@@ -1,6 +1,15 @@
 <?php
-$link = mysqli_connect("mysql317.1gb.ua", "gbua_testartem", "f277647a6ui", "gbua_testartem");
+//$link = mysqli_connect(
+//    "bpibcp34s7p5yps7ex4z-mysql.services.clever-cloud.com",
+//    "uvnybryu3c2mrnfd",
+//    "F2YCcnyMGPwwfrDfzB2w",
+//    "bpibcp34s7p5yps7ex4z");
 
+$link = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "crm");
 if (!$link) {
     echo "Ошибка: Невозможно установить соединение с MySQL." . PHP_EOL;
     echo "Код ошибки errno: " . mysqli_connect_errno() . PHP_EOL;
