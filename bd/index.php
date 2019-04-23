@@ -5,7 +5,7 @@
 //    "F2YCcnyMGPwwfrDfzB2w",
 //    "bpibcp34s7p5yps7ex4z");
 
-$link = mysqli_connect(
+$mysql_connect = mysqli_connect(
     "localhost",
     "root",
     "",

@@ -12,7 +12,7 @@ $_SESSION['id'] = 3;
 
 <body>
 <div class="login-page">
-    <form method="post" action="/login/" class="login-form">
+    <form method="post" action="../main/auth.php" class="login-form">
         <h2 class="login-form-header">Sign in</h2>
         <div class="login-box">
             <input id="loginField" placeholder="Login" type="text" name="login">
@@ -21,8 +21,8 @@ $_SESSION['id'] = 3;
 
                 <input id="passwordField" placeholder="Password" type="text" name="password">
         </div>
-        <div>
-            <label class="container">Three
+        <div class="sign-in-box">
+            <label class="container">Remember me
                 <input type="checkbox">
                 <span class="checkmark"></span>
             </label>
