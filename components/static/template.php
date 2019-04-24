@@ -1,8 +1,9 @@
 <?php
 include_once './components/static/menu.php';
-function template($body){
-   return(
-       '<html>
+function template($body)
+{
+    return (
+        '<html>
 <head>
     <title>...</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,5 +23,5 @@ function template($body){
 <script src="./components/main/filter.js"></script>
 </body>
 </html>'
-   );
+    );
 }

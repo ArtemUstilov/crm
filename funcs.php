@@ -1,7 +1,8 @@
 <?php
 function display_data($data, $title) {
+
     $output = "<div id='wrapper'><h1>$title</h1><table id='keywords'><thead>";
-    foreach($data as $key => $var) {
+    foreach ($data as $key => $var) {
         $currentCol = '';
         $index = 0;
         if($key===0) {
@@ -35,10 +36,18 @@ function display_data($data, $title) {
     return $output;
 }
 
-function clean($value = "") {
+function clean($value = "")
+{
     $value = trim($value);
     $value = stripslashes($value);
     $value = strip_tags($value);
     $value = htmlspecialchars($value);
     return $value;
+}
+
+function isAuthorized()
+{
+    session_start();
+    if (isset($_SESSION['id']) && isset($_SESSION['login']) && isset($_SESSION['password'])) return true;
+    return false;
 }
