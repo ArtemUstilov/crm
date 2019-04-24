@@ -5,17 +5,19 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     include_once "../../dev/ChromePhp.php";
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);
-    $data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE login_hash='$login'"));
-    if (empty($data['login_hash'])) {
-        echo("Invalid login");
+    $data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE login='$login'"));
+    if ($login != $data['login']) {
+        echo "login";
         return false;
     }
-    if ($password != $data['pass_hash']) {
-        echo "Invalid pass for `$login`";
+    if (!password_verify($password, $data['pass_hash'])) {
+        echo "pass";
         return false;
     }
     session_start();
-    $_SESSION['login'] = $data['login_hash'];
+    $_SESSION['login'] = $data['login'];
+    $_SESSION['password'] = $data['pass_hash'];
     $_SESSION['id'] = $data['user_id'];
-    header("location: ../../");
+
+    echo "success";
 }
