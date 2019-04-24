@@ -10,7 +10,7 @@ function display_data($data, $title) {
                 $output .= "<th>" . $col . '<span></span></th>';
                 $currentCol = $val;
             }
-            $output .= '</tr></thead><tbody>';
+            $output .= '</tr></thead><tbody id="tbody">';
             $output .= '<tr>';
             foreach($var as $col => $val) {
                 $output .= '<td title='.$val.'>' . $val . '</td>';
@@ -27,4 +27,12 @@ function display_data($data, $title) {
     }
     $output .= '</tbody></table></div>';
     return $output;
+}
+
+function clean($value = "") {
+    $value = trim($value);
+    $value = stripslashes($value);
+    $value = strip_tags($value);
+    $value = htmlspecialchars($value);
+    return $value;
 }

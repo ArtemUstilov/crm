@@ -1,5 +1,5 @@
 <?php
-include_once './static/template.php';
+include_once './components/static/template.php';
 include_once './db.php';
 include_once './funcs.php';
 
