@@ -18,10 +18,9 @@ function template($body)
     </script>
 </head>
 <body>
-<input id="searchInput" value="Type To Filter">
-' . menu() . '
-<div class="spinner"></div>' . $body . '
-    <script src="./components/main/filter.js"></script>
+' . menu() .'
+<div class="spinner"></div>'.$body.'
+<script src="./components/main/filter.js"></script>
 </body>
 </html>'
     );

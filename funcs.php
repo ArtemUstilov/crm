@@ -1,26 +1,33 @@
 <?php
+function display_data($data, $title) {
 
-function display_data($data, $title)
-{
     $output = "<div id='wrapper'><h1>$title</h1><table id='keywords'><thead>";
     foreach ($data as $key => $var) {
         $currentCol = '';
-        if ($key === 0) {
+        $index = 0;
+        if($key===0) {
             $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= "<th>" . $col . '<span></span></th>';
+            foreach($var as $col => $val) {
+                $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
+</th>";
                 $currentCol = $val;
+                $index++;
             }
+            $index = 0;
             $output .= '</tr></thead><tbody id="tbody">';
             $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= '<td title=' . $val . '>' . $val . '</td>';
+            foreach($var as $col => $val) {
+                $output .= '<td class='.$index.'-f title='.$val.'>' . $val . '</td>';
+                $index++;
             }
             $output .= '</tr>';
-        } else {
+        }
+        else {
+            $index = 0;
             $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= '<td title="' . $val . '">' . $val . '</td>';
+            foreach($var as $col => $val) {
+                $output .= '<td class='.$index.'-f title="'.$val.'">' . $val . '</td>';
+                $index++;
             }
             $output .= '</tr>';
         }

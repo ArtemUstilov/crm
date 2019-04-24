@@ -78,14 +78,24 @@ h1 {
     cursor: pointer;
     background: #c9dff0;
 }
+#keywords thead input{
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
 #keywords thead tr th {
     font-weight: bold;
     padding: 12px 10px;
     padding-left: 20px;
 }
+#keywords .col-wrap{
+    display: flex;
+    justify-content: center;
+}
 #keywords thead tr th span {
     padding-right: 20px;
     background-repeat: no-repeat;
+    display: none;
     background-position: 100% 100%;
 }
 
@@ -95,9 +105,14 @@ h1 {
 
 #keywords thead tr th[aria-sort=ascending] span {
     background-image: url('https://i.imgur.com/SP99ZPJ.png');
+    display: block;
+}
+#keywords thead tr th[aria-sort=none] span {
+    display: none;
 }
 #keywords thead tr th[aria-sort=descending] span {
     background-image: url('https://i.imgur.com/RkA9MBo.png');
+    display: block;
 }
 
 #keywords tbody tr:hover{

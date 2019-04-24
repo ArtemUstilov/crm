@@ -14,3 +14,4 @@ INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 '), 'Заказы'));
 ?>
+
