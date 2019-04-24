@@ -17,7 +17,7 @@ function display_data($data, $title) {
             $output .= '</tr></thead><tbody id="tbody">';
             $output .= '<tr>';
             foreach($var as $col => $val) {
-                $output .= '<td class='.$index.'-f title='.$val.'>' . $val . '</td>';
+                $output .= '<td class='.$index.'-f title="'.$val.'">' . $val . '</td>';
                 $index++;
             }
             $output .= '</tr>';
@@ -32,7 +32,7 @@ function display_data($data, $title) {
             $output .= '</tr>';
         }
     }
-    $output .= '</tbody></table></div>';
+    $output .= '</tbody></table><button type="button" id="add-btn">Добавить</button></div>';
     return $output;
 }
 

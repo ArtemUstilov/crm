@@ -16,6 +16,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         return false;
     }
     session_start();
+    $_SESSION['name'] = $data['first_name'].' '.$data['last_name'];
     $_SESSION['login'] = $data['login'];
     $_SESSION['password'] = $data['pass_hash'];
     $_SESSION['id'] = $data['user_id'];

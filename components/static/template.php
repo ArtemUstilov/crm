@@ -19,7 +19,7 @@ function template($body)
 </head>
 <body>
 ' . menu() .'
-<div class="spinner"></div>'.$body.'
+<div class="spinner"></div>'.($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>').'
 <script src="./components/main/filter.js"></script>
 </body>
 </html>'
