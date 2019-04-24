@@ -4,7 +4,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     include("../../functions.php");
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);
-    $data = mysqli_fetch_array(mysqli_query($mysql_connect, "SELECT * FROM `users` WHERE `login`='$login' "));
+    $data = mysqli_fetch_array($mysql_connect -> query( "SELECT * FROM `users` WHERE `login`='$login' "));
     if (empty($data['login'])) {
         echo("Invalid login");
         return false;
@@ -13,6 +13,9 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         echo "Invalid pass for `$login`";
         return false;
     }
-    $_SESSION['id'] = $data['id'];
-    header("Location: ../../index.php");
+
+    session_start();
+    $_SESSION['login']=$data['login'];
+    $_SESSION['id']=$data['user_id'];
+    header("location: ../../index.php");
 }

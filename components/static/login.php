@@ -1,6 +1,6 @@
 <?php
-session_start();
-$_SESSION['id'] = 3;
+//session_start();
+//$_SESSION['id'] = 3;
 ?>
 
 <!DOCTYPE html>

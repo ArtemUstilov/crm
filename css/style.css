@@ -38,7 +38,7 @@ html, body {
 .login-page .login-form input {
     padding: 10px 15px;
     border: 1px solid black;
-    border-radius: 10px;
+    background: #599CFF;
     font-size: 20px;
 }
 
