@@ -14,23 +14,24 @@
 
 <body>
 <div class="login-page">
-    <form  class="login-form" id="login-form">
+    <form class="login-form" id="login-form">
         <h2 class="login-form-header">Sign in</h2>
         <div class="login-box">
             <input id="loginField" placeholder="Логин" type="text" name="login">
         </div>
         <div class="pass-box">
 
-                <input id="passwordField" placeholder="Пароль" type="password" name="password">
+            <input id="passwordField" placeholder="Пароль" type="password" name="password">
         </div>
-        <div class="sign-in-box">
-            <label class="container">Запомнить меня
-                <input type="checkbox">
-                <span class="checkmark" id="remember-me-check"></span>
-            </label>
-            <button type="submit" class="login-form-submit">Sign in</button>
-        </div>
-    </form>
+         <div class="sign-in-box">
+             <!--
+             <label class="container">Запомнить меня
+                 <input type="checkbox" id="remember-me-check">
+                 <span class="checkmark"></span>
+             </label> -->
+        <button type="submit" class="login-form-submit">Sign in</button>
+</div>
+</form>
 </div>
 </body>
 </html>

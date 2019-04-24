@@ -4,6 +4,7 @@ $(document).ready(function () {
         event.preventDefault();
         let password = $("#passwordField").val();
         let login = $("#loginField").val();
+       // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
         $this = $(".login-form-submit");
         $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
         $.ajax({
@@ -13,6 +14,7 @@ $(document).ready(function () {
                 password: password,
                 login: login
             },
+            cache: false,
             success: function (res) {
                 switch (res) {
                     case "success":

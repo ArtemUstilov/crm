@@ -99,7 +99,7 @@ html, body {
 }
 .sign-in-box{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 /* Style the checkmark/indicator */
 .container .checkmark:after {

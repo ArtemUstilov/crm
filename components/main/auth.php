@@ -5,6 +5,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     include_once "../../dev/ChromePhp.php";
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);
+   // $remember_me = clean($_POST['remember_me']);
     $data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE login='$login'"));
     if ($login != $data['login']) {
         echo "login";
@@ -18,6 +19,6 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['login'] = $data['login'];
     $_SESSION['password'] = $data['pass_hash'];
     $_SESSION['id'] = $data['user_id'];
-
+    //$_SESSION['remember_me'] = $remember_me; in future
     echo "success";
 }
