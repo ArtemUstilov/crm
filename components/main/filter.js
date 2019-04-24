@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    $('#add-btn').click(function () {
-        alert('add new data');
-    });
     const val = document.getElementById('username');
     console.log(val.innerText, localStorage.getItem('username'));
     if (val.innerText) {

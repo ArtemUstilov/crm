@@ -1,7 +1,9 @@
 <?php
+include_once './funcs.php';
+if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
-include_once './funcs.php';
+
 
 echo template(display_data($connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS клиент, 
@@ -13,6 +15,6 @@ FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
-'), 'Заказы'));
+'), "Order"));
 ?>
 

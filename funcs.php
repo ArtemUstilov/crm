@@ -1,13 +1,16 @@
 <?php
-function display_data($data, $title) {
+function display_data($data, $add)
+{
 
-    $output = "<div id='wrapper'><h1>$title</h1><table id='keywords'><thead>";
+    $output = "<div id='wrapper'><div class='table-menu'><a href='./components/main/add" . $add . ".php' id=\"add-btn\">Добавить</a></div>
+<div class='table-wrapper'>
+<table id='keywords'><thead>";
     foreach ($data as $key => $var) {
         $currentCol = '';
         $index = 0;
-        if($key===0) {
+        if ($key === 0) {
             $output .= '<tr>';
-            foreach($var as $col => $val) {
+            foreach ($var as $col => $val) {
                 $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
 </th>";
                 $currentCol = $val;
@@ -16,23 +19,22 @@ function display_data($data, $title) {
             $index = 0;
             $output .= '</tr></thead><tbody id="tbody">';
             $output .= '<tr>';
-            foreach($var as $col => $val) {
-                $output .= '<td class='.$index.'-f title="'.$val.'">' . $val . '</td>';
+            foreach ($var as $col => $val) {
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                 $index++;
             }
             $output .= '</tr>';
-        }
-        else {
+        } else {
             $index = 0;
             $output .= '<tr>';
-            foreach($var as $col => $val) {
-                $output .= '<td class='.$index.'-f title="'.$val.'">' . $val . '</td>';
+            foreach ($var as $col => $val) {
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                 $index++;
             }
             $output .= '</tr>';
         }
     }
-    $output .= '</tbody></table><button type="button" id="add-btn">Добавить</button></div>';
+    $output .= '</tbody></table></div></div>';
     return $output;
 }
 

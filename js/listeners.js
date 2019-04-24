@@ -4,7 +4,7 @@ $(document).ready(function () {
         event.preventDefault();
         let password = $("#passwordField").val();
         let login = $("#loginField").val();
-       // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
+        // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
         $this = $(".login-form-submit");
         $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
         $.ajax({
@@ -41,5 +41,24 @@ $(document).ready(function () {
             }
         });
 
+    });
+    $("a[href$='./components/main/addUser.php']").click((event) => {
+        event.preventDefault();
+        alert("User");
+    })
+    $("a[href$='./components/main/addClient.php']").click((event) => {
+        event.preventDefault();
+        alert("Client");
+    })
+    $('#menu-burger').click(() => {
+
+        if ($('#menu-burger').hasClass('menu-burger--active')) {
+            $('#menu-burger').removeClass('menu-burger--active');
+            $('#menu').removeClass('menu--open');
+        } else {
+            $('#menu-burger').addClass('menu-burger--active');
+            $('#menu').addClass('menu--open');
+
+        }
     })
 })
