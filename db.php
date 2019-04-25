@@ -1,7 +1,11 @@
 <?php
-include_once './config.php';
 $connection = mysqli_connect(
-    DB_HOST,
-    DB_USER,
-    DB_PASSWORD,
-    DB_NAME);
+    "localhost",
+    "root",
+    "",
+    "crm");
+//$connection = mysqli_connect(
+//    "bvpeki022gjamywud3fk-mysql.services.clever-cloud.com",
+//    "u5bk3owgaarlg86j",
+//    "VBDjw7RGBbwsl35Wfpb8",
+//    "bvpeki022gjamywud3fk");

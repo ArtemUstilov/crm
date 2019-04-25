@@ -1,13 +1,13 @@
 <?php
-//$link = mysqli_connect(
-//    "bpibcp34s7p5yps7ex4z-mysql.services.clever-cloud.com",
-//    "uvnybryu3c2mrnfd",
-//    "F2YCcnyMGPwwfrDfzB2w",
-//    "bpibcp34s7p5yps7ex4z");
-
 $mysql_connect = mysqli_connect(
     "localhost",
     "root",
     "",
     "crm");
+//
+//$mysql_connect = mysqli_connect(
+//    "bvpeki022gjamywud3fk-mysql.services.clever-cloud.com",
+//    "u5bk3owgaarlg86j",
+//    "VBDjw7RGBbwsl35Wfpb8",
+//    "bvpeki022gjamywud3fk");
 ?>
