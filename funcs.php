@@ -2,11 +2,10 @@
 function display_data($data, $add)
 {
 
-    $output = "<div id='wrapper'><div class='table-menu'><a href='./components/main/add" . $add . ".php' id=\"add-btn\">Добавить</a></div>
+    $output = "<div id='wrapper'><div class='table-menu'><a href='./components/main/add" . $add . ".php' id='add-btn'>Добавить</a></div>
 <div class='table-wrapper'>
 <table id='table-container'><thead>";
     foreach ($data as $key => $var) {
-        $currentCol = '';
         $index = 0;
         if ($key === 0) {
             $output .= '<tr>';
