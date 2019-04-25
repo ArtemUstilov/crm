@@ -1,7 +1,27 @@
 html, body {
     height: 100%;
+    background: #eee url('https://i.imgur.com/eeQeRmk.png'); /* https://subtlepatterns.com/weave/ */
+    overflow: hidden;
+    font-family: monospace;
+}
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
 }
 
+::-webkit-scrollbar
+{
+    width: 10px;
+    height: 14px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #33373C;
+}
 .login-page {
     height: 100%;
     display: flex;
@@ -133,43 +153,49 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
 
 
 .main-wrapper {
-    background: #eee url('https://i.imgur.com/eeQeRmk.png'); /* https://subtlepatterns.com/weave/ */
-    font-family: Arial, sans-serif;
-    font-size: 62.5%;
+    font-size: 100%;
     line-height: 1;
     color: #585858;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100vw;
+    margin-top: 50px;
 }
 
 .main-header {
     height: 50px;
     width: 100%;
-    background: #5491F5;
+    background: #33373C;
     display: flex;
+    position: fixed;
 }
 
 .table-wrapper {
-    width: 100%;
-    max-height: calc(100vh - 105px);
-    overflow: scroll;
+    position: relative;
+    height: calc(100vh - 105px);
+    overflow-y: scroll;
 }
 
 #menu-burger {
     width: 50px;
-    height: 50px;
-    background: white;
-
+    height: 100%;
+    display: block;
+    padding-left: 15px;
+    padding-top: 9px;
 }
-
+.main-header i{
+    color: #fff;
+}
+.account-name-menu-btn-box i{
+    margin-left: 30px;
+}
 #add-btn {
-    background-color: #c9dff0;
+    background-color: #5491F5;
     outline: none;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    color: black;
+    color: #fff;
     text-decoration: none;
     font-size: 15px;
     height: 35px;
@@ -178,7 +204,7 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
 }
 
 #add-btn:hover {
-    background: #FFA;
+    background: #1B4E9F;
 }
 
 ::selection {
@@ -212,7 +238,7 @@ img {
 }
 
 h1 {
-    font-family: 'Amarante', Tahoma, sans-serif;
+    /*font-family: 'Amarante', Tahoma, sans-serif;*/
     font-weight: bold;
     font-size: 3.6em;
     line-height: 1.7em;
@@ -223,39 +249,40 @@ h1 {
 
 #wrapper {
     display: block;
-    width: 100%;
-
+    overflow-x:scroll;
 }
 
 .table-menu {
     display: flex;
     justify-content: flex-end;
+    height: 55px;
 }
-
-#table-container {
+table {
     font-size: 1.2em;
     -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
     background: #fff;
-    width: 100%;
+    width: 100vw;
     position: relative;
+    table-layout: fixed;
 }
 
-#table-container thead {
+table thead {
     cursor: pointer;
-    background: #c9dff0;
+    background: #5491F5;
 }
 
-#table-container thead input {
+table thead input {
     display: block;
     width: 100%;
     margin: 0 auto;
     max-width: 150px;
 }
 
-#table-container thead tr th {
+table thead tr th {
     font-weight: bold;
     padding: 12px 10px;
     padding-left: 20px;
+    color: #fff;
 }
 
 #table-container .col-wrap {
@@ -263,38 +290,22 @@ h1 {
     justify-content: center;
 }
 
-#table-container thead tr th span {
-    padding-right: 20px;
-    background-repeat: no-repeat;
-    display: none;
-    background-position: 100% 100%;
+table thead tr th span {
+    margin-left: 5px;
 }
 
 #table-container thead tr th[aria-sort=ascending], #table-container thead tr th[aria-sort=descending] {
-    background: #acc8dd;
-}
-
-#table-container thead tr th[aria-sort=ascending] span {
-    background-image: url('https://i.imgur.com/SP99ZPJ.png');
-    display: block;
-}
-
-#table-container thead tr th[aria-sort=none] span {
-    display: none;
-}
-
-#table-container thead tr th[aria-sort=descending] span {
-    background-image: url('https://i.imgur.com/RkA9MBo.png');
-    display: block;
+    background: #1B4E9F;
 }
 
 #table-container tbody tr:hover {
     background-color: #ddd;
 }
-
+.col-wrap{
+    margin-bottom: 5px;
+}
 #table-container tbody tr {
     color: #555;
-
 }
 
 #table-container tbody tr td {
@@ -311,12 +322,13 @@ h1 {
 }
 
 #menu {
-    width: 0px;
+    width: 0;
     background-color: #33373C;
     transition: width 1s;
     -ms-transition: width 1s;
     -o-transition: width 1s;
     -moz-transition: width 1s;
+    height: calc(100vh - 50px);
 }
 
 #menu ul {
@@ -339,6 +351,7 @@ h1 {
     padding: 14px 16px;
     text-decoration: none;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 #menu ul li p {
@@ -346,12 +359,15 @@ h1 {
 }
 
 #menu .active {
-    border-left: 5px solid #5491F5;
-    color: #FFA;
-    background: #3E454A;
+    border-left: 5px solid #fff;
+    color: #fff;
+    background: #5491F5;
     padding-right: 10px;
 }
-
+a[disabled] {
+    pointer-events: none;
+    cursor: default;
+}
 .account-name-menu-btn-box {
     display: flex;
     justify-content: flex-end;
@@ -383,7 +399,10 @@ h1 {
     border-right-color: transparent;
     border-radius: 50%;
 }
-
+#header-empty {
+    display:none;
+    background-color:white;
+}
 @keyframes rotate {
     0% {
         transform: rotate(0deg);

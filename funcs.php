@@ -6,7 +6,6 @@ function display_data($data, $add)
 <div class='table-wrapper'>
 <table id='table-container'><thead>";
     foreach ($data as $key => $var) {
-        $currentCol = '';
         $index = 0;
         if ($key === 0) {
             $output .= '<tr>';

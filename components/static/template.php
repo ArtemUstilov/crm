@@ -12,6 +12,7 @@ function template($body)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="../../js/listeners.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.14/js/jquery.tablesorter.min.js"></script>
@@ -22,15 +23,17 @@ function template($body)
             
         })
     </script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 
 </head>
 <body>
 <div class="main-header">
-<div id="menu-burger" class="menu-burget-btn"></div>
+<div id="menu-burger" class="menu-burget-btn">
+<i class="fas fa-bars fa-2x"></i>
+</div>
 <div class="account-name-menu-btn-box">
 <p id="username">' . $_SESSION['name'] . '</p>
+<a href="./components/main/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
 </div>
 <div class="main-wrapper">
