@@ -41,6 +41,50 @@ $(document).ready(function () {
                     jo.show();
                 }
             });
-    })
+    });
+    $.validate({
+        form: '#add-user-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addUser();
+            return false;
+        }
+    });
 
+    function addUser() {
+        let password = $("#add-user-form #passField").val();
+        let login = $("#add-user-form #loginField").val();
+        let first_name = $("#add-user-form #firstNameField").val();
+        let last_name = $("#add-user-form #lastNameField").val();
+        let branch = $("#add-user-form #branchField").val();
+        let role = $("#add-user-form #roleField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addUser.php",
+            type: "POST",
+            data: {
+                password: password,
+                login: login,
+                first_name: first_name,
+                last_name: last_name,
+                branch: branch,
+                role: role,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+            },
+            error: function () {
+                alert("kek")
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
 });

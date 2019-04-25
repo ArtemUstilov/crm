@@ -42,9 +42,8 @@ html, body {
 }
 
 
-
 .container {
-    margin-top:10px;
+    margin-top: 10px;
     display: block;
     position: relative;
     padding-left: 25px;
@@ -97,10 +96,12 @@ html, body {
 .container input:checked ~ .checkmark:after {
     display: block;
 }
-.sign-in-box{
+
+.sign-in-box {
     display: flex;
     justify-content: flex-end;
 }
+
 /* Style the checkmark/indicator */
 .container .checkmark:after {
     left: 6px;
@@ -114,10 +115,11 @@ html, body {
     transform: rotate(45deg);
 }
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
     border: 0;
+    outline: none;
     font-size: 100%;
     vertical-align: baseline;
     outline: none;
@@ -172,7 +174,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     font-size: 15px;
     height: 35px;
     margin: 10px 30px 10px 10px;
+    display: block;
 }
+
 #add-btn:hover {
     background: #FFA;
 }
@@ -310,6 +314,9 @@ h1 {
     width: 0px;
     background-color: #33373C;
     transition: width 1s;
+    -ms-transition: width 1s;
+    -o-transition: width 1s;
+    -moz-transition: width 1s;
 }
 
 #menu ul {
@@ -383,5 +390,58 @@ h1 {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+
+.add-modal-title {
+    font-size: 20px;
+    text-align: center;
+}
+
+.add-modal-inputs {
+    padding: 20px 0;
+    display: grid;
+    grid-template-columns: auto;
+    grid-column-gap: 30px;
+    grid-row-gap: 20px;
+}
+
+.add-modal-inputs p {
+    height: 40px;
+}
+
+.add-modal-inputs input, .add-modal-inputs select {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 17px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    color: black;
+}
+
+.add-modal-submit {
+    float: right;
+    font-size: 18px;
+    background: #c9dff0;
+    border-radius: .25rem;
+    padding: 5px 10px;
+    transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+    -moz-transition: all .5s;
+}
+
+.add-modal-submit:hover {
+    background: #FFA;
+}
+
+.modal {
+    max-width: 650px !important;
+}
+
+@media (min-width: 724px) {
+    .add-modal-inputs {
+        grid-template-columns: 1fr 1fr;
     }
 }

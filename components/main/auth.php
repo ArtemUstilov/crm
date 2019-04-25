@@ -1,7 +1,7 @@
 <?php
 if (isset($_POST['login']) && isset($_POST['password'])) {
-    include("../../bd/index.php");
-    include("../../funcs.php");
+    include_once("../../bd/index.php");
+    include_once("../../funcs.php");
     include_once "../../dev/ChromePhp.php";
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);

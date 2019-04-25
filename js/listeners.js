@@ -42,14 +42,7 @@ $(document).ready(function () {
         });
 
     });
-    $("a[href$='./components/main/addUser.php']").click((event) => {
-        event.preventDefault();
-        alert("User");
-    })
-    $("a[href$='./components/main/addClient.php']").click((event) => {
-        event.preventDefault();
-        alert("Client");
-    })
+
     $('#menu-burger').click(() => {
 
         if ($('#menu-burger').hasClass('menu-burger--active')) {
@@ -61,4 +54,5 @@ $(document).ready(function () {
 
         }
     })
+
 })
