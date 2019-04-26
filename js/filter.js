@@ -6,10 +6,10 @@ $(document).ready(function () {
         icon.toggleClass('fa-times');
     });
 
-    function yFixedNoJquerry(){
+    function yFixedNoJquerry() {
         const head = document.getElementById('table-head');
-        if(window.innerWidth > 524){
-            document.getElementById('table-wrapper').addEventListener('scroll', function(e){
+        if (window.innerWidth > 524) {
+            document.getElementById('table-wrapper').addEventListener('scroll', function (e) {
                 head.style.transform = 'translateY(' + this.scrollTop + 'px)';
             });
         }
@@ -19,7 +19,7 @@ $(document).ready(function () {
         const clone = $("#tbody > tr").first().clone();
         clone.attr('id', "spec");
         clone.css({visibility: 'hidden'});
-        clone.children().each(function(){
+        clone.children().each(function () {
             $(this).css({padding: '0', fontSize: '0px'});
         })
         $("#tbody").append(clone);
@@ -30,7 +30,7 @@ $(document).ready(function () {
                 const jo = $("#tbody").find("tr");
                 jo.hide();
                 jo.filter(function checkRows() {
-                    return $(this).children(`.${key}-f`).is(":contains('" + data + "')") ||  $(this).prop('id') === 'spec';
+                    return $(this).children(`.${key}-f`).is(":contains('" + data + "')") || $(this).prop('id') === 'spec';
                 }).show();
 
             }).focus(function () {
@@ -105,6 +105,60 @@ $(document).ready(function () {
         });
 
     }
+
+    $.validate({
+        form: '#add-client-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addClient();
+            return false;
+        },
+        onError: function () {
+        console.log("ke");
+        }
+    });
+
+    function addClient() {
+        let first_name = $("#add-client-form #firstNameField").val();
+        let last_name = $("#add-client-form #lastNameField").val();
+        let description = $("#add-client-form #descriptionField").val();
+        let callmaster = $("#add-client-form #callmasterField").val();
+        let byname = $("#add-client-form #bynameField").val();
+        let phone = $("#add-client-form #phoneField").val();
+        let email = $("#add-client-form #emailField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addClient.php",
+            type: "POST",
+            data: {
+                byname: byname,
+                callmaster: callmaster,
+                first_name: first_name,
+                last_name: last_name,
+                description: description,
+                phone: phone,
+                email: email
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Клиент");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Клиент");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
 
     function filterIcons() {
         $('th').each(function () {
