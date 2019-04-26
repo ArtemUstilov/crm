@@ -17,6 +17,12 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE user_id='$user_id'"));
+    $client = true;
+    $check_client = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM clients WHERE byname='$byname'"));
+    if ($check_client) {
+        echo "exists";
+        return false;
+    }
     if ($user_data && ($user_data['role'] == "admin" || $user_data['role'] == "sub-admin" || $user_data['role'] == "manager")) {
         if ($callmaster != " ") {
             $check_master = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM users WHERE byname='$callmaster'"));
@@ -26,11 +32,6 @@ if (isset($_POST['description']) && isset($_POST['byname'])
                 echo "doesNotExist";
                 return false;
             }
-        }
-        $check_client = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM users WHERE byname='$byname'"))?:false;
-        if ($check_client) {
-            echo "exists";
-            return false;
         }
         $res = $mysql_connect->
         query("INSERT INTO clients (last_name,first_name,byname,debt,rollback_sum,phone_number,email, description, callmaster ) VALUES(\"$last_name\",\"$first_name\",\"$byname\",0,0,\"$phone\",\"$email\",\"$description\",$callmaster) ");

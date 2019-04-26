@@ -177,6 +177,7 @@ h2 {
     background: #33373C;
     display: flex;
     position: fixed;
+    justify-content: flex-end;
 }
 
 .table-wrapper {
@@ -191,6 +192,8 @@ h2 {
     display: block;
     padding-left: 15px;
     padding-top: 9px;
+    position: absolute;
+    left: 0;
 }
 
 .main-header i {
@@ -274,7 +277,7 @@ h1 {
 
 .table-menu {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: 55px;
 }
 
@@ -333,6 +336,7 @@ table thead tr th span {
 #table-container tbody tr td {
     text-align: center;
     padding: 8px 5px;
+    cursor: default;
     text-overflow: ellipsis;
     white-space: nowrap;
     min-width: 150px;
@@ -353,7 +357,13 @@ table thead tr th span {
     -moz-transition: width 1s;
     height: calc(100vh - 50px);
 }
-
+#table-container tbody .clicked{
+    background-color: #888 !important;
+    color: #fff;
+}
+#table-container tbody .clicked > td{
+    white-space: normal !important;
+}
 #menu ul {
     list-style-type: none;
     margin: 0;
@@ -393,9 +403,13 @@ table thead tr th span {
     color: #fff;
     font-weight: bold;
     background: #555;
-    padding-right: 10px;
 }
-
+#menu li:hover{
+    border-left: 5px solid #5491F5;
+    color: #fff;
+    font-weight: bold;
+    background: #555;
+}
 a[disabled] {
     pointer-events: none;
     cursor: default;
@@ -404,7 +418,6 @@ a[disabled] {
 .account-name-menu-btn-box {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
     align-items: center;
     padding: 0 10px;
 }
