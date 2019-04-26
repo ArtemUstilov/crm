@@ -16,13 +16,6 @@ function template($body)
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="../../js/listeners.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.14/js/jquery.tablesorter.min.js"></script>
-    <script>
-        $(function(){$("#table-container").tablesorter();});
-        $(window).load(function() {
-            $(".spinner").fadeOut("slow");
-            
-        })
-    </script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 
 </head>
@@ -49,6 +42,13 @@ function template($body)
 <div class="spinner"></div>' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '
 </div>
 <script src="./js/filter.js"></script>
+<script>
+        $(function(){$("#table-container").tablesorter();});
+        $(window).load(function() {
+            $(".spinner").fadeOut("slow");
+            
+        })
+    </script>
 </body>
 </html>'
     );
