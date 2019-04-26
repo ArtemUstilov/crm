@@ -150,13 +150,18 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
     box-sizing: border-box;
 }
 
-
+h2{
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .main-wrapper {
     font-size: 100%;
     line-height: 1;
     color: #585858;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 200px auto;
     width: 100vw;
     margin-top: 50px;
 }
@@ -171,8 +176,8 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
 
 .table-wrapper {
     position: relative;
-    height: calc(100vh - 105px);
-    overflow-y: scroll;
+    max-height: calc(100vh - 105px);
+    overflow-y: auto;
 }
 
 #menu-burger {
@@ -256,7 +261,7 @@ h1 {
 
 #wrapper {
     display: block;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 .table-menu {
