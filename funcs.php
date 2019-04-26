@@ -1,8 +1,15 @@
 <?php
+include_once './dev/ChromePhp.php';
 function display_data($data, $add)
 {
+    $i = 0;
+    while ($new = $data->fetch_array()){
+        $copy_of_data[$i] = $new;
+        $i++;
+    }
 
-    $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#{$add}Modal\" rel=\"modal:open\">Добавить</a></p></div>
+
+    $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper'>
 <table id='table-container'><thead>";
     foreach ($data as $key => $var) {
@@ -36,7 +43,7 @@ function display_data($data, $add)
     $output .= '</tbody></table></div>
 
 </div>';
-    $output .= chooseAddModal($add, $data);
+    $output .= chooseAddModal($add, $copy_of_data);
     return $output;
 }
 
@@ -62,6 +69,7 @@ function chooseAddModal($name, $data)
         case "User":
             return userAddModal($data);
         case "Client":
+            return clientAddModal($data);
             return;
         case "Order":
             return;
@@ -71,7 +79,7 @@ function chooseAddModal($name, $data)
 function userAddModal($data)
 {
     $output = '
-<div id="UserModal" class="modal" action="" role="form">
+<div id="Modal" class="modal" action="" role="form">
 <form id="add-user-form">
   <h2 class="add-modal-title">Добавить пользователя</h2>
   <div class="add-modal-inputs">
@@ -103,5 +111,43 @@ function userAddModal($data)
   <input class="add-modal-submit" type="submit" value="Submit">
   </form>
 </div>';
+    return $output;
+}
+
+
+function clientAddModal($data)
+{
+    $output = '
+<div id="Modal" class="modal" action="" role="form">
+<form id="add-client-form">
+  <h2 class="add-modal-title">Добавить клиента</h2>
+  <div class="add-modal-inputs">
+  <p>
+  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  </p>
+  <p>
+  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  </p>
+  <p>
+  <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Кличка (только англ)" type="text" name="byname">
+  </p>
+  <p>
+  <select id="roleField" data-validation="required">
+  <option value="" selected>Выберите пригласившего</option>';
+    foreach ($data as $key => $var) {
+        $output .= '<option>' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+    }
+    $output .= '
+</select>
+</p>
+  <p>
+  <input id="branchField" data-validation="required"  placeholder="Отделение" type="text" name="branch">
+  </p>
+ 
+  </div>
+  <input class="add-modal-submit" type="submit" value="Submit">
+  </form>
+</div>';
+
     return $output;
 }
