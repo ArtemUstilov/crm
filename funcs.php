@@ -6,7 +6,7 @@ function display_data($data, $add)
         $copy_of_data[$i] = $new;
         $i++;
     }
-    $output = "<div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
+    $output = "<div id=\"wrapper\"><div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper' id='table-wrapper'><h2>$add</h2>
 
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
@@ -45,7 +45,7 @@ function display_data($data, $add)
         }
     }
 
-    $output .= '</tbody></table></div>';
+    $output .= '</tbody></table></div></div>';
     $output .= chooseAddModal($add, $copy_of_data);
     return $output;
 }
