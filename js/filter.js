@@ -9,33 +9,25 @@ $(document).ready(function () {
     $('#menu-burger').click(function () {
         icon.toggleClass('fa-bars');
         icon.toggleClass('fa-times');
-    })
+    });
 
-
-    function yFixedTH() {
-        const tableW = $(".table-wrapper");
-        const table = $("#table-container");
-        const tableOffset = table.offset().top;
-        const $head = $("#table-container > thead");
-        // const $fixedHeader = $("#header-empty");
-        const $height = $head.height();
-        // $fixedHeader.css({width: table.width()+'px', height: $height+'px'});
-        const topOffset = $head.css("top");
-        tableW.scroll(function () {
-            const offset = $(this).scrollTop();
-            if (offset > 3 && $head.css("position") !== "absolute") {
-                // $fixedHeader.show();
-                $head.css({position: 'absolute', width: table.width() + 'px'});
-            } else if (offset === 3) {
-                // $fixedHeader.hide();
-                $head.css({position: 'static', width: table.width() + 'px'});
-            }
-            $head.css({'top': offset});
-        });
+    function yFixedNoJquerry(){
+        const head = document.getElementById('table-head');
+        if(window.innerWidth > 524){
+            document.getElementById('table-wrapper').addEventListener('scroll', function(e){
+                head.style.transform = 'translateY(' + this.scrollTop + 'px)';
+            });
+        }
     }
 
-
     function initFilters() {
+        const clone = $("#tbody > tr").first().clone();
+        clone.attr('id', "spec");
+        clone.css({visibility: 'hidden'});
+        clone.children().each(function(){
+            $(this).css({padding: '0', fontSize: '0px'});
+        })
+        $("#tbody").append(clone);
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(key => {
             $(`#${key}-i`).keyup(function () {
                 const data = this.value;
@@ -43,7 +35,7 @@ $(document).ready(function () {
                 const jo = $("#tbody").find("tr");
                 jo.hide();
                 jo.filter(function checkRows() {
-                    return $(this).children(`.${key}-f`).is(":contains('" + data + "')");
+                    return $(this).children(`.${key}-f`).is(":contains('" + data + "')") ||  $(this).prop('id') === 'spec';
                 }).show();
 
             }).focus(function () {
@@ -142,7 +134,7 @@ $(document).ready(function () {
 
     if ($("table").length > 0) {
         initFilters();
-        yFixedTH();
+        yFixedNoJquerry();
         filterIcons();
     }
 

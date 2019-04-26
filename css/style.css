@@ -188,9 +188,14 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
 }
 
 .account-name-menu-btn-box i {
-    margin-left: 30px;
+    margin-left: 15px;
 }
-
+.fa-coins{
+    margin-right: 15px;
+}
+#money-t{
+    border: none;
+}
 #add-btn {
     background-color: #5491F5;
     outline: none;
@@ -264,7 +269,7 @@ table {
     font-size: 1.2em;
     -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
     background: #fff;
-    width: 100vw;
+    /*width: 100vw;*/
     position: relative;
     table-layout: fixed;
 }
@@ -318,7 +323,8 @@ table thead tr th span {
     padding: 8px 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 100px;
+    min-width: 150px;
+    max-width: 150px;
     overflow: hidden;
 }
 
@@ -380,12 +386,13 @@ a[disabled] {
     justify-content: flex-end;
     width: 100%;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
-#username {
+.menu-n {
     font-size: 18px;
     color: white;
+    white-space: nowrap;
     border-bottom: 2px dashed white;
     cursor: pointer;
 }

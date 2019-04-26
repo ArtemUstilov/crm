@@ -6,7 +6,7 @@ $(document).ready(function () {
         let login = $("#loginField").val();
         // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
         $this = $(".login-form-submit");
-        $this.prop("disabled", true); // Disable submit button until AJAX call is complete to prevent duplicate messages
+        $this.prop("disabled", true);
         $.ajax({
             url: "../components/main/auth.php",
             type: "POST",
@@ -36,7 +36,7 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false); // Re-enable submit button when AJAX call is complete
+                    $this.prop("disabled", false);
                 }, 300);
             }
         });
