@@ -7,7 +7,7 @@ function template($body)
 <head>
     <title>...</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -27,6 +27,10 @@ function template($body)
 
 </head>
 <body>
+<div class="custom-alert">
+<div class="alert-text-box"></div>
+<div class="close-btn-box"> <i class="fa fa-chevron-right"></i></div>
+</div>
 <div class="main-header">
 <div id="menu-burger" class="menu-burget-btn">
 <i class="fas fa-bars fa-2x"></i>

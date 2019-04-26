@@ -54,5 +54,9 @@ $(document).ready(function () {
 
         }
     })
+    $('.close-btn-box').click(() => {
+        if ($('.custom-alert').hasClass('custom-alert--active'))
+            $('.custom-alert').removeClass('custom-alert--active');
+    })
 
 })

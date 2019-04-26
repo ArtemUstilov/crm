@@ -16,7 +16,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['branch'
     $user_data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $check_data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users WHERE login='$login'"));
     if ($check_data) {
-        echo "exist";
+        echo "exists";
         return false;
     }
     if ($user_data['role'] == 'admin' || $user_data['role'] == 'sub_admin') {
