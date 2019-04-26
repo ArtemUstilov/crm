@@ -5,34 +5,38 @@ function display_data($data, $add)
     $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#{$add}Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper' id='table-wrapper'>
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
-    foreach ($data as $key => $var) {
-        $index = 0;
-        if ($key === 0) {
-            $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
+    if (!mysqli_fetch_assoc($data)) {
+        $output .= '<h2>Пусто</h2>';
+    } else {
+        foreach ($data as $key => $var) {
+            $index = 0;
+            if ($key === 0) {
+                $output .= '<tr>';
+                foreach ($var as $col => $val) {
+                    $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
 </th>";
-                $currentCol = $val;
-                $index++;
+                    $index++;
+                }
+                $index = 0;
+                $output .= '</tr></thead><div></div><tbody id="tbody">';
+                $output .= '<tr>';
+                foreach ($var as $col => $val) {
+                    $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
+                    $index++;
+                }
+                $output .= '</tr>';
+            } else {
+                $index = 0;
+                $output .= '<tr>';
+                foreach ($var as $col => $val) {
+                    $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
+                    $index++;
+                }
+                $output .= '</tr>';
             }
-            $index = 0;
-            $output .= '</tr></thead><div></div><tbody id="tbody">';
-            $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
-                $index++;
-            }
-            $output .= '</tr>';
-        } else {
-            $index = 0;
-            $output .= '<tr>';
-            foreach ($var as $col => $val) {
-                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
-                $index++;
-            }
-            $output .= '</tr>';
         }
     }
+
     $output .= '</tbody></table></div>
 
 </div>';

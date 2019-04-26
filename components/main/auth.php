@@ -20,6 +20,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['login'] = $data['login'];
     $_SESSION['password'] = $data['pass_hash'];
     $_SESSION['id'] = $data['user_id'];
+    $_SESSION['money'] = $data['money'];
     //$_SESSION['remember_me'] = $remember_me; in future
     echo "success";
 }
