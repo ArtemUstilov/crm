@@ -63,6 +63,7 @@ $(document).ready(function () {
                 });
         });
     };
+
     $.validate({
         form: '#add-user-form',
         modules: 'security',
@@ -95,19 +96,16 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                // alert(res);
-                createAlertTable(res);
+                createAlertTable(res, "Пользователь");
             },
             error: function () {
-                // alert(res);
-                createAlertTable("connectionError");
-                showAlertTable();
+                alert(res);
+                createAlertTable("connectionError", "Пользователь");
             },
             complete: function () {
                 setTimeout(function () {
                     $this.prop("disabled", false);
                 }, 300);
-                showAlertTable();
             }
         });
 
@@ -140,15 +138,20 @@ $(document).ready(function () {
         filterIcons();
     }
 
-    function createAlertTable(alertType) {
-        if( $('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
+    function createAlertTable(alertType, text) {
+        if ($('.custom-alert').hasClass('custom-alert--active'))
+            $('.custom-alert').removeClass('custom-alert--active');
+        if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
         switch (alertType) {
             case "exists":
-                $('.custom-alert .alert-text-box').text('Пользователь с таким логином уже существует');
+                $('.custom-alert .alert-text-box').text(`${text}с таким логином уже существует`);
                 break;
             case "success":
-                $('.custom-alert .alert-text-box').text('Пользователь успешно добавлен');
+                $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
                 $('.custom-alert').addClass('bg-green');
+                let linkEvent = document.createEvent('MouseEvents');
+                linkEvent.initEvent('click', true, true);
+                $('.close-modal')[0].dispatchEvent(linkEvent);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
@@ -163,16 +166,12 @@ $(document).ready(function () {
                 $('.custom-alert .alert-text-box').text('Ошибка сети. Перезагрузите страницу и попробуйте еще раз');
                 break;
         }
-        $('.custom-alert').addClass('custom-alert--active');
+
         setTimeout(function () {
-            if($('.custom-alert').hasClass('custom-alert--active'))
-            $('.custom-alert').removeClass('custom-alert--active');
-        }, 2500);
+            $('.custom-alert').addClass('custom-alert--active');
+        }, 300);
 
     }
 
-    function showAlertTable() {
-
-    }
 
 });
