@@ -7,5 +7,5 @@ include_once './db.php';
 echo template(display_data($connection -> query('
 SELECT concat(last_name, " ", first_name) AS Имя, role AS должность, branch_name AS отделение
 FROM users
-'),"Сотрудники"));
+'),"User","Сотрудники"));
 ?>

@@ -12,6 +12,6 @@ FROM outgo O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 WHERE O.user_id = '.$_SESSION["id"].'
-'), "Расходы"));
+'), "Outgo","Расходы"));
 ?>
 

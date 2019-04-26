@@ -1,5 +1,5 @@
 <?php
-function display_data($data, $add)
+function display_data($data, $add, $text)
 {
     $i = 0;
     while ($new = $data->fetch_array()){
@@ -7,7 +7,7 @@ function display_data($data, $add)
         $i++;
     }
     $output = "<div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
-<h2>$add</h2>
+<h2>$text</h2>
 <div class='table-wrapper' id='table-wrapper'>
 
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
@@ -139,7 +139,7 @@ function clientAddModal($data)
   <input id="phoneField" data-validation="required length" data-validation-length="min6" placeholder="Телефон" type="text" name="phone">
   </p>
   <p>
-  <input id="emailField" data-validation="length" data-validation-length="min4" placeholder="Email" type="text" name="email">
+  <input id="emailField"   placeholder="Email" type="email" name="email">
   </p>
   <p>
   <select id="callmasterField" data-validation="required">
