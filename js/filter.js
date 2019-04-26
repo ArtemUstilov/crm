@@ -169,7 +169,6 @@ $(document).ready(function () {
                         const span = $(this).children().first().children().first().children().last();
                         span.removeClass();
                     });
-                    console.log($(this).attr('aria-sort'));
                     const span = $(this).children().first().children().first().children().last();
                     if ($(this).attr('aria-sort') === 'descending') {
                         span.addClass('fas fa-arrow-down');
@@ -178,6 +177,17 @@ $(document).ready(function () {
                     }
                 }, 10);
             })
+        })
+        $('tr').each(function(){
+            const el = $(this);
+            el.click(function(){
+                el.toggleClass('clicked');
+                function unclick(){
+                    el.toggleClass('clicked');
+                    window.removeEventListener('click', unclick);
+                }
+                setTimeout(()=>window.addEventListener('click', unclick), 100);
+            });
         })
     }
 
