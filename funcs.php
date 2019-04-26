@@ -1,5 +1,4 @@
 <?php
-
 function display_data($data, $add)
 {
     $i = 0;
