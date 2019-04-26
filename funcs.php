@@ -1,4 +1,5 @@
 <?php
+include_once "./dev/ChromePhp.php";
 function display_data($data, $add)
 {
     $i = 0;
@@ -6,7 +7,7 @@ function display_data($data, $add)
         $copy_of_data[$i] = $new;
         $i++;
     }
-    $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"Modal\" rel=\"modal:open\">Добавить</a></p></div>
+    $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper' id='table-wrapper'>
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$copy_of_data || count($copy_of_data) === 0) {
@@ -69,6 +70,7 @@ function isAuthorized()
 
 function chooseAddModal($name, $data)
 {
+    ChromePhp::log($name);
     switch ($name) {
         case "User":
             return userAddModal($data);
