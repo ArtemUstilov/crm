@@ -115,7 +115,6 @@ $(document).ready(function () {
             return false;
         },
         onError: function () {
-        console.log("ke");
         }
     });
 
@@ -147,7 +146,6 @@ $(document).ready(function () {
                 createAlertTable(res, "Клиент");
             },
             error: function () {
-                alert(res);
                 createAlertTable("connectionError", "Клиент");
             },
             complete: function () {
@@ -188,6 +186,7 @@ $(document).ready(function () {
     }
 
     function createAlertTable(alertType, text) {
+        alert(text);
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
