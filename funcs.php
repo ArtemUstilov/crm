@@ -7,7 +7,8 @@ function display_data($data, $add)
         $i++;
     }
     $output = "<div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
-<div class='table-wrapper' id='table-wrapper'><h2>$add</h2>
+<h2>$add</h2>
+<div class='table-wrapper' id='table-wrapper'>
 
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$copy_of_data || count($copy_of_data) === 0) {
