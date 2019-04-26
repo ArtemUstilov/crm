@@ -1,5 +1,4 @@
 <?php
-include_once "./dev/ChromePhp.php";
 function display_data($data, $add)
 {
     $i = 0;
@@ -70,7 +69,6 @@ function isAuthorized()
 
 function chooseAddModal($name, $data)
 {
-    ChromePhp::log($name);
     switch ($name) {
         case "User":
             return userAddModal($data);
