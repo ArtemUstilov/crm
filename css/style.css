@@ -370,9 +370,10 @@ table thead tr th span {
 }
 
 #menu .active {
-    border-left: 5px solid #fff;
+    border-left: 5px solid #5491F5;
     color: #fff;
-    background: #5491F5;
+    font-weight: bold;
+    background: #555;
     padding-right: 10px;
 }
 
