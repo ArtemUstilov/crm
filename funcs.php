@@ -1,5 +1,5 @@
 <?php
-include_once "./dev/ChromePhp.php";
+
 function display_data($data, $add)
 {
     $i = 0;
@@ -7,6 +7,7 @@ function display_data($data, $add)
         $copy_of_data[$i] = $new;
         $i++;
     }
+
     $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper' id='table-wrapper'>
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
@@ -70,7 +71,6 @@ function isAuthorized()
 
 function chooseAddModal($name, $data)
 {
-    ChromePhp::log($name);
     switch ($name) {
         case "User":
             return userAddModal($data);
@@ -137,17 +137,23 @@ function clientAddModal($data)
   <p>
   <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Кличка (только англ)" type="text" name="byname">
   </p>
+   <p>
+  <input id="phoneField" data-validation="required length" data-validation-length="min6" placeholder="Телефон" type="text" name="phone">
+  </p>
   <p>
-  <select id="roleField" data-validation="required">
+  <input id="emailField" data-validation="length" data-validation-length="min4" placeholder="Email" type="text" name="email">
+  </p>
+  <p>
+  <select id="callmasterField" data-validation="required">
   <option value="" selected>Выберите пригласившего</option>';
     foreach ($data as $key => $var) {
-        $output .= '<option>' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+        $output .= '<option value="' . $var['Полное имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
     }
     $output .= '
 </select>
 </p>
   <p>
-  <input id="branchField" data-validation="required"  placeholder="Отделение" type="text" name="branch">
+  <textarea id="descriptionField" rows="5" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
   </p>
  
   </div>

@@ -54,7 +54,7 @@ html, body {
     outline: none;
 }
 
-.login-page .login-form input {
+.login-page .login-form input, .login-page .login-form textarea {
     padding: 10px 15px;
     border: 1px solid black;
     font-size: 20px;
@@ -190,12 +190,15 @@ html, body, div, span, button, applet, object, iframe, h1, h2, h3, h4, h5, h6, p
 .account-name-menu-btn-box i {
     margin-left: 15px;
 }
-.fa-coins{
+
+.fa-coins {
     margin-right: 15px;
 }
-#money-t{
+
+#money-t {
     border: none;
 }
+
 #add-btn {
     background-color: #5491F5;
     outline: none;
@@ -523,4 +526,8 @@ a[disabled] {
 
 .custom-alert--active {
     right: 0px;
+}
+
+#descriptionField {
+    width: 100%;
 }
