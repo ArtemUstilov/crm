@@ -1,5 +1,4 @@
 <?php
-include_once './dev/ChromePhp.php';
 function display_data($data, $add)
 {
     $i = 0;
@@ -7,44 +6,18 @@ function display_data($data, $add)
         $copy_of_data[$i] = $new;
         $i++;
     }
-
-
-//<<<<<<< HEAD
-//    $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
-//<div class='table-wrapper'>
-//<table id='table-container'><thead>";
-//    foreach ($data as $key => $var) {
-//        $index = 0;
-//        if ($key === 0) {
-//            $output .= '<tr>';
-//            foreach ($var as $col => $val) {
-//                $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
-//</th>";
-//                $currentCol = $val;
-//                $index++;
-//            }
-//            $index = 0;
-//            $output .= '</tr></thead><tbody id="tbody">';
-//            $output .= '<tr>';
-//            foreach ($var as $col => $val) {
-//                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
-//                $index++;
-//            }
-//            $output .= '</tr>';
-//        } else {
-//=======
     $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"Modal\" rel=\"modal:open\">Добавить</a></p></div>
 <div class='table-wrapper' id='table-wrapper'>
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
-    if (!mysqli_fetch_assoc($data)) {
+    if (!$copy_of_data || count($copy_of_data) === 0) {
         $output .= '<h2>Пусто</h2>';
     } else {
-        foreach ($data as $key => $var) {
-//>>>>>>> 442d834a9ec2aba480f44d7bc78c3261236f131c
+        foreach ($copy_of_data as $key => $var) {
             $index = 0;
             if ($key === 0) {
                 $output .= '<tr>';
                 foreach ($var as $col => $val) {
+                    if(is_numeric($col)) continue;
                     $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
 </th>";
                     $index++;
@@ -53,6 +26,7 @@ function display_data($data, $add)
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
                 $output .= '<tr>';
                 foreach ($var as $col => $val) {
+                    if(is_numeric($col)) continue;
                     $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }
@@ -61,6 +35,7 @@ function display_data($data, $add)
                 $index = 0;
                 $output .= '<tr>';
                 foreach ($var as $col => $val) {
+                    if(is_numeric($col)) continue;
                     $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }

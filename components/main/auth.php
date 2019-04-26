@@ -2,7 +2,6 @@
 if (isset($_POST['login']) && isset($_POST['password'])) {
     include_once("../../bd/index.php");
     include_once("../../funcs.php");
-    include_once "../../dev/ChromePhp.php";
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);
    // $remember_me = clean($_POST['remember_me']);

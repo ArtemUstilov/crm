@@ -1,10 +1,5 @@
 $(document).ready(function () {
-    const val = document.getElementById('username');
-    if (val.innerText) {
-        localStorage.setItem('username', val.innerText);
-    } else {
-        val.innerText = localStorage.getItem('username');
-    }
+
     let icon = $('#menu-burger > i');
     $('#menu-burger').click(function () {
         icon.toggleClass('fa-bars');
