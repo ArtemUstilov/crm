@@ -3,8 +3,8 @@ function display_data($data, $add)
 {
 
     $output = "<div id='wrapper'><div class='table-menu'><p><a id='add-btn' href=\"#{$add}Modal\" rel=\"modal:open\">Добавить</a></p></div>
-<div class='table-wrapper'>
-<table id='table-container'><thead>";
+<div class='table-wrapper' id='table-wrapper'>
+<table id='table-container' class='table table-fixed'><thead id='table-head'>";
     foreach ($data as $key => $var) {
         $index = 0;
         if ($key === 0) {
@@ -16,7 +16,7 @@ function display_data($data, $add)
                 $index++;
             }
             $index = 0;
-            $output .= '</tr></thead><tbody id="tbody">';
+            $output .= '</tr></thead><div></div><tbody id="tbody">';
             $output .= '<tr>';
             foreach ($var as $col => $val) {
                 $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
