@@ -6,8 +6,8 @@ function display_data($data, $add)
         $copy_of_data[$i] = $new;
         $i++;
     }
-    $output = "<div class='table-menu'><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
-<h2>$add</h2>
+    $output = "<div class='table-menu'><h2>$add</h2><p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p></div>
+
 <div class='table-wrapper' id='table-wrapper'>
 
 <table id='table-container' class='table table-fixed'><thead id='table-head'>";
