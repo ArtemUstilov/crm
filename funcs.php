@@ -76,13 +76,13 @@ function userAddModal($data)
   <h2 class="add-modal-title">Добавить пользователя</h2>
   <div class="add-modal-inputs">
   <p>
-  <input id="firstNameField" data-validation="required length alphanumeric" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
   </p>
   <p>
-  <input id="lastNameField" data-validation="required length alphanumeric" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-  <input id="loginField" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин" type="text" name="login">
+  <input id="loginField" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
   </p>
   <p>
   <select id="roleField" data-validation="required">
@@ -91,16 +91,16 @@ function userAddModal($data)
 </select>
 </p>
 <p>
-  <input id="passField" name="pass_confirmation" type="password" data-validation="length required" data-validation-length="min8" placeholder="Пароль">
+  <input id="passField" name="pass_confirmation" type="password" data-validation="length required" data-validation-length="min8" placeholder="Пароль (только англ)">
   </p>
   <p>
   <input id="branchField" data-validation="required"  placeholder="Отделение" type="text" name="branch">
   </p>
   <p>
-  <input id="passRepeatField" name="pass" type="password" data-validation-error-msg="Пароли не совпадают" placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
+  <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
   </p>
   </div>
-  <input rel="modal:close"  class="add-modal-submit" type="submit" value="Submit">
+  <input class="add-modal-submit" type="submit" value="Submit">
   </form>
 </div>';
     return $output;

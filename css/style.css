@@ -486,10 +486,12 @@ a[disabled] {
     -ms-transition: right 1s ease;
     -o-transition: right 1s ease;
     -moz-transition: right 1s ease;
+    z-index: 5;
     color: white;
 }
 
 .alert-text-box {
+
     padding: 5px 10px;
     font-size: 15px;
     width: 87%;
