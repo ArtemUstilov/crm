@@ -294,6 +294,50 @@ $(document).ready(function () {
     }
 
 
+    //Debt
+
+    $.validate({
+        form: '#payback-debt-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            paybackDebt();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function paybackDebt() {
+        let login = $("#payback-debt-form #debtorField").val();
+        let number = $("#payback-debt-form #paybackField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/paybackDebt.php",
+            type: "POST",
+            data: {
+                login: login,
+                number: number,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Погашение");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Погашение");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
     function filterIcons() {
         $('th').each(function () {
             const _this = $(this);

@@ -23,7 +23,7 @@ FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE debt > 0 AND O.user_id = '.$_SESSION["id"].'
 ORDER BY debt DESC
-'), "","Должники");
+'), "Debt","Должники");
 
 $sumDebtsRaw = $connection -> query('
 SELECT SUM(debt) AS sum

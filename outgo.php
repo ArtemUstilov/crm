@@ -13,6 +13,6 @@ INNER JOIN clients C ON C.client_id = O.client_id
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN owners OW ON OW.owner_id = O.owner_id
 WHERE O.user_id = '.$_SESSION["id"].'
-'), "Outgo","Расходы"));
+'), "Outgo","История расходов"));
 ?>
 
