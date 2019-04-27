@@ -25,7 +25,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     }
     if ($user_data && ($user_data['role'] == "admin" || $user_data['role'] == "sub-admin" || $user_data['role'] == "manager")) {
         if ($callmaster != " ") {
-            $check_master = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM users WHERE byname='$callmaster'"));
+            $check_master = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM clients WHERE byname='$callmaster'"));
             if ($check_master) {
                 $callmaster = $check_master['id'];
             } else {

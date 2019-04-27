@@ -159,7 +159,7 @@ function clientAddModal($data)
   <select id="callmasterField" data-validation="required">
   <option value="" selected>Выберите пригласившего</option>';
     foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['Полное имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+        $output .= '<option value="' . $var['Имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
     }
     $output .= '
 </select>
@@ -205,31 +205,45 @@ function vgAddModal($data)
 
 function orderAddModal($data, $more_data)
 {
-    session_start();
-    $id = $_SESSION['id'];
+//    session_start();
+//    $id = $_SESSION['id'];
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
-<form id="add-vg-form">
+<form id="add-order-form">
   <h2 class="add-modal-title">Добавить продажу</h2>
   <div class="add-modal-inputs">
-<select id="clientField" data-validation="required">
-  <option value="" disabled selected>Выберите клиента</option>\';
-    foreach ($data as $key => $var) {
-        $output .= \'<option value="\' . $var[\'Полное имя\'] . \'">\' . $var[\'Полное имя\'] . \' (\' . $var[\'Имя\'] . \')</option>\';
-    }
-    $output .= \'
-</select>
   <p>
-  <input id="inField" data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in">
+<select id="clientField" data-validation="required">
+  <option value="" disabled selected>Выберите клиента</option>';
+    foreach ($data as $key => $var) {
+        $output .= '<option value="' . $var['логин'] . '">' . $var['клиент'] . ' (' . $var['логин'] . ')</option>';
+    }
+    $output .= '</select>
+</p><p><select id="vgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
+    foreach ($data as $key => $var) {
+        $output .= '<option value="' . $var['VG'] . '">' . $var['VG'] .'</option>';
+    }
+    $output .= '
+</select>
+</p>
+
+  <p>
+  <input id="sumVGField" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
   </p>
   <p>
-  <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out">
+  <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
+  </p>
+  <p>
+  <input id="obtainingField"  placeholder="Способ получения" type="text" name="obtaining">
   </p>
    <p>
-  <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
+  <input id="rollback1Field"  placeholder="Откат 1" type="number" name="rollback-1">
+  </p>
+  <p>
+  <input id="rollback2Field"  placeholder="Откат 2" type="number" name="rollback-2">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Создать">
+  <input class="add-modal-submit" type="submit" value="Оформить">
   </form>
 </div>';
 

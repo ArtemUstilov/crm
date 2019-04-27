@@ -59,6 +59,61 @@ $(document).ready(function () {
         });
     };
 
+
+//User
+    $.validate({
+        form: '#add-order-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addOrder();
+            return false;
+        }
+    });
+
+    function addOrder() {
+        let client = $("#add-order-form #clientField").val();
+        let rollback_1 = $("#add-order-form #rollback1Field").val();
+        let rollback_2 = $("#add-order-form #rollback2Field").val();
+        let vg = $("#add-order-form #svgField").val();
+        let sum_vg = $("#add-order-form #sumVGField").val();
+        let out = $("#add-order-form #outField").val();
+        let obtain = $("#add-order-form #obtainingField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addOrder.php",
+            type: "POST",
+            data: {
+                client: client,
+                rollback_1: rollback_1,
+                rollback_2: rollback_2,
+                sum_vg: sum_vg,
+                out: out,
+                obtain: obtain,
+                vg: vg,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Заказ");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Заказ");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+//Order
+
+
     $.validate({
         form: '#add-user-form',
         modules: 'security',
@@ -105,6 +160,8 @@ $(document).ready(function () {
         });
 
     }
+
+//Client
 
     $.validate({
         form: '#add-client-form',
@@ -155,6 +212,7 @@ $(document).ready(function () {
         });
 
     }
+
     $.validate({
         form: '#add-outgo-form',
         modules: 'security',
@@ -166,6 +224,7 @@ $(document).ready(function () {
         onError: function () {
         }
     });
+
     function addOutgo() {
         let first_name = $("#add-outgo-form #firstNameField").val();
         let last_name = $("#add-outgo-form #lastNameField").val();
@@ -203,6 +262,7 @@ $(document).ready(function () {
         });
 
     }
+
     $.validate({
         form: '#add-vg-form',
         modules: 'security',
