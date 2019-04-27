@@ -195,12 +195,15 @@ h2 {
     position: absolute;
     left: 0;
 }
+
 .main-header i {
     color: #fff;
 }
-.main-header{
+
+.main-header {
     z-index: 1000;
 }
+
 .account-name-menu-btn-box i {
     margin-left: 15px;
 }
@@ -351,6 +354,7 @@ table thead tr th span {
 }
 
 #menu {
+    z-index: 100;
     width: 0;
     background-color: #33373C;
     transition: width 1s;
@@ -434,8 +438,8 @@ a[disabled] {
     cursor: pointer;
 }
 
-.menu--open {
-    width: 180px !important;
+#menu.menu--open {
+    width: 180px;
 }
 
 
@@ -573,23 +577,42 @@ a[disabled] {
     text-align: center;
     font-size: 25px;
 }
-@media (max-width: 512px){
-    .main-header *{
+
+
+@media (max-width: 512px) {
+    .main-header * {
         font-size: 0.9em;
     }
-    .account-name-menu-btn-box{
+
+    #menu {
+        position: fixed;
+    }
+
+    #menu.menu--open {
+        width: 100vw;
+    }
+
+    .main-header p {
+        font-size: 12px;
+    }
+
+    .account-name-menu-btn-box {
         padding: 0 5px;
     }
-    .fa-building .fa-coins{
+
+    .fa-building .fa-coins {
         margin: 0 !important;
     }
-    h2{
+
+    h2 {
         font-size: 1.3em;
     }
-    #logout > a{
+
+    #logout > a {
         display: none;
     }
-    #logout p{
+
+    #logout p {
         margin-right: 8px;
     }
 }
