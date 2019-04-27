@@ -390,8 +390,19 @@ function outgoModal($data)
 
 function headAddModal($data)
 {
+    if ($data) {
+        $i = 0;
+        while ($new = $data->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
+    }
+    if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
+<h2 class="no-payroll-text">Сначала добавьте предприятие!</h2>
+</div>';
+
     $output = '
-<div id="User-Modal" class="modal" action="" role="form">
+<div id="Head-Modal" class="modal" action="" role="form">
 <form id="add-user-form">
   <h2 class="add-modal-title">Добавить владельца</h2>
   <div class="add-modal-inputs">
@@ -402,23 +413,14 @@ function headAddModal($data)
   <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-  <input id="loginField" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
-  </p>
-  <p>
-  <select id="roleField" data-validation="required">
-  <option value="" disabled selected>Выберите должность</option>
-  <option value="manager">Менеджер</option>
+  <select id="branchField" data-validation="required">
+  <option value="" disabled selected>Выберите предприятие</option>';
+    foreach ($copy_of_data as $key => $var) {
+        $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
+    }
+    $output .= '
 </select>
 </p>
-<p>
-  <input id="passField" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min6" placeholder="Пароль (только англ)">
-  </p>
-  <p>
-  <input id="branchField" data-validation="required"  placeholder="Отделение" type="text" name="branch">
-  </p>
-  <p>
-  <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
-  </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Добавить">
   </form>

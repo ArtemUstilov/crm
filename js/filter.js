@@ -100,6 +100,54 @@ $(document).ready(function () {
     }
 
 
+    //Head
+
+    $.validate({
+        form: '#add-head-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addHead();
+            return false;
+        }
+    });
+
+    function addHead() {
+        let first_name = $("#add-head-form #firstNameField").val();
+        let last_name = $("#add-head-form #lastNameField").val();
+        let branch = $("#add-head-form #branchField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addHead.php",
+            type: "POST",
+            data: {
+                first_name,
+                last_name,
+                branch,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Владелец");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Владелец");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
+
+
+
 
 
 
