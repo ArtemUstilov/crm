@@ -1,6 +1,22 @@
 <?php
 function display_data($data, $add, $text, $more_data = NULL)
 {
+    $add_btn_text = "";
+    switch($add)
+    {
+        case"Debt":
+            $add_btn_text = "Погасить";
+            break;
+        case"Rollback":
+            $add_btn_text = "Выплатить";
+            break;
+        case"Order":
+            $add_btn_text = "Создать";
+            break;
+        default:
+            $add_btn_text = "Добавить";
+            break;
+    }
     session_start();
     $i = 0;
     while ($new = $data->fetch_array()) {
@@ -10,9 +26,9 @@ function display_data($data, $add, $text, $more_data = NULL)
     $output = "<div class='table-menu'><h2>$text</h2>";
     if ($add == "User" || $add == "VG") {
         if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin')
-            $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">Добавить</a></p>";
+            $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     } else {
-        $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">Добавить</a></p>";
+        $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     }
     $output .= "</div>
 <div class='table-wrapper' id='table-wrapper'>
@@ -91,6 +107,10 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return rollbackModal($more_data);
         case "Debt":
             return debtModal($more_data);
+        case "Head":
+            return headAddModal($more_data);
+        case "Branch":
+            return branchAddModal($data);
     }
 }
 
@@ -364,5 +384,63 @@ function outgoModal($data, $more_data)
   </form>
 </div>';
 
+    return $output;
+}
+
+function headAddModal($data)
+{
+    if ($data) {
+        $i = 0;
+        while ($new = $data->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
+    }
+    if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
+<h2 class="no-payroll-text">Сначала добавьте предприятие!</h2>
+</div>';
+
+    $output = '
+<div id="Head-Modal" class="modal" action="" role="form">
+<form id="add-user-form">
+  <h2 class="add-modal-title">Добавить владельца</h2>
+  <div class="add-modal-inputs">
+  <p>
+  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  </p>
+  <p>
+  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  </p>
+  <p>
+  <select id="branchField" data-validation="required">
+  <option value="" disabled selected>Выберите предприятие</option>';
+    foreach ($copy_of_data as $key => $var) {
+        $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
+    }
+    $output .= '
+</select>
+</p>
+  </div>
+  <input class="add-modal-submit" type="submit" value="Добавить">
+  </form>
+</div>';
+    return $output;
+}
+
+
+
+function branchAddModal($data)
+{
+    $output = '
+<div id="Branch-Modal" class="modal" action="" role="form">
+<form id="add-branch-form">
+  <h2 class="add-modal-title">Добавить предприятие</h2>
+  <div class="add-modal-inputs">
+  <p>
+  <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
+  </p>
+  <input class="add-modal-submit" type="submit" value="Добавить">
+  </form>
+</div>';
     return $output;
 }

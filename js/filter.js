@@ -60,7 +60,99 @@ $(document).ready(function () {
     };
 
 
-//User
+//Branch
+    $.validate({
+        form: '#add-branch-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addBranch();
+            return false;
+        }
+    });
+
+    function addBranch() {
+        let name = $("#add-branch-form #nameField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addBranch.php",
+            type: "POST",
+            data: {
+                name,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Предприятие");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Предприятие");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
+    //Head
+
+    $.validate({
+        form: '#add-head-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addHead();
+            return false;
+        }
+    });
+
+    function addHead() {
+        let first_name = $("#add-head-form #firstNameField").val();
+        let last_name = $("#add-head-form #lastNameField").val();
+        let branch = $("#add-head-form #branchField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addHead.php",
+            type: "POST",
+            data: {
+                first_name,
+                last_name,
+                branch,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Владелец");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Владелец");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
+
+
+
+
+
+
+
+    //Order
     $.validate({
         form: '#add-order-form',
         modules: '',
@@ -117,8 +209,10 @@ $(document).ready(function () {
 
     }
 
-//Order
 
+
+
+//User
 
     $.validate({
         form: '#add-user-form',
@@ -166,6 +260,11 @@ $(document).ready(function () {
         });
 
     }
+
+
+
+
+
 
 //Client
 
