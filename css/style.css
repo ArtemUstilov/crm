@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     background: #eee url('https://i.imgur.com/eeQeRmk.png'); /* https://subtlepatterns.com/weave/ */
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: monospace;
 }
 
@@ -195,11 +195,12 @@ h2 {
     position: absolute;
     left: 0;
 }
-
 .main-header i {
     color: #fff;
 }
-
+.main-header{
+    z-index: 1000;
+}
 .account-name-menu-btn-box i {
     margin-left: 15px;
 }
@@ -349,7 +350,7 @@ table thead tr th span {
 }
 
 #menu {
-
+    z-index: 10000000;
     width: 0;
     background-color: #33373C;
     transition: width 1s;
