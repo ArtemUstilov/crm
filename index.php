@@ -42,8 +42,8 @@ WHERE C.rollback_sum > 0 AND O.user_id = '.$_SESSION["id"].'
 $sumDebtsRaw = $connection -> query('
 SELECT SUM(R.rollback_sum) AS sum
 FROM clients C
-INNER JOIN rollback_paying R ON R.client_id = C.client_id
-WHERE R.rollback_sum > 0 AND R.user_id = '.$_SESSION["id"].'
+INNER JOIN orders O ON O.client_id = C.client_id
+WHERE C.rollback_sum > 0 AND O.user_id = '.$_SESSION["id"].'
 ');
 $sumDebts = $sumDebtsRaw ? mysqli_fetch_assoc($sumDebtsRaw) : null;
 if($sumDebts) $table .= '<h2>Всего: '.($sumDebts["sum"] ? $sumDebts["sum"] : 0).' грн</h2>';
