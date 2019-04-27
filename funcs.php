@@ -245,7 +245,9 @@ function rollbackModal($data)
         $copy_of_data[$i] = $new;
         $i++;
     }
-    if(!$copy_of_data) return '';
+    if(!$copy_of_data) return '<div id="Modal" class="modal" action="">
+<h2 class="no-payroll-text">Все откаты выплачены!</h2>
+</div>';
     $output = '
 <div id="Modal" class="modal" action="" role="form">
 <form id="pay-rollback-form">
