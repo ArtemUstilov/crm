@@ -235,12 +235,14 @@ function orderAddModal($data, $more_data)
 
 function rollbackModal($data)
 {
-    $i = 0;
-    while ($new = $data->fetch_array()) {
-        $copy_of_data[$i] = $new;
-        $i++;
+    if ($data) {
+        $i = 0;
+        while ($new = $data->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
     }
-    if(!$copy_of_data) return '<div id="Modal" class="modal" action="">
+    if (!$copy_of_data) return '<div id="Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все откаты выплачены!</h2>
 </div>';
     $output = '

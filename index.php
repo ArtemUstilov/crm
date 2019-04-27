@@ -37,7 +37,7 @@ SELECT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname A
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE C.rollback_sum > 0 AND O.user_id = '.$_SESSION["id"].'
-'), "","Ожидают откаты");
+'), "Rollback","Ожидают откаты");
 
 $sumDebtsRaw = $connection -> query('
 SELECT SUM(C.rollback_sum) AS sum
