@@ -3,5 +3,5 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    "crm3_0");
+    "crm3.0");
 

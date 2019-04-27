@@ -240,6 +240,7 @@ function rollbackModal($data)
         $copy_of_data[$i] = $new;
         $i++;
     }
+    if(!$copy_of_data) return '';
     $output = '
 <div id="Modal" class="modal" action="" role="form">
 <form id="pay-rollback-form">
