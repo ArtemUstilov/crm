@@ -204,7 +204,7 @@ h2 {
     margin-left: 15px;
 }
 
-.fa-coins {
+.fa-coins, .fa-building {
     margin-right: 15px;
 }
 
@@ -439,15 +439,16 @@ a[disabled] {
 
 
 .spinner {
-    height: 60px;
-    width: 60px;
+    height: 80px;
+    width: 80px;
     position: fixed;
-    left: calc(50% - 30px);
-    top: calc(50% - 30px);
+    left: calc(50% - 40px);
+    top: calc(50% - 40px);
     animation: rotate 0.8s infinite linear;
-    border: 8px solid #2fa546;
+    border: 12px solid #33373C;
     border-right-color: transparent;
     border-radius: 50%;
+    z-index: 100000;
 }
 
 #header-empty {
@@ -564,10 +565,21 @@ a[disabled] {
 }
 
 .custom-alert--active {
-    right: 0px;
+    right: 0;
 }
 
 .no-payroll-text {
     text-align: center;
     font-size: 25px;
+}
+@media (max-width: 512px){
+    .main-header p{
+        font-size: 12px;
+    }
+    .account-name-menu-btn-box{
+        padding: 0 5px;
+    }
+    .fa-building .fa-coins{
+        margin: 0 !important;
+    }
 }

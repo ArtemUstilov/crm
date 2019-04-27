@@ -416,7 +416,11 @@ $(document).ready(function () {
         onError: function () {
         }
     });
-
+    $('#Rollback-Modal #clientField').change(function (e) {
+        const optionSelected = $("option:selected", this);
+        const sum = optionSelected.attr('sum');
+        $('#payField').val(sum);
+    });
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
@@ -460,7 +464,11 @@ $(document).ready(function () {
         onError: function () {
         }
     });
-
+    $('#Debt-Modal #debtorField').change(function (e) {
+        const optionSelected = $("option:selected", this);
+        const sum = optionSelected.attr('sum');
+        $('#paybackField').val(sum);
+    });
     function paybackDebt() {
         let login = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();

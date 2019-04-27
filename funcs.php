@@ -306,7 +306,7 @@ function rollbackModal($data)
 <select id="clientField" data-validation="required">
   <option value="" selected disabled>Выберите клиента</option>';
     foreach ($copy_of_data as $key => $var) {
-        $output .= '<option value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+        $output .= '<option sum="'.$var['rollback_sum'].'" value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
     }
     $output .= '
 </select>
@@ -344,7 +344,7 @@ function debtModal($data)
 <select id="debtorField" data-validation="required">
   <option value="" selected disabled>Выберите должника</option>';
     foreach ($copy_of_data as $key => $var) {
-        $output .= '<option value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+        $output .= '<option sum="'.$var['debt'].'" value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
     }
     $output .= '
 </select>
@@ -396,7 +396,7 @@ function headAddModal($data)
             $i++;
         }
     }
-    if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
+    if (!$copy_of_data) return '<div id="Head-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Сначала добавьте предприятие!</h2>
 </div>';
 

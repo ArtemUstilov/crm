@@ -14,8 +14,9 @@ INNER JOIN users U ON U.user_id = O.user_id
 WHERE O.user_id = '.$_SESSION["id"].'
 '), "Debt","История погашений долгов", $connection -> query('
 SELECT concat(last_name, " ", first_name) AS client_name, 
-byname AS login
-FROM clients
-WHERE  debt > 0
+byname AS login, debt
+FROM clients C
+INNER JOIN orders O ON C.client_id = O.client_id
+WHERE  debt > 0 AND O.user_id = '.$_SESSION["id"].'
 ')));
 

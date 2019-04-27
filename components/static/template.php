@@ -35,8 +35,12 @@ function template($body)
 <i class="fas fa-bars fa-2x"></i>
 </div>
 <div class="account-name-menu-btn-box">
+<i class="fas fa-building fa-2x"></i>
+<p class="menu-n" id="branch-t">' . $_SESSION['branch'] . '</p>
+</div>
+<div class="account-name-menu-btn-box">
 <i class="fas fa-coins fa-2x"></i>
-<p class="menu-n" id="money-t">' . $_SESSION['money'] . 'грн</p>
+<p class="menu-n" class="money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div class="account-name-menu-btn-box">
 <p class="menu-n">' . $_SESSION['name'] . '</p>

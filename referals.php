@@ -14,7 +14,7 @@ INNER JOIN users U ON U.user_id = O.user_id
 WHERE O.user_id = '.$_SESSION["id"].'
 '), "Rollback","История выплат рефералов", $connection -> query('
 SELECT concat(last_name, " ", first_name) AS client_name, 
-byname AS login
+byname AS login, rollback_sum
 FROM clients
 WHERE  rollback_sum > 0
 ')));
