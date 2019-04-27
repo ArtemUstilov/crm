@@ -141,13 +141,6 @@ $(document).ready(function () {
     }
 
 
-
-
-
-
-
-
-
     //Order
     $.validate({
         form: '#add-order-form',
@@ -160,11 +153,34 @@ $(document).ready(function () {
     });
 
     $('#Order-Modal #vgField').change(function (e) {
+        $('#Order-Modal #vgField').prop('disabled', true);
+        $('#Order-Modal #vgField').addClass('no-drop');
+        let id = $('#Order-Modal #vgField').val();
         const optionSelected = $("option:selected", this);
         const perc = optionSelected.attr('percent');
-        console.log(perc);
         $('#outField').val(perc);
+        $.ajax({
+            url: "../components/main/getVGOwners.php",
+            type: "POST",
+            data: {
+                id,
+            },
+            cache: false,
+            success: function (res) {
+                $('#owners-lists-container').empty();
+                $('#owners-lists-container').append(res);
+            },
+            error: function () {
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $('#Order-Modal #vgField').prop('disabled', false);
+                    $('#Order-Modal #vgField').removeClass('no-drop');
+                }, 100);
+            }
+        });
     });
+
     function addOrder() {
         let client = $("#add-order-form #clientField").val();
         let rollback_1 = $("#add-order-form #rollback1Field").val();
@@ -202,8 +218,6 @@ $(document).ready(function () {
         });
 
     }
-
-
 
 
 //User
@@ -253,10 +267,6 @@ $(document).ready(function () {
         });
 
     }
-
-
-
-
 
 
 //Client
@@ -332,7 +342,7 @@ $(document).ready(function () {
         $.ajax({
             url: "../components/main/addOutgo.php",
             type: "POST",
-            data: { owner, sum },
+            data: {owner, sum},
             cache: false,
             success: function (res) {
                 createAlertTable(res, "Расход");
@@ -413,6 +423,7 @@ $(document).ready(function () {
         const sum = optionSelected.attr('sum');
         $('#payField').val(sum);
     });
+
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
@@ -460,6 +471,7 @@ $(document).ready(function () {
         const sum = optionSelected.attr('sum');
         $('#paybackField').val(sum);
     });
+
     function paybackDebt() {
         let login = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();

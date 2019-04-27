@@ -234,9 +234,8 @@ function vgAddModal($data)
 
 function orderAddModal($data, $more_data)
 {
-    include_once './dev/ChromePhp.php';
-    ChromePhp::log($more_data);
     session_start();
+
     $id = $_SESSION['id'];
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
@@ -264,7 +263,7 @@ function orderAddModal($data, $more_data)
   <p>
   <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
   </p>
-  <p>
+    <p>
   <select id="obtainingField" data-validation="required">
   <option value="" disabled selected>Способ получения</option>;
   <option value="card">На карту</option>;
@@ -276,8 +275,7 @@ function orderAddModal($data, $more_data)
   </p>
   <p>
   <input id="rollback2Field"  placeholder="Откат 2 (0,1)" type="number" name="rollback-2">
-  </p>
-  </div>
+  </p></div><div id="owners-lists-container"></div>
   <input class="add-modal-submit" type="submit" value="Оформить">
   </form>
 </div>';
