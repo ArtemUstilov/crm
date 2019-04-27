@@ -83,11 +83,9 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Предприятие");
             },
             error: function () {
-                alert(res);
                 createAlertTable("connectionError", "Предприятие");
             },
             complete: function () {
@@ -128,11 +126,9 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Владелец");
             },
             error: function () {
-                alert(res);
                 createAlertTable("connectionError", "Владелец");
             },
             complete: function () {
@@ -193,11 +189,9 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Заказ");
             },
             error: function () {
-                alert(res);
                 createAlertTable("connectionError", "Заказ");
             },
             complete: function () {
@@ -249,7 +243,6 @@ $(document).ready(function () {
                 createAlertTable(res, "Пользователь");
             },
             error: function () {
-                alert(res);
                 createAlertTable("connectionError", "Пользователь");
             },
             complete: function () {
@@ -386,7 +379,6 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Валюта");
             },
             error: function () {
@@ -435,7 +427,6 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Выплата");
             },
             error: function () {
@@ -483,7 +474,6 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Погашение");
             },
             error: function () {
@@ -539,7 +529,6 @@ $(document).ready(function () {
     }
 
     function createAlertTable(alertType, text) {
-        alert(text);
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
