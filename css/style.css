@@ -183,6 +183,7 @@ h2 {
     position: relative;
     max-height: calc(100vh - 150px);
     overflow-y: auto;
+    margin-bottom: 45px;
 }
 
 #menu-burger {
@@ -273,6 +274,7 @@ h1 {
 #wrapper {
     display: block;
     overflow-x: auto;
+    margin-left: 10px;
 }
 
 .table-menu {
@@ -349,7 +351,6 @@ table thead tr th span {
 }
 
 #menu {
-    z-index: 10000000;
     width: 0;
     background-color: #33373C;
     transition: width 1s;
@@ -573,13 +574,22 @@ a[disabled] {
     font-size: 25px;
 }
 @media (max-width: 512px){
-    .main-header p{
-        font-size: 12px;
+    .main-header *{
+        font-size: 0.9em;
     }
     .account-name-menu-btn-box{
         padding: 0 5px;
     }
     .fa-building .fa-coins{
         margin: 0 !important;
+    }
+    h2{
+        font-size: 1.3em;
+    }
+    #logout > a{
+        display: none;
+    }
+    #logout p{
+        margin-right: 8px;
     }
 }
