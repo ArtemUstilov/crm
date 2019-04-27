@@ -30,7 +30,6 @@ html, body {
 }
 
 .login-page .login-form {
-    height: 280px;
     max-width: 370px;
     border: 1px solid black;
     padding: 30px;
