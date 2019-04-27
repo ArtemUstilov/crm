@@ -9,10 +9,15 @@ function display_data($data, $add, $text, $more_data = NULL)
     }
     $output = "<div class='table-menu'><h2>$text</h2>";
     if ($add == "User" || $add == "VG") {
-        if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin')
+        if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin') {
             $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
+        }
     } else {
-        $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
+        if($add === 'rollback-main'){
+            $output .= "<p><a id='add-btn' href='./referals.php#Modal' rel=\"modal:open\">Выплатить</a></p>";
+        }else{
+            $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
+        }
     }
     $output .= "</div>
 <div class='table-wrapper' id='table-wrapper'>
