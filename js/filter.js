@@ -142,11 +142,55 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Клиент");
             },
             error: function () {
                 createAlertTable("connectionError", "Клиент");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+    $.validate({
+        form: '#add-vg-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addVG();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function addVG() {
+        let name = $("#add-vg-form #nameField").val();
+        let in_percent = $("#add-vg-form #inField").val();
+        let out_percent = $("#add-vg-form #outField").val();
+        let url = $("#add-vg-form #urlField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addVG.php",
+            type: "POST",
+            data: {
+                name: name,
+                in: in_percent,
+                out: out_percent,
+                url: url,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Валюта");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Валюта");
             },
             complete: function () {
                 setTimeout(function () {
