@@ -155,7 +155,54 @@ $(document).ready(function () {
         });
 
     }
+    $.validate({
+        form: '#add-outgo-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addOutgo();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+    function addOutgo() {
+        let first_name = $("#add-outgo-form #firstNameField").val();
+        let last_name = $("#add-outgo-form #lastNameField").val();
+        let description = $("#add-outgo-form #descriptionField").val();
+        let callmaster = $("#add-outgo-form #callmasterField").val();
+        let byname = $("#add-outgo-form #bynameField").val();
+        let phone = $("#add-outgo-form #phoneField").val();
+        let email = $("#add-outgo-form #emailField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addOutgo.php",
+            type: "POST",
+            data: {
+                byname: byname,
+                callmaster: callmaster,
+                first_name: first_name,
+                last_name: last_name,
+                description: description,
+                phone: phone,
+                email: email
+            },
+            cache: false,
+            success: function (res) {
+                createAlertTable(res, "Клиент");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Клиент");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
 
+    }
     $.validate({
         form: '#add-vg-form',
         modules: 'security',

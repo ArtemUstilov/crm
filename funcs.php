@@ -16,7 +16,7 @@ function display_data($data, $add, $text, $more_data = NULL)
         if($add === 'rollback-main'){
             $add = 'Rollback';
             $output .= "<p><a id='add-btn' href='#Modal' rel=\"modal:open\">Выплатить</a></p>";
-        }else{
+        }elseif($add !== 'none'){
             $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
         }
     }
@@ -87,9 +87,10 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return userAddModal($data);
         case "Client":
             return clientAddModal($data);
-            return;
         case "Order":
             return orderAddModal($data, $more_data);
+        case "Outgo":
+            return outgoModal($data);
         case "VG":
             return vgAddModal($data);
         case "Rollback":
@@ -235,18 +236,17 @@ function orderAddModal($data, $more_data)
   <input class="add-modal-submit" type="submit" value="Создать">
   </form>
 </div>';
-
     return $output;
 }
 
 function rollbackModal($data)
 {
-    $i = 0;
-    while ($new = $data->fetch_array()) {
-        $copy_of_data[$i] = $new;
-        $i++;
-    }
-    if(!$copy_of_data) return '<div id="Modal" class="modal" action="">
+        $i = 0;
+        while ($new = $data->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
+    if (!$copy_of_data) return '<div id="Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все откаты выплачены!</h2>
 </div>';
     $output = '
@@ -268,6 +268,49 @@ function rollbackModal($data)
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Выплатить">
+  </form>
+</div>';
+
+    return $output;
+}
+
+function outgoModal($data)
+{
+    $output = '
+<div id="Modal" class="modal" action="" role="form">
+<form id="add-outgo-form">
+  <h2 class="add-modal-title">Добавить клиента</h2>
+  <div class="add-modal-inputs">
+  <p>
+  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  </p>
+  <p>
+  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  </p>
+  <p>
+  <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин (кличка, только англ)" type="text" name="byname">
+  </p>
+   <p>
+  <input id="phoneField" data-validation="required length" data-validation-length="min6" placeholder="Телефон" type="text" name="phone">
+  </p>
+  <p>
+  <input id="emailField"   placeholder="Email" type="email" name="email">
+  </p>
+  <p>
+  <select id="callmasterField" data-validation="required">
+  <option value="" selected>Выберите пригласившего</option>';
+    foreach ($data as $key => $var) {
+        $output .= '<option value="' . $var['Полное имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+    }
+    $output .= '
+</select>
+</p>
+  <p>
+  <textarea id="descriptionField" rows="5" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
+  </p>
+ 
+  </div>
+  <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
 
