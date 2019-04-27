@@ -71,6 +71,12 @@ $(document).ready(function () {
         }
     });
 
+    $('#Order-Modal #vgField').change(function (e) {
+        const optionSelected = $("option:selected", this);
+        const perc = optionSelected.attr('percent');
+        console.log(perc);
+        $('#outField').val(perc);
+    });
     function addOrder() {
         let client = $("#add-order-form #clientField").val();
         let rollback_1 = $("#add-order-form #rollback1Field").val();

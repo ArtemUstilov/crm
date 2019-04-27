@@ -113,7 +113,7 @@ function userAddModal($data, $more_data)
   <p>
   <select id="branchField" data-validation="required">
   <option value="" disabled selected>Выберите отделение</option>';
-  foreach ($more_data as $key => $var) {
+    foreach ($more_data as $key => $var) {
         $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
     }
     $output .= '
@@ -214,8 +214,10 @@ function vgAddModal($data)
 
 function orderAddModal($data, $more_data)
 {
-//    session_start();
-//    $id = $_SESSION['id'];
+    include_once './dev/ChromePhp.php';
+    ChromePhp::log($more_data);
+    session_start();
+    $id = $_SESSION['id'];
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
 <form id="add-order-form">
@@ -224,18 +226,18 @@ function orderAddModal($data, $more_data)
   <p>
 <select id="clientField" data-validation="required">
   <option value="" disabled selected>Выберите клиента</option>';
-    foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['логин'] . '">' . $var['клиент'] . ' (' . $var['логин'] . ')</option>';
+    foreach ($more_data['clients'] as $key => $var) {
+        $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
     }
     $output .= '</select>
-</p><p><select id="vgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-    foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['VG'] . '">' . $var['VG'] .'</option>';
+</p>
+<p><select id="vgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
+    foreach ($more_data['vgs'] as $key => $var) {
+        $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
     }
     $output .= '
 </select>
 </p>
-
   <p>
   <input id="sumVGField" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
   </p>
@@ -243,13 +245,17 @@ function orderAddModal($data, $more_data)
   <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
   </p>
   <p>
-  <input id="obtainingField"  placeholder="Способ получения" type="text" name="obtaining">
+  <select id="obtainingField" data-validation="required">
+  <option value="" disabled selected>Способ получения</option>;
+  <option value="card">На карту</option>;
+  <option value="cash">Наличные</option>;
+  </select>
   </p>
    <p>
-  <input id="rollback1Field"  placeholder="Откат 1" type="number" name="rollback-1">
+  <input id="rollback1Field"  placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
   </p>
   <p>
-  <input id="rollback2Field"  placeholder="Откат 2" type="number" name="rollback-2">
+  <input id="rollback2Field"  placeholder="Откат 2 (0,1)" type="number" name="rollback-2">
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Оформить">
