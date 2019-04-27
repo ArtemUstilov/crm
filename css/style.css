@@ -194,12 +194,15 @@ h2 {
     position: absolute;
     left: 0;
 }
+
 .main-header i {
     color: #fff;
 }
-.main-header{
+
+.main-header {
     z-index: 1000;
 }
+
 .account-name-menu-btn-box i {
     margin-left: 15px;
 }
@@ -357,6 +360,7 @@ table thead tr th span {
     -o-transition: width 1s;
     -moz-transition: width 1s;
     height: calc(100vh - 50px);
+
 }
 
 #table-container tbody .clicked {
@@ -433,8 +437,8 @@ a[disabled] {
     cursor: pointer;
 }
 
-.menu--open {
-    width: 180px !important;
+#menu.menu--open {
+    width: 180px;
 }
 
 
@@ -572,14 +576,24 @@ a[disabled] {
     text-align: center;
     font-size: 25px;
 }
-@media (max-width: 512px){
-    .main-header p{
+
+@media (max-width: 512px) {
+    #menu{
+        position:fixed;
+    }
+    #menu.menu--open {
+        width: 100vw;
+    }
+
+    .main-header p {
         font-size: 12px;
     }
-    .account-name-menu-btn-box{
+
+    .account-name-menu-btn-box {
         padding: 0 5px;
     }
-    .fa-building .fa-coins{
+
+    .fa-building .fa-coins {
         margin: 0 !important;
     }
 }
