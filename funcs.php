@@ -10,9 +10,9 @@ function display_data($data, $add, $text, $more_data = NULL)
     $output = "<div class='table-menu'><h2>$text</h2>";
     if ($add == "User" || $add == "VG") {
         if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin')
-            $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
+            $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">Добавить</a></p>";
     } else {
-        $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
+        $output .= "<p><a id='add-btn' href=\"#$add-Modal\" rel=\"modal:open\">Добавить</a></p>";
     }
     $output .= "</div>
 <div class='table-wrapper' id='table-wrapper'>
@@ -88,13 +88,15 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return vgAddModal($data);
         case "Rollback":
             return rollbackModal($more_data);
+        case "Debt":
+            return debtModal($more_data);
     }
 }
 
 function userAddModal($data)
 {
     $output = '
-<div id="Modal" class="modal" action="" role="form">
+<div id="User-Modal" class="modal" action="" role="form">
 <form id="add-user-form">
   <h2 class="add-modal-title">Добавить пользователя</h2>
   <div class="add-modal-inputs">
@@ -133,7 +135,7 @@ function userAddModal($data)
 function clientAddModal($data)
 {
     $output = '
-<div id="Modal" class="modal" action="" role="form">
+<div id="Client-Modal" class="modal" action="" role="form">
 <form id="add-client-form">
   <h2 class="add-modal-title">Добавить клиента</h2>
   <div class="add-modal-inputs">
@@ -176,7 +178,7 @@ function clientAddModal($data)
 function vgAddModal($data)
 {
     $output = '
-<div id="Modal" class="modal" action="" role="form">
+<div id="VG-Modal" class="modal" action="" role="form">
 <form id="add-vg-form">
   <h2 class="add-modal-title">Добавить валюту</h2>
   <div class="add-modal-inputs">
@@ -205,7 +207,7 @@ function orderAddModal($data, $more_data)
     session_start();
     $id = $_SESSION['id'];
     $output = '
-<div id="Modal" class="modal" action="" role="form">
+<div id="Order-Modal" class="modal" action="" role="form">
 <form id="add-vg-form">
   <h2 class="add-modal-title">Добавить продажу</h2>
   <div class="add-modal-inputs">
@@ -242,13 +244,13 @@ function rollbackModal($data)
             $i++;
         }
     }
-    if (!$copy_of_data) return '<div id="Modal" class="modal" action="">
+    if (!$copy_of_data) return '<div id="Rollback-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все откаты выплачены!</h2>
 </div>';
     $output = '
-<div id="Modal" class="modal" action="" role="form">
+<div id="Rollback-Modal" class="modal" action="" role="form">
 <form id="pay-rollback-form">
-  <h2 class="add-modal-title">Добавить продажу</h2>
+  <h2 class="add-modal-title">Выплатить откат</h2>
   <div class="add-modal-inputs">
   <p>
 <select id="clientField" data-validation="required">
@@ -261,6 +263,44 @@ function rollbackModal($data)
 </p>
   <p>
   <input id="payField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
+  </p>
+  </div>
+  <input class="add-modal-submit" type="submit" value="Выплатить">
+  </form>
+</div>';
+
+    return $output;
+}
+
+
+function debtModal($data)
+{
+    if ($data) {
+        $i = 0;
+        while ($new = $data->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
+    }
+    if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
+<h2 class="no-payroll-text">Все долги погашены!</h2>
+</div>';
+    $output = '
+<div id="Debt-Modal" class="modal" action="" role="form">
+<form id="payback-debt-form">
+  <h2 class="add-modal-title">Погасить долг</h2>
+  <div class="add-modal-inputs">
+  <p>
+<select id="debtorField" data-validation="required">
+  <option value="" selected disabled>Выберите должника</option>';
+    foreach ($copy_of_data as $key => $var) {
+        $output .= '<option value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+    }
+    $output .= '
+</select>
+</p>
+  <p>
+  <input id="paybackField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Выплатить">
