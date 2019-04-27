@@ -16,7 +16,7 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
         $add_ref = $mysql_connect->
         query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\") ");
         $change_rollback_sum = $mysql_connect->
-        query("UPDATE `clients` SET `rollback_sum` = `rollback_sum` - $user_id WHERE `client_id` = $client_id");
+        query("UPDATE `clients` SET `rollback_sum` = `rollback_sum` - $number WHERE `client_id` = $client_id");
         if ($change_rollback_sum && $add_ref) {
             echo "success";
             return false;
