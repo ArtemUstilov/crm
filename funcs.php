@@ -14,7 +14,8 @@ function display_data($data, $add, $text, $more_data = NULL)
         }
     } else {
         if($add === 'rollback-main'){
-            $output .= "<p><a id='add-btn' href='./referals.php#Modal' rel=\"modal:open\">Выплатить</a></p>";
+            $add = 'Rollback';
+            $output .= "<p><a id='add-btn' href='#Modal' rel=\"modal:open\">Выплатить</a></p>";
         }else{
             $output .= "<p><a id='add-btn' href=\"#Modal\" rel=\"modal:open\">Добавить</a></p>";
         }
