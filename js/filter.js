@@ -167,33 +167,21 @@ $(document).ready(function () {
         }
     });
     function addOutgo() {
-        let first_name = $("#add-outgo-form #firstNameField").val();
-        let last_name = $("#add-outgo-form #lastNameField").val();
-        let description = $("#add-outgo-form #descriptionField").val();
-        let callmaster = $("#add-outgo-form #callmasterField").val();
-        let byname = $("#add-outgo-form #bynameField").val();
-        let phone = $("#add-outgo-form #phoneField").val();
-        let email = $("#add-outgo-form #emailField").val();
+        let sum = $("#add-outgo-form #sumField").val();
+        let owner = $("#add-outgo-form #ownerField").val();
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
+        // console.log(sum)
         $.ajax({
             url: "../components/main/addOutgo.php",
             type: "POST",
-            data: {
-                byname: byname,
-                callmaster: callmaster,
-                first_name: first_name,
-                last_name: last_name,
-                description: description,
-                phone: phone,
-                email: email
-            },
+            data: { owner, sum },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Клиент");
+                createAlertTable(res, "Расход");
             },
             error: function () {
-                createAlertTable("connectionError", "Клиент");
+                createAlertTable("connectionError", "Расход");
             },
             complete: function () {
                 setTimeout(function () {

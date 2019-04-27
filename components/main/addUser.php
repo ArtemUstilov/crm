@@ -21,7 +21,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['branch'
     }
     if ($user_data['role'] == 'admin' || $user_data['role'] == 'sub_admin') {
         $res = $mysql_connect->
-        query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_name`, `money`) VALUES('$login','$password','$first_name','$last_name','$role','$branch','$money') ");
+        query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`, `money`) VALUES('$login','$password','$first_name','$last_name','$role','$branch','$money') ");
         if ($res) {
             echo "success";
             return false;

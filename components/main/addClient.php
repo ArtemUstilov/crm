@@ -11,7 +11,6 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     $last_name = clean($_POST['last_name']);
     $description = clean($_POST['description']);
     $callmaster = clean($_POST['callmaster']);
-    $callmaster = $callmaster != "Выберите пригласившего" ?: " ";
     $phone = clean($_POST['phone']);
     $email = isset($_POST['email']) ? clean($_POST['email']) : " ";
     session_start();
@@ -25,7 +24,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     }
     if ($user_data && ($user_data['role'] == "admin" || $user_data['role'] == "sub-admin" || $user_data['role'] == "manager")) {
         if ($callmaster != " ") {
-            $check_master = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM users WHERE byname='$callmaster'"));
+            $check_master = mysqli_fetch_assoc($mysql_connect->query("SELECT client_id AS id FROM clients WHERE byname='".$callmaster."'"));
             if ($check_master) {
                 $callmaster = $check_master['id'];
             } else {
@@ -47,6 +46,4 @@ if (isset($_POST['description']) && isset($_POST['byname'])
         echo "empty";
         return false;
     }
-    echo "denied";
-    return false;
 }

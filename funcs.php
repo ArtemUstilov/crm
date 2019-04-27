@@ -78,11 +78,11 @@ function chooseAddModal($name, $data, $more_data = NULL)
 {
     switch ($name) {
         case "User":
-            return userAddModal($data);
+            return userAddModal($data, $more_data);
         case "Client":
             return clientAddModal($data);
         case "Outgo":
-            return outgoModal($data);
+            return outgoModal($data, $more_data);
         case "Order":
             return orderAddModal($data, $more_data);
         case "VG":
@@ -94,7 +94,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
     }
 }
 
-function userAddModal($data)
+function userAddModal($data, $more_data)
 {
     $output = '
 <div id="User-Modal" class="modal" action="" role="form">
@@ -111,16 +111,25 @@ function userAddModal($data)
   <input id="loginField" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
   </p>
   <p>
-  <select id="roleField" data-validation="required">
-  <option value="" disabled selected>Выберите должность</option>
-  <option value="manager">Менеджер</option>
+  <select id="branchField" data-validation="required">
+  <option value="" disabled selected>Выберите отделение</option>';
+  foreach ($more_data as $key => $var) {
+        $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
+    }
+    $output .= '
 </select>
 </p>
 <p>
+
   <input id="passField" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min6" placeholder="Пароль (только англ)">
   </p>
   <p>
-  <input id="branchField" data-validation="required"  placeholder="Отделение" type="text" name="branch">
+  <select id="roleField" data-validation="required">
+  <option value="" disabled selected>Выберите должность</option>
+  <option value="manager">Менеджер</option>
+   <option value="moder">Модератор</option>
+    <option value="admin">Администратор</option>
+    </select>
   </p>
   <p>
   <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
@@ -159,7 +168,7 @@ function clientAddModal($data)
   <select id="callmasterField" data-validation="required">
   <option value="" selected>Выберите пригласившего</option>';
     foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['Полное имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+        $output .= '<option value="' . $var['Имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
     }
     $output .= '
 </select>
@@ -311,41 +320,25 @@ function debtModal($data)
     return $output;
 }
 
-function outgoModal($data)
+function outgoModal($data, $more_data)
 {
     $output = '
 <div id="Outgo-Modal" class="modal" action="" role="form">
 <form id="add-outgo-form">
-  <h2 class="add-modal-title">Добавить клиента</h2>
+  <h2 class="add-modal-title">Добавить расходы</h2>
   <div class="add-modal-inputs">
-  <p>
-  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
-  </p>
-  <p>
-  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
-  </p>
-  <p>
-  <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин (кличка, только англ)" type="text" name="byname">
-  </p>
    <p>
-  <input id="phoneField" data-validation="required length" data-validation-length="min6" placeholder="Телефон" type="text" name="phone">
+  <input id="sumField" data-validation="required" placeholder="Сумма" type="number" name="sum">
   </p>
   <p>
-  <input id="emailField"   placeholder="Email" type="email" name="email">
-  </p>
-  <p>
-  <select id="callmasterField" data-validation="required">
-  <option value="" selected>Выберите пригласившего</option>';
-    foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['Полное имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
+  <select id="ownerField">
+  <option value="" selected disabled>Выберите владельца (опц)</option>';
+    foreach ($more_data as $key => $var) {
+        $output .= '<option value="' . $var['owner_id'] . '">' . $var['name'] . '</option>';
     }
     $output .= '
 </select>
 </p>
-  <p>
-  <textarea id="descriptionField" rows="5" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
-  </p>
- 
   </div>
   <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
