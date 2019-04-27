@@ -23,7 +23,13 @@ FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE debt > 0 AND O.user_id = '.$_SESSION["id"].'
 ORDER BY debt DESC
-'), "Debt","Должники");
+'), "Debt","Должники",($connection -> query('
+SELECT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login
+FROM clients C
+INNER JOIN orders O ON O.client_id = C.client_id
+WHERE debt > 0 AND O.user_id = '.$_SESSION["id"].'
+ORDER BY debt DESC
+')));
 
 $sumDebtsRaw = $connection -> query('
 SELECT SUM(debt) AS sum
@@ -40,13 +46,12 @@ SELECT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname A
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE C.rollback_sum > 0 AND O.user_id = '.$_SESSION["id"].'
-'), "rollback-main","Ожидают откаты", $connection -> query('
+'), "Rollback","Ожидают откаты", $connection -> query('
 SELECT concat(last_name, " ", first_name) AS client_name, 
 byname AS login
 FROM clients
 WHERE  rollback_sum > 0
 '));
-
 $sumDebtsRaw = $connection -> query('
 SELECT SUM(C.rollback_sum) AS sum
 FROM clients C
