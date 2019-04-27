@@ -1,6 +1,5 @@
 <?php
-
-function display_data($data, $add, $text)
+function display_data($data, $add, $text, $more_data = NULL)
 {
     session_start();
     $i = 0;
@@ -55,7 +54,7 @@ function display_data($data, $add, $text)
     }
 
     $output .= '</tbody></table></div>';
-    $output .= chooseAddModal($add, $copy_of_data);
+    $output .= chooseAddModal($add, $copy_of_data, $more_data);
     return $output;
 }
 
@@ -75,7 +74,7 @@ function isAuthorized()
     return false;
 }
 
-function chooseAddModal($name, $data)
+function chooseAddModal($name, $data, $more_data = NULL)
 {
     switch ($name) {
         case "User":
@@ -87,6 +86,8 @@ function chooseAddModal($name, $data)
             return orderAddModal($data);
         case "VG":
             return vgAddModal($data);
+        case "Rollback":
+            return rollbackModal($more_data);
     }
 }
 
@@ -122,7 +123,7 @@ function userAddModal($data)
   <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Submit">
+  <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
     return $output;
@@ -165,7 +166,7 @@ function clientAddModal($data)
   </p>
  
   </div>
-  <input class="add-modal-submit" type="submit" value="Submit">
+  <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
 
@@ -192,7 +193,7 @@ function vgAddModal($data)
   <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Submit">
+  <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
 
@@ -209,7 +210,7 @@ function orderAddModal($data)
   <h2 class="add-modal-title">Добавить продажу</h2>
   <div class="add-modal-inputs">
 <select id="clientField" data-validation="required">
-  <option value="" selected>Выберите клиента</option>\';
+  <option value="" disabled selected>Выберите клиента</option>\';
     foreach ($data as $key => $var) {
         $output .= \'<option value="\' . $var[\'Полное имя\'] . \'">\' . $var[\'Полное имя\'] . \' (\' . $var[\'Имя\'] . \')</option>\';
     }
@@ -225,7 +226,39 @@ function orderAddModal($data)
   <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Submit">
+  <input class="add-modal-submit" type="submit" value="Создать">
+  </form>
+</div>';
+
+    return $output;
+}
+
+function rollbackModal($data)
+{
+    $i = 0;
+    while ($new = $data->fetch_array()) {
+        $copy_of_data[$i] = $new;
+        $i++;
+    }
+    $output = '
+<div id="Modal" class="modal" action="" role="form">
+<form id="pay-rollback-form">
+  <h2 class="add-modal-title">Добавить продажу</h2>
+  <div class="add-modal-inputs">
+  <p>
+<select id="clientField" data-validation="required">
+  <option value="" selected disabled>Выберите клиента</option>';
+    foreach ($copy_of_data as $key => $var) {
+        $output .= '<option value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+    }
+    $output .= '
+</select>
+</p>
+  <p>
+  <input id="payField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
+  </p>
+  </div>
+  <input class="add-modal-submit" type="submit" value="Выплатить">
   </form>
 </div>';
 

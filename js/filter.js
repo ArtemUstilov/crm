@@ -202,6 +202,51 @@ $(document).ready(function () {
     }
 
 
+    //Payback
+
+
+    $.validate({
+        form: '#pay-rollback-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            payRollback();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function payRollback() {
+        let login = $("#pay-rollback-form #clientField").val();
+        let number = $("#pay-rollback-form #payField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/payRollback.php",
+            type: "POST",
+            data: {
+                login: login,
+                number: number,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Выплата");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Выплата");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
     function filterIcons() {
         $('th').each(function () {
             const _this = $(this);
@@ -220,15 +265,17 @@ $(document).ready(function () {
                 }, 10);
             })
         })
-        $('tr').each(function(){
+        $('tr').each(function () {
             const el = $(this);
-            el.click(function(){
+            el.click(function () {
                 el.toggleClass('clicked');
-                function unclick(){
+
+                function unclick() {
                     el.toggleClass('clicked');
                     window.removeEventListener('click', unclick);
                 }
-                setTimeout(()=>window.addEventListener('click', unclick), 100);
+
+                setTimeout(() => window.addEventListener('click', unclick), 100);
             });
         })
     }
