@@ -83,7 +83,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return clientAddModal($data);
             return;
         case "Order":
-            return orderAddModal($data);
+            return orderAddModal($data, $more_data);
         case "VG":
             return vgAddModal($data);
         case "Rollback":
@@ -200,7 +200,7 @@ function vgAddModal($data)
     return $output;
 }
 
-function orderAddModal($data)
+function orderAddModal($data, $more_data)
 {
     session_start();
     $id = $_SESSION['id'];
