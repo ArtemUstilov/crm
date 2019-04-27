@@ -13,7 +13,11 @@ INNER JOIN owners O ON O.owner_id = S.owner_id
 WHERE O.branch_id IN (SELECT branch_id FROM users U WHERE U.user_id = '.$_SESSION["id"].')
 GROUP BY S.owner_id 
 ');
-$table .= display_data($headSumsRaw, 'none', "Heads");
+$branches = $connection -> query('
+SELECT branch_id AS id, branch_name
+FROM branch
+');
+$table .= display_data($headSumsRaw, 'Head', "Владельцы", $branches);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
 

@@ -10,9 +10,10 @@ function menu(){
          <li><a href="../../vgs.php" class='.($curPage === 'vgs' ? '"active" disabled' : '').'>VG</a></li>
         <li><a href="../../orders.php" class='.($curPage === 'orders' ? '"active" disabled' : '').'>Продажи</a></li>
                 <li><a href="../../outgo.php" class='.($curPage === 'outgo' ? '"active" disabled' : '').'>Расходы</a></li>
+                <li><a href="../../branches.php" class='.($curPage === 'branches' ? '"active" disabled' : '').'>Отделы</a></li>
         <li><a href="../../referals.php" class='.($curPage === 'referals' ? '"active" disabled' : '').'>Рефералы</a></li>
         <li><a href="../../debts.php" class='.($curPage === 'debts' ? '"active" disabled' : '').'>Долги</a></li>
-        <li><a href="./components/main/logout.php">Выйти</a></li>
+        <li><a class="menu-logout-btn" href="./components/main/logout.php">Выйти</a></li>
     </ul>
 </div>');
 }

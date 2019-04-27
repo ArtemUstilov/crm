@@ -60,7 +60,51 @@ $(document).ready(function () {
     };
 
 
-//User
+//Branch
+    $.validate({
+        form: '#add-branch-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addBranch();
+            return false;
+        }
+    });
+
+    function addBranch() {
+        let name = $("#add-branch-form #nameField").val();
+        $this = $(".add-modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/main/addBranch.php",
+            type: "POST",
+            data: {
+                name,
+            },
+            cache: false,
+            success: function (res) {
+                alert(res);
+                createAlertTable(res, "Предприятие");
+            },
+            error: function () {
+                alert(res);
+                createAlertTable("connectionError", "Предприятие");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
+
+
+
+
+    //Order
     $.validate({
         form: '#add-order-form',
         modules: '',
@@ -111,8 +155,10 @@ $(document).ready(function () {
 
     }
 
-//Order
 
+
+
+//User
 
     $.validate({
         form: '#add-user-form',
@@ -160,6 +206,11 @@ $(document).ready(function () {
         });
 
     }
+
+
+
+
+
 
 //Client
 
