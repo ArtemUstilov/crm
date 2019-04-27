@@ -402,7 +402,7 @@ function headAddModal($data)
 
     $output = '
 <div id="Head-Modal" class="modal" action="" role="form">
-<form id="add-user-form">
+<form id="add-head-form">
   <h2 class="add-modal-title">Добавить владельца</h2>
   <div class="add-modal-inputs">
   <p>
