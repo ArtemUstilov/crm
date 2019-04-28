@@ -1,5 +1,22 @@
 $(document).ready(function () {
+    $('#owners-lists-container').on('click', '#open-invisible-owner-list', () => {
+        $('#owners-list-invisible').toggleClass('open');
+        if ($('#owners-list-invisible').hasClass('open')) {
+            $('#open-invisible-owner-list').html('Скрыть');
+            $('#owners-list-invisible').animate({
+                height: $('#owners-list-invisible').get(0).scrollHeight
+            }, 1000, function(){
+                $('#owners-list-invisible').height('auto');
+            });
+        } else {
+            $('#open-invisible-owner-list').html('Показать всех');
+            $('#owners-list-invisible').animate({
+                height: '0px'
+            }, 1000);
 
+        }
+
+    });
     $('#login-form').submit((event) => {
         event.preventDefault();
         let password = $("#passwordField").val();

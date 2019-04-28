@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['vg_id'])) {
+if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
     include_once("../../dev/ChromePhp.php");
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -28,7 +28,7 @@ if (isset($_POST['vg_id'])) {
         SELECT concat(last_name, ' ', first_name) AS owner_name, shares.owner_id AS id, share_percent AS percent 
         FROM owners 
         INNER JOIN shares ON shares.owner_id = owners.owner_id 
-        WHERE order_id='" . $last_order . "'
+        WHERE order_id='" . $last_order . "' AND branch_id = '" . $branch_id . "'
     "));
 
     $hidden_owners = mysqliToArray($connection->query("
@@ -41,10 +41,28 @@ if (isset($_POST['vg_id'])) {
             WHERE order_id='" . $last_order . "')"
     ));
 
+    if (!$prev_order_owners) {
+        $res .= '<div id="owners-list-visible" class="orders-modal-owners-list">';
+        if ($hidden_owners) foreach ($hidden_owners as $key => $var) {
+            $res .= '
+            <p>' . $var["owner_name"] . '
+            <input 
+                class="owner-percent-input" 
+                type="number" 
+                owner-id="' . $var['id'] . '" 
+                placeholder="Процент прибыли" 
+                value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
+            </p>
+        ';
+        }
+        $res .= '</div>';
+        echo $res;
+        return false;
+    }
     $res = '';
 
     $res .= '<div id="owners-list-visible" class="orders-modal-owners-list">';
-    if($prev_order_owners) foreach ($prev_order_owners as $key => $var) {
+    if ($prev_order_owners) foreach ($prev_order_owners as $key => $var) {
         $res .= '
             <p>' . $var["owner_name"] . '
             <input 
@@ -55,10 +73,10 @@ if (isset($_POST['vg_id'])) {
             </p>
         ';
     }
-    $res .= '</div>';
+    $res .= '</div><div id="open-invisible-owner-list">Показать всех</div>';
 
     $res .= '<div id="owners-list-invisible" class="orders-modal-owners-list">';
-    if($hidden_owners)foreach ($hidden_owners as $key => $var) {
+    if ($hidden_owners) foreach ($hidden_owners as $key => $var) {
         $res .= '
             <p>' . $var["owner_name"] . '
             <input 
@@ -66,7 +84,7 @@ if (isset($_POST['vg_id'])) {
                 type="number" 
                 owner-id="' . $var['id'] . '" 
                 placeholder="Процент прибыли" 
-                value="'.(!$prev_order_owners ? sprintf('%0.2f', 100.0/count($hidden_owners)) : 0).'">
+                value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
             </p>
         ';
     }
