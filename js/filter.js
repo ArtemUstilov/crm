@@ -152,14 +152,21 @@ $(document).ready(function () {
         }
     });
 
-    $('#Order-Modal #vgField').change(function (e) {
-        $('#Order-Modal #vgField').prop('disabled', true);
-        $('#Order-Modal #vgField').addClass('no-drop');
+    const vgcl = $('#Order-Modal #vgField, #Order-Modal #clientField');
+    vgcl.change(function (e) {
         let vg_id = $('#Order-Modal #vgField').val();
         let client_id = $('#Order-Modal #clientField').val();
-        const optionSelected = $("option:selected", this);
-        const perc = optionSelected.attr('percent');
-        $('#outField').val(perc);
+        if (!vg_id && !client_id) return;
+        if (vg_id) {
+            const optionSelected = $("option:selected", this);
+            const perc = optionSelected.attr('percent');
+            $('#outField').val(perc);
+        }
+        if (!client_id || !vg_id) return;
+        vgcl.prop('disabled', true);
+        vgcl.addClass('no-drop');
+        $(".spinner").show();
+
         $.ajax({
             url: "../components/modal-response/getVGOwners.php",
             type: "POST",
@@ -168,41 +175,49 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                $('#owners-lists-container').empty();
-                $('#owners-lists-container').append(res);
+                const container = $('#owners-lists-container');
+                container.empty();
+                container.append(res);
             },
             error: function () {
             },
             complete: function () {
-                setTimeout(function () {
-                    $('#Order-Modal #vgField').prop('disabled', false);
-                    $('#Order-Modal #vgField').removeClass('no-drop');
-                }, 100);
+                $(".spinner").fadeOut('slow');
+                vgcl.prop('disabled', false);
+                vgcl.removeClass('no-drop');
             }
         });
     });
 
     function addOrder() {
-        let client = $("#add-order-form #clientField").val();
-        let rollback_1 = $("#add-order-form #rollback1Field").val();
-        let rollback_2 = $("#add-order-form #rollback2Field").val();
-        let vg = $("#add-order-form #svgField").val();
-        let sum_vg = $("#add-order-form #sumVGField").val();
-        let out = $("#add-order-form #outField").val();
-        let obtain = $("#add-order-form #obtainingField").val();
+        const client = $("#add-order-form #clientField").val();
+        const rollback_1 = $("#add-order-form #rollback1Field").val();
+        const rollback_2 = $("#add-order-form #rollback2Field").val();
+        const vg = $("#add-order-form #svgField").val();
+        const sum_vg = $("#add-order-form #sumVGField").val();
+        const out = $("#add-order-form #outField").val();
+        const obtain = $("#add-order-form #obtainingField").val();
+        const sharesEls = $("#add-order-form .owner-percent-input");
+        const debtCl = $("#add-order-form #debtCLField").val();
+        const shares = [];
+        sharesEls.each(function(){
+            shares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
+        });
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addOrder.php",
             type: "POST",
             data: {
-                client: client,
-                rollback_1: rollback_1,
-                rollback_2: rollback_2,
-                sum_vg: sum_vg,
-                out: out,
-                obtain: obtain,
-                vg: vg,
+                client,
+                rollback_1,
+                rollback_2,
+                sum_vg,
+                out,
+                obtain,
+                vg,
+                shares,
+                debtCl,
             },
             cache: false,
             success: function (res) {

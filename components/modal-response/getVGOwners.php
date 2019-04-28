@@ -47,7 +47,11 @@ if (isset($_POST['vg_id'])) {
     if($prev_order_owners) foreach ($prev_order_owners as $key => $var) {
         $res .= '
             <p>' . $var["owner_name"] . '
-            <input class="owner-percent-input" type="number" owner-id="' . $var['id'] . '"placeholder="Процент прибыли" value="' . $var["percent"] . '">
+            <input 
+                class="owner-percent-input" 
+                type="number" owner-id="' . $var['id'] . '" 
+                placeholder="Процент прибыли" 
+                value="' . $var["percent"] . '">
             </p>
         ';
     }
@@ -57,7 +61,12 @@ if (isset($_POST['vg_id'])) {
     if($hidden_owners)foreach ($hidden_owners as $key => $var) {
         $res .= '
             <p>' . $var["owner_name"] . '
-            <input class="owner-percent-input" type="number" owner-id="' . $var['id'] . ' placeholder="Процент прибыли" value="'.(!$prev_order_owners ? 100.0/count($hidden_owners) : 0).'">
+            <input 
+                class="owner-percent-input" 
+                type="number" 
+                owner-id="' . $var['id'] . '" 
+                placeholder="Процент прибыли" 
+                value="'.(!$prev_order_owners ? sprintf('%0.2f', 100.0/count($hidden_owners)) : 0).'">
             </p>
         ';
     }

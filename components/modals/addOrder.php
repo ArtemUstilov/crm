@@ -27,6 +27,9 @@ function orderAddModal($data, $more_data)
   <p>
   <input id="sumVGField" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
   </p>
+   <p>
+  <input id="debtClField" data-validation="required length" data-validation-length="min1" placeholder="Не оплаченая часть" type="number" name="debt-sum">
+  </p>
   <p>
   <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
   </p>

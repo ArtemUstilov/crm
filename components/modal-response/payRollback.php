@@ -15,8 +15,16 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
             || $user_data['role'] == 'manager')) {
         $add_ref = $mysql_connect->
         query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\") ");
-        $change_rollback_sum = $mysql_connect->
-        query("UPDATE `clients` SET `rollback_sum` = `rollback_sum` - $number WHERE `client_id` = $client_id");
+        $change_rollback_sum = $mysql_connect->query("
+            UPDATE `clients` 
+            SET `rollback_sum` = `rollback_sum` - $number 
+            WHERE `client_id` = $client_id
+        ");
+        $change_user_sum = $mysql_connect->query("
+            UPDATE `users` 
+            SET `money` = `money` - $number 
+            WHERE `user_id` = $user_id");
+        $_SESSION['money'] -= $number;
         if ($change_rollback_sum && $add_ref) {
             echo "success";
             return false;

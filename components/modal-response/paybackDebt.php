@@ -15,9 +15,16 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
             || $user_data['role'] == 'manager')) {
         $add_ref = $mysql_connect->
         query("INSERT INTO debt_history (user_id, client_id, debt_sum, date) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\") ");
-        $change_rollback_sum = $mysql_connect->
-        query("UPDATE `clients` SET `debt` = `debt` - $number WHERE `client_id` = $client_id");
-        if ($change_rollback_sum && $add_ref) {
+        $change_debt = $mysql_connect->query("
+            UPDATE `clients` 
+            SET `debt` = `debt` - $number 
+            WHERE `client_id` = $client_id");
+        $change_user_sum = $mysql_connect->query("
+            UPDATE `users` 
+            SET `money` = `money` + $number 
+            WHERE `user_id` = $user_id");
+        $_SESSION['money'] += $number;
+        if ($change_debt && $add_ref && $change_user_sum) {
             echo "success";
             return false;
         }else{
