@@ -4,6 +4,8 @@ if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
 
+session_start();
+$branch_name = $_SESSION['branch'];
 
 $clients = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS name, C.client_id AS id FROM clients C
@@ -11,8 +13,11 @@ SELECT concat(C.last_name, " ", C.first_name) AS name, C.client_id AS id FROM cl
 $vgs = $connection -> query('
 SELECT * FROM virtualgood
 ');
+
+
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;
+
 
 
 

@@ -201,7 +201,7 @@ h2 {
 }
 
 .main-header {
-    z-index: 1000;
+    z-index: 3;
 }
 
 .account-name-menu-btn-box i {
@@ -354,7 +354,7 @@ table thead tr th span {
 }
 
 #menu {
-    z-index: 100;
+    z-index: 10;
     width: 0;
     background-color: #33373C;
     transition: width 1s;
@@ -476,7 +476,7 @@ a[disabled] {
     text-align: center;
 }
 
-.add-modal-inputs {
+.add-modal-inputs, .orders-modal-owners-list {
     padding: 20px 0;
     display: grid;
     grid-template-columns: auto;
@@ -488,7 +488,7 @@ a[disabled] {
     height: 40px;
 }
 
-.add-modal-inputs input, .add-modal-inputs select {
+.add-modal-inputs input, .orders-modal-owners-list input, .add-modal-inputs select {
     width: 100%;
     padding: 5px 10px;
     font-size: 17px;
@@ -525,7 +525,7 @@ a[disabled] {
 }
 
 @media (min-width: 724px) {
-    .add-modal-inputs {
+    .add-modal-inputs, .orders-modal-owners-list {
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -618,4 +618,12 @@ a[disabled] {
     #logout p {
         margin-right: 8px;
     }
+}
+
+.blocker {
+    z-index: 3 !important;
+}
+
+.no-drop {
+    cursor: no-drop;
 }
