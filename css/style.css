@@ -583,7 +583,10 @@ a[disabled] {
     .main-header * {
         font-size: 0.9em;
     }
-
+    .main-header{
+        justify-content: space-between;
+        padding-left: 50px;
+    }
     #menu {
         position: fixed;
     }
