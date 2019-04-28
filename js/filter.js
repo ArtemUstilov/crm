@@ -76,7 +76,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addBranch.php",
+            url: "../components/modal-response/addBranch.php",
             type: "POST",
             data: {
                 name,
@@ -117,7 +117,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addHead.php",
+            url: "../components/modal-response/addHead.php",
             type: "POST",
             data: {
                 first_name,
@@ -155,15 +155,16 @@ $(document).ready(function () {
     $('#Order-Modal #vgField').change(function (e) {
         $('#Order-Modal #vgField').prop('disabled', true);
         $('#Order-Modal #vgField').addClass('no-drop');
-        let id = $('#Order-Modal #vgField').val();
+        let vg_id = $('#Order-Modal #vgField').val();
+        let client_id = $('#Order-Modal #clientField').val();
         const optionSelected = $("option:selected", this);
         const perc = optionSelected.attr('percent');
         $('#outField').val(perc);
         $.ajax({
-            url: "../components/main/getVGOwners.php",
+            url: "../components/modal-response/getVGOwners.php",
             type: "POST",
             data: {
-                id,
+                vg_id, client_id
             },
             cache: false,
             success: function (res) {
@@ -192,7 +193,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addOrder.php",
+            url: "../components/modal-response/addOrder.php",
             type: "POST",
             data: {
                 client: client,
@@ -242,7 +243,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addUser.php",
+            url: "../components/modal-response/addUser.php",
             type: "POST",
             data: {
                 password: password,
@@ -294,7 +295,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addClient.php",
+            url: "../components/modal-response/addClient.php",
             type: "POST",
             data: {
                 byname: byname,
@@ -340,7 +341,7 @@ $(document).ready(function () {
         $this.prop("disabled", true);
         // console.log(sum)
         $.ajax({
-            url: "../components/main/addOutgo.php",
+            url: "../components/modal-response/addOutgo.php",
             type: "POST",
             data: {owner, sum},
             cache: false,
@@ -379,7 +380,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/addVG.php",
+            url: "../components/modal-response/addVG.php",
             type: "POST",
             data: {
                 name: name,
@@ -430,7 +431,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/payRollback.php",
+            url: "../components/modal-response/payRollback.php",
             type: "POST",
             data: {
                 login: login,
@@ -478,7 +479,7 @@ $(document).ready(function () {
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/paybackDebt.php",
+            url: "../components/modal-response/paybackDebt.php",
             type: "POST",
             data: {
                 login: login,

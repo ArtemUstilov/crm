@@ -5,7 +5,6 @@ include_once './components/static/template.php';
 include_once './db.php';
 $table = '';
 
-//TODO replace with unknown number of owners
 $headSumsRaw = $connection -> query('
 SELECT concat(O.last_name, " ", O.first_name) AS "Полное имя", SUM(S.sum) AS сумма
 FROM shares S

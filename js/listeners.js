@@ -8,7 +8,7 @@ $(document).ready(function () {
         $this = $(".login-form-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/main/auth.php",
+            url: "../components/modal-response/auth.php",
             type: "POST",
             data: {
                 password: password,

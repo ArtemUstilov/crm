@@ -44,7 +44,7 @@ function template($body)
 </div>
 <div id="logout" class="account-name-menu-btn-box">
 <p class="menu-n">' . $_SESSION['name'] . '</p>
-<a  href="./components/main/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+<a  href="./components/modal-response/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
 </div>
 <div class="main-wrapper">
