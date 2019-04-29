@@ -263,7 +263,6 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                alert(res);
                 createAlertTable(res, "Заказ");
             },
             error: function () {

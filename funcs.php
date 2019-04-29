@@ -22,7 +22,7 @@ function display_data($data, $type, $text, $addition_data = NULL)
     $output = "<div class='table-menu'><h2>$text</h2>";
     $class = $type == 'Debtor' ? 'Debt' : ($type=='RollbackMain' ? 'Rollback' : $type);
     if ($type == "User" || $type == "VG") {
-        if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin' || $_SESSION['role'] == 'moder')
+        if ($_SESSION['role'] == 'admin'  || $_SESSION['role'] == 'moder')
             $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     } else {
         $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";

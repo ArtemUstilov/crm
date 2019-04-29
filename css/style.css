@@ -277,7 +277,7 @@ h1 {
 #wrapper {
     display: block;
     overflow-x: auto;
-    margin-left: 10px;
+    padding: 0 10px;
 }
 
 .table-menu {
@@ -355,7 +355,7 @@ table thead tr th span {
 
 #menu {
     position: fixed;
-    z-index: 10;
+    z-index: 3;
     width: 0;
     background-color: #33373C;
     transition: width 1s;
@@ -367,7 +367,7 @@ table thead tr th span {
 
 #menu-invisible {
     width: 0;
-    z-index: 10;
+    z-index: 2;
     height: 100%;
     transition: width 1s;
     -ms-transition: width 1s;
@@ -590,6 +590,13 @@ a[disabled] {
 
 
 @media (max-width: 512px) {
+    #menu ul {
+        font-size: 30px;
+    }
+    #menu ul li a{
+       text-align: center;
+    }
+
     .main-header * {
         font-size: 0.9em;
     }
@@ -603,6 +610,7 @@ a[disabled] {
     #menu.menu--open {
         width: 100vw;
     }
+
     #menu-invisible.menu--open {
         width: 100vw;
     }
