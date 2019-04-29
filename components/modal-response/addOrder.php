@@ -1,6 +1,4 @@
 <?php
-include_once '../../dev/ChromePhp.php';
-
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -17,7 +15,6 @@ if (isset($_POST['client']) &&
     $client = clean($_POST['client']);
     $rollback_2 = $_POST['rollback_2'] ? clean($_POST['rollback_2']) : 0;
     $rollback_sum = $sum_vg / 100 * ($rollback_1 + $rollback_2);
-    ChromePhp::log("rollback: ", $rollback_sum);
     $obtain = clean($_POST['obtain']);
     $out_percent = clean($_POST['out']);
     $shares = $_POST['shares'];
@@ -53,19 +50,16 @@ if (isset($_POST['client']) &&
             ORDER BY `date` DESC
             LIMIT 1
             "))['order_id'];
-
+            
+            // TODO fix last_order
             foreach ($shares as $key => $var) {
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($var['value'] / 100));
-                //ChromePhp::log(" out: ", $out_percent," in: ", $out_percent," roll_1: ", $rollback_1," roll_2: ", $rollback_2," sum: ", $sum_vg," percent: ", $shares);
-                ChromePhp::log($order_id, ' ', $var['owner_id'], '  ', $sum_of_owner, '  ', $var['value'], '  ');
                 $curr_owner_id = $var['owner_id'];
                 $share_percent = $var['value'];
                 $add_share = $mysql_connect->
                 query("INSERT INTO `shares`
                 (`order_id`, `owner_id`, `sum`, `share_percent`) VALUES
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
-                ChromePhp::log("succes: ", $add_share);
-
             }
             if ($debt > 0) {
                 $mysql_connect->
@@ -96,16 +90,7 @@ if (isset($_POST['client']) &&
             echo "failed";
             return false;
         }
-        // TODO add order to DB
-        // count all attributes
-        // 1. Add order to orders
-        // 2. Add all shares to shares
-        // 3. Update client`s debt
-        // 4. Update client`s rollback (callmaster)
-        // 5. Update user`s money
-        // 6. Update user`s money in session
-        //
-        // Last. reload page
+
     }
     echo "denied";
     return false;

@@ -14,7 +14,7 @@ if (isset($_POST['client_id'])) {
         SELECT * 
         FROM clients 
         WHERE client_id='$client_id'"));
-    
+
     if(is_numeric($client_data['callmaster'])){
         echo '<p>
   <input id="rollback1Field" placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
