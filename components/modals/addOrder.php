@@ -40,12 +40,14 @@ function orderAddModal($data, $more_data)
   <option value="cash">Наличные</option>;
   </select>
   </p>
-   <p>
-  <input id="rollback1Field"  placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
+  '.$callmaster ? '<p>
+  <input id="rollback1Field" placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
   </p>
   <p>
   <input id="rollback2Field"  placeholder="Откат 2 (0,1)" type="number" name="rollback-2">
-  </p></div><div id="owners-lists-container"></div>
+  </p>' : ''.'
+   </div><div id="owners-lists-container"></div>
+   <div id="rollbacks-lists-container"></div>
   <input class="add-modal-submit" type="submit" value="Оформить">
   </form>
 </div>';
