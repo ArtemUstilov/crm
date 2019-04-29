@@ -354,9 +354,21 @@ table thead tr th span {
 }
 
 #menu {
+    position: fixed;
     z-index: 10;
     width: 0;
     background-color: #33373C;
+    transition: width 1s;
+    -ms-transition: width 1s;
+    -o-transition: width 1s;
+    -moz-transition: width 1s;
+    height: calc(100vh - 50px);
+}
+
+#menu-invisible {
+    width: 0;
+    z-index: 10;
+    height: 100%;
     transition: width 1s;
     -ms-transition: width 1s;
     -o-transition: width 1s;
@@ -438,7 +450,7 @@ a[disabled] {
     cursor: pointer;
 }
 
-#menu.menu--open {
+#menu.menu--open, #menu-invisible.menu--open {
     width: 180px;
 }
 
@@ -589,11 +601,11 @@ a[disabled] {
         padding-left: 50px;
     }
 
-    #menu {
-        position: fixed;
-    }
 
     #menu.menu--open {
+        width: 100vw;
+    }
+    #menu-invisible.menu--open {
         width: 100vw;
     }
 

@@ -70,9 +70,11 @@ $(document).ready(function () {
         if ($('#menu-burger').hasClass('menu-burger--active')) {
             $('#menu-burger').removeClass('menu-burger--active');
             $('#menu').removeClass('menu--open');
+            $('#menu-invisible').removeClass('menu--open');
         } else {
             $('#menu-burger').addClass('menu-burger--active');
             $('#menu').addClass('menu--open');
+            $('#menu-invisible').addClass('menu--open');
 
         }
     })
