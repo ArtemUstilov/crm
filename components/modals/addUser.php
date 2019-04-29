@@ -26,18 +26,18 @@ function userAddModal($data, $more_data)
 </p>
 <p>
 
-  <input id="passField" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min6" placeholder="Пароль (только англ)">
+  <input id="passField" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
   </p>
   <p>
   <select id="roleField" data-validation="required">
   <option value="" disabled selected>Выберите должность</option>
-  <option value="manager">Менеджер</option>
+  <option value="agent">Агент</option>
    <option value="moder">Модератор</option>
     <option value="admin">Администратор</option>
     </select>
   </p>
   <p>
-  <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min8" data-validation="length required confirmation">
+  <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Добавить">
