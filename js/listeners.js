@@ -5,7 +5,7 @@ $(document).ready(function () {
             $('#open-invisible-owner-list').html('Скрыть');
             $('#owners-list-invisible').animate({
                 height: $('#owners-list-invisible').get(0).scrollHeight
-            }, 1000, function(){
+            }, 1000, function () {
                 $('#owners-list-invisible').height('auto');
             });
         } else {
@@ -16,6 +16,11 @@ $(document).ready(function () {
 
         }
 
+    });
+    $('#owners-lists-container').on('change', '.owner-percent-input', () => {
+        $('.owner-percent-input').each(function () {
+            $(this).attr('value', $(this).val());
+        })
     });
     $('#login-form').submit((event) => {
         event.preventDefault();

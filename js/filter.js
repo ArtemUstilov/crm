@@ -21,7 +21,7 @@ $(document).ready(function () {
         clone.css({visibility: 'hidden'});
         clone.children().each(function () {
             $(this).css({padding: '0', fontSize: '0px'});
-        })
+        });
         $("#tbody").append(clone);
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(key => {
             $(`#${key}-i`).keyup(function () {
@@ -158,7 +158,7 @@ $(document).ready(function () {
         let client_id = $('#Order-Modal #clientField').val();
         if (!vg_id && !client_id) return;
         if (vg_id) {
-            const optionSelected = $("option:selected", this);
+            const optionSelected = $("option:selected", '#Order-Modal #vgField');
             const perc = optionSelected.attr('percent');
             $('#outField').val(perc);
         }
@@ -193,16 +193,17 @@ $(document).ready(function () {
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();
         const rollback_2 = $("#add-order-form #rollback2Field").val();
-        const vg = $("#add-order-form #svgField").val();
+        const vg = $("#add-order-form #vgField").val();
         const sum_vg = $("#add-order-form #sumVGField").val();
         const out = $("#add-order-form #outField").val();
         const obtain = $("#add-order-form #obtainingField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
         const debtCl = $("#add-order-form #debtCLField").val();
-        const shares = [];
-        sharesEls.each(function(){
-            shares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
+        const allShares = [];
+        sharesEls.each(function () {
+            allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
         });
+        const shares = allShares.filter((el) => el.value > 0);
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -221,6 +222,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                alert(res);
                 createAlertTable(res, "Заказ");
             },
             error: function () {
