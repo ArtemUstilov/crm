@@ -3,6 +3,7 @@ include_once './funcs.php';
 if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
+session_start();
 $branch_id = $_SESSION['branch_id'];
 switch ($_SESSION['role']) {
     case "admin":
