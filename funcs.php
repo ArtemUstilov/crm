@@ -50,7 +50,7 @@ function makeTable($data, $delLine = false)
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr  defaultVal = "'.$var[1].'">';
+                $output .= '<tr>';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){
@@ -62,7 +62,7 @@ function makeTable($data, $delLine = false)
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                $output .= '<tr  defaultVal = "'.$var[1].'">';
+                $output .= '<tr>';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){

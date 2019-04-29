@@ -45,6 +45,7 @@ html, body {
 .login-form-submit {
     font-size: 20px;
     padding: 5px 10px;
+    margin: 0 !important;
 }
 
 .login-page .login-form > div {
@@ -216,7 +217,7 @@ h2 {
     border: none;
 }
 
-#add-btn, .add-modal-submit {
+#add-btn, .add-modal-submit, .login-form-submit {
     background-color: #5491F5;
     outline: none;
     border: none;
@@ -230,7 +231,7 @@ h2 {
     display: block;
 }
 
-#add-btn:hover, .add-modal-submit:hover {
+#add-btn:hover, .add-modal-submit:hover, .login-form-submit:hover {
     background: #1B4E9F;
 }
 
