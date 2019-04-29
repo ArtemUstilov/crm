@@ -15,7 +15,7 @@ function menu()
         <li><a href="../../branches.php" class=' . ($curPage === 'branches' ? '"active" disabled' : '') . '>Предприятия</a></li>
         <li><a href="../../referals.php" class=' . ($curPage === 'referals' ? '"active" disabled' : '') . '>Рефералы</a></li>
         <li><a href="../../debts.php" class=' . ($curPage === 'debts' ? '"active" disabled' : '') . '>Долги</a></li>
-        <li><a class="menu-logout-btn" href="./components/modal-response/logout.php">Выйти</a></li>
+        <li><a class="menu-logout-btn" href="./components/auth/logout.php">Выйти</a></li>
     </ul>
 </div>');
 }

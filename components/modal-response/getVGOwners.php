@@ -51,6 +51,7 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
                 type="number" 
                 owner-id="' . $var['id'] . '" 
                 placeholder="Процент прибыли" 
+                step="0.01"
                 value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
             </p>
         ';
@@ -69,6 +70,7 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
                 class="owner-percent-input" 
                 type="number" owner-id="' . $var['id'] . '" 
                 placeholder="Процент прибыли" 
+                step="0.01"
                 value="' . $var["percent"] . '">
             </p>
         ';
@@ -84,6 +86,7 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
                 type="number" 
                 owner-id="' . $var['id'] . '" 
                 placeholder="Процент прибыли" 
+                step="0.01"
                 value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
             </p>
         ';

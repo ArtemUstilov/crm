@@ -188,7 +188,33 @@ $(document).ready(function () {
             }
         });
     });
-
+    const clientInpt = $('#Order-Modal #clientField');
+    clientInpt.change(function (e) {
+        let client_id = $('#Order-Modal #clientField').val();
+        clientInpt.prop('disabled', true);
+        clientInpt.addClass('no-drop');
+        $(".spinner").show();
+        $.ajax({
+            url: "../components/modal-response/getRollbacks.php",
+            type: "POST",
+            data: {
+                client_id
+            },
+            cache: false,
+            success: function (res) {
+                const container = $('#rollbacks-lists-container');
+                container.empty();
+                container.append(res);
+            },
+            error: function () {
+            },
+            complete: function () {
+                $(".spinner").fadeOut('slow');
+                clientInpt.prop('disabled', false);
+                clientInpt.removeClass('no-drop');
+            }
+        });
+    });
     function addOrder() {
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();

@@ -30,7 +30,7 @@ $(document).ready(function () {
         $this = $(".login-form-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/auth.php",
+            url: "../components/auth/auth.php",
             type: "POST",
             data: {
                 password: password,

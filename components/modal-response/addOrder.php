@@ -8,7 +8,6 @@ if (isset($_POST['client']) &&
 
     include_once("../../bd/index.php");
     include_once("../../funcs.php");
-
     $sum_vg = clean($_POST['sum_vg']);
     $vg = clean($_POST['vg']);
     $rollback_1 = $_POST['rollback_1'] ? clean($_POST['rollback_1']) : 0;
@@ -50,6 +49,7 @@ if (isset($_POST['client']) &&
             ORDER BY `date` DESC
             LIMIT 1
             "))['order_id'];
+
             // TODO fix last_order
             foreach ($shares as $key => $var) {
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($var['value'] / 100));
