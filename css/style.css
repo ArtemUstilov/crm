@@ -216,7 +216,7 @@ h2 {
     border: none;
 }
 
-#add-btn {
+#add-btn, .add-modal-submit {
     background-color: #5491F5;
     outline: none;
     border: none;
@@ -230,7 +230,7 @@ h2 {
     display: block;
 }
 
-#add-btn:hover {
+#add-btn:hover, .add-modal-submit:hover {
     background: #1B4E9F;
 }
 
@@ -513,7 +513,7 @@ a[disabled] {
 .add-modal-submit {
     float: right;
     font-size: 18px;
-    background: #c9dff0;
+    margin: 0;
     border-radius: .25rem;
     padding: 5px 10px;
     transition: all .5s;
@@ -522,9 +522,6 @@ a[disabled] {
     -moz-transition: all .5s;
 }
 
-.add-modal-submit:hover {
-    background: #FFA;
-}
 
 .menu-logout-btn {
     border-top: 2px solid white;
