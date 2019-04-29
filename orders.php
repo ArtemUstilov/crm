@@ -6,6 +6,7 @@ include_once './db.php';
 
 session_start();
 $branch_name = $_SESSION['branch'];
+$branch_id = $_SESSION['branch_id'];
 
 $clients = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS name, C.client_id AS id FROM clients C
