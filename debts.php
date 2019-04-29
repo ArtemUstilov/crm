@@ -13,7 +13,7 @@ INNER JOIN clients C ON C.client_id = O.client_id
 INNER JOIN users U ON U.user_id = O.user_id
 WHERE O.user_id = '.$_SESSION["id"].'
 '), "Debt","История погашений долгов", $connection -> query('
-SELECT concat(last_name, " ", first_name) AS client_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
 byname AS login, debt
 FROM clients C
 INNER JOIN orders O ON C.client_id = O.client_id

@@ -3,9 +3,11 @@ function display_data($data, $type, $text, $addition_data = NULL)
 {
     switch ($type) {
         case"Debt":
+        case "Debtor":
             $add_btn_text = "Погасить";
             break;
         case"Rollback":
+        case"RollbackMain":
             $add_btn_text = "Выплатить";
             break;
         case"Order":
@@ -18,18 +20,19 @@ function display_data($data, $type, $text, $addition_data = NULL)
     session_start();
     $data = mysqliToArray($data);
     $output = "<div class='table-menu'><h2>$text</h2>";
+    $class = $type == 'Debtor' ? 'Debt' : ($type=='RollbackMain' ? 'Rollback' : $type);
     if ($type == "User" || $type == "VG") {
         if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin')
-            $output .= "<p><a id='add-btn' href=\"#$type-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
+            $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     } else {
-        $output .= "<p><a id='add-btn' href=\"#$type-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
+        $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     }
-    $output .= "</div><div class='table-wrapper' id='table-wrapper'>" . makeTable($data) . "</div>";
+    $output .= "</div><div class='table-wrapper' id='table-wrapper'>" . makeTable($data, $type =='Debtor' || $type=='RollbackMain' ? "#$class-Modal" : false) . "</div>";
     $output .= chooseAddModal($type, $data, $addition_data);
     return $output;
 }
 
-function makeTable($data)
+function makeTable($data, $delLine = false)
 {
     $output = "<table id='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$data || count($data) === 0) {
@@ -47,19 +50,25 @@ function makeTable($data)
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr>';
+                $output .= '<tr  defaultVal = "'.$var[1].'">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
+                    if($col == 0 && $index == 0 && $delLine){
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                    }else
                     $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                $output .= '<tr>';
+                $output .= '<tr  defaultVal = "'.$var[1].'">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
-                    $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
+                    if($col == 0 && $index == 0 && $delLine){
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                    }else
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }
                 $output .= '</tr>';
@@ -111,8 +120,10 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "VG":
             return vgAddModal($data);
         case "Rollback":
+        case"RollbackMain":
             return rollbackModal($more_data);
         case "Debt":
+        case "Debtor":
             return debtModal($more_data);
         case "Head":
             return headAddModal($more_data);
