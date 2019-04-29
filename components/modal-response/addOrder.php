@@ -53,7 +53,6 @@ if (isset($_POST['client']) &&
             ORDER BY `date` DESC
             LIMIT 1
             "))['order_id'];
-            $order_id++;
 
             foreach ($shares as $key => $var) {
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($var['value'] / 100));

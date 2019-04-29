@@ -10,67 +10,20 @@ if (isset($_POST['client_id'])) {
         FROM users 
         WHERE user_id='$user_id'"));
     if (!$user_data) return false;
+    $client_data = mysqli_fetch_assoc($connection->query("
+        SELECT * 
+        FROM clients 
+        WHERE client_id='$client_id'"));
     
-
-    $hidden_owners = mysqliToArray($connection->query("
-        SELECT concat(last_name, ' ', first_name) AS owner_name, owner_id AS id 
-        FROM owners 
-        WHERE branch_id = '$branch_id' AND owner_id NOT IN (
-            SELECT shares.owner_id 
-            FROM owners 
-            INNER JOIN shares ON shares.owner_id = owners.owner_id 
-            WHERE order_id='" . $last_order . "')"
-    ));
-
-    if (!$prev_order_owners) {
-        $res .= '<div id="owners-list-visible" class="orders-modal-owners-list">';
-        if ($hidden_owners) foreach ($hidden_owners as $key => $var) {
-            $res .= '
-            <p>' . $var["owner_name"] . '
-            <input 
-                class="owner-percent-input" 
-                type="number" 
-                owner-id="' . $var['id'] . '" 
-                placeholder="Процент прибыли" 
-                value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
-            </p>
-        ';
-        }
-        $res .= '</div>';
-        echo $res;
+    if(is_numeric($client_data['callmaster'])){
+        echo '<p>
+  <input id="rollback1Field" placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
+  </p>
+  <p>
+  <input id="rollback2Field"  placeholder="Откат 2 (0,1)" type="number" name="rollback-2">
+  </p>';
+    }else{
         return false;
     }
-    $res = '';
-
-    $res .= '<div id="owners-list-visible" class="orders-modal-owners-list">';
-    if ($prev_order_owners) foreach ($prev_order_owners as $key => $var) {
-        $res .= '
-            <p>' . $var["owner_name"] . '
-            <input 
-                class="owner-percent-input" 
-                type="number" owner-id="' . $var['id'] . '" 
-                placeholder="Процент прибыли" 
-                value="' . $var["percent"] . '">
-            </p>
-        ';
-    }
-    $res .= '</div><div id="open-invisible-owner-list">Показать всех</div>';
-
-    $res .= '<div id="owners-list-invisible" class="orders-modal-owners-list">';
-    if ($hidden_owners) foreach ($hidden_owners as $key => $var) {
-        $res .= '
-            <p>' . $var["owner_name"] . '
-            <input 
-                class="owner-percent-input" 
-                type="number" 
-                owner-id="' . $var['id'] . '" 
-                placeholder="Процент прибыли" 
-                value="' . (!$prev_order_owners ? sprintf('%0.2f', 100.0 / count($hidden_owners)) : 0) . '">
-            </p>
-        ';
-    }
-    $res .= '</div>';
-    echo $res;
-
 }
 
