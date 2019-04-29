@@ -8,6 +8,7 @@ if (isset($_POST['client']) &&
 
     include_once("../../bd/index.php");
     include_once("../../funcs.php");
+    include_once "../../dev/ChromePhp.php";
     $sum_vg = clean($_POST['sum_vg']);
     $vg = clean($_POST['vg']);
     $rollback_1 = $_POST['rollback_1'] ? clean($_POST['rollback_1']) : 0;

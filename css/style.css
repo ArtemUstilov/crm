@@ -314,7 +314,7 @@ table thead tr th {
     color: #fff;
 }
 
-#table-container .col-wrap {
+.table-container .col-wrap {
     display: flex;
     justify-content: center;
 }
@@ -323,11 +323,11 @@ table thead tr th span {
     margin-left: 5px;
 }
 
-#table-container thead tr th[aria-sort=ascending], #table-container thead tr th[aria-sort=descending] {
+.table-container thead tr th[aria-sort=ascending], .table-container thead tr th[aria-sort=descending] {
     background: #1B4E9F;
 }
 
-#table-container tbody tr:hover {
+.table-container tbody tr:hover {
     background-color: #ddd;
 }
 
@@ -335,11 +335,11 @@ table thead tr th span {
     margin-bottom: 5px;
 }
 
-#table-container tbody tr {
+.table-container tbody tr {
     color: #555;
 }
 
-#table-container tbody tr td {
+.table-container tbody tr td {
     text-align: center;
     padding: 8px 5px;
     cursor: default;
@@ -350,7 +350,7 @@ table thead tr th span {
     overflow: hidden;
 }
 
-#table-container tbody tr td.lalign {
+.table-container tbody tr td.lalign {
     text-align: left;
 }
 
@@ -377,12 +377,12 @@ table thead tr th span {
     height: calc(100vh - 50px);
 }
 
-#table-container tbody .clicked {
+.table-container tbody .clicked {
     background-color: #888 !important;
     color: #fff;
 }
 
-#table-container tbody .clicked > td {
+.table-container tbody .clicked > td {
     white-space: normal !important;
 }
 

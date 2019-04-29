@@ -16,50 +16,76 @@ $(document).ready(function () {
     }
 
     function initFilters() {
-        const clone = $("#tbody > tr").first().clone();
-        clone.attr('id', "spec");
-        clone.css({visibility: 'hidden'});
-        clone.children().each(function () {
-            $(this).css({padding: '0', fontSize: '0px'});
-        });
-        $("#tbody").append(clone);
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(key => {
-            $(`#${key}-i`).keyup(function () {
-                const data = this.value;
+        $(".table-container").each(function(){
+            const clone = $(this).find("#tbody > tr").first().clone();
+            const _this= $(this);
+            clone.attr('id', "spec");
+            clone.css({visibility: 'hidden'});
+            clone.children().each(function () {
+                $(this).css({padding: '0', fontSize: '0px'});
+            });
+            _this.find("#tbody").append(clone);
+            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(key => {
+                _this.find(`#${key}-i`).keyup(function () {
+                    const data = this.value;
 
-                const jo = $("#tbody").find("tr");
-                jo.hide();
-                jo.filter(function checkRows() {
-                    return $(this).children(`.${key}-f`).is(":contains('" + data + "')") || $(this).prop('id') === 'spec';
-                }).show();
+                    const jo = _this.find("#tbody").find("tr");
+                    jo.hide();
+                    jo.filter(function checkRows() {
+                        return $(this).children(`.${key}-f`).is(":contains('" + data + "')") || $(this).prop('id') === 'spec';
+                    }).show();
 
-            }).focus(function () {
-                this.value = "";
-                $(this).css({
-                    "color": "black"
-                });
-                $(this).unbind('focus');
-            }).css({
-                "color": "#C0C0C0"
-            })
-                .click(function () {
-                    $filled = null;
-                    $('input').each(function () {
-                        if ($(this).prop('id') !== `${key}-i`) {
-                            this.value = '';
-                        } else {
-                            $filled = $(this);
+                }).focus(function () {
+                    this.value = "";
+                    $(this).css({
+                        "color": "black"
+                    });
+                    $(this).unbind('focus');
+                }).css({
+                    "color": "#C0C0C0"
+                })
+                    .click(function () {
+                        $filled = null;
+                        $('input').each(function () {
+                            if ($(this).prop('id') !== `${key}-i`) {
+                                this.value = '';
+                            } else {
+                                $filled = $(this);
+                            }
+                        });
+                        if (this.value.length === 0) {
+                            const jo = _this.find("#tbody").find("tr");
+                            jo.show();
                         }
                     });
-                    if (this.value.length === 0) {
-                        const jo = $("#tbody").find("tr");
-                        jo.show();
-                    }
-                });
+            });
         });
-    };
+    }
 
-
+    function handle_mousedown(e){
+        console.log('ddd')
+        const my_dragging = {};
+        my_dragging.pageX0 = e.pageX;
+        my_dragging.pageY0 = e.pageY;
+        my_dragging.elem = this;
+        my_dragging.offset0 = $(this).offset();
+        function handle_dragging(e){
+            const left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
+            const top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
+            $(my_dragging.elem)
+                .offset({top: top, left: left});
+        }
+        const body = $('body');
+        function handle_mouseup(e){
+            body
+                .off('mousemove', handle_dragging)
+                .off('mouseup', handle_mouseup);
+        }
+        body
+            .on('mouseup', handle_mouseup)
+            .on('mousemove', handle_dragging);
+    }
+    $('.modal, .table-container').mousedown(handle_mousedown);
 //Branch
     $.validate({
         form: '#add-branch-form',

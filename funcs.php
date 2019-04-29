@@ -22,7 +22,7 @@ function display_data($data, $type, $text, $addition_data = NULL)
     $output = "<div class='table-menu'><h2>$text</h2>";
     $class = $type == 'Debtor' ? 'Debt' : ($type=='RollbackMain' ? 'Rollback' : $type);
     if ($type == "User" || $type == "VG") {
-        if ($_SESSION['role'] == 'admin'  || $_SESSION['role'] == 'moder')
+        if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin' || $_SESSION['role'] == 'moder')
             $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     } else {
         $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
@@ -34,7 +34,7 @@ function display_data($data, $type, $text, $addition_data = NULL)
 
 function makeTable($data, $delLine = false)
 {
-    $output = "<table id='table-container' class='table table-fixed'><thead id='table-head'>";
+    $output = "<table class='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$data || count($data) === 0) {
         $output .= '<h2>Пусто</h2>';
     } else {
@@ -50,11 +50,11 @@ function makeTable($data, $delLine = false)
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr>';
+                $output .= '<tr  defaultVal = "'.$var[1].'">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
                     }else
                     $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
@@ -62,11 +62,11 @@ function makeTable($data, $delLine = false)
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                $output .= '<tr>';
+                $output .= '<tr  defaultVal = "'.$var[1].'">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
                     }else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;

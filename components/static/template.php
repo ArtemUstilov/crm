@@ -18,7 +18,7 @@ function template($body)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.28.14/js/jquery.tablesorter.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <script>
-        $(function(){$("#table-container").tablesorter();});
+        $(function(){$(".table-container").tablesorter();});
         $(window).load(function() {
             $(".spinner").fadeOut("slow");
             
