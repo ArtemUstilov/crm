@@ -3,12 +3,17 @@ function headAddModal($data)
 {
     if ($data) {
         $i = 0;
-        while ($new = $data->fetch_array()) {
-            $copy_of_data[$i] = $new;
+        while ($new = $data['branches']->fetch_array()) {
+            $branches[$i] = $new;
+            $i++;
+        }
+        $i = 0;
+        while ($new = $data['clients']->fetch_array()) {
+            $clients[$i] = $new;
             $i++;
         }
     }
-    if (!$copy_of_data) return '<div id="Head-Modal" class="modal" action="">
+    if (!$branches) return '<div id="Head-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Сначала добавьте предприятие!</h2>
 </div>';
 
@@ -18,15 +23,18 @@ function headAddModal($data)
   <h2 class="add-modal-title">Добавить владельца</h2>
   <div class="add-modal-inputs">
   <p>
-  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
-  </p>
-  <p>
-  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <select id="nameField" data-validation="required">
+  <option value="" disabled selected>Выберите человека</option>';
+    foreach ($clients as $key => $var) {
+        $output .= '<option value="' . $var['first_name']." ". $var['last_name']  . '">' . $var['first_name']." ". $var['last_name'] . '</option>';
+    }
+    $output .= '
+</select>
   </p>
   <p>
   <select id="branchField" data-validation="required">
   <option value="" disabled selected>Выберите предприятие</option>';
-    foreach ($copy_of_data as $key => $var) {
+    foreach ($branches as $key => $var) {
         $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
     }
     $output .= '

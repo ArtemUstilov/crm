@@ -111,8 +111,7 @@ $(document).ready(function () {
     });
 
     function addHead() {
-        let first_name = $("#add-head-form #firstNameField").val();
-        let last_name = $("#add-head-form #lastNameField").val();
+        let [first_name, last_name] = $("#add-head-form #nameField").val().split(' ');
         let branch = $("#add-head-form #branchField").val();
         $this = $(".add-modal-submit");
         $this.prop("disabled", true);
@@ -139,7 +138,23 @@ $(document).ready(function () {
         });
 
     }
-
+    $('[modal*="Debt-Modal"]').parent().parent().click(function(){
+        $('[href*="#Debt-Modal"]').first()[0].click();
+        const list = $('#debtorField');
+        list.val($(this).attr('defaultval'));
+        const optionSelected = $("option:selected", list);
+        const sum = optionSelected.attr('sum');
+        $('#paybackField').val(sum);
+    });
+    $('[modal*="Rollback-Modal"]').parent().parent().click(function(){
+        console.log('i')
+        $('[href*="#Rollback-Modal"]').first()[0].click();
+        const list = $('#clientField');
+        list.val($(this).attr('defaultval'));
+        const optionSelected = $("option:selected", list);
+        const sum = optionSelected.attr('sum');
+        $('#payField').val(sum);
+    });
 
     //Order
     $.validate({

@@ -3,6 +3,7 @@ include_once './funcs.php';
 if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
+$branch_id = $_SESSION['branch_id'];
 switch ($_SESSION['role']) {
     case "admin":
         $info = $connection -> query("
@@ -42,7 +43,8 @@ WHERE O.user_id = '.$_SESSION["id"].'
         break;
 }
 echo template(display_data($info, "Debt","История погашений долгов", $connection -> query('
-SELECT concat(last_name, " ", first_name) AS client_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
+
 byname AS login, debt
 FROM clients C
 INNER JOIN orders O ON C.client_id = O.client_id

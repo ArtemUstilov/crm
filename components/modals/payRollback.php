@@ -8,6 +8,8 @@ function rollbackModal($data)
             $i++;
         }
     }
+    include_once '/dev/ChromePhp.php';
+    ChromePhp::log($copy_of_data);
     if (!$copy_of_data) return '<div id="Rollback-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все откаты выплачены!</h2>
 </div>';
