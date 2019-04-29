@@ -15,14 +15,16 @@ if (isset($_POST['client_id'])) {
         FROM clients 
         WHERE client_id='$client_id'"));
 
-    if(is_numeric($client_data['callmaster'])){
-        echo '<p>
-  <input id="rollback1Field" placeholder="Откат 1 (0,1)" type="number" name="rollback-1">
+    if (is_numeric($client_data['callmaster'])) {
+        echo '<div class="orders-modal-owners-list">
+<p>
+  <input id="rollback1Field" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
   </p>
   <p>
-  <input id="rollback2Field"  placeholder="Откат 2 (0,1)" type="number" name="rollback-2">
-  </p>';
-    }else{
+  <input id="rollback2Field"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
+  </p>
+  </div>';
+    } else {
         return false;
     }
 }

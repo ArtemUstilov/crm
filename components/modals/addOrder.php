@@ -40,7 +40,6 @@ function orderAddModal($data, $more_data)
   <option value="cash">Наличные</option>;
   </select>
   </p>
-  '.$callmaster ?  : ''.'
    </div><div id="owners-lists-container"></div>
    <div id="rollbacks-lists-container"></div>
   <input class="add-modal-submit" type="submit" value="Оформить">
