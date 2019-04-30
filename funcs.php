@@ -34,6 +34,7 @@ function display_data($data, $type, $text, $addition_data = NULL)
 
 function makeTable($data, $delLine = false)
 {
+    $role = $_SESSION['role'];
     $output = "<table class='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$data || count($data) === 0) {
         $output .= '<h2>Пусто</h2>';
@@ -55,6 +56,8 @@ function makeTable($data, $delLine = false)
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                    }else if($col == 0 && $index == 0 && $role !== 'agent'){
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit" modal="tbd"></i>' .$val . '</td>';
                     }else
                     $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
@@ -67,6 +70,8 @@ function makeTable($data, $delLine = false)
                     if (is_numeric($col)) continue;
                     if($col == 0 && $index == 0 && $delLine){
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
+                    }else if($col == 0 && $index == 0 && $role !== 'agent'){
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit" modal="tbd"></i>' .$val . '</td>';
                     }else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
@@ -116,7 +121,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Outgo":
             return outgoModal($data, $more_data);
         case "Order":
-            return orderAddModal($data, $more_data);
+            return orderAddModal($data, $more_data).''.clientAddModal($data);
         case "VG":
             return vgAddModal($data);
         case "Rollback":

@@ -21,15 +21,7 @@ function clientAddModal($data)
   <p>
   <input id="emailField"   placeholder="Email" type="email" name="email">
   </p>
-  <p>
-  <select id="callmasterField" data-validation="required">
-  <option value="" selected>Выберите пригласившего</option>';
-    foreach ($data as $key => $var) {
-        $output .= '<option value="' . $var['Имя'] . '">' . $var['Полное имя'] . ' (' . $var['Имя'] . ')</option>';
-    }
-    $output .= '
-</select>
-</p>
+
   <p>
   <textarea id="descriptionField" rows="5" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
   </p>

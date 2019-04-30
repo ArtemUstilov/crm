@@ -19,6 +19,7 @@ INNER JOIN clients C ON C.client_id = O.client_id
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 INNER JOIN branch B ON U.branch_id = B.branch_id
+ORDER BY `date` DESC
 ');
         break;
     case "moder":
@@ -32,6 +33,7 @@ INNER JOIN clients C ON C.client_id = O.client_id
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 WHERE U.branch_id = '$branch_id'
+ORDER BY `date` DESC
 ");
         break;
     case "agent":
@@ -45,6 +47,7 @@ INNER JOIN clients C ON C.client_id = O.client_id
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 WHERE O.user_id = '.$_SESSION["id"].'
+ORDER BY `date` DESC
 ');
        break;
     default:
@@ -62,7 +65,6 @@ SELECT * FROM virtualgood
 
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;
-
 
 
 

@@ -1,11 +1,11 @@
 <?php
 if (isset($_POST['login']) && isset($_POST['password'])) {
-    include_once("../../bd/index.php");
+    include_once("../../db.php");
     include_once("../../funcs.php");
     $login = clean($_POST['login']);
     $password = clean($_POST['password']);
    // $remember_me = clean($_POST['remember_me']);
-    $data = mysqli_fetch_assoc($mysql_connect->query("SELECT * FROM users U INNER JOIN branch B ON B.branch_id = U.branch_id WHERE login='$login'"));
+    $data = mysqli_fetch_assoc($connection->query("SELECT * FROM users U INNER JOIN branch B ON B.branch_id = U.branch_id WHERE login='$login'"));
     if ($login != $data['login']) {
         echo "login";
         return false;

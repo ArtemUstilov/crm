@@ -209,14 +209,17 @@ h2 {
     margin-left: 15px;
 }
 
-.fa-coins, .fa-building {
+.fa-coins, .fa-building, .fa-edit {
     margin-right: 15px;
 }
 
 #money-t {
     border: none;
 }
+.fa-edit:hover{
+    color: #5491F5;
 
+}
 #add-btn, .add-modal-submit, .login-form-submit {
     background-color: #5491F5;
     outline: none;

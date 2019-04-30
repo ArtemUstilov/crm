@@ -63,12 +63,13 @@ $(document).ready(function () {
     }
 
     function handle_mousedown(e){
-        console.log('ddd')
+        if('DIV' !== e.target.tagName) return;
         const my_dragging = {};
         my_dragging.pageX0 = e.pageX;
         my_dragging.pageY0 = e.pageY;
         my_dragging.elem = this;
         my_dragging.offset0 = $(this).offset();
+        console.log();
         function handle_dragging(e){
             const left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
             const top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
@@ -85,7 +86,7 @@ $(document).ready(function () {
             .on('mouseup', handle_mouseup)
             .on('mousemove', handle_dragging);
     }
-    $('.modal, .table-container').mousedown(handle_mousedown);
+    $('.modal/*.table-container*/').mousedown(handle_mousedown);
 //Branch
     $.validate({
         form: '#add-branch-form',
@@ -173,13 +174,15 @@ $(document).ready(function () {
         $('#paybackField').val(sum);
     });
     $('[modal*="Rollback-Modal"]').parent().parent().click(function(){
-        console.log('i')
         $('[href*="#Rollback-Modal"]').first()[0].click();
         const list = $('#clientField');
         list.val($(this).attr('defaultval'));
         const optionSelected = $("option:selected", list);
         const sum = optionSelected.attr('sum');
         $('#payField').val(sum);
+    });
+    $('[modal*="tbd"]').click(function(){
+        alert('Not implemented yet');
     });
 
     //Order
@@ -232,34 +235,30 @@ $(document).ready(function () {
     const clientInpt = $('#Order-Modal #clientField');
     clientInpt.change(function (e) {
         let client_id = $('#Order-Modal #clientField').val();
-        clientInpt.prop('disabled', true);
-        clientInpt.addClass('no-drop');
-        $(".spinner").show();
-        $.ajax({
-            url: "../components/modal-response/getRollbacks.php",
-            type: "POST",
-            data: {
-                client_id
-            },
-            cache: false,
-            success: function (res) {
-                const container = $('#rollbacks-lists-container');
-                container.empty();
-                container.append(res);
-            },
-            error: function () {
-            },
-            complete: function () {
-                $(".spinner").fadeOut('slow');
-                clientInpt.prop('disabled', false);
-                clientInpt.removeClass('no-drop');
-            }
-        });
+        if(client_id == -1){
+            const href = document.createElement('a');
+            href.style.display = 'none';
+            href.href = '#Client-Modal';
+            href.rel = 'modal:open';
+            document.body.appendChild(href);
+            href.click();
+            document.body.removeChild(href);
+        }
+    });
+    const callmasterInpt = $('#Order-Modal #callmasterField');
+    callmasterInpt.change(function (e) {
+        let callmaster_id = callmasterInpt.val();
+        if(callmaster_id){
+            $('#rollbacks-lists-container').css({display: 'grid'});
+        }else{
+            $('#rollbacks-lists-container').css({display: 'none'});
+        }
     });
     function addOrder() {
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();
         const rollback_2 = $("#add-order-form #rollback2Field").val();
+        const callmaster = $("#add-order-form #callmasterField").val();
         const vg = $("#add-order-form #vgField").val();
         const sum_vg = $("#add-order-form #sumVGField").val();
         const out = $("#add-order-form #outField").val();
@@ -286,6 +285,7 @@ $(document).ready(function () {
                 vg,
                 shares,
                 debtCl,
+                callmaster,
             },
             cache: false,
             success: function (res) {
@@ -391,6 +391,14 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                if(res.includes('success')){
+                    const opt = document.createElement('option');
+                    opt.value = res.substr(7);
+                    opt.innerText = first_name + ' ' + last_name;
+                    opt.selected = true;
+                    $('#clientField').append(opt);
+                    res = 'success';
+                }
                 createAlertTable(res, "Клиент");
             },
             error: function () {
@@ -400,6 +408,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $this.prop("disabled", false);
                 }, 300);
+                $('[href*="#Order-Modal"]').first()[0].click();
             }
         });
 

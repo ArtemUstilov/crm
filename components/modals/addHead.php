@@ -25,7 +25,7 @@ function headAddModal($data)
   <p>
   <select id="nameField" data-validation="required">
   <option value="" disabled selected>Выберите человека</option>';
-    foreach ($clients as $key => $var) {
+    if($clients) foreach ($clients as $key => $var) {
         $output .= '<option value="' . $var['first_name']." ". $var['last_name']  . '">' . $var['first_name']." ". $var['last_name'] . '</option>';
     }
     $output .= '
@@ -34,7 +34,7 @@ function headAddModal($data)
   <p>
   <select id="branchField" data-validation="required">
   <option value="" disabled selected>Выберите предприятие</option>';
-    foreach ($branches as $key => $var) {
+    if($branches) foreach ($branches as $key => $var) {
         $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
     }
     $output .= '
