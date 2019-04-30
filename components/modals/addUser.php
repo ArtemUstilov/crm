@@ -13,7 +13,7 @@ function userAddModal($data, $more_data)
   <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-  <input id="loginField" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
+  <input id="loginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
   </p>
   <p>
   <select id="branchField" data-validation="required">
@@ -26,7 +26,7 @@ function userAddModal($data, $more_data)
 </p>
 <p>
 
-  <input id="passField" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
+  <input id="passField" autocomplete="new-password"  name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
   </p>
   <p>
   <select id="roleField" data-validation="required">
@@ -37,11 +37,71 @@ function userAddModal($data, $more_data)
     </select>
   </p>
   <p>
-  <input id="passRepeatField" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
+  <input id="passRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
+    session_start();
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder') {
+        $output .= '
+<div id="User-edit-Modal" class="modal" action="" role="form">
+<form id="edit-user-form">
+  <h2 class="add-modal-title" id="edit-user-title">Изменить данные пользователя</h2>
+  <div class="add-modal-inputs">
+  <p>
+  Имя
+  <input id="editFirstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  </p>
+  <p>
+  Фамилия
+  <input id="editLastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  </p>
+  <p>
+  Логин
+  <input id="editLoginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
+  </p>
+  <p>
+  Деньги
+  <input id="editMoneyField"    placeholder="Логин (только англ)" type="number" name="money">
+  </p>
+  <p>
+  Отдел
+  <select id="editBranchField" data-validation="required">
+  <option value="" disabled selected>Выберите отдел</option>';
+        foreach ($more_data as $key => $var) {
+            $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
+        }
+        $output .= '
+</select>
+</p>';
+        session_start();
+        if ($_SESSION['role'] == 'admin')
+        $output .= '
+<p>
+Пароль
+  <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
+  </p>
+  <p>
+  Должность
+  <select id="editRoleField" data-validation="required">
+  <option value="" disabled selected>Выберите должность</option>
+  <option value="agent">Агент</option>
+   <option value="moder">Модератор</option>
+    <option value="admin">Администратор</option>
+    </select>
+  </p>';
+        $output .= '
+  <p>
+  Повторите пароль
+  <input id="editPa
+  ssRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
+  </p>
+  </div>
+  <input class="add-modal-submit" type="submit" value="Сохранить">
+  </form>
+</div>';
+    }
     return $output;
 }

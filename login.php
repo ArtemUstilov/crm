@@ -17,11 +17,11 @@
     <form class="login-form" id="login-form">
         <h2 class="login-form-header">Sign in</h2>
         <div class="login-box">
-            <input id="loginField" placeholder="Логин" type="text" name="login">
+            <input id="loginField" autocomplete="username" placeholder="Логин" type="text" name="login">
         </div>
         <div class="pass-box">
 
-            <input id="passwordField" placeholder="Пароль" type="password" name="password">
+            <input id="passwordField" placeholder="Пароль" type="password" autocomplete="current-password" name="password">
         </div>
          <div class="sign-in-box">
              <!--

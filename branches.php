@@ -5,6 +5,6 @@ include_once './components/static/template.php';
 include_once './db.php';
 
 echo template(display_data($connection -> query('
-SELECT branch_name
+SELECT branch_id AS id, branch_name
 FROM branch'), "Branch","Предприятия"));
 

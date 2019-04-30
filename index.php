@@ -7,7 +7,7 @@ $table = '';
 $role = $_SESSION['role'];
 $branch_id = $_SESSION['branch_id'];
 $headSumsRaw = $connection->query('
-SELECT concat(O.last_name, " ", O.first_name) AS "Полное имя", IFNULL(SUM(S.sum),0) AS сумма
+SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", IFNULL(SUM(S.sum),0) AS сумма
 FROM shares S
 RIGHT OUTER JOIN owners O ON O.owner_id = S.owner_id 
 WHERE O.branch_id IN (SELECT branch_id FROM users U WHERE U.user_id = ' . $_SESSION["id"] . ')

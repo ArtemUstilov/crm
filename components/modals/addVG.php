@@ -22,6 +22,29 @@ function vgAddModal($data)
   <input class="add-modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
+    session_start();
+    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder')
+        $output .= '
+<div id="VG-edit-Modal" class="modal" action="" role="form">
+<form id="edit-vg-form">
+  <h2 class="add-modal-title" id="edit-vg-title">Редактировать валюту</h2>
+  <div class="add-modal-inputs">
+  <p>
+  <input id="editNameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
+  </p>
+  <p>
+  <input id="editInField" data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in">
+  </p>
+  <p>
+  <input id="editOutField" data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out">
+  </p>
+   <p>
+  <input id="editUrlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
+  </p>
+  </div>
+  <input class="add-modal-submit" type="submit" value="Сохранить">
+  </form>
+</div>';
 
     return $output;
 }

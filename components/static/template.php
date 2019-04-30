@@ -52,6 +52,7 @@ function template($body)
 <div class="spinner"></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
 <script src="./js/filter.js"></script>
+<script src="./js/edit.js"></script>
 
 </body>
 </html>'

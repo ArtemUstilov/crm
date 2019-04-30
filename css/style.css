@@ -60,7 +60,7 @@ html, body {
     font-size: 20px;
 }
 
-#descriptionField {
+#descriptionField, #editDescriptionField {
     width: 100%;
 }
 
@@ -216,9 +216,11 @@ h2 {
 #money-t {
     border: none;
 }
-tr .fas:hover{
+
+tr .fas:hover {
     color: #5491F5;
 }
+
 #add-btn, .add-modal-submit, .login-form-submit {
     background-color: #5491F5;
     outline: none;
@@ -500,9 +502,6 @@ a[disabled] {
     grid-row-gap: 20px;
 }
 
-.add-modal-inputs p {
-    height: 40px;
-}
 
 .add-modal-inputs input, .orders-modal-owners-list input, .add-modal-inputs select {
     width: 100%;
@@ -596,8 +595,9 @@ a[disabled] {
     #menu ul {
         font-size: 30px;
     }
-    #menu ul li a{
-       text-align: center;
+
+    #menu ul li a {
+        text-align: center;
     }
 
     .main-header * {
@@ -667,6 +667,6 @@ a[disabled] {
     letter-spacing: 1px;
 }
 
-.edit-box{
-    color:unset;
+.display-none {
+    display: none;
 }

@@ -171,57 +171,22 @@ $(document).ready(function () {
 
     }
 
-    $('tr').on('click', (e) => {
-        const target = $(e.target);
-        switch (target.attr('modal')) {
-            case "#Debt-Modal":
-                $('[href*="#Debt-Modal"]').first()[0].click();
-                const debtorList = $('#debtorField');
-                debtorList.val(target.parent().parent().attr('defaultval'));
-                const debtorSelected = $("option:selected", debtorList);
-                const debtSum = debtorSelected.attr('sum');
-                $('#paybackField').val(debtSum);
-                break;
-            case "#Rollback-Modal":
-                $('[href*="#Rollback-Modal"]').first()[0].click();
-                const referalList = $('#clientField');
-                referalList.val(target.parent().parent().attr('defaultval'));
-                const referalSelected = $("option:selected", referalList);
-                const rollbackSum = referalSelected.attr('sum');
-                $('#payField').val(rollbackSum);
-                break;
-            case "Head-edit":
-                alert('Head edit');
-                break;
-            case "Outgo-edit":
-                alert('Outgo edit');
-                break;
-            case "User-edit":
-                alert('User edit');
-                break;
-            case "Branch-edit":
-                alert('Branch edit');
-                break;
-            case "Client-edit":
-                alert('Client edit');
-                break;
-            case "Referal-edit":
-                alert('Referal edit');
-                break;
-            case "VG-edit":
-                alert('VG edit');
-                break;
-            case "Debt-edit":
-                alert('Debt edit');
-                break;
-            case "Order-edit":
-                alert('Order edit');
-                break;
-            default:
-                break;
-        }
 
+    $.validate({
+        form: '#edit-vg-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addOrder();
+            return false;
+        }
     });
+    function fillDebtsEditForm() {
+
+    }
+
+
+
 
     //Order
     $.validate({
