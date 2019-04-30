@@ -216,9 +216,8 @@ h2 {
 #money-t {
     border: none;
 }
-.fa-edit:hover{
+tr .fas:hover{
     color: #5491F5;
-
 }
 #add-btn, .add-modal-submit, .login-form-submit {
     background-color: #5491F5;
@@ -668,3 +667,6 @@ a[disabled] {
     letter-spacing: 1px;
 }
 
+.edit-box{
+    color:unset;
+}

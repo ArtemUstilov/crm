@@ -20,19 +20,19 @@ function display_data($data, $type, $text, $addition_data = NULL)
     session_start();
     $data = mysqliToArray($data);
     $output = "<div class='table-menu'><h2>$text</h2>";
-    $class = $type == 'Debtor' ? 'Debt' : ($type=='RollbackMain' ? 'Rollback' : $type);
+    $class = $type == 'Debtor' ? 'Debt' : ($type == 'RollbackMain' ? 'Rollback' : $type);
     if ($type == "User" || $type == "VG") {
         if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin' || $_SESSION['role'] == 'moder')
             $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     } else {
         $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
     }
-    $output .= "</div><div class='table-wrapper' id='table-wrapper'>" . makeTable($data, $type =='Debtor' || $type=='RollbackMain' ? "#$class-Modal" : false) . "</div>";
+    $output .= "</div><div class='table-wrapper' id='table-wrapper'>" . makeTable($data, $class, $type == 'Debtor' || $type == 'RollbackMain' ? "#$class-Modal" : false) . "</div>";
     $output .= chooseAddModal($type, $data, $addition_data);
     return $output;
 }
 
-function makeTable($data, $delLine = false)
+function makeTable($data, $type, $delLine = false)
 {
     $role = $_SESSION['role'];
     $output = "<table class='table-container' class='table table-fixed'><thead id='table-head'>";
@@ -51,28 +51,28 @@ function makeTable($data, $delLine = false)
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr  defaultVal = "'.$var[1].'">';
+                $output .= '<tr  defaultVal = "' . $var[1] . '">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
-                    if($col == 0 && $index == 0 && $delLine){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
-                    }else if($col == 0 && $index == 0 && $role !== 'agent'){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit" modal="tbd"></i>' .$val . '</td>';
-                    }else
-                    $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
+                    if ($col == 0 && $index == 0 && $delLine) {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $role !== 'agent') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<a class="edit-box" href="#'.$type.'-Modal" rel="modal:open"><i class="fas fa-edit" modal="' . $type . '-edit"></i></a>' . $val . '</td>';
+                    } else
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                $output .= '<tr  defaultVal = "'.$var[1].'">';
+                $output .= '<tr  defaultVal = "' . $var[1] . '">';
                 foreach ($var as $col => $val) {
                     if (is_numeric($col)) continue;
-                    if($col == 0 && $index == 0 && $delLine){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="'.$delLine.'"></i>' .$val . '</td>';
-                    }else if($col == 0 && $index == 0 && $role !== 'agent'){
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit" modal="tbd"></i>' .$val . '</td>';
-                    }else
+                    if ($col == 0 && $index == 0 && $delLine) {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $role !== 'agent') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<a class="edit-box" href="#'.$type.'-Modal" rel="modal:open"><i class="fas fa-edit"  modal="' . $type . '-edit"></i></a>' . $val . '</td>';
+                    } else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
                 }
@@ -121,7 +121,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Outgo":
             return outgoModal($data, $more_data);
         case "Order":
-            return orderAddModal($data, $more_data).''.clientAddModal($data);
+            return orderAddModal($data, $more_data) . '' . clientAddModal($data);
         case "VG":
             return vgAddModal($data);
         case "Rollback":

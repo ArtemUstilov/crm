@@ -16,9 +16,9 @@ $(document).ready(function () {
     }
 
     function initFilters() {
-        $(".table-container").each(function(){
+        $(".table-container").each(function () {
             const clone = $(this).find("#tbody > tr").first().clone();
-            const _this= $(this);
+            const _this = $(this);
             clone.attr('id', "spec");
             clone.css({visibility: 'hidden'});
             clone.children().each(function () {
@@ -62,30 +62,35 @@ $(document).ready(function () {
         });
     }
 
-    function handle_mousedown(e){
-        if('DIV' !== e.target.tagName) return;
+    function handle_mousedown(e) {
+        if ('DIV' !== e.target.tagName) return;
         const my_dragging = {};
         my_dragging.pageX0 = e.pageX;
         my_dragging.pageY0 = e.pageY;
         my_dragging.elem = this;
         my_dragging.offset0 = $(this).offset();
         console.log();
-        function handle_dragging(e){
+
+        function handle_dragging(e) {
             const left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
             const top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
             $(my_dragging.elem)
                 .offset({top: top, left: left});
         }
+
         const body = $('body');
-        function handle_mouseup(e){
+
+        function handle_mouseup(e) {
             body
                 .off('mousemove', handle_dragging)
                 .off('mouseup', handle_mouseup);
         }
+
         body
             .on('mouseup', handle_mouseup)
             .on('mousemove', handle_dragging);
     }
+
     $('.modal/*.table-container*/').mousedown(handle_mousedown);
 //Branch
     $.validate({
@@ -165,24 +170,57 @@ $(document).ready(function () {
         });
 
     }
-    $('[modal*="Debt-Modal"]').parent().parent().click(function(){
-        $('[href*="#Debt-Modal"]').first()[0].click();
-        const list = $('#debtorField');
-        list.val($(this).attr('defaultval'));
-        const optionSelected = $("option:selected", list);
-        const sum = optionSelected.attr('sum');
-        $('#paybackField').val(sum);
-    });
-    $('[modal*="Rollback-Modal"]').parent().parent().click(function(){
-        $('[href*="#Rollback-Modal"]').first()[0].click();
-        const list = $('#clientField');
-        list.val($(this).attr('defaultval'));
-        const optionSelected = $("option:selected", list);
-        const sum = optionSelected.attr('sum');
-        $('#payField').val(sum);
-    });
-    $('[modal*="tbd"]').click(function(){
-        alert('Not implemented yet');
+
+    $('tr').on('click', (e) => {
+        const target = $(e.target);
+        switch (target.attr('modal')) {
+            case "#Debt-Modal":
+                $('[href*="#Debt-Modal"]').first()[0].click();
+                const debtorList = $('#debtorField');
+                debtorList.val(target.parent().parent().attr('defaultval'));
+                const debtorSelected = $("option:selected", debtorList);
+                const debtSum = debtorSelected.attr('sum');
+                $('#paybackField').val(debtSum);
+                break;
+            case "#Rollback-Modal":
+                $('[href*="#Rollback-Modal"]').first()[0].click();
+                const referalList = $('#clientField');
+                referalList.val(target.parent().parent().attr('defaultval'));
+                const referalSelected = $("option:selected", referalList);
+                const rollbackSum = referalSelected.attr('sum');
+                $('#payField').val(rollbackSum);
+                break;
+            case "Head-edit":
+                alert('Head edit');
+                break;
+            case "Outgo-edit":
+                alert('Outgo edit');
+                break;
+            case "User-edit":
+                alert('User edit');
+                break;
+            case "Branch-edit":
+                alert('Branch edit');
+                break;
+            case "Client-edit":
+                alert('Client edit');
+                break;
+            case "Referal-edit":
+                alert('Referal edit');
+                break;
+            case "VG-edit":
+                alert('VG edit');
+                break;
+            case "Debt-edit":
+                alert('Debt edit');
+                break;
+            case "Order-edit":
+                alert('Order edit');
+                break;
+            default:
+                break;
+        }
+
     });
 
     //Order
@@ -235,7 +273,7 @@ $(document).ready(function () {
     const clientInpt = $('#Order-Modal #clientField');
     clientInpt.change(function (e) {
         let client_id = $('#Order-Modal #clientField').val();
-        if(client_id == -1){
+        if (client_id == -1) {
             const href = document.createElement('a');
             href.style.display = 'none';
             href.href = '#Client-Modal';
@@ -248,12 +286,13 @@ $(document).ready(function () {
     const callmasterInpt = $('#Order-Modal #callmasterField');
     callmasterInpt.change(function (e) {
         let callmaster_id = callmasterInpt.val();
-        if(callmaster_id){
+        if (callmaster_id) {
             $('#rollbacks-lists-container').css({display: 'grid'});
-        }else{
+        } else {
             $('#rollbacks-lists-container').css({display: 'none'});
         }
     });
+
     function addOrder() {
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();
@@ -391,7 +430,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                if(res.includes('success')){
+                if (res.includes('success')) {
                     const opt = document.createElement('option');
                     opt.value = res.substr(7);
                     opt.innerText = first_name + ' ' + last_name;
