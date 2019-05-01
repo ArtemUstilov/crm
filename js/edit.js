@@ -34,7 +34,7 @@ $('tr').on('click', (e) => {
             fillVGEditForm(mainParent);
             break;
         case "Order-edit":
-            alert('Order edit');
+            fillOrderEditForm(mainParent);
             break;
         default:
             break;
@@ -42,7 +42,34 @@ $('tr').on('click', (e) => {
 
 });
 
+function fillOrderEditForm(target) {
+    $(".spinner").show();
+    let order_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/Order.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            order_id,
+        },
+        cache: false,
+        success: function (res) {
+            console.log(res);
+            $('#edit-user-form #edit-user-title').text(`Изменить данные продажи ${res['full_name']}`).attr('order-id', res['id']);
+            $('#edit-user-form #editFirstNameField').val(res['first_name']);
+            $('#edit-user-form #editLastNameField').val(res['last_name']);
+            $('#edit-user-form #editLoginField').val(res['login']);
+            $('#edit-user-form #editBranchField').val(res['branch_id']);
+            $('#edit-user-form #editRoleField').val(res['role']);
+            $('#edit-user-form #editMoneyField').val(res['money']);
+            $(".spinner").fadeOut('fast');
+            createClick('[href="#Order-edit-Modal"]');
 
+        },
+        error: function () {
+        },
+    });
+}
 function fillOwnerEditForm(target) {
     $(".spinner").show();
     let owner_id = target.attr('itemid');
