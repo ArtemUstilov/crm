@@ -36,11 +36,44 @@ $('tr').on('click', (e) => {
         case "Order-edit":
             fillOrderEditForm(mainParent);
             break;
+        case "info":
+            fillOrderAdditionalInfo(mainParent);
+            break;
         default:
             break;
     }
 
 });
+
+function fillOrderAdditionalInfo(target){
+    $(".spinner").show();
+    let order_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/OrderInfo.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            order_id,
+        },
+        cache: false,
+        success: function (res) {
+            console.log(res);
+            $('#info-order-form .modal-title').text(`Информация про продажу № ${order_id}`).attr('order-id', res['id']);
+            let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
+            const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%, ${res[0]["rollback_2"]}%)</p>`;
+            if(res[0]["callmaster"])
+                owners += callmaster;
+            $('#info-order-form .text').html(owners);
+        },
+        error: function () {
+            $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
+        },
+        complete: function(){
+            $(".spinner").fadeOut('fast');
+            createClick('[href="#Order-info-modal"]');
+        }
+    });
+}
 
 function fillOrderEditForm(target) {
     $(".spinner").show();
@@ -121,10 +154,6 @@ function fillOwnerEditForm(target) {
         error: function () {
         },
     });
-}
-
-function fillOrdersEditForm() {
-
 }
 
 function fillUserEditForm(target) {

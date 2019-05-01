@@ -56,8 +56,10 @@ function makeTable($data, $type, $delLine = false)
                     if (is_numeric($col) || $col == 'id') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle"  modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
                     $index++;
@@ -70,6 +72,8 @@ function makeTable($data, $type, $delLine = false)
                     if (is_numeric($col) || $col == 'id') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else

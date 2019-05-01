@@ -165,7 +165,6 @@ h2 {
     font-size: 100%;
     line-height: 1;
     color: #585858;
-    display: grid;
     grid-template-columns: auto auto;
     width: 100vw;
     margin-top: 50px;
@@ -210,9 +209,11 @@ h2 {
 }
 
 .fa-coins, .fa-building, .fa-edit {
-    margin-right: 15px;
+    margin-right: 12px;
 }
-
+.fa-info-circle{
+    margin-right: 5px;
+}
 #money-t {
     border: none;
 }
@@ -285,6 +286,9 @@ h1 {
     display: block;
     overflow-x: auto;
     padding: 0 10px;
+    width: fit-content;
+    max-width: 100vw;
+    margin: 0 auto;
 }
 
 .table-menu {
@@ -365,17 +369,6 @@ table thead tr th span {
     z-index: 3;
     width: 0;
     background-color: #33373C;
-    transition: width 1s;
-    -ms-transition: width 1s;
-    -o-transition: width 1s;
-    -moz-transition: width 1s;
-    height: calc(100vh - 50px);
-}
-
-#menu-invisible {
-    width: 0;
-    z-index: 2;
-    height: 100%;
     transition: width 1s;
     -ms-transition: width 1s;
     -o-transition: width 1s;
@@ -539,7 +532,10 @@ a[disabled] {
 .modal {
     max-width: 650px !important;
 }
-
+#Order-info-modal{
+    width: auto;
+    padding-bottom: 30px;
+}
 @media (min-width: 724px) {
     .modal-inputs, .orders-modal-owners-list {
         grid-template-columns: 1fr 1fr;
