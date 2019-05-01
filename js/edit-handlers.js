@@ -67,7 +67,9 @@ function editClient() {
     let last_name = $("#edit-client-form #editLastNameField").val();
     let description = $("#edit-client-form #editDescriptionField").val();
     let email = $("#edit-client-form #editEmailField").val();
-    let id = $("#edit-client-form #edit-user-title").attr('client-id');
+    let rollback = $("#edit-client-form #editRollbackField").val();
+    let debt = $("#edit-client-form #editDebtField").val();
+    let id = $("#edit-client-form #edit-client-title").attr('client-id');
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
@@ -79,6 +81,8 @@ function editClient() {
             first_name,
             last_name,
             byname,
+            rollback,
+            debt,
             phone,
             client_id : id,
         },
@@ -96,6 +100,89 @@ function editClient() {
         }
     });
 }
+
+//VG
+$.validate({
+    form: '#edit-vg-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editVG();
+        return false;
+    }
+});
+
+function editVG() {
+    let name = $("#edit-vg-form #editNameField").val();
+    let in_percent = $("#edit-vg-form #editInField").val();
+    let out_percent = $("#edit-vg-form #editOutField").val();
+    let url = $("#edit-vg-form #editUrlField").val();
+    let id = $("#edit-vg-form #edit-vg-title").attr('vg-id');
+    const $this = $("#edit-client-form .modal-submit");
+    $this.prop("disabled", true);
+    $.ajax({
+        url: "../components/edit-modal-response/editVG.php",
+        type: "POST",
+        data: {
+            name,
+            out_percent,
+            in_percent,
+            url,
+            vg_id : id,
+        },
+        cache: false,
+        success: function (res) {
+            createAlertTable(res, "Пользователь");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Пользователь");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $this.prop("disabled", false);
+            }, 300);
+        }
+    });
+}
+
+//branch
+$.validate({
+    form: '#edit-branch-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editBranch();
+        return false;
+    }
+});
+
+function editBranch() {
+    let name = $("#edit-branch-form #editNameField").val();
+    let id = $("#edit-branch-form #edit-branch-title").attr('branch-id');
+    const $this = $("#edit-client-form .modal-submit");
+    $this.prop("disabled", true);
+    $.ajax({
+        url: "../components/edit-modal-response/editBranch.php",
+        type: "POST",
+        data: {
+            name,
+            branch_id : id,
+        },
+        cache: false,
+        success: function (res) {
+            createAlertTable(res, "Пользователь");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Пользователь");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $this.prop("disabled", false);
+            }, 300);
+        }
+    });
+}
+
 function createAlertTable(alertType, text) {
     if ($('.custom-alert').hasClass('custom-alert--active'))
         $('.custom-alert').removeClass('custom-alert--active');
