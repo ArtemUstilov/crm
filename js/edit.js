@@ -19,11 +19,7 @@ $('tr').on('click', (e) => {
             $('#payField').val(rollbackSum);
             break;
         case "Head-edit":
-            fillOwnersEditForm();
-            alert('Head edit');
-            break;
-        case "Outgo-edit":
-            alert('Outgo edit');
+            fillOwnerEditForm();
             break;
         case "User-edit":
             fillUserEditForm(mainParent);
@@ -34,14 +30,8 @@ $('tr').on('click', (e) => {
         case "Client-edit":
             fillClientEditForm(mainParent);
             break;
-        case "Rollback-edit":
-            fillRollbacksEditForm(mainParent);
-            break;
         case "VG-edit":
             fillVGEditForm(mainParent);
-            break;
-        case "Debt-edit":
-            alert('Debt edit');
             break;
         case "Order-edit":
             alert('Order edit');
@@ -53,15 +43,38 @@ $('tr').on('click', (e) => {
 });
 
 
+function fillOwnerEditForm(target) {
+    $(".spinner").show();
+    let owner_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/User.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            owner_id,
+        },
+        cache: false,
+        success: function (res) {
+            $('#edit-user-form #edit-user-title').text(`Изменить данные пользователя ${res['full_name']}`).attr('user-id', res['id']);
+            $('#edit-user-form #editFirstNameField').val(res['first_name']);
+            $('#edit-user-form #editLastNameField').val(res['last_name']);
+            $('#edit-user-form #editLoginField').val(res['login']);
+            $('#edit-user-form #editBranchField').val(res['branch_id']);
+            $('#edit-user-form #editRoleField').val(res['role']);
+            $('#edit-user-form #editMoneyField').val(res['money']);
+            $(".spinner").fadeOut('fast');
+            createClick('[href="#Head-edit-Modal"]');
 
-
-function fillRollbackEditForm(target) {
-    createClick('[href="#VG-Modal"]');
+        },
+        error: function () {
+        },
+    });
 }
 
 function fillOrdersEditForm() {
 
 }
+
 function fillUserEditForm(target) {
     $(".spinner").show();
     let user_id = target.attr('itemid');
@@ -78,7 +91,7 @@ function fillUserEditForm(target) {
             $('#edit-user-form #editFirstNameField').val(res['first_name']);
             $('#edit-user-form #editLastNameField').val(res['last_name']);
             $('#edit-user-form #editLoginField').val(res['login']);
-            $('#edit-user-form #editBranchField').val( res['branch_id']);
+            $('#edit-user-form #editBranchField').val(res['branch_id']);
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
@@ -88,6 +101,7 @@ function fillUserEditForm(target) {
         },
     });
 }
+
 function fillBranchEditForm(target) {
     $(".spinner").show();
     let branch_id = target.attr('itemid');
@@ -164,6 +178,7 @@ function fillOwnerEditForm(target) {
         },
     });
 }
+
 function fillClientEditForm(target) {
     $(".spinner").show();
     let client_id = target.attr('itemid');
@@ -182,6 +197,8 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editBynameField').val(res['login']);
             $('#edit-client-form #editPhoneField').val(res['phone']);
             $('#edit-client-form #editEmailField').val(res['email']);
+            $('#edit-client-form #editDebtField').val(res['debt']);
+            $('#edit-client-form #editRollbackField').val(res['rollback']);
             $('#edit-client-form #editDescriptionField').val(res['description']);
             $(".spinner").fadeOut('fast');
             createClick('[href="#Client-edit-Modal"]');

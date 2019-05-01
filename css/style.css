@@ -221,6 +221,7 @@ tr .fas:hover {
     color: #5491F5;
 }
 
+
 #add-btn, .modal-submit, .login-form-submit {
     background-color: #5491F5;
     outline: none;
@@ -234,6 +235,7 @@ tr .fas:hover {
     margin: 10px 30px 10px 10px;
     display: block;
 }
+
 
 #add-btn:hover, .modal-submit:hover, .login-form-submit:hover {
     background: #1B4E9F;
@@ -488,10 +490,12 @@ a[disabled] {
     }
 }
 
+
 .modal-title {
     font-size: 20px;
     text-align: center;
 }
+
 
 .modal-inputs, .orders-modal-owners-list {
     padding: 20px 0;

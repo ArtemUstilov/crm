@@ -57,6 +57,14 @@ function clientAddModal($data)
   Email
   <input id="editEmailField"   placeholder="Email" type="email" name="email">
   </p>
+  <p>
+  Откат
+  <input id="editRollbackField"   placeholder="Откат" type="number" name="rollback">
+  </p>
+  <p>
+  Долг
+  <input id="editDebtField"   placeholder="Долг" type="number" name="debt">
+  </p>
 
   <p>
   Описание
