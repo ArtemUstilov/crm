@@ -78,7 +78,7 @@ function userAddModal($data, $more_data)
 </p>';
         session_start();
         if ($_SESSION['role'] == 'admin')
-        $output .= '
+            $output .= '
 <p>
 Пароль
   <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
@@ -94,9 +94,14 @@ function userAddModal($data, $more_data)
   </p>';
         $output .= '
   <p>
-  Повторите пароль
-  <input id="editPa
-  ssRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
+    Повторите пароль
+    <input 
+        id="editPassRepeatField" 
+        autocomplete="new-password" 
+        name="pass" type="password"  
+        placeholder="Повторите пароль" 
+        data-validation-length="min3" 
+        data-validation="length required confirmation">
   </p>
   </div>
   <input class="add-modal-submit" type="submit" value="Сохранить">
