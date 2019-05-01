@@ -142,7 +142,7 @@ function fillBranchEditForm(target) {
         cache: false,
         success: function (res) {
             console.log(res);
-            $('#edit-branch-form #edit-user-title').text(`Изменить данные пользователя ${res['name']}`).attr('branch-id', res['id']);
+            $('#edit-branch-form #edit-branch-title').text(`Изменить данные пользователя ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $(".spinner").fadeOut('fast');
             createClick('[href="#Branch-edit-Modal"]');
