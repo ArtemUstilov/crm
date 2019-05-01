@@ -46,7 +46,7 @@ function clientAddModal($data)
   <input id="editLastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-  Логин(клика)
+  Логин(кличка)
   <input id="editBynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин (кличка, только англ)" type="text" name="byname">
   </p>
    <p>

@@ -494,7 +494,7 @@ a[disabled] {
     text-align: center;
 }
 
-.add-modal-inputs, .orders-modal-owners-list {
+.add-modal-inputs, .edit-modal-inputs, .orders-modal-owners-list {
     padding: 20px 0;
     display: grid;
     grid-template-columns: auto;
@@ -503,7 +503,8 @@ a[disabled] {
 }
 
 
-.add-modal-inputs input, .orders-modal-owners-list input, .add-modal-inputs select {
+.add-modal-inputs input, .edit-modal-inputs input, .edit-modal-inputs select,
+.orders-modal-owners-list input, .add-modal-inputs select {
     width: 100%;
     padding: 5px 10px;
     font-size: 17px;
@@ -512,7 +513,7 @@ a[disabled] {
     color: black;
 }
 
-.add-modal-submit {
+.add-modal-submit, .edit-modal-submit {
     float: right;
     font-size: 18px;
     margin: 0;
@@ -537,7 +538,7 @@ a[disabled] {
 }
 
 @media (min-width: 724px) {
-    .add-modal-inputs, .orders-modal-owners-list {
+    .add-modal-inputs, .edit-modal-inputs, .orders-modal-owners-list {
         grid-template-columns: 1fr 1fr;
     }
 }
