@@ -20,8 +20,8 @@ function headAddModal($data)
     $output = '
 <div id="Head-Modal" class="modal" action="" role="form">
 <form id="add-head-form">
-  <h2 class="add-modal-title">Добавить владельца</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Добавить владельца</h2>
+  <div class="modal-inputs">
   <p>
   <select id="nameField" data-validation="required">
   <option value="" disabled selected>Выберите человека</option>';
@@ -41,7 +41,7 @@ function headAddModal($data)
 </select>
 </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Добавить">
+  <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
     return $output;

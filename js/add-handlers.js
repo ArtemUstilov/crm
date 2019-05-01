@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     function addBranch() {
         let name = $("#add-branch-form #nameField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addBranch.php",
@@ -52,7 +52,7 @@ $(document).ready(function () {
     function addHead() {
         let [first_name, last_name] = $("#add-head-form #nameField").val().split(' ');
         let branch = $("#add-head-form #branchField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addHead.php",
@@ -164,7 +164,7 @@ $(document).ready(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
         });
         const shares = allShares.filter((el) => el.value > 0);
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addOrder.php",
@@ -217,7 +217,7 @@ $(document).ready(function () {
         let last_name = $("#add-user-form #lastNameField").val();
         let branch = $("#add-user-form #branchField").val();
         let role = $("#add-user-form #roleField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addUser.php",
@@ -269,7 +269,7 @@ $(document).ready(function () {
         let byname = $("#add-client-form #bynameField").val();
         let phone = $("#add-client-form #phoneField").val();
         let email = $("#add-client-form #emailField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addClient.php",
@@ -325,7 +325,7 @@ $(document).ready(function () {
     function addOutgo() {
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         // console.log(sum)
         $.ajax({
@@ -367,7 +367,7 @@ $(document).ready(function () {
         let in_percent = $("#add-vg-form #inField").val();
         let out_percent = $("#add-vg-form #outField").val();
         let url = $("#add-vg-form #urlField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addVG.php",
@@ -417,7 +417,7 @@ $(document).ready(function () {
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/payRollback.php",
@@ -465,7 +465,7 @@ $(document).ready(function () {
     function paybackDebt() {
         let login = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();
-        $this = $(".add-modal-submit");
+        $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/paybackDebt.php",

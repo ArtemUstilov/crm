@@ -194,18 +194,7 @@ function fillClientEditForm(target) {
         },
     });
 }
-$.validate({
-    form: '#edit-vg-form',
-    modules: '',
-    lang: 'ru',
-    onSuccess: function () {
-        addOrder();
-        return false;
-    }
-});
-function fillDebtsEditForm() {
 
-}
 function createClick(target) {
     let linkEvent = document.createEvent('MouseEvents');
     linkEvent.initEvent('click', true, true);

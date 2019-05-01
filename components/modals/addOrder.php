@@ -7,8 +7,8 @@ function orderAddModal($data, $more_data)
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
 <form id="add-order-form">
-  <h2 class="add-modal-title">Добавить продажу</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Добавить продажу</h2>
+  <div class="modal-inputs">
   <p>
   Клиент
 <select id="clientField" data-validation="required">
@@ -61,7 +61,7 @@ function orderAddModal($data, $more_data)
   </select>
   </p>
    </div><div id="owners-lists-container"></div>
-   <div id="rollbacks-lists-container" class="add-modal-inputs" style="display: none">
+   <div id="rollbacks-lists-container" class="modal-inputs" style="display: none">
 <p>
    Откат 1
   <input id="rollback1Field" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
@@ -71,7 +71,7 @@ function orderAddModal($data, $more_data)
   <input id="rollback2Field"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Оформить">
+  <input class="modal-submit" type="submit" value="Оформить">
   </form>
 </div>';
 

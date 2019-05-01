@@ -4,8 +4,8 @@ function vgAddModal($data)
     $output = '
 <div id="VG-Modal" class="modal" action="" role="form">
 <form id="add-vg-form">
-  <h2 class="add-modal-title">Добавить валюту</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Добавить валюту</h2>
+  <div class="modal-inputs">
   <p>
   <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
@@ -19,7 +19,7 @@ function vgAddModal($data)
   <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Добавить">
+  <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
     session_start();
@@ -27,8 +27,8 @@ function vgAddModal($data)
         $output .= '
 <div id="VG-edit-Modal" class="modal" action="" role="form">
 <form id="edit-vg-form">
-  <h2 class="add-modal-title" id="edit-vg-title">Редактировать валюту</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title" id="edit-vg-title">Редактировать валюту</h2>
+  <div class="modal-inputs">
   <p>
   <input id="editNameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
@@ -42,7 +42,7 @@ function vgAddModal($data)
   <input id="editUrlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Сохранить">
+  <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
 
