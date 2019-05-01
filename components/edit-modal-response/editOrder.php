@@ -34,6 +34,12 @@ if (isset($_POST['order_id']) &&
         query("SELECT *
                      FROM orders
                      WHERE order_id ='$order_id'"));
+
+        $old_shares_data = mysqliToArray($connection->
+        query("SELECT *
+                     FROM shares
+                     WHERE order_id ='$order_id'"));
+
         if ($order_data['client_id'] != $client_id) {
             $old_client = $order_data['client_id'];
             $old_debt = $order_data['order_debt'];
@@ -80,7 +86,7 @@ if (isset($_POST['order_id']) &&
                      `callmaster` = '$callmaster'
                      WHERE `order_id` = $order_id");
         if ($res) {
-            echo "success";
+            echo "edit-success";
             return false;
         } else {
             echo "failed";

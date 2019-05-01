@@ -44,16 +44,22 @@ function makeTable($data, $type, $delLine = false)
             if ($key === 0) {
                 $output .= '<tr>';
                 foreach ($var as $col => $val) {
-                    if (is_numeric($col) || $col == 'id') continue;
-                    $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
+                    if ($col == 'id' && $type != 'Order') continue;
+                    if ($col == 'id' && $type == 'Order') {
+                        $output .= "<th><div class='col-wrap'><p>номер заказа</p><span></span></div><input id=$index-i>
 </th>";
+                    } else {
+                        $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
+</th>";
+                    }
+
                     $index++;
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
                 $output .= '<tr  defaultVal = "' . $var[1] . '" itemId = "' . $var['id'] . '">';
                 foreach ($var as $col => $val) {
-                    if (is_numeric($col) || $col == 'id') continue;
+                    if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $type == 'Order') {
@@ -69,7 +75,7 @@ function makeTable($data, $type, $delLine = false)
                 $index = 0;
                 $output .= '<tr  defaultVal = "' . $var[1] . '" itemId = "' . $var['id'] . '">';
                 foreach ($var as $col => $val) {
-                    if (is_numeric($col) || $col == 'id') continue;
+                    if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $type == 'Order') {
@@ -108,7 +114,7 @@ function mysqliToArray($mysqli_result)
 {
     $i = 0;
     $data = null;
-    while ($new = $mysqli_result->fetch_array()) $data[$i++] = $new;
+    while ($new = mysqli_fetch_assoc($mysqli_result)) $data[$i++] = $new;
     return $data;
 }
 

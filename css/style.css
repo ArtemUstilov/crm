@@ -208,12 +208,14 @@ h2 {
     margin-left: 15px;
 }
 
-.fa-coins, .fa-building, .fa-edit {
+.fa-coins, .fa-building, .fa-edit, .fa-user {
     margin-right: 12px;
 }
-.fa-info-circle{
+
+.fa-info-circle {
     margin-right: 5px;
 }
+
 #money-t {
     border: none;
 }
@@ -532,10 +534,12 @@ a[disabled] {
 .modal {
     max-width: 650px !important;
 }
-#Order-info-modal{
+
+#Order-info-modal {
     width: auto;
     padding-bottom: 30px;
 }
+
 @media (min-width: 724px) {
     .modal-inputs, .orders-modal-owners-list {
         grid-template-columns: 1fr 1fr;
@@ -592,6 +596,10 @@ a[disabled] {
 
 
 @media (max-width: 512px) {
+    .fa-coins, .fa-building, .fa-edit, .fa-user {
+        font-size: 1.2em !important;
+    }
+
     #menu ul {
         font-size: 30px;
     }

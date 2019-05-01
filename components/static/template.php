@@ -42,6 +42,7 @@ function template($body)
 <p class="menu-n" class="money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div id="logout" class="account-name-menu-btn-box">
+<i class="fas fa-user fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
 <a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>

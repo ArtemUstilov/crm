@@ -118,11 +118,12 @@ function fillOrderEditForm(target) {
                     " value='0'> " +
                     "</p>");
             }))
+            
             $(".spinner").fadeOut('fast');
             createClick('[href="#Order-edit-Modal"]');
 
         },
-        error: function () {
+        error: function (res) {
         },
     });
 }

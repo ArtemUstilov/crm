@@ -88,9 +88,15 @@ $(document).ready(function () {
             return false;
         }
     });
-
+    $('#Order-Modal #sumVGField, #Order-Modal #outField').on('change paste keyup',function (e) {
+        $('#Order-Modal #debtClField').val($('#Order-Modal #sumVGField').val() * $('#Order-Modal #outField').val() / 100);
+    })
+    $('#Order-edit-Modal #editSumVGField, #Order-edit-Modal #outField').on('change paste keyup',function (e) {
+        $('#Order-edit-Modal #editDebtClField').val($('#Order-edit-Modal #editSumVGField').val() * $('#Order-edit-Modal #editOutField').val() / 100);
+    })
     const vgcl = $('#Order-Modal #vgField, #Order-Modal #clientField');
     vgcl.change(function (e) {
+        $('#Order-Modal #sumVGField').trigger('change');
         let vg_id = $('#Order-Modal #vgField').val();
         let client_id = $('#Order-Modal #clientField').val();
         if (!vg_id && !client_id) return;
@@ -380,10 +386,10 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Валюта");
+                createAlertTable(res, "VG");
             },
             error: function () {
-                createAlertTable("connectionError", "Валюта");
+                createAlertTable("connectionError", "VG");
             },
             complete: function () {
                 setTimeout(function () {
@@ -414,6 +420,8 @@ $(document).ready(function () {
         $('#payField').val(sum);
     });
 
+
+
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
@@ -428,10 +436,10 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Выплата");
+                createAlertTable(res, "Откат");
             },
             error: function () {
-                createAlertTable("connectionError", "Выплата");
+                createAlertTable("connectionError", "Откат");
             },
             complete: function () {
                 setTimeout(function () {
@@ -443,7 +451,7 @@ $(document).ready(function () {
     }
 
 
-    //Debt
+//Debt
 
     $.validate({
         form: '#payback-debt-form',
@@ -500,7 +508,7 @@ $(document).ready(function () {
                 $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);
                 break;
             case "success":
-                $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
+                $('.custom-alert .alert-text-box').text(`${text} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
                 let linkEvent = document.createEvent('MouseEvents');
                 linkEvent.initEvent('click', true, true);
