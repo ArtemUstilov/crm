@@ -14,8 +14,8 @@ function editOrder() {
     let sum_vg = $("#edit-order-form #editSumVGField").val();
     let debt = $("#edit-order-form #editDebtClField").val();
     let referral = $("#edit-order-form #editLastNameField").val();
-    let rollback_1 = $("#edit-order-form #editBranchField").val();
-    let rollback_2 = $("#edit-order-form #editMoneyField").val();
+    let rollback_1 = $("#edit-order-form #editRollback1Field").val();
+    let rollback_2 = $("#edit-order-form #editRollback2Field").val();
     let out = $("#edit-order-form #editOutField").val();
     let vg_id = $("#edit-order-form #editVgField").val();
     let callmaster = $('#edit-order-form #editCallmasterField').val();

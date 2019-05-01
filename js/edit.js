@@ -87,7 +87,6 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log("order res: ", res);
             $('#edit-order-form #edit-order-title').text(`Редактировать данные продажи ${res['full_name']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editVgField').val(res['vg_id']);
