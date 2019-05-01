@@ -221,7 +221,7 @@ tr .fas:hover {
     color: #5491F5;
 }
 
-#add-btn, .add-modal-submit, .login-form-submit {
+#add-btn, .add-modal-submit, .edit-modal-submit,  .login-form-submit {
     background-color: #5491F5;
     outline: none;
     border: none;
