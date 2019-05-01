@@ -662,7 +662,7 @@ a[disabled] {
     margin-top: 20px;
 }
 
-#open-invisible-owner-list {
+#open-invisible-owner-list, #open-invisible-owner-edit-list {
     cursor: pointer;
     font-size: 20px;
     text-decoration: underline;

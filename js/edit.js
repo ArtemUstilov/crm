@@ -54,14 +54,38 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
-            $('#edit-user-form #edit-user-title').text(`Изменить данные продажи ${res['full_name']}`).attr('order-id', res['id']);
-            $('#edit-user-form #editFirstNameField').val(res['first_name']);
-            $('#edit-user-form #editLastNameField').val(res['last_name']);
-            $('#edit-user-form #editLoginField').val(res['login']);
-            $('#edit-user-form #editBranchField').val(res['branch_id']);
-            $('#edit-user-form #editRoleField').val(res['role']);
-            $('#edit-user-form #editMoneyField').val(res['money']);
+            console.log("order res: ", res);
+            $('#edit-order-form #edit-order-title').text(`Редактировать данные продажи ${res['full_name']}`).attr('order-id', res['order_id']);
+            $('#edit-order-form #editClientField').val(res['client_id']);
+            $('#edit-order-form #editVgField').val(res['vg_id']);
+            $('#edit-order-form #editSumVGField').val(res['sum_vg']);
+            if (res['callmaster'])
+                $('#edit-order-form #editCallmasterField').val(res['callmaster']);
+            $('#edit-order-form #editDebtClField').val(res['debt']);
+            $('#edit-order-form #editOutField').val(res['out']);
+            $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
+            $('#edit-order-form #editRollback2Field').val(res['rollback_2']);
+            $('#edit-order-form #editObtainingField').val(res['method']);
+            if(res['shares'])
+            res['shares'].forEach((el => {
+                $('#edit-owners-list-visible').append(
+                    "<p>" +
+                    `${el['owner_name']}` +
+                    "<input class='owner-percent-input' type='number' " +
+                    `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
+                    `step='0.01' value=${el['percent']}> ` +
+                    "</p>");
+            }))
+            if(res['other_owners'])
+            res['other_owners'].forEach((el => {
+                $('#edit-owners-list-invisible').append(
+                    "<p>" +
+                    `${el['owner_name']}` +
+                    "<input class='owner-percent-input' type='number' " +
+                    `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
+                    "step='0.01' value='0'> " +
+                    "</p>");
+            }))
             $(".spinner").fadeOut('fast');
             createClick('[href="#Order-edit-Modal"]');
 
@@ -70,6 +94,7 @@ function fillOrderEditForm(target) {
         },
     });
 }
+
 function fillOwnerEditForm(target) {
     $(".spinner").show();
     let owner_id = target.attr('itemid');
