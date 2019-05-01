@@ -51,7 +51,7 @@ function template($body)
 ' . menu() . '
 <div class="spinner"></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
-<script src="./js/filter.js"></script>
+<script src="./js/add-handlers.js"></script>
 <script src="./js/edit.js"></script>
 
 </body>
