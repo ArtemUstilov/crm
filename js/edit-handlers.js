@@ -1,3 +1,66 @@
+//Order
+$.validate({
+    form: '#edit-order-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editOrder();
+        return false;
+    }
+});
+
+function editOrder() {
+    let order_id = $('#edit-order-form #edit-order-title').attr('order-id');
+    let sum_vg = $("#edit-order-form #editSumVGField").val();
+    let debt = $("#edit-order-form #editDebtClField").val();
+    let referral = $("#edit-order-form #editLastNameField").val();
+    let rollback_1 = $("#edit-order-form #editBranchField").val();
+    let rollback_2 = $("#edit-order-form #editMoneyField").val();
+    let out = $("#edit-order-form #editOutField").val();
+    let vg_id = $("#edit-order-form #editVgField").val();
+    let callmaster = $('#edit-order-form #editCallmasterField').val();
+    let obtain = $('#edit-order-form #editObtainingField').val();
+    let client_id = $("#edit-order-form #editClientField").val();
+    let sharesEls = $('#edit-order-form .edit-owner-percent-input');
+    const allShares = [];
+    sharesEls.each(function () {
+        allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
+    });
+    const shares = allShares.filter((el) => el.value > 0);
+    const $this = $("#edit-order-form .modal-submit");
+    $this.prop("disabled", true);
+    $.ajax({
+        url: "../components/edit-modal-response/editOrder.php",
+        type: "POST",
+        data: {
+            order_id,
+            client_id,
+            sum_vg,
+            debt,
+            referral,
+            rollback_1,
+            rollback_2,
+            out,
+            vg_id,
+            shares,
+            callmaster,
+            obtain,
+        },
+        cache: false,
+        success: function (res) {
+            console.log(res);
+            createAlertTable(res, "Заказ");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Заказ");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $this.prop("disabled", false);
+            }, 300);
+        }
+    });
+}
 
 //User
 $.validate({

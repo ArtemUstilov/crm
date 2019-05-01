@@ -30,8 +30,6 @@ if (isset($_POST['order_id'])) {
                              FROM orders O INNER JOIN users U ON U.user_id = O.user_id
                              WHERE O.order_id = '$order_id')
             "));
-    include_once '../../dev/ChromePhp.php';
-    ChromePhp::log("all: ", $other_owners_data);
     if($shares_data)
     $order_data['shares'] = $shares_data;
     if($other_owners_data)

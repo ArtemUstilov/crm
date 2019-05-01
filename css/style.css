@@ -651,7 +651,7 @@ a[disabled] {
     cursor: no-drop;
 }
 
-#owners-list-invisible {
+#owners-list-invisible, #edit-owners-list-invisible {
     overflow: hidden;
     height: 0px;
     padding: 0px;

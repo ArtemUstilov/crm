@@ -23,6 +23,23 @@ $(document).ready(function () {
         }
 
     });
+    $('#open-invisible-owner-edit-list').click(()=>{
+        $('#edit-owners-list-invisible').toggleClass('open');
+        if ($('#edit-owners-list-invisible').hasClass('open')) {
+            $('#open-invisible-owner-edit-list').html('Скрыть');
+            $('#edit-owners-list-invisible').animate({
+                height: $('#edit-owners-list-invisible').get(0).scrollHeight
+            }, 1000, function () {
+                $('#edit-owners-list-invisible').height('auto');
+            });
+        } else {
+            $('#open-invisible-owner-edit-list').html('Показать всех');
+            $('#edit-owners-list-invisible').animate({
+                height: '0px'
+            }, 1000);
+
+        }
+    })
     $('#owners-lists-container').on('change', '.owner-percent-input', () => {
         $('.owner-percent-input').each(function () {
             $(this).attr('value', $(this).val());
