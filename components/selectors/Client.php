@@ -6,7 +6,7 @@ if (isset($_POST['client_id'])) {
     $client_data = mysqli_fetch_assoc($connection->query("
             SELECT client_id AS `id`,  concat(last_name, ' ', first_name,' (', byname,')') AS `full_name`,
             `first_name`, `last_name`, `byname` AS `login`, `phone_number` AS `phone`,
-            `description`, `email`
+            `description`, `email`, `debt`, `rollback_sum` AS rollback
             FROM clients 
             WHERE client_id = '$client_id'
             "));
