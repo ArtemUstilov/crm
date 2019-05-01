@@ -183,6 +183,8 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editBynameField').val(res['login']);
             $('#edit-client-form #editPhoneField').val(res['phone']);
             $('#edit-client-form #editEmailField').val(res['email']);
+            $('#edit-client-form #editDebtField').val(res['debt']);
+            $('#edit-client-form #editRollbackField').val(res['rollback']);
             $('#edit-client-form #editDescriptionField').val(res['description']);
             $(".spinner").fadeOut('fast');
             createClick('[href="#Client-edit-Modal"]');
