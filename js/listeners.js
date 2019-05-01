@@ -138,17 +138,16 @@ $(document).ready(function () {
                     }
                 }, 10);
             })
-        })
+        });
         $('tr').each(function () {
             const el = $(this);
-            el.click(function () {
+            el.click(function (e) {
+                if(e.target.tagName === 'I') return;
                 el.toggleClass('clicked');
-
                 function unclick() {
                     el.toggleClass('clicked');
                     window.removeEventListener('click', unclick);
                 }
-
                 setTimeout(() => window.addEventListener('click', unclick), 100);
             });
         })
@@ -172,15 +171,26 @@ $(document).ready(function () {
                 $(this).css({padding: '0', fontSize: '0px'});
             });
             _this.find("#tbody").append(clone);
-            [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(key => {
+            const cols = _this.find("thead > tr > th").length;
+            function fill(arr, cols){
+                arr.push(cols);
+                return cols ? fill(arr, --cols) : arr.reverse();
+            }
+            const maxcols = fill([], cols);
+            maxcols.forEach(key => {
                 _this.find(`#${key}-i`).keyup(function () {
                     const data = this.value;
-
-                    const jo = _this.find("#tbody").find("tr");
+                    let jo = _this.find("#tbody").find("tr");
                     jo.hide();
-                    jo.filter(function checkRows() {
-                        return $(this).children(`.${key}-f`).is(":contains('" + data + "')") || $(this).prop('id') === 'spec';
-                    }).show();
+                    maxcols.forEach(k =>{
+                        const data = _this.find(`#${k}-i`)[0] && _this.find(`#${k}-i`)[0].value;
+                        console.log(data);
+                        if(!data || !data.length) return;
+                        jo = jo.filter(function checkRows() {
+                            return $(this).children(`.${k}-f`).first()[0].innerText.toUpperCase().includes(data.toUpperCase()) || $(this).prop('id') === 'spec';
+                        });
+                    });
+                    jo.show();
 
                 }).focus(function () {
                     this.value = "";
@@ -191,20 +201,20 @@ $(document).ready(function () {
                 }).css({
                     "color": "#C0C0C0"
                 })
-                    .click(function () {
-                        $filled = null;
-                        $('input').each(function () {
-                            if ($(this).prop('id') !== `${key}-i`) {
-                                this.value = '';
-                            } else {
-                                $filled = $(this);
-                            }
-                        });
-                        if (this.value.length === 0) {
-                            const jo = _this.find("#tbody").find("tr");
-                            jo.show();
-                        }
-                    });
+                    // .click(function () {
+                    //     $filled = null;
+                    //     $('input').each(function () {
+                    //         if ($(this).prop('id') !== `${key}-i`) {
+                    //             this.value = '';
+                    //         } else {
+                    //             $filled = $(this);
+                    //         }
+                    //     });
+                    //     if (this.value.length === 0) {
+                    //         const jo = _this.find("#tbody").find("tr");
+                    //         jo.show();
+                    //     }
+                    // });
             });
         });
     }

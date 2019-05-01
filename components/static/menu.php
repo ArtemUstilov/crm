@@ -3,7 +3,7 @@ function menu()
 {
     $curPage = substr($_SERVER['REQUEST_URI'], 1, -4);
 
-    return ('<div id="menu-invisible"></div><div id="menu">
+    return ('<div id="menu">
     <ul>
     <li>
     <a href="../../" class=' . (!$curPage ? '"active" disabled' : '') . '>Главная</a></li>
