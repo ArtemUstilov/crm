@@ -81,7 +81,11 @@ function userAddModal($data, $more_data)
             $output .= '
 <p>
 Пароль
-  <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
+  <input id="editPassField" 
+  autocomplete="new-password" 
+  name="pass_confirmation" 
+  type="password" 
+  placeholder="Пароль (только англ)">
   </p>
   <p>
   Должность
@@ -100,8 +104,7 @@ function userAddModal($data, $more_data)
         autocomplete="new-password" 
         name="pass" type="password"  
         placeholder="Повторите пароль" 
-        data-validation-length="min3" 
-        data-validation="length required confirmation">
+        data-validation="confirmation">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

@@ -214,4 +214,4 @@ $(document).ready(function () {
         yFixedNoJquerry();
         filterIcons();
     }
-})
+});

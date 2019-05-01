@@ -83,7 +83,6 @@ function fillUserEditForm(target) {
             $('#edit-user-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
             createClick('[href="#User-edit-Modal"]');
-
         },
         error: function () {
         },
