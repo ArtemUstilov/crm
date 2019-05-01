@@ -14,8 +14,8 @@ function debtModal($data)
     $output = '
 <div id="Debt-Modal" class="modal" action="" role="form">
 <form id="payback-debt-form">
-  <h2 class="add-modal-title">Погасить долг</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Погасить долг</h2>
+  <div class="modal-inputs">
   <p>
 <select id="debtorField" data-validation="required">
   <option value="" selected disabled>Выберите должника</option>';
@@ -29,7 +29,7 @@ function debtModal($data)
   <input id="paybackField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Выплатить">
+  <input class="modal-submit" type="submit" value="Выплатить">
   </form>
 </div>';
 

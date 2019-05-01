@@ -16,8 +16,8 @@ function rollbackModal($data)
     $output = '
 <div id="Rollback-Modal" class="modal" action="" role="form">
 <form id="pay-rollback-form">
-  <h2 class="add-modal-title">Выплатить откат</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Выплатить откат</h2>
+  <div class="modal-inputs">
   <p>
 <select id="clientField" data-validation="required">
   <option value="" selected disabled>Выберите клиента</option>';
@@ -31,7 +31,7 @@ function rollbackModal($data)
   <input id="payField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Выплатить">
+  <input class="modal-submit" type="submit" value="Выплатить">
   </form>
 </div>';
 

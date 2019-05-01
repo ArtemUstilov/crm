@@ -4,8 +4,8 @@ function userAddModal($data, $more_data)
     $output = '
 <div id="User-Modal" class="modal" action="" role="form">
 <form id="add-user-form">
-  <h2 class="add-modal-title">Добавить пользователя</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Добавить пользователя</h2>
+  <div class="modal-inputs">
   <p>
   <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
   </p>
@@ -40,7 +40,7 @@ function userAddModal($data, $more_data)
   <input id="passRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Добавить">
+  <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
     session_start();
@@ -48,8 +48,8 @@ function userAddModal($data, $more_data)
         $output .= '
 <div id="User-edit-Modal" class="modal" action="" role="form">
 <form id="edit-user-form">
-  <h2 class="add-modal-title" id="edit-user-title">Изменить данные пользователя</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title" id="edit-user-title">Изменить данные пользователя</h2>
+  <div class="modal-inputs">
   <p>
   Имя
   <input id="editFirstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
@@ -104,7 +104,7 @@ function userAddModal($data, $more_data)
         data-validation="length required confirmation">
   </p>
   </div>
-  <input class="add-modal-submit" type="submit" value="Сохранить">
+  <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
     }

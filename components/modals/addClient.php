@@ -4,8 +4,8 @@ function clientAddModal($data)
     $output = '
 <div id="Client-Modal" class="modal" action="" role="form">
 <form id="add-client-form">
-  <h2 class="add-modal-title">Добавить клиента</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title">Добавить клиента</h2>
+  <div class="modal-inputs">
   <p>
   <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
   </p>
@@ -27,7 +27,7 @@ function clientAddModal($data)
   </p>
  
   </div>
-  <input class="add-modal-submit" type="submit" value="Добавить">
+  <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
     session_start();
@@ -35,8 +35,8 @@ function clientAddModal($data)
     $output .= '
 <div id="Client-edit-Modal" class="modal" action="" role="form">
 <form id="edit-client-form">
-  <h2 class="add-modal-title" id="edit-client-title">Изменить данные клиента</h2>
-  <div class="add-modal-inputs">
+  <h2 class="modal-title" id="edit-client-title">Изменить данные клиента</h2>
+  <div class="modal-inputs">
   <p>
   Имя
   <input id="editFirstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
@@ -64,7 +64,7 @@ function clientAddModal($data)
   </p>
  
   </div>
-  <input class="add-modal-submit" type="submit" value="Сохранить">
+  <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
 

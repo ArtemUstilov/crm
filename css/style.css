@@ -221,7 +221,7 @@ tr .fas:hover {
     color: #5491F5;
 }
 
-#add-btn, .add-modal-submit, .login-form-submit {
+#add-btn, .modal-submit, .login-form-submit {
     background-color: #5491F5;
     outline: none;
     border: none;
@@ -235,7 +235,7 @@ tr .fas:hover {
     display: block;
 }
 
-#add-btn:hover, .add-modal-submit:hover, .login-form-submit:hover {
+#add-btn:hover, .modal-submit:hover, .login-form-submit:hover {
     background: #1B4E9F;
 }
 
@@ -488,13 +488,12 @@ a[disabled] {
     }
 }
 
-
-.add-modal-title {
+.modal-title {
     font-size: 20px;
     text-align: center;
 }
 
-.add-modal-inputs, .edit-modal-inputs, .orders-modal-owners-list {
+.modal-inputs, .orders-modal-owners-list {
     padding: 20px 0;
     display: grid;
     grid-template-columns: auto;
@@ -503,8 +502,8 @@ a[disabled] {
 }
 
 
-.add-modal-inputs input, .edit-modal-inputs input, .edit-modal-inputs select,
-.orders-modal-owners-list input, .add-modal-inputs select {
+.modal-inputs input,
+.orders-modal-owners-list input, .modal-inputs select {
     width: 100%;
     padding: 5px 10px;
     font-size: 17px;
@@ -513,7 +512,7 @@ a[disabled] {
     color: black;
 }
 
-.add-modal-submit, .edit-modal-submit {
+.modal-submit {
     float: right;
     font-size: 18px;
     margin: 0;
@@ -538,7 +537,7 @@ a[disabled] {
 }
 
 @media (min-width: 724px) {
-    .add-modal-inputs, .edit-modal-inputs, .orders-modal-owners-list {
+    .modal-inputs, .orders-modal-owners-list {
         grid-template-columns: 1fr 1fr;
     }
 }
