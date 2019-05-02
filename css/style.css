@@ -678,3 +678,71 @@ a[disabled] {
 .display-none {
     display: none;
 }
+
+
+.elem {
+    width: 200px;
+    height: 50px;
+}
+
+.elem:hover {
+    -webkit-animation: 1.2s ease-in-out 0s normal none infinite running trambling-animation;
+    -moz-animation: 1.2s ease-in-out 0s normal none infinite running trambling-animation;
+    -o-animation: 1.2s ease-in-out 0s normal none infinite running trambling-animation;
+    animation: 1.2s ease-in-out 0s normal none infinite running trambling-animation;
+}
+
+@keyframes trambling-animation {
+    0%, 50%, 100% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+    }
+    10%, 30% {
+        transform: rotate(-10deg);
+        -webkit-transform: rotate(-10deg);
+        -moz-transform: rotate(-10deg);
+        -o-transform: rotate(-10deg);
+        -ms-transform: rotate(-10deg);
+    }
+    20%, 40% {
+        transform: rotate(10deg);
+        -webkit-transform: rotate(10deg);
+        -moz-transform: rotate(10deg);
+        -o-transform: rotate(10deg);
+        -ms-transform: rotate(10deg);
+    }
+}
+
+
+.shaking {
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(235,51,18,1);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(235,51,18,1);
+    box-shadow: 0px 0px 5px 2px rgba(235,51,18,1);
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    -moz-animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    -webkit-animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}

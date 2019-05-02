@@ -23,7 +23,7 @@ $(document).ready(function () {
         }
 
     });
-    $('#open-invisible-owner-edit-list').click(()=>{
+    $('#open-invisible-owner-edit-list').click(() => {
         $('#edit-owners-list-invisible').toggleClass('open');
         if ($('#edit-owners-list-invisible').hasClass('open')) {
             $('#open-invisible-owner-edit-list').html('Скрыть');
@@ -47,6 +47,7 @@ $(document).ready(function () {
     });
     $('#login-form').submit((event) => {
         event.preventDefault();
+        if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
         let password = $("#passwordField").val();
         let login = $("#loginField").val();
         // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
@@ -66,13 +67,21 @@ $(document).ready(function () {
                         window.location.href = '../index.php';
                         break;
                     case "login":
-                        alert("wrong login");
+                        $('.login-form #loginField').addClass('shaking');
+                        setTimeout(function () {
+                            $('.login-form #loginField').removeClass('shaking');
+                            setTimeout
+                        }, 1000);
                         break;
                     case "pass":
-                        alert("wrong pass");
+                        $('.login-form #passwordField').addClass('shaking');
+                        setTimeout(function () {
+                            $('.login-form #passwordField').removeClass('shaking');
+                            setTimeout
+                        }, 1000);
                         break;
                     default:
-                        alert(res);
+
                 }
 
             },
@@ -159,16 +168,19 @@ $(document).ready(function () {
         $('tr').each(function () {
             const el = $(this);
             el.click(function (e) {
-                if(e.target.tagName === 'I') return;
+                if (e.target.tagName === 'I') return;
                 el.toggleClass('clicked');
+
                 function unclick() {
                     el.toggleClass('clicked');
                     window.removeEventListener('click', unclick);
                 }
+
                 setTimeout(() => window.addEventListener('click', unclick), 100);
             });
         })
     }
+
     function yFixedNoJquerry() {
         const head = document.getElementById('table-head');
         if (window.innerWidth > 524) {
@@ -189,20 +201,22 @@ $(document).ready(function () {
             });
             _this.find("#tbody").append(clone);
             const cols = _this.find("thead > tr > th").length;
-            function fill(arr, cols){
+
+            function fill(arr, cols) {
                 arr.push(cols);
                 return cols ? fill(arr, --cols) : arr.reverse();
             }
+
             const maxcols = fill([], cols);
             maxcols.forEach(key => {
                 _this.find(`#${key}-i`).keyup(function () {
                     const data = this.value;
                     let jo = _this.find("#tbody").find("tr");
                     jo.hide();
-                    maxcols.forEach(k =>{
+                    maxcols.forEach(k => {
                         const data = _this.find(`#${k}-i`)[0] && _this.find(`#${k}-i`)[0].value;
                         console.log(data);
-                        if(!data || !data.length) return;
+                        if (!data || !data.length) return;
                         jo = jo.filter(function checkRows() {
                             return $(this).children(`.${k}-f`).first()[0].innerText.toUpperCase().includes(data.toUpperCase()) || $(this).prop('id') === 'spec';
                         });
@@ -218,20 +232,20 @@ $(document).ready(function () {
                 }).css({
                     "color": "#C0C0C0"
                 })
-                    // .click(function () {
-                    //     $filled = null;
-                    //     $('input').each(function () {
-                    //         if ($(this).prop('id') !== `${key}-i`) {
-                    //             this.value = '';
-                    //         } else {
-                    //             $filled = $(this);
-                    //         }
-                    //     });
-                    //     if (this.value.length === 0) {
-                    //         const jo = _this.find("#tbody").find("tr");
-                    //         jo.show();
-                    //     }
-                    // });
+                // .click(function () {
+                //     $filled = null;
+                //     $('input').each(function () {
+                //         if ($(this).prop('id') !== `${key}-i`) {
+                //             this.value = '';
+                //         } else {
+                //             $filled = $(this);
+                //         }
+                //     });
+                //     if (this.value.length === 0) {
+                //         const jo = _this.find("#tbody").find("tr");
+                //         jo.show();
+                //     }
+                // });
             });
         });
     }
