@@ -157,7 +157,11 @@ function orderAddModal($data, $more_data)
 </div>';
         $output .='<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-transaction-info-modal" class="modal">
-  KEKEKEKE
+ <h2>Ошибка транзакции!</h2>
+ <h3>Выполните вручную</h3>
+ <div class="error-url-box">
+ <span>Ссылка:</span><span id="error-url"></span>
+</div>
 </div>';
     return $output;
 }

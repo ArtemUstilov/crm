@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    createClick('[href="#Order-transaction-info-modal"]');
 //Branch
     $.validate({
         form: '#add-branch-form',
@@ -192,10 +191,11 @@ $(document).ready(function () {
             success: function (res) {
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
+                    $('#Order-transaction #error-url').text(res['url']);
+                    createClick('[href="#Order-transaction-info-modal"]');
                 } else {
                     createAlertTable(res, "Заказ");
                 }
-                createClick('[href="#Order-transaction-info-modal"]');
             },
             error: function () {
                 createAlertTable("connectionError", "Заказ");
@@ -209,6 +209,9 @@ $(document).ready(function () {
 
     }
 
+    $('#Order-transaction-info-modal').on('click', '.close-modal', function () {
+        location.reload();
+    })
 
 //User
 
