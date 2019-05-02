@@ -663,7 +663,7 @@ a[disabled] {
     overflow: hidden;
     height: 0px;
     padding: 0px;
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 #open-invisible-owner-list, #open-invisible-owner-edit-list {

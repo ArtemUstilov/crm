@@ -79,14 +79,6 @@ function userAddModal($data, $more_data)
         session_start();
         if ($_SESSION['role'] == 'admin')
             $output .= '
-<p>
-Пароль
-  <input id="editPassField" 
-  autocomplete="new-password" 
-  name="pass_confirmation" 
-  type="password" 
-  placeholder="Пароль (только англ)">
-  </p>
   <p>
   Должность
   <select id="editRoleField" data-validation="required">

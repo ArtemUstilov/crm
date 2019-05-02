@@ -15,6 +15,7 @@ FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN branch B ON B.branch_id = U.branch_id
+ORDER BY `date` DESC
 ");
         break;
     case "moder":
@@ -26,6 +27,7 @@ FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 WHERE U.branch_id = '$branch_id'
+ORDER BY `date` DESC
 ");
         break;
     case "agent":
@@ -37,6 +39,7 @@ FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 WHERE O.user_id = '.$_SESSION["id"].'
+ORDER BY `date` DESC
 ');
         break;
     default:

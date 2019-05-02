@@ -58,7 +58,7 @@ function fillOrderAdditionalInfo(target) {
         cache: false,
         success: function (res) {
             console.log(res);
-            $('#info-order-form .modal-title').text(`Информация про продажу № ${order_id}`).attr('order-id', res['id']);
+            $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
             let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
             const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%, ${res[0]["rollback_2"]}%)</p>`;
             if (res[0]["callmaster"])
@@ -305,7 +305,6 @@ $('#Order-edit-Modal').on('click', '.close-modal', function () {
 
     if ($('#Order-edit-Modal .edit-owners-list-invisible').children() ||
         $('#Order-edit-Modal .edit-owners-list-visible').children()) {
-        alert("TRUE");
         $('#Order-edit-Modal .edit-owner-percent-input-box ').remove();
     }
 })
