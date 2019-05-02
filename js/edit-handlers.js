@@ -1,4 +1,15 @@
 //Order
+
+const vg = $('#Order-edit-Modal #editVgField');
+vg.change(function (e) {
+    let vg_id = vg.val();
+    if (vg_id) {
+        const optionSelected = $("option:selected", '#Order-edit-Modal #editVgField');
+        const perc = optionSelected.attr('percent');
+        $('#editOutField').val(perc);
+    }
+});
+
 $.validate({
     form: '#edit-order-form',
     modules: '',
@@ -250,6 +261,7 @@ function createAlertTable(alertType, text) {
     if ($('.custom-alert').hasClass('custom-alert--active'))
         $('.custom-alert').removeClass('custom-alert--active');
     if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
+    console.log(alertType);
     switch (alertType) {
         case "exists":
             $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);

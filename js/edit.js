@@ -87,13 +87,14 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            $('#edit-order-form #edit-order-title').text(`Редактировать данные продажи ${res['full_name']}`).attr('order-id', res['order_id']);
+            $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editVgField').val(res['vg_id']);
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
             if (res['callmaster'])
                 $('#edit-order-form #editCallmasterField').val(res['callmaster']);
             $('#edit-order-form #editDebtClField').val(res['debt']);
+            console.log(res['out']);
             $('#edit-order-form #editOutField').val(res['out']);
             $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
             $('#edit-order-form #editRollback2Field').val(res['rollback_2']);

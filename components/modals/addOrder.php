@@ -91,7 +91,6 @@ function orderAddModal($data, $more_data)
             $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
         }
         $output .= '
-    <option value="-1">Добавить нового</option>;
   </select>
 </p>
 <p>
@@ -119,13 +118,12 @@ function orderAddModal($data, $more_data)
             $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
         }
         $output .= '
-    <option value="-1">Добавить нового</option>;
   </select>
 </p>
 
   <p>
   Продажа
-  <input id="editOutField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
+  <input id="editOutField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out" step=0.01>
   </p>
     <p>
     Способ получения

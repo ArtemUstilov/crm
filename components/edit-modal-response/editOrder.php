@@ -25,7 +25,7 @@ if (isset($_POST['order_id']) &&
     $obtain = clean($_POST['obtain']);
     $rollback_sum = $sum_vg / 100 * ($rollback_1 + $rollback_2);
     $sum_currency = ($sum_vg * $out_percent) / 100;
-
+    $shares = clean($_POST['shares']);
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
