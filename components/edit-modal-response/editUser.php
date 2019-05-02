@@ -25,8 +25,6 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
         $_SESSION['login'] = $login;
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    include_once '../../dev/ChromePhp.php';
-    ChromePhp::log($edit_user_id);
     if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
         $res = $connection->
         query("
