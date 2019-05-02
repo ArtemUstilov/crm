@@ -9,7 +9,7 @@ $('tr').on('click', (e) => {
             debtorList.val(target.parent().parent().attr('defaultval'));
             const debtorSelected = $("option:selected", debtorList);
             const debtSum = debtorSelected.attr('sum');
-           const input  = $('#paybackField');
+            const input = $('#paybackField');
             input.val(debtSum);
             input.attr('max', debtSum);
             input.attr('min', 0);
@@ -20,7 +20,7 @@ $('tr').on('click', (e) => {
             referalList.val(target.parent().parent().attr('defaultval'));
             const referalSelected = $("option:selected", referalList);
             const rollbackSum = referalSelected.attr('sum');
-            const input2  = $('#payField');
+            const input2 = $('#payField');
             input2.val(rollbackSum);
             input2.attr('max', rollbackSum);
             input2.attr('min', 0);
@@ -77,7 +77,8 @@ function fillOrderAdditionalInfo(target) {
         },
         complete: function () {
             $(".spinner").fadeOut('fast');
-            createClick('[href="#Order-info-modal"]');
+            $("#Order-info-modal").modal();
+
         }
     });
 }
@@ -96,10 +97,10 @@ function fillOrderEditForm(target) {
         success: function (res) {
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
-            $('#edit-order-form #editClientField option').each(function(){
-               if(!res['clients'].find(t => t.client_id === this.value)){
-                   $(this).hide();
-               }
+            $('#edit-order-form #editClientField option').each(function () {
+                if (!res['clients'].find(t => t.client_id === this.value)) {
+                    $(this).hide();
+                }
             });
             $('#edit-order-form #editVgField').val(res['vg_id']);
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
@@ -130,9 +131,10 @@ function fillOrderEditForm(target) {
                         " value='0'> " +
                         "</p>");
                 }))
+            else $('#open-invisible-owner-edit-list').addClass('display-none');
 
             $(".spinner").fadeOut('fast');
-            createClick('[href="#Order-edit-Modal"]');
+            $('#Order-edit-Modal').modal();
 
         },
         error: function (res) {
@@ -160,7 +162,7 @@ function fillOwnerEditForm(target) {
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#Head-edit-Modal"]');
+            $('#Head-edit-Modal').modal();
 
         },
         error: function () {
@@ -188,7 +190,7 @@ function fillUserEditForm(target) {
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#User-edit-Modal"]');
+            $('#User-edit-Modal').modal();
         },
         error: function () {
         },
@@ -211,7 +213,7 @@ function fillBranchEditForm(target) {
             $('#edit-branch-form #edit-branch-title').text(`Изменить данные пользователя ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#Branch-edit-Modal"]');
+            $('#Branch-edit-Modal').modal();
 
         },
         error: function () {
@@ -237,7 +239,7 @@ function fillVGEditForm(target) {
             $('#edit-vg-form #editInField').val(res['in']);
             $('#edit-vg-form #editUrlField').val(res['url']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#VG-edit-Modal"]');
+            $('#VG-edit-Modal').modal();
 
         },
         error: function () {
@@ -264,7 +266,8 @@ function fillOwnerEditForm(target) {
             $('#edit-vg-form #editInField').val(res['in']);
             $('#edit-vg-form #editUrlField').val(res['url']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#VG-edit-Modal"]');
+            $('#Head-edit-Modal').modal();
+
 
         },
         error: function () {
@@ -294,7 +297,8 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editRollbackField').val(res['rollback']);
             $('#edit-client-form #editDescriptionField').val(res['description']);
             $(".spinner").fadeOut('fast');
-            createClick('[href="#Client-edit-Modal"]');
+            $('#Client-edit-Modal').modal();
+
 
         },
         error: function () {
@@ -302,16 +306,12 @@ function fillClientEditForm(target) {
     });
 }
 
-function createClick(target) {
-    let linkEvent = document.createEvent('MouseEvents');
-    linkEvent.initEvent('click', true, true);
-    $(target)[0].dispatchEvent(linkEvent);
-}
 
-$('#Order-edit-Modal').on('click', '.close-modal', function () {
-
-    if ($('#Order-edit-Modal .edit-owners-list-invisible').children() ||
-        $('#Order-edit-Modal .edit-owners-list-visible').children()) {
+$('#Order-edit-Modal').on($.modal.CLOSE, function () {
         $('#Order-edit-Modal .edit-owner-percent-input-box ').remove();
-    }
+
+})
+$('#Order-Modal').on($.modal.CLOSE, function () {
+    $('#Order-Modal .owner-percent-input-box ').remove();
+
 })

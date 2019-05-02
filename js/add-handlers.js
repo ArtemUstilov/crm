@@ -192,8 +192,9 @@ $(document).ready(function () {
                 res = JSON.parse(res);
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
-                    $('#Order-transaction-info-modal #error-url').text(res['url']);
-                    createClick('[href="#Order-transaction-info-modal"]');
+                    $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
+                    $('#Order-transaction-info-modal').modal({fadeDuration: 7000,
+                        fadeDelay: 0.30});
                 } else {
                     createAlertTable(res, "Заказ");
                 }
@@ -525,7 +526,7 @@ $(document).ready(function () {
             case "success":
                 $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
-                createClick('.close-modal');
+                $.modal.close();
                 if (requestType != 'Заказ')
                     setTimeout(function () {
                         location.reload();
@@ -534,7 +535,7 @@ $(document).ready(function () {
             case "edit-success":
                 $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
                 $('.custom-alert').addClass('bg-green');
-                createClick('.close-modal');
+                $.modal.close();
 
                 setTimeout(function () {
                     location.reload();
@@ -559,9 +560,4 @@ $(document).ready(function () {
 
     }
 
-    function createClick(target) {
-        let linkEvent = document.createEvent('MouseEvents');
-        linkEvent.initEvent('click', true, true);
-        $(target)[0].dispatchEvent(linkEvent);
-    }
 });

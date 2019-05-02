@@ -545,7 +545,12 @@ a[disabled] {
         grid-template-columns: 1fr 1fr;
     }
 }
-
+.new-client-option{
+    color: #2196F3;
+    font-weight:600;
+    border-top:1px solid black;
+    border-bottom:1px solid black;
+}
 .custom-alert {
     display: flex;
     position: fixed;
@@ -756,9 +761,17 @@ a[disabled] {
     max-width: 480px !important;
 }
 
+#Order-transaction-info-modal .manually {
+    font-size: 20px;
+}
+
 .error-url-box {
     margin-top: 20px;
-    padding: 3px 5%;
+    padding: 3px 1%;
     text-align: left;
     font-size: 15px;
+}
+
+.error-url {
+    color: blue;
 }

@@ -269,7 +269,7 @@ function createAlertTable(alertType, text) {
         case "success":
             $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
             $('.custom-alert').addClass('bg-green');
-            createClick('.close-modal');
+            $.modal.close();
             setTimeout(function () {
                 location.reload();
             }, 1500);
@@ -277,7 +277,7 @@ function createAlertTable(alertType, text) {
         case "edit-success":
             $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
             $('.custom-alert').addClass('bg-green');
-            createClick('.close-modal');
+            $.modal.close();
             setTimeout(function () {
                 location.reload();
             }, 1500);

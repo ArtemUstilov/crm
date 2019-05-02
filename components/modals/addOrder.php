@@ -9,12 +9,13 @@ function orderAddModal($data, $more_data)
   <p>
   Клиент
 <select id="clientField" data-validation="required">
-  <option value="" disabled selected>Выберите клиента</option>';
+  <option value="" disabled selected>Выберите клиента</option>
+  <option class="new-client-option" value="-1">Добавить нового</option>';
     foreach ($more_data['clients'] as $key => $var) {
         $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
     }
     $output .= '
-    <option value="-1">Добавить нового</option>;
+    ;
   </select>
 </p>
 <p>
@@ -37,12 +38,13 @@ function orderAddModal($data, $more_data)
   <p>
   Реферал
 <select id="callmasterField">
-  <option value="" selected>Выберите реферала(опц)</option>';
+  <option value="" selected>Выберите реферала(опц)</option>
+  <option class="new-client-option" value="-1">Добавить нового</option>';
     foreach ($more_data['clients'] as $key => $var) {
         $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
     }
     $output .= '
-    <option value="-1">Добавить нового</option>;
+    ;
   </select>
 </p>
 
@@ -158,9 +160,9 @@ function orderAddModal($data, $more_data)
         $output .='<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-transaction-info-modal" class="modal">
  <h2>Ошибка транзакции!</h2>
- <h3>Выполните вручную</h3>
+ <h3 class="manually">Выполните вручную</h3>
  <div class="error-url-box">
- <span>Ссылка:</span><span id="error-url"></span>
+ <span>Ссылка: </span><a target="_blank" id="error-url"></a>
 </div>
 </div>';
     return $output;
