@@ -40,7 +40,7 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
             `money` = '$money'
         WHERE `user_id` = '$edit_user_id'");
         if ($res) {
-            echo "success";
+            echo "edit-success";
             return false;
         } else {
             echo "failed";

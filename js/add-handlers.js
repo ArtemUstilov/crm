@@ -88,10 +88,10 @@ $(document).ready(function () {
             return false;
         }
     });
-    $('#Order-Modal #sumVGField, #Order-Modal #outField').on('change paste keyup',function (e) {
+    $('#Order-Modal #sumVGField, #Order-Modal #outField').on('change paste keyup', function (e) {
         $('#Order-Modal #debtClField').val($('#Order-Modal #sumVGField').val() * $('#Order-Modal #outField').val() / 100);
     })
-    $('#Order-edit-Modal #editSumVGField, #Order-edit-Modal #outField').on('change paste keyup',function (e) {
+    $('#Order-edit-Modal #editSumVGField, #Order-edit-Modal #outField').on('change paste keyup', function (e) {
         $('#Order-edit-Modal #editDebtClField').val($('#Order-edit-Modal #editSumVGField').val() * $('#Order-edit-Modal #editOutField').val() / 100);
     })
     const vgcl = $('#Order-Modal #vgField, #Order-Modal #clientField');
@@ -421,7 +421,6 @@ $(document).ready(function () {
     });
 
 
-
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
@@ -510,9 +509,18 @@ $(document).ready(function () {
             case "success":
                 $('.custom-alert .alert-text-box').text(`${text} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
-                let linkEvent = document.createEvent('MouseEvents');
-                linkEvent.initEvent('click', true, true);
-                $('.close-modal')[0].dispatchEvent(linkEvent);
+                createClick('.close-modal');
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
+                break;
+            case "edit-success":
+                $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
+                $('.custom-alert').addClass('bg-green');
+                createClick('.close-modal');
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
@@ -532,5 +540,9 @@ $(document).ready(function () {
         }, 300);
 
     }
-
+    function createClick(target) {
+        let linkEvent = document.createEvent('MouseEvents');
+        linkEvent.initEvent('click', true, true);
+        $(target)[0].dispatchEvent(linkEvent);
+    }
 });

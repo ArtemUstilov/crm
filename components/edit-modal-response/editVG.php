@@ -25,7 +25,7 @@ if (isset($_POST['name']) && isset($_POST['url']) && isset($_POST['in_percent'])
             `vg_id`='$vg_id' 
         ");
         if ($res) {
-            echo "success";
+            echo "edit-success";
             return false;
         } else {
             echo "failed";
