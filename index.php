@@ -31,7 +31,7 @@ $table .= display_data($headSumsRaw, 'Head', "Владельцы", $data);
 switch ($role) {
     case 'moder':
         $debtorsData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, client_id AS id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE debt > 0 AND O.user_id IN(
@@ -65,7 +65,7 @@ WHERE F.client_id IN(
 ))
 ');
         $rollbackData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, C.rollback_sum AS откат, client_id AS id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, C.rollback_sum AS откат, C.client_id AS id
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE C.rollback_sum > 0 AND O.user_id IN(
@@ -131,7 +131,7 @@ WHERE rollback_sum > 0
         break;
     default:
         $debtorsData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, client_id AS id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE debt > 0 AND O.user_id = ' . $_SESSION["id"] . '
@@ -153,7 +153,7 @@ WHERE F.client_id IN(
     )
 ');
         $rollbackData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, C.rollback_sum AS откат, client_id AS id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, C.rollback_sum AS откат, C.client_id AS id
 FROM clients C
 INNER JOIN orders O ON O.client_id = C.client_id
 WHERE C.rollback_sum > 0 AND O.user_id = ' . $_SESSION["id"] . '

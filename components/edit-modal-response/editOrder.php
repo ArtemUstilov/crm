@@ -10,8 +10,6 @@ if (isset($_POST['order_id']) &&
     isset($_POST['client_id'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
-    include_once "../../dev/ChromePhp.php";
-    ChromePhp::log($_POST);
     $rollback_1 = isset($_POST['rollback_1']) ? clean($_POST['rollback_1']) : 0;
     $rollback_2 = isset($_POST['rollback_2']) ? clean($_POST['rollback_2']) : 0;
 

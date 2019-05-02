@@ -62,8 +62,10 @@ function makeTable($data, $type, $delLine = false)
                     if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $type == 'Order' && $role !== 'agent') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $type == 'Order') {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle"  modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else
@@ -73,15 +75,15 @@ function makeTable($data, $type, $delLine = false)
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                include_once '/dev/ChromePhp.php';
-                ChromePhp::log($var);
                 $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
                 foreach ($var as $col => $val) {
                     if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
+                    } else if ($col == 0 && $index == 0 && $type == 'Order' && $role !== 'agent') {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
+                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
+                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else
