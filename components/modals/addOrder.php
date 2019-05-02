@@ -148,12 +148,16 @@ function orderAddModal($data, $more_data)
 </div>';
     }
         $output .= '<a href="#Order-info-modal" rel="modal:open" style="display: none"></a>
-<div id="Order-info-modal" class="modal" action="" role="form">
-<form id="info-order-form">
+<div id="Order-info-modal" class="modal">
+<div id="info-order-form">
   <h2 class="modal-title">Иноформация про продажу</h2>
   <div class="text">
   </div>
-  </form>
+  </div>
+</div>';
+        $output .='<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
+<div id="Order-transaction-info-modal" class="modal">
+  KEKEKEKE
 </div>';
     return $output;
 }

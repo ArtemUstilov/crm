@@ -33,11 +33,19 @@ if (isset($_POST['client']) &&
     "));
     if ($user_data['role'] == 'admin' || $user_data['role'] == 'sub_admin' || $user_data['role'] == 'agent'
         || $user_data['role'] == 'moder') {
+        if($callmaster )
         $add_order = $connection->
         query("INSERT INTO `orders`
         (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `rollback_2`, `date`, `callmaster`) 
         VALUES
         ('$vg','$client', '$user_id', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$rollback_2','$date', '$callmaster') ");
+        else
+            $add_order = $connection->
+        query("INSERT INTO `orders`
+        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `rollback_2`, `date`) 
+        VALUES
+        ('$vg','$client', '$user_id', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$rollback_2','$date') ");
+
         if ($add_order) {
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
