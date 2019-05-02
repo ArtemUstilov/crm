@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    createClick('[href="#Order-transaction-info-modal"]');
 //Branch
     $.validate({
         form: '#add-branch-form',
@@ -189,7 +190,12 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Заказ");
+                if (res['url']) {
+                    createAlertTable('success', "Заказ");
+                } else {
+                    createAlertTable(res, "Заказ");
+                }
+                createClick('[href="#Order-transaction-info-modal"]');
             },
             error: function () {
                 createAlertTable("connectionError", "Заказ");
@@ -504,26 +510,28 @@ $(document).ready(function () {
     }
 
 
-    function createAlertTable(alertType, text) {
+    function createAlertTable(alertType, requestType) {
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
         switch (alertType) {
             case "exists":
-                $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);
+                $('.custom-alert .alert-text-box').text(`${requestType} с таким логином уже существует`);
                 break;
             case "success":
-                $('.custom-alert .alert-text-box').text(`${text} успешно добавлен(о)`);
+                $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
                 createClick('.close-modal');
-                setTimeout(function () {
-                    location.reload();
-                }, 1500);
+                if (requestType != 'Заказ')
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
                 break;
             case "edit-success":
                 $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
                 $('.custom-alert').addClass('bg-green');
                 createClick('.close-modal');
+
                 setTimeout(function () {
                     location.reload();
                 }, 1500);
@@ -546,6 +554,7 @@ $(document).ready(function () {
         }, 300);
 
     }
+
     function createClick(target) {
         let linkEvent = document.createEvent('MouseEvents');
         linkEvent.initEvent('click', true, true);
