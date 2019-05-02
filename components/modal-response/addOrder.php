@@ -101,14 +101,26 @@ if (isset($_POST['client']) &&
             "))['api_url_regexp'];
             //"virtualGoodsSiteName.com/api/?key=4838327498273wdjf8743h73&type=transfer&user=%UserName%&Summ=%Summ%" - test link FAIL
             //'http://nit.tron.net.ua/api/category/list' - test link SUCCESS
-            $vg_url = str_replace("%UserName%", $client_login, $vg_url);
+            $vg_url = str_replace("%UserName%", $client_login, "http://nit.tron.net.ua/api/category/list/ttt");
             $vg_url = str_replace("%Summ%", $sum_vg, $vg_url);
-            $result = file_get_contents($vg_url);
-            if($result === FALSE) {
+
+            set_error_handler(
+                function ($severity, $message, $file, $line) {
+                    throw new ErrorException($message, $severity, $severity, $file, $line);
+                }
+            );
+
+            try {
+                $result = file_get_contents($vg_url);
+            }
+            catch (Exception $e) {
                 $response['url'] = $vg_url;
                 $response['sent'] = false;
-                echo $response;
+                echo json_encode($response);
+                return false;
             }
+
+            restore_error_handler();
             echo "success";
             return false;
         } else {

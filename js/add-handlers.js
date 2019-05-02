@@ -189,9 +189,10 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                res = JSON.parse(res);
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
-                    $('#Order-transaction #error-url').text(res['url']);
+                    $('#Order-transaction-info-modal #error-url').text(res['url']);
                     createClick('[href="#Order-transaction-info-modal"]');
                 } else {
                     createAlertTable(res, "Заказ");
