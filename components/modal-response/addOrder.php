@@ -99,8 +99,8 @@ if (isset($_POST['client']) &&
                 FROM clients
                 WHERE client_id = '$client'
             "))['api_url_regexp'];
-            //"virtualGoodsSiteName.com/api/?key=4838327498273wdjf8743h73&type=transfer&user=%UserName%&Summ=%Summ%" - test link FAIL
-            //'http://nit.tron.net.ua/api/category/list' - test link SUCCESS
+            //"http://nit.tron.net.ua/api/category/list/ttt" - test FAIL
+            //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             $vg_url = str_replace("%UserName%", $client_login, "http://nit.tron.net.ua/api/category/list/ttt");
             $vg_url = str_replace("%Summ%", $sum_vg, $vg_url);
 
