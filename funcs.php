@@ -57,7 +57,7 @@ function makeTable($data, $type, $delLine = false)
                 }
                 $index = 0;
                 $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr  defaultVal = "' . $var[1] . '" itemId = "' . $var['id'] . '">';
+                $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
                 foreach ($var as $col => $val) {
                     if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {
@@ -73,7 +73,9 @@ function makeTable($data, $type, $delLine = false)
                 $output .= '</tr>';
             } else {
                 $index = 0;
-                $output .= '<tr  defaultVal = "' . $var[1] . '" itemId = "' . $var['id'] . '">';
+                include_once '/dev/ChromePhp.php';
+                ChromePhp::log($var);
+                $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
                 foreach ($var as $col => $val) {
                     if ($col == 'id' && $type != 'Order') continue;
                     if ($col == 0 && $index == 0 && $delLine) {

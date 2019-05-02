@@ -10,10 +10,10 @@ function vgAddModal($data)
   <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
   <p>
-  <input id="inField" data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in">
+  <input id="inField" min=0 data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in" step=0.01>
   </p>
   <p>
-  <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out">
+  <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out" step=0.01>
   </p>
    <p>
   <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
@@ -33,10 +33,10 @@ function vgAddModal($data)
   <input id="editNameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
   <p>
-  <input id="editInField" data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in">
+  <input id="editInField" min=0 data-validation="required length" data-validation-length="min1" placeholder="покупка %" type="number" name="in" step=0.01>
   </p>
   <p>
-  <input id="editOutField" data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out">
+  <input id="editOutField" min=0 data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out" step=0.01>
   </p>
    <p>
   <input id="editUrlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">

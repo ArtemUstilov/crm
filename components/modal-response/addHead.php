@@ -35,8 +35,6 @@ if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['b
         return false;
 
     }
-    echo "failed";
-    return false;
 }
 echo "empty";
 return false;
