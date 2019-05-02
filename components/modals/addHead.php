@@ -26,7 +26,7 @@ function headAddModal($data)
   <select id="nameField" data-validation="required">
   <option value="" disabled selected>Выберите человека</option>';
     if($clients) foreach ($clients as $key => $var) {
-        $output .= '<option value="' . $var['client_id'].'">' . $var['first_name']." ". $var['last_name'] . '</option>';
+        $output .= '<option value="' . $var['first_name']." ". $var['last_name'].'">' . $var['first_name']." ". $var['last_name'] . '</option>';
     }
     $output .= '
 </select>

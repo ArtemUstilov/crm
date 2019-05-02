@@ -39,7 +39,7 @@ $(document).ready(function () {
             }, 1000);
 
         }
-    })
+    });
     $('#owners-lists-container').on('change', '.owner-percent-input', () => {
         $('.owner-percent-input').each(function () {
             $(this).attr('value', $(this).val());

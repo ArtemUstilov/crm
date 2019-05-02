@@ -1,7 +1,6 @@
 <?php
 function orderAddModal($data, $more_data)
 {
-
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
 <form id="add-order-form">
@@ -29,11 +28,11 @@ function orderAddModal($data, $more_data)
 </p>
   <p>
   Сумма вг
-  <input id="sumVGField" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg" step="1000">
+  <input id="sumVGField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
   </p>
    <p>
    Не оплаченая часть
-  <input id="debtClField" data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0>
+  <input id="debtClField" min=0 data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0>
   </p>
   <p>
   Реферал
@@ -49,7 +48,7 @@ function orderAddModal($data, $more_data)
 
   <p>
   Продажа
-  <input id="outField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
+  <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
   </p>
     <p>
     Способ получения
@@ -63,18 +62,16 @@ function orderAddModal($data, $more_data)
    <div id="rollbacks-lists-container" class="modal-inputs" style="display: none">
 <p>
    Откат 1
-  <input id="rollback1Field" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
+  <input id="rollback1Field" min="0" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
   </p>
   <p>
   Откат 2
-  <input id="rollback2Field"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
+  <input id="rollback2Field" min="0" placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Оформить">
   </form>
 </div>';
-
-
     //edit modal
     session_start();
     if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder') {
@@ -104,11 +101,11 @@ function orderAddModal($data, $more_data)
 </p>
   <p>
   Сумма вг
-  <input id="editSumVGField" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg" step="1000">
+  <input id="editSumVGField" min="0" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
   </p>
    <p>
    Не оплаченая часть
-  <input id="editDebtClField" data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0>
+  <input id="editDebtClField" min="0" data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0>
   </p>
   <p>
   Реферал
@@ -123,7 +120,7 @@ function orderAddModal($data, $more_data)
 
   <p>
   Продажа
-  <input id="editOutField" data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out" step=0.01>
+  <input id="editOutField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out" step=0.01>
   </p>
     <p>
     Способ получения
@@ -135,11 +132,11 @@ function orderAddModal($data, $more_data)
   </p>
   <p>
    Откат 1
-  <input id="editRollback1Field" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
+  <input id="editRollback1Field" min="0" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
   </p>
   <p>
   Откат 2
-  <input id="editRollback2Field"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
+  <input id="editRollback2Field" min="0"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
   </p>
   </div>
   <h2>Владельцы</h2>
@@ -150,7 +147,6 @@ function orderAddModal($data, $more_data)
   </form>
 </div>';
     }
-
         $output .= '<a href="#Order-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-info-modal" class="modal" action="" role="form">
 <form id="info-order-form">
@@ -159,6 +155,5 @@ function orderAddModal($data, $more_data)
   </div>
   </form>
 </div>';
-
     return $output;
 }

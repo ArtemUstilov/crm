@@ -3,12 +3,16 @@ $('tr').on('click', (e) => {
     const mainParent = target.parent().parent();
     switch (target.attr('modal')) {
         case "#Debt-Modal":
+            console.log('debt modal');
             $('[href*="#Debt-Modal"]').first()[0].click();
             const debtorList = $('#debtorField');
             debtorList.val(target.parent().parent().attr('defaultval'));
             const debtorSelected = $("option:selected", debtorList);
             const debtSum = debtorSelected.attr('sum');
-            $('#paybackField').val(debtSum);
+           const input  = $('#paybackField');
+            input.val(debtSum);
+            input.attr('max', debtSum);
+            input.attr('min', 0);
             break;
         case "#Rollback-Modal":
             $('[href*="#Rollback-Modal"]').first()[0].click();
@@ -16,7 +20,10 @@ $('tr').on('click', (e) => {
             referalList.val(target.parent().parent().attr('defaultval'));
             const referalSelected = $("option:selected", referalList);
             const rollbackSum = referalSelected.attr('sum');
-            $('#payField').val(rollbackSum);
+            const input2  = $('#payField');
+            input2.val(rollbackSum);
+            input2.attr('max', rollbackSum);
+            input2.attr('min', 0);
             break;
         case "Head-edit":
             fillOwnerEditForm();

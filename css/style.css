@@ -649,6 +649,9 @@ a[disabled] {
     #logout p {
         margin-right: 8px;
     }
+    .account-name-menu-btn-box i {
+        margin-left: 0;
+    }
 }
 
 .blocker {

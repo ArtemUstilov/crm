@@ -417,7 +417,10 @@ $(document).ready(function () {
     $('#Rollback-Modal #clientField').change(function (e) {
         const optionSelected = $("option:selected", this);
         const sum = optionSelected.attr('sum');
-        $('#payField').val(sum);
+        const input = $('#payField');
+        input.val(sum);
+        input.attr('max', sum);
+        input.attr('min', 0);
     });
 
 
@@ -466,7 +469,10 @@ $(document).ready(function () {
     $('#Debt-Modal #debtorField').change(function (e) {
         const optionSelected = $("option:selected", this);
         const sum = optionSelected.attr('sum');
-        $('#paybackField').val(sum);
+        const input = $('#paybackField');
+        input.val(sum);
+        input.attr('max', sum);
+        input.attr('min', 0);
     });
 
     function paybackDebt() {
