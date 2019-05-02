@@ -8,7 +8,6 @@ if (isset($_POST['client']) &&
 
     include_once("../../db.php");
     include_once("../../funcs.php");
-    include_once "../../dev/ChromePhp.php";
     $sum_vg = clean($_POST['sum_vg']);
     $vg = clean($_POST['vg']);
     $rollback_1 = $_POST['rollback_1'] ? clean($_POST['rollback_1']) : 0;
@@ -88,6 +87,27 @@ if (isset($_POST['client']) &&
                              SET `money` = `money` + $money_to_add
                              WHERE `user_id` = '$user_id'");
                 $_SESSION['money'] += $money_to_add;
+            }
+
+            $vg_url = mysqli_fetch_assoc($connection->query("
+                SELECT api_url_regexp
+                FROM virtualgood
+                WHERE vg_id = '$vg'
+            "))['api_url_regexp'];
+            $client_login = mysqli_fetch_assoc($connection->query("
+                SELECT byname
+                FROM clients
+                WHERE client_id = '$client'
+            "))['api_url_regexp'];
+            //"virtualGoodsSiteName.com/api/?key=4838327498273wdjf8743h73&type=transfer&user=%UserName%&Summ=%Summ%" - test link FAIL
+            //'http://nit.tron.net.ua/api/category/list' - test link SUCCESS
+            $vg_url = str_replace("%UserName%", $client_login, $vg_url);
+            $vg_url = str_replace("%Summ%", $sum_vg, $vg_url);
+            $result = file_get_contents($vg_url);
+            if($result === FALSE) {
+                $response['url'] = $vg_url;
+                $response['sent'] = false;
+                echo $response;
             }
             echo "success";
             return false;
