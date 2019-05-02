@@ -30,7 +30,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
             `description` = '$description'
         WHERE `client_id` = '$edit_client_id'");
         if ($res) {
-            echo "success";
+            echo "edit-success";
             return false;
         } else {
             echo "failed";

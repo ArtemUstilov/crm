@@ -106,7 +106,7 @@ function fillOrderEditForm(target) {
             if (res['shares'])
                 res['shares'].forEach((el => {
                     $('#edit-owners-list-visible').append(
-                        "<p>" +
+                        "<p class='edit-owner-percent-input-box'>" +
                         `${el['owner_name']}` +
                         "<input class='edit-owner-percent-input' type='number' " +
                         `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
@@ -116,7 +116,7 @@ function fillOrderEditForm(target) {
             if (res['other_owners'])
                 res['other_owners'].forEach((el => {
                     $('#edit-owners-list-invisible').append(
-                        "<p>" +
+                        "<p class='edit-owner-percent-input-box'>" +
                         `${el['owner_name']}` +
                         "<input class='edit-owner-percent-input' type='number' " +
                         `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
@@ -300,3 +300,12 @@ function createClick(target) {
     linkEvent.initEvent('click', true, true);
     $(target)[0].dispatchEvent(linkEvent);
 }
+
+$('#Order-edit-Modal').on('click', '.close-modal', function () {
+
+    if ($('#Order-edit-Modal .edit-owners-list-invisible').children() ||
+        $('#Order-edit-Modal .edit-owners-list-visible').children()) {
+        alert("TRUE");
+        $('#Order-edit-Modal .edit-owner-percent-input-box ').remove();
+    }
+})

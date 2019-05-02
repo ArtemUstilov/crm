@@ -269,9 +269,18 @@ function createAlertTable(alertType, text) {
         case "success":
             $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
             $('.custom-alert').addClass('bg-green');
-            let linkEvent = document.createEvent('MouseEvents');
-            linkEvent.initEvent('click', true, true);
-            $('.close-modal')[0].dispatchEvent(linkEvent);
+            createClick('.close-modal');
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
+            break;
+        case "edit-success":
+            $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
+            $('.custom-alert').addClass('bg-green');
+            createClick('.close-modal');
+            setTimeout(function () {
+                location.reload();
+            }, 1500);
             break;
         case "failed":
             $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');

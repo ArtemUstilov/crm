@@ -11,7 +11,7 @@ if (isset($_POST['name'])) {
         $res = $connection->
         query("UPDATE branch SET branch_name='$name' WHERE branch_id='$branch_id'");
         if ($res) {
-            echo "success";
+            echo "edit-success";
             return false;
         } else {
             echo "failed";
