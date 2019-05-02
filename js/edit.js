@@ -45,7 +45,7 @@ $('tr').on('click', (e) => {
 
 });
 
-function fillOrderAdditionalInfo(target){
+function fillOrderAdditionalInfo(target) {
     $(".spinner").show();
     let order_id = target.attr('itemid');
     $.ajax({
@@ -61,14 +61,14 @@ function fillOrderAdditionalInfo(target){
             $('#info-order-form .modal-title').text(`Информация про продажу № ${order_id}`).attr('order-id', res['id']);
             let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
             const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%, ${res[0]["rollback_2"]}%)</p>`;
-            if(res[0]["callmaster"])
+            if (res[0]["callmaster"])
                 owners += callmaster;
             $('#info-order-form .text').html(owners);
         },
         error: function () {
             $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
         },
-        complete: function(){
+        complete: function () {
             $(".spinner").fadeOut('fast');
             createClick('[href="#Order-info-modal"]');
         }
@@ -89,37 +89,41 @@ function fillOrderEditForm(target) {
         success: function (res) {
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
+            $('#edit-order-form #editClientField option').each(function(){
+               if(!res['clients'].find(t => t.client_id === this.value)){
+                   $(this).hide();
+               }
+            });
             $('#edit-order-form #editVgField').val(res['vg_id']);
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
             if (res['callmaster'])
                 $('#edit-order-form #editCallmasterField').val(res['callmaster']);
             $('#edit-order-form #editDebtClField').val(res['debt']);
-            console.log(res['out']);
             $('#edit-order-form #editOutField').val(res['out']);
             $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
             $('#edit-order-form #editRollback2Field').val(res['rollback_2']);
             $('#edit-order-form #editObtainingField').val(res['method']);
-            if(res['shares'])
-            res['shares'].forEach((el => {
-                $('#edit-owners-list-visible').append(
-                    "<p>" +
-                    `${el['owner_name']}` +
-                    "<input class='edit-owner-percent-input' type='number' " +
-                    `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
-                    `value=${el['percent']}> ` +
-                    "</p>");
-            }))
-            if(res['other_owners'])
-            res['other_owners'].forEach((el => {
-                $('#edit-owners-list-invisible').append(
-                    "<p>" +
-                    `${el['owner_name']}` +
-                    "<input class='edit-owner-percent-input' type='number' " +
-                    `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
-                    " value='0'> " +
-                    "</p>");
-            }))
-            
+            if (res['shares'])
+                res['shares'].forEach((el => {
+                    $('#edit-owners-list-visible').append(
+                        "<p>" +
+                        `${el['owner_name']}` +
+                        "<input class='edit-owner-percent-input' type='number' " +
+                        `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
+                        `value=${el['percent']}> ` +
+                        "</p>");
+                }))
+            if (res['other_owners'])
+                res['other_owners'].forEach((el => {
+                    $('#edit-owners-list-invisible').append(
+                        "<p>" +
+                        `${el['owner_name']}` +
+                        "<input class='edit-owner-percent-input' type='number' " +
+                        `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
+                        " value='0'> " +
+                        "</p>");
+                }))
+
             $(".spinner").fadeOut('fast');
             createClick('[href="#Order-edit-Modal"]');
 

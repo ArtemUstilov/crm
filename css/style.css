@@ -208,7 +208,7 @@ h2 {
     margin-left: 15px;
 }
 
-.fa-coins, .fa-building, .fa-edit, .fa-user {
+.fa-coins, .fa-building, .fa-edit, .fa-user, .fa-user-cog, .fa-user-shield {
     margin-right: 12px;
 }
 
@@ -596,7 +596,7 @@ a[disabled] {
 
 
 @media (max-width: 512px) {
-    .fa-coins, .fa-building, .fa-edit, .fa-user {
+    .fa-coins, .fa-building, .fa-edit, .fa-user, .fa-user-shield, .fa-user-cog {
         font-size: 1.2em !important;
     }
 
