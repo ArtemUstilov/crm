@@ -30,10 +30,29 @@ if (isset($_POST['order_id'])) {
                              FROM orders O INNER JOIN users U ON U.user_id = O.user_id
                              WHERE O.order_id = '$order_id')
             "));
+    $possible_client_data = mysqliToArray($connection->query("
+       SELECT client_id 
+        FROM clients
+        WHERE client_id IN (
+            SELECT client_id
+            FROM orders
+            WHERE user_id IN(
+                SELECT user_id
+                FROM users
+                WHERE branch_id IN (
+                	SELECT branch_id FROM users U
+                    INNER JOIN orders O ON O.user_id = U.user_id
+                    WHERE order_id = 112
+                )
+            )
+        )
+    "));
     if($shares_data)
     $order_data['shares'] = $shares_data;
     if($other_owners_data)
     $order_data['other_owners'] = $other_owners_data;
+    $order_data['clients'] = $possible_client_data;
+
     if ($order_data) {
         echo json_encode($order_data);
         return false;

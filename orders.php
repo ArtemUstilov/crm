@@ -62,10 +62,8 @@ $vgs = $connection -> query('
 SELECT * FROM virtualgood
 ');
 
-
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;
-
 
 
 echo template(display_data($info, "Order","Продажи", $more_data));

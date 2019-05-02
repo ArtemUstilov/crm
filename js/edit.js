@@ -89,6 +89,11 @@ function fillOrderEditForm(target) {
         success: function (res) {
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
+            $('#edit-order-form #editClientField option').each(function(){
+               if(!res['clients'].find(t => t.client_id === this.value)){
+                   $(this).hide();
+               }
+            });
             $('#edit-order-form #editVgField').val(res['vg_id']);
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
             if (res['callmaster'])

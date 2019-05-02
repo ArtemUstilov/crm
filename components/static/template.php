@@ -2,6 +2,17 @@
 include_once './components/static/menu.php';
 function template($body)
 {
+    $userIcon = '';
+    switch($_SESSION['role']){
+        case 'admin':
+            $userIcon = 'user-shield';
+            break;
+        case 'moder':
+            $userIcon = 'user-cog';
+            break;
+        default:
+            $userIcon = 'user';
+    }
     return (
         '<html>
 <head>
@@ -42,7 +53,7 @@ function template($body)
 <p class="menu-n" class="money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div id="logout" class="account-name-menu-btn-box">
-<i class="fas fa-user fa-2x"></i>
+<i class="fas fa-'.$userIcon.' fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
 <a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>

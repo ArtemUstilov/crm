@@ -25,7 +25,7 @@ if (isset($_POST['order_id']) &&
     $obtain = clean($_POST['obtain']);
     $rollback_sum = $sum_vg / 100 * ($rollback_1 + $rollback_2);
     $sum_currency = ($sum_vg * $out_percent) / 100;
-    $shares = clean($_POST['shares']);
+    $shares = $_POST['shares'];
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
@@ -36,9 +36,40 @@ if (isset($_POST['order_id']) &&
                      WHERE order_id ='$order_id'"));
 
         $old_shares_data = mysqliToArray($connection->
-        query("SELECT *
+        query("SELECT owner_id, share_percent
                      FROM shares
                      WHERE order_id ='$order_id'"));
+        $sharesChanged = false;
+        if(count($shares) !== count($old_shares_data))
+            $sharesChanged = true;
+        else
+            foreach ($shares as $key => $value) {
+               if($value['value'] !== $old_shares_data[$key]['share_percent'] ||
+                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']){
+                   $sharesChanged = true;
+                   break;
+               }
+            }
+        if($sharesChanged){
+            mysqli_fetch_assoc($connection->
+            query("DELETE FROM shares
+                     WHERE order_id ='$order_id'"));
+            $in_percent = mysqli_fetch_assoc($connection->query("
+            SELECT in_percent
+            FROM virtualgood
+            WHERE vg_id = '$vg_id'
+            "))['in_percent'];
+
+            foreach ($shares as $key => $value) {
+                $curr_owner_id = $value['owner_id'];
+                $share_percent = $value['value'];
+                $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($share_percent / 100));
+                $add_share = $connection->
+                query("INSERT INTO `shares`
+                (`order_id`, `owner_id`, `sum`, `share_percent`) VALUES
+                ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
+            }
+        }
 
         if ($order_data['client_id'] != $client_id) {
             $old_client = $order_data['client_id'];
