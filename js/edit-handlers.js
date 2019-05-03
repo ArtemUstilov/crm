@@ -261,7 +261,6 @@ function createAlertTable(alertType, text) {
     if ($('.custom-alert').hasClass('custom-alert--active'))
         $('.custom-alert').removeClass('custom-alert--active');
     if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
-    console.log(alertType);
     switch (alertType) {
         case "exists":
             $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);
