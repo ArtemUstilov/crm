@@ -6,18 +6,37 @@ include_once './db.php';
 $table = '';
 $role = $_SESSION['role'];
 $branch_id = $_SESSION['branch_id'];
+
+$averageOutgo = mysqli_fetch_array($connection->query("
+SELECT (SUM(`sum`) / (SELECT COUNT(*)
+                      FROM owners
+                      WHERE branch_id = '$branch_id' )
+       ) AS average_outgo
+FROM outgo
+WHERE user_id IN (SELECT user_id
+                  FROM users
+                  WHERE user_id = '$branch_id') 
+AND `owner_id` IS NULL
+"))['average_outgo'];
+
 $headSumsRaw = $connection->query('
-SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", IFNULL(SUM(S.sum),0) AS сумма
-FROM shares S
+SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", ((IFNULL(SUM(S.sum),0) - IFNULL( T.outgo_sum,0)) - "' . $averageOutgo . '") AS прибыль 
+FROM shares S 
 RIGHT OUTER JOIN owners O ON O.owner_id = S.owner_id 
-WHERE O.branch_id IN (SELECT branch_id FROM users U WHERE U.user_id = ' . $_SESSION["id"] . ')
+LEFT OUTER JOIN (SELECT SUM(sum) AS outgo_sum, owner_id
+                 FROM outgo
+                 GROUP BY owner_id) T 
+ON O.owner_id = T.owner_id 
+WHERE O.branch_id = "' . $branch_id . '"
 GROUP BY O.owner_id 
-ORDER BY IFNULL(SUM(S.sum),0) desc
+ORDER BY (IFNULL(SUM(S.sum),0) - T.outgo_sum) desc
 ');
-$branches = $connection->query('
+
+
+$branches = $connection->query("
 SELECT branch_id AS id, branch_name
 FROM branch
-');
+");
 $clients = $connection->query('
 SELECT *
 FROM clients
@@ -27,6 +46,7 @@ $data['clients'] = $clients;
 $table .= display_data($headSumsRaw, 'Head', "Владельцы", $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
+
 
 switch ($role) {
     case 'moder':

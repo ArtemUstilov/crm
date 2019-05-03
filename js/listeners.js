@@ -80,7 +80,9 @@ $(document).ready(function () {
                             setTimeout
                         }, 1000);
                         break;
-                    default:
+                    case "inactive":
+                        $('#user-inactive-modal').modal();
+                        break;
 
                 }
 
@@ -256,3 +258,22 @@ $(document).ready(function () {
         filterIcons();
     }
 });
+
+function checkIfActive() {
+    $.ajax({
+        url: "../components/auth/activityCheck.php",
+        type: "POST",
+        data: "req=ok",
+        cache: false,
+        success: function (res) {
+            if(res=="inactive") {
+                window.location.href = '../index.php';
+            }
+        },
+        error: function () {
+
+        }
+    });
+}
+
+setInterval(checkIfActive, 5000);
