@@ -30,8 +30,7 @@ if (isset($_POST['client']) &&
         FROM users 
         WHERE user_id='$user_id'
     "));
-    if ($user_data['role'] == 'admin' || $user_data['role'] == 'sub_admin' || $user_data['role'] == 'agent'
-        || $user_data['role'] == 'moder') {
+    if (heCan($user_data['role'], 1)) {
         if($callmaster )
         $add_order = $connection->
         query("INSERT INTO `orders`

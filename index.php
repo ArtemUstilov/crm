@@ -4,7 +4,6 @@ if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
 $table = '';
-$role = $_SESSION['role'];
 $branch_id = $_SESSION['branch_id'];
 $headSumsRaw = $connection->query('
 SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", IFNULL(SUM(S.sum),0) AS сумма
@@ -30,8 +29,8 @@ $table .= display_data($headSumsRaw, $options, $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
 
-switch ($role) {
-    case 'moder':
+switch (accessLevel()) {
+    case 2:
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C
@@ -99,7 +98,7 @@ WHERE Y.client_id IN(
 )
 ');
         break;
-    case 'admin':
+    case 3:
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, client_id AS id
 FROM clients C
@@ -131,7 +130,7 @@ FROM clients C
 WHERE rollback_sum > 0
 ');
         break;
-    default:
+    case 1:
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C

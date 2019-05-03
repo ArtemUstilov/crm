@@ -114,9 +114,10 @@ function chooseAddModal($name, $data, $more_data = NULL)
     }
 }
 
-function accessLevel()
+function accessLevel($role = false)
 {
-    switch ($_SESSION['role']) {
+    $r = $role ? $role : $_SESSION['role'];
+    switch ($r) {
         case 'agent':
             return 1;
         case 'moder':
@@ -130,7 +131,10 @@ function iCan($actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel();
 }
-
+function heCan($role, $actionLvl)
+{
+    return !is_null($actionLvl) && $actionLvl <= accessLevel($role);
+}
 
 
 

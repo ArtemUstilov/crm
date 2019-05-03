@@ -1,14 +1,14 @@
 <?php
 function menu()
 {
+    include_once './funcs.php';
     $curPage = substr($_SERVER['REQUEST_URI'], 1, -4);
-    $advanced = $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moder';
     return ('<div id="menu">
     <ul>
     <li>
     <a href="../../" class=' . (!$curPage ? '"active" disabled' : '') . '>Главная</a></li>
         <li><a href="../../clients.php" class=' . ($curPage === 'clients' ? '"active" disabled' : '') . '>Клиенты</a></li>
-        '.($advanced ? '
+        '.(iCan(2) ? '
           <li><a href="../../owners.php" class=' . ($curPage === 'owners' ? '"active" disabled' : '') . '>Владельцы</a></li>
           <li><a href="../../users.php" class=' . ($curPage === 'users' ? '"active" disabled' : '') . '>Сотрудники</a></li>
         ' : '').'

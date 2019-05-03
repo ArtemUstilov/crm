@@ -25,7 +25,7 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
         $_SESSION['login'] = $login;
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
+    if (iCan(2)) {
         $res = $connection->
         query("
         UPDATE `users` 

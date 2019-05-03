@@ -17,7 +17,7 @@ $output = '
 </div>
 ';
     session_start();
-    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder')
+    if (iCan(2))
         $output .= '
 <div id="Branch-edit-Modal" class="modal" action="" role="form">
     <form id="edit-branch-form">

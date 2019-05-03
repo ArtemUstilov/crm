@@ -19,7 +19,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['branch'
         echo "exists";
         return false;
     }
-    if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
+    if (heCan($user_data['role'], 2)) {
         $res = $connection->
         query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`, `money`) VALUES('$login','$password','$first_name','$last_name','$role','$branch','$money') ");
         if ($res) {

@@ -44,7 +44,7 @@ function userAddModal($data, $more_data)
   </form>
 </div>';
     session_start();
-    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder') {
+    if (iCan(2)) {
         $output .= '
 <div id="User-edit-Modal" class="modal" action="" role="form">
 <form id="edit-user-form">
