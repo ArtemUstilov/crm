@@ -13,9 +13,13 @@ FROM clients
 ');
 $data['branches'] = $branches;
 $data['clients'] = $clients;
+$options['type'] = 'Head';
+$options['text'] = 'Владельцы';
+$options['btn-text'] = 'Добавить';
+$options['btn'] = 2;
 echo template(display_data($connection -> query('
 SELECT concat(O.last_name, " ", O.first_name) AS  Имя, branch_name AS предприятие
 FROM owners O
 INNER JOIN branch B ON B.branch_id = O.branch_id
-'), "Head","Владельцы", $data));
+'), $options, $data));
 

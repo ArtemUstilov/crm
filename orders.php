@@ -10,7 +10,7 @@ $branch_id = $_SESSION['branch_id'];
 switch ($_SESSION['role']) {
     case "admin":
         $info = $connection -> query('
-SELECT O.order_id AS id, concat(U.last_name, " ", U.first_name) AS агент, B.branch_name AS отдел, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
+SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, " ", U.first_name) AS агент, B.branch_name AS отдел, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS "кол-во", O.real_out_percent AS "%", 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата
@@ -24,7 +24,7 @@ ORDER BY `date` DESC
         break;
     case "moder":
         $info = $connection -> query("
-SELECT O.order_id AS id, concat(U.last_name, ' ', U.first_name) AS агент, concat(C.last_name, ' ', C.first_name) AS клиент, byname AS логин,
+SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, ' ', U.first_name) AS агент, concat(C.last_name, ' ', C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS 'кол-во', O.real_out_percent AS '%', 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата
@@ -38,7 +38,7 @@ ORDER BY `date` DESC
         break;
     case "agent":
         $info = $connection -> query('
-SELECT O.order_id AS id, concat(U.last_name, " ", U.first_name) AS агент, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
+SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, " ", U.first_name) AS агент, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS "кол-во", O.real_out_percent AS "%", 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата
@@ -65,7 +65,12 @@ SELECT * FROM virtualgood
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;
 
-
-echo template(display_data($info, "Order","Продажи", $more_data));
+$options['type'] = 'Order';
+$options['text'] = 'Продажи';
+$options['info'] = true;
+$options['btn'] = 1;
+$options['btn-text'] = 'Добавить';
+$options['edit'] = 2;
+echo template(display_data($info, $options, $more_data));
 ?>
 

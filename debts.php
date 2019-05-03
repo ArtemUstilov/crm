@@ -46,7 +46,11 @@ ORDER BY `date` DESC
         exit();
         break;
 }
-echo template(display_data($info, "Debt","История погашений долгов", $connection -> query('
+$options['type'] = 'Debt';
+$options['text'] = 'История погашений долгов';
+$options['btn-text'] = 'Погасить';
+$options['btn'] = 1;
+echo template(display_data($info, $options, $connection -> query('
 SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
 
 byname AS login, debt

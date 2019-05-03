@@ -33,8 +33,12 @@ WHERE B.branch_id = '$branch_id' AND role!= 'admin'
         exit();
         break;
 }
-
-echo template(display_data($res, "User", "Сотрудники", $connection->query('
+$options['type'] = 'User';
+$options['text'] = 'Сотрудники';
+$options['edit'] = 2;
+$options['btn-text'] = 'Добавить';
+$options['btn'] = 2;
+echo template(display_data($res, $options, $connection->query('
 SELECT * FROM branch
 ')));
 ?>

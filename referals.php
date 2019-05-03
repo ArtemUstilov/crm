@@ -46,7 +46,11 @@ ORDER BY `date` DESC
         exit();
         break;
 }
-echo template(display_data($info, "Rollback","История выплат рефералов", $connection -> query('
+$options['type'] = 'Rollback';
+$options['text'] = "История выплат рефералов";
+$options['btn'] = 1;
+$options['btn-text'] = 'Выплатить';
+echo template(display_data($info, $options, $connection -> query('
 SELECT concat(last_name, " ", first_name) AS client_name, 
 byname AS login, rollback_sum
 FROM clients

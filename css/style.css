@@ -599,7 +599,9 @@ a[disabled] {
     font-size: 25px;
 }
 
-
+.fas{
+    float: left;
+}
 @media (max-width: 512px) {
     .fa-coins, .fa-building, .fa-edit, .fa-user, .fa-user-shield, .fa-user-cog {
         font-size: 1.2em !important;

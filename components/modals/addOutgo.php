@@ -18,6 +18,9 @@ function outgoModal($data, $more_data)
     $output .= '
 </select>
 </p>
+ <p>
+  <textarea id="commentField" rows="3"  placeholder="Комментарий" type="text" name="description"></textarea>
+  </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
   </form>

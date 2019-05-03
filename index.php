@@ -24,7 +24,9 @@ FROM clients
 ');
 $data['branches'] = $branches;
 $data['clients'] = $clients;
-$table .= display_data($headSumsRaw, 'Head', "Владельцы", $data);
+$options['type'] = 'Head';
+$options['text'] = 'Владельцы';
+$table .= display_data($headSumsRaw, $options, $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
 
@@ -178,13 +180,25 @@ WHERE Y.client_id IN(
         break;
 }
 
-$table .= display_data($debtorsData, "Debtor", "Должники", $debtorsList);
+$options['type'] = 'Debt';
+$options['text'] = 'Должники';
+$options['coins'] = true;
+$options['btn-text'] = 'Погасить';
+$options['btn'] = 1;
+$options['modal'] = 'Debt-Modal';
+$table .= display_data($debtorsData, $options, $debtorsList);
 
 $sumDebts = $sumDebtsRaw ? mysqli_fetch_assoc($sumDebtsRaw) : null;
 
 if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
 
-$table .= display_data($rollbackData, "RollbackMain", "Ожидают откаты", $rollbackList);
+$options['type'] = 'Rollback';
+$options['text'] = 'Ожидают откаты';
+$options['coins'] = true;
+$options['btn-text'] = 'Выплатить';
+$options['btn'] = 1;
+$options['modal'] = 'Rollback-Modal';
+$table .= display_data($rollbackData, $options, $rollbackList);
 
 $sumDebts = $rollbackSum ? mysqli_fetch_assoc($rollbackSum) : null;
 if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
