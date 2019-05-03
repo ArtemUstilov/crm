@@ -5,16 +5,24 @@ function display_data($data, $options, $addition_data = NULL)
     $data = mysqliToArray($data);
     return
         ("
-        <div class='table-menu'>
+        <div class='table-menu' ".(iCan($options['range']) ? 'style = "justify-content: left;"' :'').">
             <h2>" . $options['text'] . "</h2>"
             . (iCan($options['btn']) ? "
             <p><a 
                     id='add-btn' 
                     href=\"#" . $options['type'] . "-Modal\" 
                     rel=\"modal:open\">" . $options['btn-text'] . "
-            </a></p>" : '') . "
+            </a></p>
+            " : '') .
+            (iCan($options['range']) ? "
+            <div id='reportrange'>
+    <i class='fa fa-calendar'></i>&nbsp;
+    <span></span> <i class='fa fa-caret-down'></i>
+</div>
+            " : '') .
+            "
         </div>
-        <div class='table-wrapper' id='table-wrapper'>
+        <div class='table-wrapper ".$options['type']."' id='table-wrapper'>
             <a 
                     class='display-none' 
                     href=\"#" . $options['type'] . "-edit-Modal\" 

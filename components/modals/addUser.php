@@ -33,7 +33,7 @@ function userAddModal($data, $more_data)
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
    <option value="moder">Модератор</option>
-    <option value="admin">Администратор</option>
+     '.(iCan(3) ? '<option value="admin">Администратор</option>' : '').'
     </select>
   </p>
   <p>
@@ -85,7 +85,7 @@ function userAddModal($data, $more_data)
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
    <option value="moder">Модератор</option>
-    <option value="admin">Администратор</option>
+    '.(iCan(3) ? '<option value="admin">Администратор</option>' : '').'
     </select>
   </p>';
         $output .= '

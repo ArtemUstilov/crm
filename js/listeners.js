@@ -279,6 +279,87 @@ $(document).ready(function () {
             }
         })
     });
+
+    (function range() {
+        const start = moment().day("Sunday");
+        const end = moment();
+
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
+            $('.spinner').show();
+            $.ajax({
+                url: "../components/selectors/headSums.php",
+                type: "POST",
+                data: {start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD')},
+                cache: false,
+                success: function (res) {
+                    res = JSON.parse(res);
+                    res.forEach(r => {
+                        const cell = $('.Head [itemid*=' + r.owner_id + '] .1-f');
+                        cell.attr('title', r.sum || 0);
+                        cell.text(r.sum || 0);
+                    })
+                },
+                error: function () {
+                    createAlertTable("connectionError", "Расход");
+                },
+                complete: function () {
+                    $('.spinner').fadeOut('fast');
+                }
+            });
+        }
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            locale: {
+                "format": "MM/DD/YYYY",
+                "separator": " - ",
+                "applyLabel": "Применить",
+                "cancelLabel": "Отмена",
+                "fromLabel": "От",
+                "toLabel": "До",
+                "customRangeLabel": "Вручную",
+                "weekLabel": "W",
+                "daysOfWeek": [
+                    "Вс",
+                    "Пн",
+                    "Вт",
+                    "Ср",
+                    "Чт",
+                    "Пт",
+                    "Сб"
+                ],
+                "monthNames": [
+                    "Янв",
+                    "Фев",
+                    "Мар",
+                    "Апр",
+                    "Май",
+                    "Июн",
+                    "Июл",
+                    "Авг",
+                    "Сен",
+                    "Окт",
+                    "Ноя",
+                    "Дек"
+                ],
+                "firstDay": 1
+            },
+            ranges: {
+                'Сегодня': [moment(), moment()],
+                'Вчера': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Неделя': [moment().day("Sunday"), moment()],
+                'Последние 30 дней': [moment().subtract(29, 'days'), moment()],
+                'Этот месяц': [moment().startOf('month'), moment().endOf('month')],
+                'Прошлый месяц': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'Все время': [moment('1970-01-01', 'YYYY-MM-DD'), moment('2100-01-01', 'YYYY-MM-DD')]
+            }
+        }, cb);
+
+        cb(start, end);
+    })();
+    checkIfActive();
 });
 
 function checkIfActive() {
@@ -288,14 +369,15 @@ function checkIfActive() {
         data: "req=ok",
         cache: false,
         success: function (res) {
-            if (res == "inactive") {
+            if (res === "inactive") {
                 window.location.href = '../index.php';
+            } else {
+                setTimeout(checkIfActive, 5000);
             }
         },
         error: function () {
 
         }
     });
-}
 
-setInterval(checkIfActive, 5000);
+};

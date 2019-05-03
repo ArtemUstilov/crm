@@ -45,10 +45,11 @@ $data['branches'] = $branches;
 $data['clients'] = $clients;
 $options['type'] = 'Head';
 $options['text'] = 'Владельцы';
+$options['range'] = 1;
 $table .= display_data($headSumsRaw, $options, $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
-
+$options = [];
 
 switch (accessLevel()) {
     case 2:
