@@ -15,7 +15,7 @@ SELECT (SUM(`sum`) / (SELECT COUNT(*)
 FROM outgo
 WHERE user_id IN (SELECT user_id
                   FROM users
-                  WHERE user_id = '$user_id') 
+                  WHERE branch_id = '$branch_id') 
 AND `owner_id` IS NULL
 "))['average_outgo'];
 
