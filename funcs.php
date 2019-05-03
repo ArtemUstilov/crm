@@ -53,7 +53,20 @@ function makeTable($data, $options)
                 $actions .= $options['info'] ? '<i class="fas fa-info-circle" modal="info"></i>' : '';
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
-            $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
+            if($col == 'статус'){
+                $output .= '<td class=' . $index . '-f title="' . $val . '">
+                <div class="button b2" id="button-10">
+                                     <div class="layer"></div>
+
+                    <input type="checkbox" class="checkbox" '.($val == 0 ? 'checked' : '').'>
+                                        <div class="knobs">
+
+                    </div>
+                    </div>
+            </td>';
+            }else{
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
+            }
             $index++;
         }
         $output .= '</tr>';
