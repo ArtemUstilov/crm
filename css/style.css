@@ -240,7 +240,8 @@ tr .fas:hover {
     font-size: 15px;
     height: 35px;
 }
-#add-btn, .modal-submit, .login-form-submit{
+
+#add-btn, .modal-submit, .login-form-submit {
     display: block;
     margin: 10px 30px 10px 10px;
 
@@ -407,7 +408,7 @@ h1 {
     height: 100%;
 }
 
-@media (min-width: 512px){
+@media (min-width: 512px) {
     #menu ul li:last-child {
         position: absolute;
         bottom: 0;
@@ -498,14 +499,17 @@ a[disabled] {
     margin-top: 5px;
     margin-left: 20px;
 }
-#reportrange *{
+
+#reportrange * {
     color: #33373C;
 }
+
 .daterangepicker .ranges li.active,
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
     background-color: #5491F5 !important;
 }
+
 #header-empty {
     display: none;
     background-color: white;
@@ -666,18 +670,23 @@ a[disabled] {
     #menu.menu--open {
         width: 100vw;
     }
+
     #menu-invisible.menu--open {
         width: 100vw;
     }
+
     .main-header p {
         font-size: 12px;
     }
-    #menu ul li{
+
+    #menu ul li {
         font-size: 12px;
     }
-    #menu ul li a{
+
+    #menu ul li a {
         padding: 7px 8px;
     }
+
     .account-name-menu-btn-box {
         padding: 0 5px;
     }
@@ -820,7 +829,6 @@ a[disabled] {
 }
 
 #button-10 .knobs:before, #button-10 .knobs:after {
-    position: absolute;
     top: 4px;
     width: 14px;
     height: 5px;
@@ -844,20 +852,19 @@ a[disabled] {
     background-color: firebrick;
 }
 
-.knobs, .layer {
-    position: absolute;
+.knobs{
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
 }
 
+
 .button.b2 {
     border-radius: 2px;
     display: block;
     margin: 0 auto;
     z-index: 0;
-    position: relative;
     top: 50%;
     width: 50px;
     height: 18px;
@@ -865,13 +872,13 @@ a[disabled] {
 }
 
 .checkbox {
-    position: relative;
+    position: absolute;
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     opacity: 0;
-    z-index: 0;
+    z-index: 1;
     cursor: pointer;
 }
 
@@ -880,3 +887,4 @@ a[disabled] {
     background-color: #eee;
     transition: 0.3s ease all;
 }
+
