@@ -229,7 +229,7 @@ tr .fas:hover {
 }
 
 
-#add-btn, .modal-submit, .login-form-submit {
+#add-btn, .modal-submit, .login-form-submit, .daterangepicker .drp-buttons .btn {
     background-color: #5491F5;
     outline: none;
     border: none;
@@ -239,12 +239,15 @@ tr .fas:hover {
     text-decoration: none;
     font-size: 15px;
     height: 35px;
-    margin: 10px 30px 10px 10px;
+}
+#add-btn, .modal-submit, .login-form-submit{
     display: block;
+    margin: 10px 30px 10px 10px;
+
 }
 
 
-#add-btn:hover, .modal-submit:hover, .login-form-submit:hover {
+#add-btn:hover, .modal-submit:hover, .login-form-submit:hover, .daterangepicker .drp-buttons .btn:hover {
     background: #1B4E9F;
 }
 
@@ -268,7 +271,7 @@ ol, ul {
     list-style: none;
 }
 
-table {
+.table {
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -303,7 +306,7 @@ h1 {
     height: 55px;
 }
 
-table {
+.table {
     font-size: 1.2em;
     -webkit-box-shadow: 2px 2px 3px -1px rgba(0, 0, 0, 0.35);
     background: #fff;
@@ -311,20 +314,20 @@ table {
     table-layout: fixed;
 }
 
-table thead {
+.table thead {
     cursor: pointer;
     background: #5491F5;
     z-index: 2;
 }
 
-table thead input {
+.table thead input {
     display: block;
     width: 100%;
     margin: 0 auto;
     max-width: 150px;
 }
 
-table thead tr th {
+.table thead tr th {
     font-weight: bold;
     padding: 12px 10px;
     padding-left: 20px;
@@ -336,7 +339,7 @@ table thead tr th {
     justify-content: center;
 }
 
-table thead tr th span {
+.table thead tr th span {
     margin-left: 5px;
 }
 
@@ -482,6 +485,24 @@ a[disabled] {
     z-index: 1000;
 }
 
+#reportrange {
+    background: #fff;
+    cursor: pointer;
+    padding: 5px 5px;
+    border: 1px solid #ccc;
+    width: 220px;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+#reportrange *{
+    color: #33373C;
+}
+.daterangepicker .ranges li.active,
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
+    background-color: #5491F5 !important;
+}
 #header-empty {
     display: none;
     background-color: white;
