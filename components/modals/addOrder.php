@@ -85,7 +85,8 @@ function orderAddModal($data, $more_data)
   <p>
   Клиент
 <select id="editClientField" data-validation="required">
-  <option value="" disabled selected>Выберите клиента</option>';
+  <option value="" disabled selected>Выберите клиента</option>
+  <option class="new-client-option" value="-1">Добавить нового</option>';
         foreach ($more_data['clients'] as $key => $var) {
             $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
         }

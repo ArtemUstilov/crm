@@ -293,12 +293,14 @@ $(document).ready(function () {
                 data: {start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD')},
                 cache: false,
                 success: function (res) {
-                    res = JSON.parse(res);
-                    res.forEach(r => {
-                        const cell = $('.Head [itemid*=' + r.owner_id + '] .1-f');
-                        cell.attr('title', r.sum || 0);
-                        cell.text(r.sum || 0);
-                    })
+                        res = JSON.parse(res);
+                        if(!res || !res.length) return;
+                        res.forEach(r => {
+                            const cell = $('.Head [itemid*=' + r.owner_id + '] .1-f');
+                            cell.attr('title', r.sum || 0);
+                            cell.text(r.sum || 0);
+                        })
+
                 },
                 error: function () {
                     createAlertTable("connectionError", "Расход");

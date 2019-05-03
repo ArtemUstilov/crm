@@ -40,6 +40,7 @@ function editOrder() {
     const shares = allShares.filter((el) => el.value > 0);
     const $this = $("#edit-order-form .modal-submit");
     $this.prop("disabled", true);
+    console.log(shares);
     $.ajax({
         url: "../components/edit-modal-response/editOrder.php",
         type: "POST",

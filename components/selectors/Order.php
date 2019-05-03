@@ -42,7 +42,7 @@ if (isset($_POST['order_id'])) {
                 WHERE branch_id IN (
                 	SELECT branch_id FROM users U
                     INNER JOIN orders O ON O.user_id = U.user_id
-                    WHERE order_id = 112
+                    WHERE order_id = '$order_id'
                 )
             )
         )
