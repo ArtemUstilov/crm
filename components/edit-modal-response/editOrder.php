@@ -36,17 +36,17 @@ if (isset($_POST['order_id']) &&
         query("SELECT owner_id, share_percent
                      FROM shares
                      WHERE order_id ='$order_id'"));
-        $sharesChanged = false;
-        if (count($shares) !== count($old_shares_data))
-            $sharesChanged = true;
-        else
-            foreach ($shares as $key => $value) {
-                if ($value['value'] !== $old_shares_data[$key]['share_percent'] ||
-                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']) {
-                    $sharesChanged = true;
-                    break;
-                }
-            }
+        $sharesChanged = true;
+//        if (count($shares) !== count($old_shares_data))
+//            $sharesChanged = true;
+//        else
+//            foreach ($shares as $key => $value) {
+//                if ($value['value'] !== $old_shares_data[$key]['share_percent'] ||
+//                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']) {
+//                    $sharesChanged = true;
+//                    break;
+//                }
+//            }
         if ($sharesChanged) {
             $connection->
             query("DELETE FROM shares
