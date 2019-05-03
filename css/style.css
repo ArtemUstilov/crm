@@ -407,10 +407,13 @@ h1 {
     height: 100%;
 }
 
-#menu ul li:last-child {
-    position: absolute;
-    bottom: 0;
+@media (min-width: 512px){
+    #menu ul li:last-child {
+        position: absolute;
+        bottom: 0;
+    }
 }
+
 
 #menu ul li {
     width: 100%;
@@ -663,15 +666,18 @@ a[disabled] {
     #menu.menu--open {
         width: 100vw;
     }
-
     #menu-invisible.menu--open {
         width: 100vw;
     }
-
     .main-header p {
         font-size: 12px;
     }
-
+    #menu ul li{
+        font-size: 12px;
+    }
+    #menu ul li a{
+        padding: 7px 8px;
+    }
     .account-name-menu-btn-box {
         padding: 0 5px;
     }

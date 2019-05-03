@@ -40,7 +40,6 @@ function editOrder() {
     const shares = allShares.filter((el) => el.value > 0);
     const $this = $("#edit-order-form .modal-submit");
     $this.prop("disabled", true);
-    console.log(shares);
     $.ajax({
         url: "../components/edit-modal-response/editOrder.php",
         type: "POST",
@@ -60,7 +59,6 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             createAlertTable(res, "Заказ");
         },
         error: function () {
@@ -95,7 +93,6 @@ function editUser() {
     let role = $("#edit-user-form #editRoleField").val();
     let id = $("#edit-user-form #edit-user-title").attr('user-id');
     const $this = $("#edit-user-form .modal-submit");
-    console.log('eee');
     $this.prop("disabled", true);
     $.ajax({
         url: "../components/edit-modal-response/editUser.php",
