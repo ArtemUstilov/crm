@@ -126,7 +126,6 @@ $(document).ready(function () {
         my_dragging.pageY0 = e.pageY;
         my_dragging.elem = this;
         my_dragging.offset0 = $(this).offset();
-        console.log();
 
         function handle_dragging(e) {
             const left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
@@ -219,7 +218,6 @@ $(document).ready(function () {
                     jo.hide();
                     maxcols.forEach(k => {
                         const data = _this.find(`#${k}-i`)[0] && _this.find(`#${k}-i`)[0].value;
-                        console.log(data);
                         if (!data || !data.length) return;
                         jo = jo.filter(function checkRows() {
                             return $(this).children(`.${k}-f`).first()[0].innerText.toUpperCase().includes(data.toUpperCase()) || $(this).prop('id') === 'spec';
@@ -281,6 +279,7 @@ $(document).ready(function () {
     });
 
     (function range() {
+        if(typeof moment !== "function") return;
         const start = moment().day("Sunday");
         const end = moment();
 

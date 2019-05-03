@@ -345,7 +345,6 @@ $(document).ready(function () {
         let descr = $("#add-outgo-form #commentField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
-        // console.log(sum)
         $.ajax({
             url: "../components/modal-response/addOutgo.php",
             type: "POST",

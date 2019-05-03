@@ -3,7 +3,6 @@ $('tr').on('click', (e) => {
     const mainParent = target.parent().parent();
     switch (target.attr('modal')) {
         case "#Debt-Modal":
-            console.log('debt modal');
             $('[href*="#Debt-Modal"]').first()[0].click();
             const debtorList = $('#debtorField');
             debtorList.val(target.parent().parent().attr('defaultval'));
@@ -64,7 +63,6 @@ function fillOrderAdditionalInfo(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
             let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
             const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%, ${res[0]["rollback_2"]}%)</p>`;
@@ -95,7 +93,6 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
@@ -212,12 +209,10 @@ function fillBranchEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('#edit-branch-form #edit-branch-title').text(`Изменить данные пользователя ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $(".spinner").fadeOut('fast');
             $('#Branch-edit-Modal').modal();
-
         },
         error: function () {
         },
