@@ -35,7 +35,7 @@
             </div>
     </form>
 </div>
-
+<div class="spinner"></div>
 <script src="js/listeners.js"></script>
 <div id="user-inactive-modal" class="modal">
     <h2>Пользователь деактивирован</h2>

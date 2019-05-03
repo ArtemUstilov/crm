@@ -46,6 +46,7 @@ $(document).ready(function () {
         })
     });
     $('#login-form').submit((event) => {
+        $(".spinner").show();
         event.preventDefault();
         if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
         let password = $("#passwordField").val();
@@ -62,6 +63,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                $(".spinner").fadeOut('fast');
                 switch (res) {
                     case "success":
                         window.location.href = '../index.php';
@@ -257,6 +259,26 @@ $(document).ready(function () {
         yFixedNoJquerry();
         filterIcons();
     }
+    $('.checkbox').click(function () {
+        $(".spinner").show();
+        let id = $(this).parent().parent().parent().attr('itemid');
+        $.ajax({
+            url: "../components/edit-modal-response/editActivity.php",
+            type: "POST",
+            data: {id},
+            cache: false,
+            success: function (res) {
+                if (res == "failed" || res == "empty")
+                    createAlertTable('failed', '');
+            },
+            error: function () {
+                createAlertTable('failed', '');
+            },
+            complete: function () {
+                $(".spinner").fadeOut('fast');
+            }
+        })
+    });
 });
 
 function checkIfActive() {
@@ -266,7 +288,7 @@ function checkIfActive() {
         data: "req=ok",
         cache: false,
         success: function (res) {
-            if(res=="inactive") {
+            if (res == "inactive") {
                 window.location.href = '../index.php';
             }
         },
