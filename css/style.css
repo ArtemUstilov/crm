@@ -701,6 +701,9 @@ a[disabled] {
     .account-name-menu-btn-box i {
         margin-left: 0;
     }
+    .table-wrapper{
+        overflow: visible;
+    }
 }
 
 .blocker {
