@@ -37,12 +37,12 @@ $branches = $connection->query("
 SELECT branch_id AS id, branch_name
 FROM branch
 ");
-$clients = $connection->query('
+$users = $connection->query('
 SELECT *
-FROM clients
+FROM users
 ');
 $data['branches'] = $branches;
-$data['clients'] = $clients;
+$data['users'] = $users;
 $options['type'] = 'Head';
 $options['text'] = 'Владельцы';
 $options['range'] = 1;

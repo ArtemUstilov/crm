@@ -8,8 +8,8 @@ function headAddModal($data)
             $i++;
         }
         $i = 0;
-        while ($new = $data['clients']->fetch_array()) {
-            $clients[$i] = $new;
+        while ($new = $data['users']->fetch_array()) {
+            $users[$i] = $new;
             $i++;
         }
     }
@@ -25,7 +25,7 @@ function headAddModal($data)
   <p>
   <select id="nameField" data-validation="required">
   <option value="" disabled selected>Выберите человека</option>';
-    if($clients) foreach ($clients as $key => $var) {
+    if($users) foreach ($users as $key => $var) {
         $output .= '<option value="' . $var['first_name']." ". $var['last_name'].'">' . $var['first_name']." ". $var['last_name'] . '</option>';
     }
     $output .= '
