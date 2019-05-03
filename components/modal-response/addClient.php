@@ -21,7 +21,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
         echo "exists";
         return false;
     }
-    if ($user_data && ($user_data['role'] == "admin" || $user_data['role'] == "moder" || $user_data['role'] == "agent")) {
+    if ($user_data && heCan($user_data['role'], 1)) {
         $res = $connection->
         query("
         INSERT INTO clients (last_name,first_name,byname,debt,rollback_sum,phone_number,email, description ) 

@@ -95,6 +95,7 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            console.log(res);
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {

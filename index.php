@@ -4,8 +4,8 @@ if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
 $table = '';
-$role = $_SESSION['role'];
 $branch_id = $_SESSION['branch_id'];
+$user_id = $_SESSION['id'];
 
 $averageOutgo = mysqli_fetch_array($connection->query("
 SELECT (SUM(`sum`) / (SELECT COUNT(*)
@@ -15,7 +15,7 @@ SELECT (SUM(`sum`) / (SELECT COUNT(*)
 FROM outgo
 WHERE user_id IN (SELECT user_id
                   FROM users
-                  WHERE user_id = '$branch_id') 
+                  WHERE user_id = '$user_id') 
 AND `owner_id` IS NULL
 "))['average_outgo'];
 
@@ -43,13 +43,16 @@ FROM clients
 ');
 $data['branches'] = $branches;
 $data['clients'] = $clients;
-$table .= display_data($headSumsRaw, 'Head', "Владельцы", $data);
+$options['type'] = 'Head';
+$options['text'] = 'Владельцы';
+$table .= display_data($headSumsRaw, $options, $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
 
 
-switch ($role) {
-    case 'moder':
+switch (accessLevel()) {
+    case 2:
+
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C
@@ -117,7 +120,7 @@ WHERE Y.client_id IN(
 )
 ');
         break;
-    case 'admin':
+    case 3:
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, client_id AS id
 FROM clients C
@@ -149,7 +152,7 @@ FROM clients C
 WHERE rollback_sum > 0
 ');
         break;
-    default:
+    case 1:
         $debtorsData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, debt AS долг, C.client_id AS id
 FROM clients C
@@ -198,13 +201,25 @@ WHERE Y.client_id IN(
         break;
 }
 
-$table .= display_data($debtorsData, "Debtor", "Должники", $debtorsList);
+$options['type'] = 'Debt';
+$options['text'] = 'Должники';
+$options['coins'] = true;
+$options['btn-text'] = 'Погасить';
+$options['btn'] = 1;
+$options['modal'] = 'Debt-Modal';
+$table .= display_data($debtorsData, $options, $debtorsList);
 
 $sumDebts = $sumDebtsRaw ? mysqli_fetch_assoc($sumDebtsRaw) : null;
 
 if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
 
-$table .= display_data($rollbackData, "RollbackMain", "Ожидают откаты", $rollbackList);
+$options['type'] = 'Rollback';
+$options['text'] = 'Ожидают откаты';
+$options['coins'] = true;
+$options['btn-text'] = 'Выплатить';
+$options['btn'] = 1;
+$options['modal'] = 'Rollback-Modal';
+$table .= display_data($rollbackData, $options, $rollbackList);
 
 $sumDebts = $rollbackSum ? mysqli_fetch_assoc($rollbackSum) : null;
 if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';

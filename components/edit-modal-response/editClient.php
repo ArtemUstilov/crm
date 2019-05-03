@@ -16,7 +16,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if ($user_data && ($user_data['role'] == "admin" || $user_data['role'] == "moder")) {
+    if ($user_data && (heCan($user_data['role'], 2))) {
         $res = $connection->
         query("
         UPDATE `clients` 

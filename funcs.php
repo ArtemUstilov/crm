@@ -1,100 +1,63 @@
 <?php
-function display_data($data, $type, $text, $addition_data = NULL)
+function display_data($data, $options, $addition_data = NULL)
 {
-    switch ($type) {
-        case"Debt":
-        case "Debtor":
-            $add_btn_text = "Погасить";
-            break;
-        case"Rollback":
-        case"RollbackMain":
-            $add_btn_text = "Выплатить";
-            break;
-        case"Order":
-            $add_btn_text = "Создать";
-            break;
-        default:
-            $add_btn_text = "Добавить";
-            break;
-    }
     session_start();
     $data = mysqliToArray($data);
-    $output = "<div class='table-menu'><h2>$text</h2>";
-    $class = $type == 'Debtor' ? 'Debt' : ($type == 'RollbackMain' ? 'Rollback' : $type);
-    if ($type == "User" || $type == "VG") {
-        if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'sub-admin' || $_SESSION['role'] == 'moder')
-            $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
-    } else {
-        $output .= "<p><a id='add-btn' href=\"#$class-Modal\" rel=\"modal:open\">$add_btn_text</a></p>";
-    }
-    $output .= "</div><div class='table-wrapper' id='table-wrapper'><a class='display-none' href=\"#$class-edit-Modal\" rel=\"modal:open\"></a>" . makeTable($data, $class, $type == 'Debtor' || $type == 'RollbackMain' ? "#$class-Modal" : false) . "</div>";
-    $output .= chooseAddModal($type, $data, $addition_data);
-    return $output;
+    return
+        ("
+        <div class='table-menu'>
+            <h2>" . $options['text'] . "</h2>"
+            . (iCan($options['btn']) ? "
+            <p><a 
+                    id='add-btn' 
+                    href=\"#" . $options['type'] . "-Modal\" 
+                    rel=\"modal:open\">" . $options['btn-text'] . "
+            </a></p>" : '') . "
+        </div>
+        <div class='table-wrapper' id='table-wrapper'>
+            <a 
+                    class='display-none' 
+                    href=\"#" . $options['type'] . "-edit-Modal\" 
+                    rel=\"modal:open\">
+            </a>
+            " . makeTable($data, $options) . "
+        </div>
+        " . chooseAddModal($options['type'], $data, $addition_data)
+        );
 }
 
-function makeTable($data, $type, $delLine = false)
+function makeTable($data, $options)
 {
-    $role = $_SESSION['role'];
-    $output = "<table class='table-container' class='table table-fixed'><thead id='table-head'>";
     if (!$data || count($data) === 0) {
-        $output .= '<h2>Пусто</h2>';
-    } else {
-        foreach ($data as $key => $var) {
-            $index = 0;
-            if ($key === 0) {
-                $output .= '<tr>';
-                foreach ($var as $col => $val) {
-                    if ($col == 'id' && $type != 'Order') continue;
-                    if ($col == 'id' && $type == 'Order') {
-                        $output .= "<th><div class='col-wrap'><p>номер заказа</p><span></span></div><input id=$index-i>
-</th>";
-                    } else {
-                        $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i>
-</th>";
-                    }
-
-                    $index++;
-                }
-                $index = 0;
-                $output .= '</tr></thead><div></div><tbody id="tbody">';
-                $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
-                foreach ($var as $col => $val) {
-                    if ($col == 'id' && $type != 'Order') continue;
-                    if ($col == 0 && $index == 0 && $delLine) {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $type == 'Order' && $role !== 'agent') {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
-                    } else
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
-                    $index++;
-                }
-                $output .= '</tr>';
-            } else {
-                $index = 0;
-                $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
-                foreach ($var as $col => $val) {
-                    if ($col == 'id' && $type != 'Order') continue;
-                    if ($col == 0 && $index == 0 && $delLine) {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-coins" modal="' . $delLine . '"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $type == 'Order' && $role !== 'agent') {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $type == 'Order') {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
-                        $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
-                    } else
-                        $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
-                    $index++;
-                }
-                $output .= '</tr>';
-            }
-        }
+        return '<h2>Пусто</h2>';
     }
-
+    $output = "<table class='table-container table table-fixed'>";
+    foreach ($data as $key => $var) {
+        $index = 0;
+        if ($key === 0) {
+            $output .= '<thead id="table-head"><tr>';
+            foreach ($var as $col => $val) {
+                if ($col == 'id') continue;
+                $output .= "<th><div class='col-wrap'><p>" . $col . "</p><span></span></div><input id=$index-i></th>";
+                $index++;
+            }
+            $output .= '</tr></thead><tbody id="tbody">';
+        }
+        $index = 0;
+        $output .= '<tr  defaultVal = "' . $var['Имя'] . '" itemId = "' . $var['id'] . '">';
+        foreach ($var as $col => $val) {
+            if ($col == 'id') continue;
+            $actions = '';
+            if ($index == 0) {
+                $actions .= $options['coins'] ? '<i class="fas fa-coins" modal="#' . $options['modal'] . '"></i>' : '';
+                $actions .= $options['info'] ? '<i class="fas fa-info-circle" modal="info"></i>' : '';
+                $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
+            }
+            $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
+            $index++;
+        }
+        $output .= '</tr>';
+    }
     $output .= '</tbody></table>';
     return $output;
 }
@@ -139,10 +102,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "VG":
             return vgAddModal($data);
         case "Rollback":
-        case"RollbackMain":
             return rollbackModal($more_data);
         case "Debt":
-        case "Debtor":
             return debtModal($more_data);
         case "Head":
             return headAddModal($more_data);
@@ -153,10 +114,27 @@ function chooseAddModal($name, $data, $more_data = NULL)
     }
 }
 
+function accessLevel($role = false)
+{
+    $r = $role ? $role : $_SESSION['role'];
+    switch ($r) {
+        case 'agent':
+            return 1;
+        case 'moder':
+            return 2;
+        case 'admin':
+            return 3;
+    }
+}
 
-
-
-
+function iCan($actionLvl)
+{
+    return !is_null($actionLvl) && $actionLvl <= accessLevel();
+}
+function heCan($role, $actionLvl)
+{
+    return !is_null($actionLvl) && $actionLvl <= accessLevel($role);
+}
 
 
 

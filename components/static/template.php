@@ -2,12 +2,11 @@
 include_once './components/static/menu.php';
 function template($body)
 {
-    $userIcon = '';
-    switch($_SESSION['role']){
-        case 'admin':
+    switch(accessLevel()){
+        case 3:
             $userIcon = 'user-shield';
             break;
-        case 'moder':
+        case 2:
             $userIcon = 'user-cog';
             break;
         default:

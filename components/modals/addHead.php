@@ -44,36 +44,5 @@ function headAddModal($data)
   <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
-//    session_start();
-//    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder')
-//    {
-//        $output .= '
-//<div id="Head-edit-Modal" class="modal" action="" role="form">
-//<form id="edit-head-form">
-//  <h2 class="modal-title">Добавить владельца</h2>
-//  <div class="modal-inputs">
-//  <p>
-//  <select id="editNameField" data-validation="required">
-//  <option value="" disabled selected>Выберите человека</option>';
-//        if($clients) foreach ($clients as $key => $var) {
-//            $output .= '<option value="' . $var['client_id'].'">' . $var['first_name']." ". $var['last_name'] . '</option>';
-//        }
-//        $output .= '
-//</select>
-//  </p>
-//  <p>
-//  <select id="editBranchField" data-validation="required">
-//  <option value="" disabled selected>Выберите предприятие</option>';
-//        if($branches) foreach ($branches as $key => $var) {
-//            $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
-//        }
-//        $output .= '
-//</select>
-//</p>
-//  </div>
-//  <input class="modal-submit" type="submit" value="Добавить">
-//  </form>
-//</div>';
-//    }
     return $output;
 }

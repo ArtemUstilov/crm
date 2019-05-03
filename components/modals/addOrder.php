@@ -76,7 +76,7 @@ function orderAddModal($data, $more_data)
 </div>';
     //edit modal
     session_start();
-    if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'moder') {
+    if (iCan(2)) {
         $output .= '
 <div id="Order-edit-Modal" class="modal" action="" role="form">
 <form id="edit-order-form">

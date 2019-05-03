@@ -193,8 +193,8 @@ $(document).ready(function () {
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
-                    $('#Order-transaction-info-modal').modal({fadeDuration: 7000,
-                        fadeDelay: 0.30});
+                    $('#Order-transaction-info-modal').modal({fadeDuration: 500,
+                        fadeDelay: 0});
                 } else {
                     createAlertTable(res, "Заказ");
                 }
@@ -342,13 +342,14 @@ $(document).ready(function () {
     function addOutgo() {
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
+        let descr = $("#add-outgo-form #commentField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         // console.log(sum)
         $.ajax({
             url: "../components/modal-response/addOutgo.php",
             type: "POST",
-            data: {owner, sum},
+            data: { owner, sum, description: descr },
             cache: false,
             success: function (res) {
                 createAlertTable(res, "Расход");

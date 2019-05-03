@@ -11,8 +11,7 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
     $date = date('Y-m-d H:i:s');
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if ($user_data && ($user_data['role'] == 'admin' || $user_data['role'] == 'sub_admin' || $user_data['role'] == 'moder'
-            || $user_data['role'] == 'agent')) {
+    if ($user_data && heCan($user_data['role'], 1)) {
         $add_ref = $connection->
         query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\") ");
         $change_rollback_sum = $connection->query("
