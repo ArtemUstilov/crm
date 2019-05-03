@@ -32,7 +32,7 @@ function template($body)
 <script>
         $(function(){$(".table-container").tablesorter();});
         $(window).load(function() {
-            $(".spinner").fadeOut("slow");
+            $(".loader").fadeOut("slow");
             
         });
     </script>
@@ -62,7 +62,7 @@ function template($body)
 </div>
 <div class="main-wrapper">
 ' . menu() . '
-<div class="spinner"></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
+<div class="loader"><div class="spinner"></div></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
 <script src="./js/add-handlers.js"></script>
 <script src="./js/edit-handlers.js"></script>
