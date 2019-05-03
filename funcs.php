@@ -66,7 +66,7 @@ function makeTable($data, $type, $delLine = false)
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $type == 'Order') {
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
+                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Head' && $type != 'Debt' && $type != 'Outgo')) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';
@@ -84,7 +84,7 @@ function makeTable($data, $type, $delLine = false)
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-info-circle" modal="info"></i><i class="fas fa-edit" modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else if ($col == 0 && $index == 0 && $type == 'Order') {
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . '<i class="fas fa-info-circle" modal="info"></i>' . $val . '</td>';
-                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt' && $type != 'Outgo' && $type != 'Head')) {
+                    } else if ($col == 0 && $index == 0 && $role !== 'agent' && ($type != 'Rollback' && $type != 'Debt'&& $type != 'Head' && $type != 'Outgo')) {
                         $output .= '<td class=' . $index . '-f title="' . $val . '" style="text-align: left">' . '<i class="fas fa-edit"  modal="' . $type . '-edit"></i>' . $val . '</td>';
                     } else
                         $output .= '<td class=' . $index . '-f title="' . $val . '">' . $val . '</td>';

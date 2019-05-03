@@ -193,8 +193,8 @@ $(document).ready(function () {
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
-                    $('#Order-transaction-info-modal').modal({fadeDuration: 7000,
-                        fadeDelay: 0.30});
+                    $('#Order-transaction-info-modal').modal({fadeDuration: 500,
+                        fadeDelay: 0});
                 } else {
                     createAlertTable(res, "Заказ");
                 }

@@ -2,7 +2,7 @@
 function menu()
 {
     $curPage = substr($_SERVER['REQUEST_URI'], 1, -4);
-
+    $showOwners = $_SESSION['role'] === 'admin' || $_SESSION['role'] === 'moder';
     return ('<div id="menu">
     <ul>
     <li>
@@ -14,7 +14,10 @@ function menu()
         <li><a href="../../outgo.php" class=' . ($curPage === 'outgo' ? '"active" disabled' : '') . '>Расходы</a></li>
         <li><a href="../../branches.php" class=' . ($curPage === 'branches' ? '"active" disabled' : '') . '>Предприятия</a></li>
         <li><a href="../../referals.php" class=' . ($curPage === 'referals' ? '"active" disabled' : '') . '>Рефералы</a></li>
-        <li><a href="../../debts.php" class=' . ($curPage === 'debts' ? '"active" disabled' : '') . '>Долги</a></li>
+        <li><a href="../../debts.php" class=' . ($curPage === 'debts' ? '"active" disabled' : '') . '>Должники</a></li>
+        '.($showOwners ? '
+          <li><a href="../../owners.php" class=' . ($curPage === 'owners' ? '"active" disabled' : '') . '>Владельцы</a></li>
+        ' : 0).'
         <li><a class="menu-logout-btn" href="./components/auth/logout.php">Выйти</a></li>
     </ul>
 </div>');
