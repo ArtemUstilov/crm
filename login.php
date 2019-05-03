@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script>
     $(window).load(function() {
-        $(".spinner").fadeOut("slow");
+        $(".loader").fadeOut("slow");
 
     });
 </script>
@@ -41,7 +41,7 @@
             </div>
     </form>
 </div>
-<div class="spinner"></div>
+<div class="loader"><div class="spinner"></div></div>
 <script src="js/listeners.js"></script>
 <div id="user-inactive-modal" class="modal">
     <h2>Пользователь деактивирован</h2>
