@@ -26,7 +26,7 @@ if (isset($_POST['order_id']) &&
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if ($user_data && (heCan($user_data['role'],2))) {
+    if ($user_data && (heCan($user_data['role'], 2))) {
         $order_data = mysqli_fetch_assoc($connection->
         query("SELECT *
                      FROM orders
@@ -37,20 +37,21 @@ if (isset($_POST['order_id']) &&
                      FROM shares
                      WHERE order_id ='$order_id'"));
         $sharesChanged = false;
-        if(count($shares) !== count($old_shares_data))
+        if (count($shares) !== count($old_shares_data))
             $sharesChanged = true;
         else
             foreach ($shares as $key => $value) {
-               if($value['value'] !== $old_shares_data[$key]['share_percent'] ||
-                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']){
-                   $sharesChanged = true;
-                   break;
-               }
+                if ($value['value'] !== $old_shares_data[$key]['share_percent'] ||
+                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']) {
+                    $sharesChanged = true;
+                    break;
+                }
             }
-        if($sharesChanged){
-            mysqli_fetch_assoc($connection->
+        if ($sharesChanged) {
+            $connection->
             query("DELETE FROM shares
-                     WHERE order_id ='$order_id'"));
+                     WHERE order_id ='$order_id'");
+
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
             FROM virtualgood
@@ -67,10 +68,24 @@ if (isset($_POST['order_id']) &&
             }
         }
 
+        if ($order_data['sum_currency'] != $sum_currency) {
+            $money = $sum_currency - $order_data['sum_currency'];
+            $update_user = $connection->
+            query("UPDATE users SET `money` = `money` + '$money'
+                     WHERE `client_id` = '$client_id'");
+            $_SESSION['money'] += $money;
+        }
+
         if ($order_data['client_id'] != $client_id) {
             $old_client = $order_data['client_id'];
             $old_debt = $order_data['order_debt'];
-
+            if ($order_data['order_debt'] != $debt) {
+                $money = $debt - $order_data['order_debt'];
+                $update_user = $connection->
+                query("UPDATE users SET `money` = `money` + '$money'
+                     WHERE `client_id` = '$client_id'");
+                $_SESSION['money'] += $money;
+            }
             $update_old_client = $connection->
             query("UPDATE clients SET `debt` = `debt` - '$old_debt'
                      WHERE `client_id` = '$old_client'");
@@ -78,16 +93,20 @@ if (isset($_POST['order_id']) &&
             $update_client = $connection->
             query("UPDATE clients SET `debt` = `debt` + '$debt'
                      WHERE `client_id` = '$client_id'");
-        }else if ($order_data['order_debt'] != $debt) {
+
+        } else if ($order_data['order_debt'] != $debt) {
             $new_debt = $debt - $order_data['order_debt'];
-            include_once '../../dev/ChromePhp.php';
-            ChromePhp::log($debt, $order_data['order_debt']);
             $update_debt = $connection->
             query("UPDATE clients SET `debt` = `debt` + '$new_debt'
                      WHERE `client_id` = $client_id");
 
             $update_debt = $connection->query("UPDATE users SET `money` = `money` - '$new_debt'
                      WHERE `user_id` = $user_id");
+
+            $update_user = $connection->
+            query("UPDATE users SET `money` = `money` + '$new_debt'
+                     WHERE `client_id` = '$client_id'");
+            $_SESSION['money'] += $new_debt;
         }
         if ($order_data['callmaster'] != $callmaster) {
             $old_callmaster = $order_data['callmaster'];
@@ -107,7 +126,7 @@ if (isset($_POST['order_id']) &&
             query("UPDATE clients SET `rollback_sum` = `rollback_sum` + '$new_rollback'
                      WHERE `client_id` = $callmaster");
         }
-        if($callmaster){
+        if ($callmaster) {
             $res = $connection->
             query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
@@ -115,7 +134,7 @@ if (isset($_POST['order_id']) &&
                      `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',`rollback_2` = $rollback_2,
                      `callmaster` = '$callmaster'
                      WHERE `order_id` = $order_id");
-        }else{
+        } else {
             $res = $connection->
             query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',

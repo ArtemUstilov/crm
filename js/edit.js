@@ -122,7 +122,8 @@ function fillOrderEditForm(target) {
                         `value=${el['percent']}> ` +
                         "</p>");
                 }))
-            if (res['other_owners'])
+            if (res['other_owners']) {
+                $('#open-invisible-owner-edit-list').removeClass('display-none');
                 res['other_owners'].forEach((el => {
                     $('#edit-owners-list-invisible').append(
                         "<p class='edit-owner-percent-input-box'>" +
@@ -131,7 +132,8 @@ function fillOrderEditForm(target) {
                         `owner-id=${el["owner_id"]} placeholder='Процент прибыли' ` +
                         " value='0'> " +
                         "</p>");
-                }))
+                }));
+            }
             else $('#open-invisible-owner-edit-list').addClass('display-none');
 
             $(".spinner").fadeOut('fast');
