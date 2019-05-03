@@ -865,7 +865,7 @@ a[disabled] {
     padding: 0;
     margin: 0;
     opacity: 0;
-    z-index: 2;
+    z-index: 0;
     cursor: pointer;
 }
 
