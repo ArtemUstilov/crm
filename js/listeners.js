@@ -46,9 +46,9 @@ $(document).ready(function () {
         })
     });
     $('#login-form').submit((event) => {
-        $(".spinner").show();
         event.preventDefault();
         if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
+        $(".spinner").show();
         let password = $("#passwordField").val();
         let login = $("#loginField").val();
         // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
