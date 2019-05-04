@@ -64,7 +64,7 @@ html, body {
     font-size: 20px;
 }
 
-#descriptionField, #editDescriptionField {
+#descriptionField, #editDescriptionField, #commentField {
     width: 100%;
 }
 
@@ -384,7 +384,7 @@ h1 {
     -ms-transition: width 1s;
     -o-transition: width 1s;
     -moz-transition: width 1s;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 100px);
 }
 
 .table-container tbody .clicked {
@@ -420,7 +420,7 @@ h1 {
     width: 100%;
 }
 
-#menu ul li a, #menu ul li p {
+#menu ul li a, #menu ul li p, #menu .menu-logout-btn {
     display: block;
     color: white;
     text-align: right;
@@ -429,6 +429,13 @@ h1 {
     white-space: nowrap;
     cursor: pointer;
 }
+
+.menu-logout-btn-box {
+    position: relative;
+    overflow: hidden;
+}
+
+
 
 #menu ul li p {
     text-decoration: underline;
@@ -456,7 +463,9 @@ a[disabled] {
     align-items: center;
     padding: 0 10px;
 }
-
+.menu-logout-btn {
+    text-align: center !important;
+}
 .menu-n {
     font-size: 18px;
     color: white;
@@ -710,7 +719,8 @@ a[disabled] {
     .account-name-menu-btn-box i {
         margin-left: 0;
     }
-    .table-wrapper{
+
+    .table-wrapper {
         overflow: visible;
     }
 }
@@ -852,7 +862,7 @@ a[disabled] {
     background-color: firebrick;
 }
 
-.knobs{
+.knobs {
     width: 40px;
     height: 20px;
     background-color: #ccc;
@@ -887,7 +897,8 @@ a[disabled] {
     cursor: pointer;
 
 }
-.checkbox:hover, .checkbox:active{
+
+.checkbox:hover, .checkbox:active {
     outline: none;
     background: none;
     border: none;
