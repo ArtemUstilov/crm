@@ -189,14 +189,17 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                res = JSON.parse(res);
+                try{
+                    res = JSON.parse(res);
+                }catch{}
+                console.log(res);
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
                     $('#Order-transaction-info-modal').modal({fadeDuration: 500,
                         fadeDelay: 0});
                 } else {
-                    createAlertTable(res, "Заказ");
+                    createAlertTable(res, "Заказ и транзакция");
                 }
             },
             error: function () {

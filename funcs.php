@@ -64,13 +64,9 @@ function makeTable($data, $options)
             if($col == 'статус'){
                 $output .= '<td class=' . $index . '-f title="' . $val . '">
                 <div class="button b2" id="button-10">
-                                     <div class="layer"></div>
-
-                    <input type="checkbox" class="checkbox" '.($val == 0 ? 'checked' : '').'>
-                                        <div class="knobs">
-
-                    </div>
-                    </div>
+                <input type="checkbox" class="checkbox" '.($val == 0 ? 'checked' : '').'>
+                <div class="knobs"></div>
+                </div>
             </td>';
             }else{
                 $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
@@ -141,9 +137,9 @@ function accessLevel($role = false)
     switch ($r) {
         case 'agent':
             return 1;
-        case 'moder':
-            return 2;
         case 'admin':
+            return 2;
+        case 'moder':
             return 3;
     }
 }

@@ -97,7 +97,7 @@ if (isset($_POST['client']) &&
                 SELECT byname
                 FROM clients
                 WHERE client_id = '$client'
-            "))['api_url_regexp'];
+            "))['byname'];
             //"http://nit.tron.net.ua/api/category/list/ttt" - test FAIL
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             $vg_url = str_replace("%UserName%", $client_login, "http://nit.tron.net.ua/api/category/list/ttt");

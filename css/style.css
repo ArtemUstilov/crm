@@ -680,7 +680,7 @@ a[disabled] {
     }
 
     #menu ul li {
-        font-size: 12px;
+        font-size: 18px;
     }
 
     #menu ul li a {
@@ -832,37 +832,36 @@ a[disabled] {
 }
 
 #button-10 .knobs:before, #button-10 .knobs:after {
-    top: 4px;
-    width: 14px;
-    height: 5px;
-    font-size: 8px;
-    font-weight: bold;
+    font-size: 9px;
     text-align: center;
     line-height: 1;
-    padding: 3px 10px;
-    border-radius: 1px;
+    padding: 3px 8px;
     transition: 0.3s ease all;
     margin-top: 20px;
+    border-radius: 50%;
 }
 
 #button-10 .knobs:before {
     content: '';
-    margin-left: -20px;
+    margin-left: -17px;
     background-color: green;
 }
 
 #button-10 .checkbox:checked + .knobs:before {
-    margin-left: 25px;
+    margin-left: 18px;
     background-color: firebrick;
 }
 
 .knobs{
-    width: 50px;
+    width: 40px;
     height: 20px;
     background-color: #ccc;
     margin-top: -10px;
     margin-left: -10px;
-    padding-top: 7px;
+    padding-top: 6px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
 
@@ -886,11 +885,12 @@ a[disabled] {
     opacity: 0;
     z-index: 2;
     cursor: pointer;
+
+}
+.checkbox:hover, .checkbox:active{
+    outline: none;
+    background: none;
+    border: none;
 }
 
-.layer {
-    width: 30px;
-    background-color: #eee;
-    transition: 0.3s ease all;
-}
 
