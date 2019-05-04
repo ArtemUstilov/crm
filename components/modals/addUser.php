@@ -32,8 +32,8 @@ function userAddModal($data, $more_data)
   <select id="roleField" data-validation="required">
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
-   <option value="moder">Модератор</option>
-     '.(iCan(3) ? '<option value="admin">Администратор</option>' : '').'
+   <option value="moder">Администратор</option>
+     '.(iCan(3) ? '<option value="admin">Модератор</option>' : '').'
     </select>
   </p>
   <p>
@@ -84,8 +84,8 @@ function userAddModal($data, $more_data)
   <select id="editRoleField" data-validation="required">
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
-   <option value="moder">Модератор</option>
-    '.(iCan(3) ? '<option value="admin">Администратор</option>' : '').'
+   <option value="moder">Администратор</option>
+    '.(iCan(3) ? '<option value="admin">Модератор</option>' : '').'
     </select>
   </p>';
         $output .= '

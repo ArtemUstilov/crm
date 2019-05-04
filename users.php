@@ -18,7 +18,7 @@ INNER JOIN branch B ON B.branch_id = U.branch_id
 SELECT user_id AS id, concat(last_name, ' ', first_name) AS Имя, role AS должность, branch_name AS отделение, active AS статус
 FROM users U
 INNER JOIN branch B ON B.branch_id = U.branch_id
-WHERE B.branch_id = '$branch_id' AND role!= 'admin'
+WHERE B.branch_id = '$branch_id' AND U.role != 'moder'
 "));
         break;
     case 1:
@@ -26,7 +26,7 @@ WHERE B.branch_id = '$branch_id' AND role!= 'admin'
 SELECT user_id AS id, concat(last_name, ' ', first_name) AS Имя, branch_name AS отделение, active AS статус
 FROM users U
 INNER JOIN branch B ON B.branch_id = U.branch_id
-WHERE B.branch_id = '$branch_id' AND role!= 'admin'
+WHERE B.branch_id = '$branch_id' AND U.role != 'moder'
 "));
         break;
     default:
@@ -38,7 +38,14 @@ $options['text'] = 'Сотрудники';
 $options['edit'] = 2;
 $options['btn-text'] = 'Добавить';
 $options['btn'] = 2;
-echo template(display_data($res, $options, $connection->query('
+if(iCan(3)){
+    $branches = $connection->query('
 SELECT * FROM branch
-')));
+');
+}else if(iCan(2)){
+    $branches = $connection->query('
+SELECT * FROM branch WHERE branch_id = '.$_SESSION['branch_id'].'
+');
+}
+echo template(display_data($res, $options, $branches));
 ?>

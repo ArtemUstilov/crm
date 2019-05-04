@@ -705,7 +705,9 @@ a[disabled] {
     .fa-building .fa-coins {
         margin: 0 !important;
     }
-
+    .table-wrapper{
+        max-height: 75%;
+    }
     h2 {
         font-size: 1.3em;
     }
@@ -720,10 +722,6 @@ a[disabled] {
 
     .account-name-menu-btn-box i {
         margin-left: 0;
-    }
-
-    .table-wrapper {
-        overflow: visible;
     }
 }
 

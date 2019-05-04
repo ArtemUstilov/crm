@@ -3,10 +3,19 @@ include_once './funcs.php';
 if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
-$branches = $connection->query('
+if(iCan(3)){
+    $branches = $connection->query('
 SELECT branch_id AS id, branch_name
 FROM branch
 ');
+}else{
+    $branches = $connection->query('
+SELECT branch_id AS id, branch_name
+FROM branch
+WHERE branch_id = '.$_SESSION['branch_id'].'
+');
+}
+
 $users = $connection->query('
 SELECT *
 FROM users
