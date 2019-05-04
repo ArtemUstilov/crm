@@ -192,7 +192,6 @@ $(document).ready(function () {
                 try{
                     res = JSON.parse(res);
                 }catch{}
-                console.log(res);
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
