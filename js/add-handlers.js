@@ -321,7 +321,7 @@ $(document).ready(function () {
                 setTimeout(function () {
                     $this.prop("disabled", false);
                 }, 300);
-                $('[href*="#Order-Modal"]').first()[0].click();
+                $('#Order-Modal').modal();
             }
         });
 

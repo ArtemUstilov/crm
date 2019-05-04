@@ -14,10 +14,10 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
     $edit_user_id = clean($_POST['user_id']);
     session_start();
     $user_id = $_SESSION['id'];
-    if($user_id == $edit_user_id){
+    if ($user_id == $edit_user_id) {
         $_SESSION['name'] = $first_name . ' ' . $last_name;
         $_SESSION['money'] = $money;
-        if($_SESSION['branch_id'] !== $branch){
+        if ($_SESSION['branch_id'] !== $branch) {
             $_SESSION['branch'] = mysqli_fetch_assoc($connection->query("SELECT branch_name FROM branch WHERE branch_id='$branch'"))['branch_name'];
         }
         $_SESSION['branch_id'] = $branch;
@@ -30,7 +30,7 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
         query("
         UPDATE `users` 
         SET `login`='$login',"
-            .($password ? "`pass_hash` = '$password'," : "")."
+            . ($password ? "`pass_hash` = '$password'," : "") . "
             `first_name` = '$first_name',
             `last_name` = '$last_name',
             `role` = '$role',
@@ -44,9 +44,10 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
             echo "failed";
             return false;
         }
+    } else {
+        echo "denied";
+        return false;
     }
-    echo "denied";
-    return false;
 } else {
     echo "empty";
 }
