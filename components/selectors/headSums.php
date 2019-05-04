@@ -27,7 +27,7 @@ SELECT O.owner_id, TT.sum
 FROM owners O
 LEFT JOIN (
 
-    SELECT O.owner_id AS "id", ((IFNULL(SUM(S.sum),0) - IFNULL(SUM(T.sum),0)) - "' . $averageOutgo . '") AS sum
+    SELECT O.owner_id AS "id", (IFNULL(SUM(S.sum),0) - "' . $averageOutgo . '") AS sum
 FROM owners O
 LEFT OUTER JOIN shares S ON O.owner_id = S.owner_id
 LEFT OUTER JOIN orders ORD ON ORD.order_id = S.order_id

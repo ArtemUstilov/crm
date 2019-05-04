@@ -20,8 +20,8 @@ AND `owner_id` IS NULL
 "))['average_outgo'];
 
 $headSumsRaw = $connection->query('
-SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", ((IFNULL(SUM(S.sum),0) - IFNULL( T.outgo_sum,0)) - "' . $averageOutgo . '") AS прибыль,
-(IFNULL(SUM(S.sum),0) - "' . $averageOutgo . '") AS остаток 
+SELECT O.owner_id AS "id", concat(O.last_name, " ", O.first_name) AS "Полное имя", 
+(IFNULL(SUM(S.sum),0) - "' . $averageOutgo . '") AS прибыль, ((IFNULL(SUM(S.sum),0) - IFNULL( T.outgo_sum,0)) - "' . $averageOutgo . '") AS остаток
 
 FROM shares S 
 RIGHT OUTER JOIN owners O ON O.owner_id = S.owner_id 
