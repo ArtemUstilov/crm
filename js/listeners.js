@@ -360,25 +360,7 @@ $(document).ready(function () {
 
         cb(start, end);
     })();
-    checkIfActive();
+
 });
 
-function checkIfActive() {
-    $.ajax({
-        url: "../components/auth/activityCheck.php",
-        type: "POST",
-        data: "req=ok",
-        cache: false,
-        success: function (res) {
-            if (res === "inactive") {
-                window.location.href = '../index.php';
-            } else {
-                setTimeout(checkIfActive, 5000);
-            }
-        },
-        error: function () {
 
-        }
-    });
-
-};

@@ -189,14 +189,17 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                try{
+                try {
                     res = JSON.parse(res);
-                }catch{}
+                } catch {
+                }
                 if (res['url']) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
-                    $('#Order-transaction-info-modal').modal({fadeDuration: 500,
-                        fadeDelay: 0});
+                    $('#Order-transaction-info-modal').modal({
+                        fadeDuration: 500,
+                        fadeDelay: 0
+                    });
                 } else {
                     createAlertTable(res, "Заказ и транзакция");
                 }
@@ -350,7 +353,7 @@ $(document).ready(function () {
         $.ajax({
             url: "../components/modal-response/addOutgo.php",
             type: "POST",
-            data: { owner, sum, description: descr },
+            data: {owner, sum, description: descr},
             cache: false,
             success: function (res) {
                 createAlertTable(res, "Расход");
@@ -523,7 +526,10 @@ $(document).ready(function () {
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
         switch (alertType) {
             case "exists":
-                $('.custom-alert .alert-text-box').text(`${requestType} с таким логином уже существует`);
+                if (requestType == "VG")
+                    $('.custom-alert .alert-text-box').text(`${requestType} с таким именем уже существует`);
+                else
+                    $('.custom-alert .alert-text-box').text(`${requestType} с таким логином уже существует`);
                 break;
             case "success":
                 $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);

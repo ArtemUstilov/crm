@@ -8,7 +8,7 @@ $branch_id = $_SESSION['branch_id'];
 switch (accessLevel()) {
     case 3:
         $info = $connection -> query("
-SELECT B.branch_name AS отдел, concat(U.last_name, ' ', U.first_name) AS агент, concat(C.last_name, ' ', C.first_name) AS клиент, 
+SELECT B.branch_name AS отдел, concat(U.last_name, ' ', U.first_name) AS агент, U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
 O.debt_sum AS сума,
 O.date AS дата
 FROM debt_history O
@@ -20,7 +20,7 @@ ORDER BY `date` DESC
         break;
     case 2:
         $info = $connection -> query("
-SELECT concat(U.last_name, ' ', U.first_name) AS агент, concat(C.last_name, ' ', C.first_name) AS клиент, 
+SELECT concat(U.last_name, ' ', U.first_name) AS агент, U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
 O.debt_sum AS сума,
 O.date AS дата
 FROM debt_history O

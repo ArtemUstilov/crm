@@ -11,6 +11,11 @@ if (isset($_POST['name']) && isset($_POST['url']) && isset($_POST['in']) && isse
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
+    $exists = $connection->query("SELECT * FROM virtualgood WHERE `name` = '$name'");
+    if ($exists) {
+        echo "exists";
+        return false;
+    }
     if (heCan($user_data['role'], 2)) {
         $res = $connection->
         query("INSERT INTO virtualgood (in_percent,out_percent,name,default_first_owner_percent,api_url_regexp) VALUES(\"$in\",\"$out\",\"$name\",\"$default\",\"$url\") ");

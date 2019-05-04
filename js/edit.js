@@ -1,3 +1,4 @@
+checkIfActive();
 $('tr').on('click', (e) => {
     const target = $(e.target);
     const mainParent = target.parent().parent();
@@ -96,7 +97,7 @@ function fillOrderEditForm(target) {
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
-                if (!res['clients'].find(t => t.client_id === this.value)) {
+                if (!res['clients'].find(t => t.client_id === this.value || this.value == -1)) {
                     $(this).hide();
                 }
             });
@@ -313,3 +314,22 @@ $('#Order-Modal').on($.modal.CLOSE, function () {
     $('#Order-Modal .owner-percent-input-box ').remove();
 
 })
+function checkIfActive() {
+    $.ajax({
+        url: "../components/auth/activityCheck.php",
+        type: "POST",
+        data: "req=ok",
+        cache: false,
+        success: function (res) {
+            if (res === "inactive") {
+                window.location.href = '../index.php';
+            } else {
+                setTimeout(checkIfActive, 3000);
+            }
+        },
+        error: function () {
+
+        }
+    });
+
+};
