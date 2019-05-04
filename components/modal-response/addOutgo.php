@@ -16,6 +16,7 @@ if (isset($_POST['sum'])) {
         $res = $connection->
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`) VALUES('$user_id','$sum', '$date', '$descr') ");
     }
+    $_SESSION['money'] -= $sum;
     if ($res) {
         echo "success";
         return false;
