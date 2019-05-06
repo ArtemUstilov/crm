@@ -153,7 +153,8 @@ $(document).ready(function () {
     function filterIcons() {
         $('th').each(function () {
             const _this = $(this);
-            _this.click(function () {
+            _this.click(function (e) {
+                if(e.target.tagName === 'INPUT') return;
                 setTimeout(() => {
                     $('th').each(function () {
                         const span = $(this).children().first().children().first().children().last();
