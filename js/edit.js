@@ -131,8 +131,7 @@ function fillOrderEditForm(target) {
                         " value='0'> " +
                         "</p>");
                 }));
-            }
-            else $('#open-invisible-owner-edit-list').addClass('display-none');
+            } else $('#open-invisible-owner-edit-list').addClass('display-none');
 
             $(".spinner").fadeOut('fast');
             $('#Order-edit-Modal').modal();
@@ -304,16 +303,25 @@ function fillClientEditForm(target) {
         },
     });
 }
-
+$('a[href="#Order-Modal"]').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+    if ($('#Order-Modal #owners-lists-container').empty())
+        $('#noOwners-Modal').modal()
+        else
+        $('#Order-Modal').modal()
+})
 
 $('#Order-edit-Modal').on($.modal.CLOSE, function () {
-        $('#Order-edit-Modal .edit-owner-percent-input-box ').remove();
+    $('#Order-edit-Modal .edit-owner-percent-input-box ').remove();
 
 })
+
 $('#Order-Modal').on($.modal.CLOSE, function () {
     $('#Order-Modal .owner-percent-input-box ').remove();
 
 })
+
 function checkIfActive() {
     $.ajax({
         url: "../components/auth/activityCheck.php",

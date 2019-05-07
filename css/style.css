@@ -644,7 +644,7 @@ a[disabled] {
     right: 0;
 }
 
-.no-payroll-text {
+.no-payroll-text, .no-owners-text {
     text-align: center;
     font-size: 25px;
 }

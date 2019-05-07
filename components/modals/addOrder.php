@@ -160,5 +160,8 @@ function orderAddModal($data, $more_data)
  <span>Ссылка: </span><a target="_blank" id="error-url"></a>
 </div>
 </div>';
+    $output .='<div id="noOwners-Modal" class="modal" action="">
+<h2 class="no-owners-text">Для создания продажи требуется наличие валедльцев!</h2>
+</div>';
     return $output;
 }
