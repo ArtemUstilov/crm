@@ -5,8 +5,8 @@ function display_data($data, $options, $addition_data = NULL)
     $data = mysqliToArray($data);
     return
         ("
-        <div class='table-menu' ".(iCan($options['range']) ? 'style = "justify-content: left;"' :'').">
-            <h2 type=".$options['type'].">" . $options['text'] . "</h2>"
+        <div class='table-menu' " . (iCan($options['range']) ? 'style = "justify-content: left;"' : '') . ">
+            <h2 type=" . $options['type'] . ">" . $options['text'] . "</h2>"
             . (iCan($options['btn']) ? "
             <p><a 
                     id='add-btn' 
@@ -22,7 +22,7 @@ function display_data($data, $options, $addition_data = NULL)
             " : '') .
             "
         </div>
-        <div class='table-wrapper ".$options['type']."' id='table-wrapper'>
+        <div class='table-wrapper " . $options['type'] . "' id='table-wrapper'>
             <a 
                     class='display-none' 
                     href=\"#" . $options['type'] . "-edit-Modal\" 
@@ -61,14 +61,14 @@ function makeTable($data, $options)
                 $actions .= $options['info'] ? '<i class="fas fa-info-circle" modal="info"></i>' : '';
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
-            if($col == 'статус'){
+            if ($col == 'статус') {
                 $output .= '<td class=' . $index . '-f title="' . $val . '">
                 <div class="button b2" id="button-10">
-                <input type="checkbox" class="checkbox" '.($val == 0 ? 'checked' : '').'>
+                <input type="checkbox" class="checkbox" ' . ($val == 0 ? 'checked' : '') . '>
                 <div class="knobs"></div>
                 </div>
             </td>';
-            }else{
+            } else {
                 $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
             }
             $index++;
@@ -148,10 +148,12 @@ function iCan($actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel();
 }
+
 function heCan($role, $actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel($role);
 }
+
 
 
 

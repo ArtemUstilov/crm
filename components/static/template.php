@@ -2,14 +2,30 @@
 include_once './components/static/menu.php';
 function template($body)
 {
-    switch(accessLevel()){
+    switch (accessLevel()) {
         case 3:
+            $changeBranch = '<div id="Change-Branch-Modal" class="modal" >
+<h2 class="modal-title">Перейти в другой отдел</h2>
+<form id="change-branch-form">
+<div class="modal-inputs">
+<p>
+<select data-validation="required" id="changeBranchField">
+</select>
+</p>
+</div>
+<input class="modal-submit" type="submit" value="Перейти">
+</form>
+
+</div>
+<script src="./js/changeBranch.js"></script>';
             $userIcon = 'user-shield';
             break;
         case 2:
+            $changeBranch = '';
             $userIcon = 'user-cog';
             break;
         default:
+            $changeBranch = '';
             $userIcon = 'user';
     }
     return (
@@ -55,7 +71,7 @@ function template($body)
 <p class="menu-n" class="money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div id="logout" class="account-name-menu-btn-box">
-<i class="fas fa-'.$userIcon.' fa-2x"></i>
+<i class="fas fa-' . $userIcon . ' fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
 <a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
@@ -64,6 +80,7 @@ function template($body)
 ' . menu() . '
 <div class="loader"><div class="spinner"></div></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
+' . $changeBranch . '
 <script src="./js/add-handlers.js"></script>
 <script src="./js/edit-handlers.js"></script>
 <script src="./js/edit.js"></script>
