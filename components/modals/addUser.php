@@ -74,7 +74,7 @@ function userAddModal($data, $more_data)
   </p>
   <p>
   Деньги
-  <input id="editMoneyField"    placeholder="Логин (только англ)" type="number" name="money">
+  <input id="editMoneyField"    placeholder="Деньги" type="number" name="money">
   </p>';
         $i = 0;
         foreach ($more_data as $key => $var) {

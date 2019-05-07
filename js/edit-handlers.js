@@ -239,6 +239,7 @@ $.validate({
 
 function editBranch() {
     let name = $("#edit-branch-form #editNameField").val();
+    let money = $("#edit-branch-form #editMoneyField").val();
     let id = $("#edit-branch-form #edit-branch-title").attr('branch-id');
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
@@ -248,6 +249,7 @@ function editBranch() {
         data: {
             name,
             branch_id : id,
+            money,
         },
         cache: false,
         success: function (res) {

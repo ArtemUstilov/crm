@@ -4,7 +4,7 @@ if (isset($_POST['branch_id'])) {
     include_once("../../funcs.php");
     $branch_id = clean($_POST['branch_id']);
     $branch_data = mysqli_fetch_assoc($connection->query("
-            SELECT branch_name AS 'name', branch_id AS id
+            SELECT branch_name AS 'name', branch_id AS id, money
             FROM branch 
             WHERE branch_id = '$branch_id'
             "));

@@ -8,8 +8,13 @@ $output = '
         <h2 class="modal-title">Добавить предприятие</h2>
         <div class="modal-inputs">
             <p>
+            Название
                 <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
             </p>
+             <p>
+  Деньги
+  <input id="moneyField"    placeholder="Деньги" type="number" name="money">
+  </p>
             </div>
             <input class="modal-submit" type="submit" value="Добавить">
             
@@ -27,6 +32,10 @@ $output = '
             Название
                 <input id="editNameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
             </p>
+       <p>
+  Деньги
+  <input id="editMoneyField"    placeholder="Деньги" type="number" name="money">
+  </p>
             </div>
             <input class="modal-submit" type="submit" value="Добавить">
     </form>

@@ -12,6 +12,7 @@ $(document).ready(function () {
 
     function addBranch() {
         let name = $("#add-branch-form #nameField").val();
+        let money = $("#add-branch-form #moneyField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -19,6 +20,7 @@ $(document).ready(function () {
             type: "POST",
             data: {
                 name,
+                money,
             },
             cache: false,
             success: function (res) {

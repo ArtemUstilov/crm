@@ -211,6 +211,7 @@ function fillBranchEditForm(target) {
         success: function (res) {
             $('#edit-branch-form #edit-branch-title').text(`Изменить данные предприятия ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
+            $('#edit-branch-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
             $('#Branch-edit-Modal').modal();
         },
