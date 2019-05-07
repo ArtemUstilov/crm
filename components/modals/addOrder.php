@@ -45,7 +45,9 @@ function orderAddModal($data, $more_data)
     $output .= '
   </select>
 </p>
-
+ <p>
+  <textarea id="commentField" rows="3"  placeholder="Комментарий" name="description"></textarea>
+  </p>
   <p>
   Продажа
   <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
@@ -53,20 +55,16 @@ function orderAddModal($data, $more_data)
     <p>
     Способ получения
   <select id="obtainingField" data-validation="required">
-  <option value="" disabled selected>Способ получения</option>;
-  <option value="card">На карту</option>;
+  <option value="" disabled >Способ получения</option>;
+  <option value="card" selected>На карту</option>;
   <option value="cash">Наличные</option>;
   </select>
   </p>
    </div><div id="owners-lists-container"></div>
    <div id="rollbacks-lists-container" class="modal-inputs" style="display: none">
 <p>
-   Откат 1
+   Откат
   <input id="rollback1Field" min="0" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
-  </p>
-  <p>
-  Откат 2
-  <input id="rollback2Field" min="0" placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Оформить">
@@ -118,7 +116,9 @@ function orderAddModal($data, $more_data)
         $output .= '
   </select>
 </p>
-
+ <p>
+  <textarea id="editCommentField" rows="3"  placeholder="Комментарий" name="description"></textarea>
+  </p>
   <p>
   Продажа
   <input id="editOutField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out" step=0.01>
@@ -126,18 +126,14 @@ function orderAddModal($data, $more_data)
     <p>
     Способ получения
   <select id="editObtainingField" data-validation="required">
-  <option value="" disabled selected>Способ получения</option>;
-  <option value="card">На карту</option>;
+    <option value="" disabled >Способ получения</option>;
+  <option value="card" selected>На карту</option>;
   <option value="cash">Наличные</option>;
   </select>
   </p>
   <p>
-   Откат 1
+   Откат
   <input id="editRollback1Field" min="0" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
-  </p>
-  <p>
-  Откат 2
-  <input id="editRollback2Field" min="0"  placeholder="Откат 2 %" type="number" name="rollback-2" step="0.01">
   </p>
   </div>
   <h2>Владельцы</h2>

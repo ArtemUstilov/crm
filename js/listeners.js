@@ -153,7 +153,8 @@ $(document).ready(function () {
     function filterIcons() {
         $('th').each(function () {
             const _this = $(this);
-            _this.click(function () {
+            _this.click(function (e) {
+                if(e.target.tagName === 'INPUT') return;
                 setTimeout(() => {
                     $('th').each(function () {
                         const span = $(this).children().first().children().first().children().last();
@@ -260,13 +261,19 @@ $(document).ready(function () {
     $('.checkbox').click(function () {
         $(".spinner").show();
         let id = $(this).parent().parent().parent().attr('itemid');
+        let type = $('.table-menu>h2').attr('type');
+        let url = '';
+        if(type === 'Branch'){
+            url = 'editBranchActivity';
+        }else
+            url = 'editActivity';
         $.ajax({
-            url: "../components/edit-modal-response/editActivity.php",
+            url: "../components/edit-modal-response/"+url+".php",
             type: "POST",
             data: {id},
             cache: false,
             success: function (res) {
-                if (res == "failed" || res == "empty")
+                if (res === "failed" || res === "empty")
                     createAlertTable('failed', '');
             },
             error: function () {

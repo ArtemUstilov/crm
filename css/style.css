@@ -384,7 +384,7 @@ h1 {
     -ms-transition: width 1s;
     -o-transition: width 1s;
     -moz-transition: width 1s;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 50px);
 }
 
 .table-container tbody .clicked {

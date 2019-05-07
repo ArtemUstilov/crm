@@ -6,7 +6,7 @@ function display_data($data, $options, $addition_data = NULL)
     return
         ("
         <div class='table-menu' ".(iCan($options['range']) ? 'style = "justify-content: left;"' :'').">
-            <h2>" . $options['text'] . "</h2>"
+            <h2 type=".$options['type'].">" . $options['text'] . "</h2>"
             . (iCan($options['btn']) ? "
             <p><a 
                     id='add-btn' 

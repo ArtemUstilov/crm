@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['name']) && isset($_POST['url']) && isset($_POST['in']) && isset($_POST['out'])) {
+if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -11,7 +11,7 @@ if (isset($_POST['name']) && isset($_POST['url']) && isset($_POST['in']) && isse
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    $exists = $connection->query("SELECT * FROM virtualgood WHERE `name` = '$name'");
+    $exists = mysqliToArray($connection->query("SELECT * FROM virtualgood WHERE `name` = '$name'"));
     if ($exists) {
         echo "exists";
         return false;

@@ -157,12 +157,12 @@ $(document).ready(function () {
     function addOrder() {
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();
-        const rollback_2 = $("#add-order-form #rollback2Field").val();
         const callmaster = $("#add-order-form #callmasterField").val();
         const vg = $("#add-order-form #vgField").val();
         const sum_vg = $("#add-order-form #sumVGField").val();
         const out = $("#add-order-form #outField").val();
         const obtain = $("#add-order-form #obtainingField").val();
+        const descr = $("#add-order-form #commentField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
         const debtCl = $("#add-order-form #debtCLField").val();
         const allShares = [];
@@ -178,7 +178,6 @@ $(document).ready(function () {
             data: {
                 client,
                 rollback_1,
-                rollback_2,
                 sum_vg,
                 out,
                 obtain,
@@ -186,6 +185,7 @@ $(document).ready(function () {
                 shares,
                 debtCl,
                 callmaster,
+                descr,
             },
             cache: false,
             success: function (res) {
@@ -286,6 +286,7 @@ $(document).ready(function () {
     function addClient() {
         let first_name = $("#add-client-form #firstNameField").val();
         let last_name = $("#add-client-form #lastNameField").val();
+        let telegram = $("#add-client-form #tgField").val();
         let description = $("#add-client-form #descriptionField").val();
         let callmaster = $("#add-client-form #callmasterField").val();
         let byname = $("#add-client-form #bynameField").val();
@@ -303,7 +304,8 @@ $(document).ready(function () {
                 last_name: last_name,
                 description: description,
                 phone: phone,
-                email: email
+                email: email,
+                telegram: telegram,
             },
             cache: false,
             success: function (res) {

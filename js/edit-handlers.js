@@ -26,8 +26,8 @@ function editOrder() {
     let debt = $("#edit-order-form #editDebtClField").val();
     let referral = $("#edit-order-form #editLastNameField").val();
     let rollback_1 = $("#edit-order-form #editRollback1Field").val();
-    let rollback_2 = $("#edit-order-form #editRollback2Field").val();
     let out = $("#edit-order-form #editOutField").val();
+    let descr = $("#edit-order-form #editCommentField").val();
     let vg_id = $("#edit-order-form #editVgField").val();
     let callmaster = $('#edit-order-form #editCallmasterField').val();
     let obtain = $('#edit-order-form #editObtainingField').val();
@@ -50,12 +50,12 @@ function editOrder() {
             debt,
             referral,
             rollback_1,
-            rollback_2,
             out,
             vg_id,
             shares,
             callmaster,
             obtain,
+            descr,
         },
         cache: false,
         success: function (res) {
@@ -142,6 +142,7 @@ $.validate({
 function editClient() {
     let phone = $("#edit-client-form #editPhoneField").val();
     let byname = $("#edit-client-form #editBynameField").val();
+    let telegram = $("#edit-client-form #editTgField").val();
     let first_name = $("#edit-client-form #editFirstNameField").val();
     let last_name = $("#edit-client-form #editLastNameField").val();
     let description = $("#edit-client-form #editDescriptionField").val();
@@ -163,6 +164,7 @@ function editClient() {
             rollback,
             debt,
             phone,
+            telegram,
             client_id : id,
         },
         cache: false,

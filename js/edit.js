@@ -66,7 +66,7 @@ function fillOrderAdditionalInfo(target) {
         success: function (res) {
             $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
             let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
-            const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%, ${res[0]["rollback_2"]}%)</p>`;
+            const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%)</p>`;
             if (res[0]["callmaster"])
                 owners += callmaster;
             $('#info-order-form .text').html(owners);
@@ -107,8 +107,8 @@ function fillOrderEditForm(target) {
                 $('#edit-order-form #editCallmasterField').val(res['callmaster']);
             $('#edit-order-form #editDebtClField').val(res['debt']);
             $('#edit-order-form #editOutField').val(res['out']);
+            $("#edit-order-form #editCommentField").val(res['comment']);
             $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
-            $('#edit-order-form #editRollback2Field').val(res['rollback_2']);
             $('#edit-order-form #editObtainingField').val(res['method']);
             if (res['shares'])
                 res['shares'].forEach((el => {
@@ -210,7 +210,7 @@ function fillBranchEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            $('#edit-branch-form #edit-branch-title').text(`Изменить данные пользователя ${res['name']}`).attr('branch-id', res['id']);
+            $('#edit-branch-form #edit-branch-title').text(`Изменить данные предприятия ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $(".spinner").fadeOut('fast');
             $('#Branch-edit-Modal').modal();
@@ -236,7 +236,6 @@ function fillVGEditForm(target) {
             $('#edit-vg-form #editNameField').val(res['name']);
             $('#edit-vg-form #editOutField').val(res['out']);
             $('#edit-vg-form #editInField').val(res['in']);
-            $('#edit-vg-form #editUrlField').val(res['url']);
             $(".spinner").fadeOut('fast');
             $('#VG-edit-Modal').modal();
 
@@ -291,6 +290,7 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editLastNameField').val(res['last_name']);
             $('#edit-client-form #editBynameField').val(res['login']);
             $('#edit-client-form #editPhoneField').val(res['phone']);
+            $('#edit-client-form #editTgField').val(res['telegram']);
             $('#edit-client-form #editEmailField').val(res['email']);
             $('#edit-client-form #editDebtField').val(res['debt']);
             $('#edit-client-form #editRollbackField').val(res['rollback']);

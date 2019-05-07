@@ -4,7 +4,7 @@ if (isset($_POST['order_id'])) {
     include_once("../../funcs.php");
     $order_id = clean($_POST['order_id']);
     $order_data = mysqliToArray($connection -> query("
-        SELECT share_percent, S.sum AS sum, concat(O.last_name, ' ', O.first_name) AS `name`, rollback_1, rollback_2, OD.rollback_sum, concat(C.last_name, ' ', C.first_name) AS callmaster
+        SELECT share_percent, S.sum AS sum, concat(O.last_name, ' ', O.first_name) AS `name`, rollback_1, OD.rollback_sum, concat(C.last_name, ' ', C.first_name) AS callmaster
         FROM shares S
         INNER JOIN owners O ON O.owner_id = S.owner_id
         INNER JOIN orders OD ON OD.order_id = S.order_id
