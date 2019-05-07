@@ -1,4 +1,5 @@
 <?php
+include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -23,27 +24,33 @@ if (isset($_POST['client']) &&
     $money_to_add = $sum_currency - $debt;
     $date = date('Y-m-d H:i:s');
 
+
     session_start();
     $user_id = $_SESSION['id'];
+    $branch_id = $_SESSION['branch_id'];
     $user_data = mysqli_fetch_assoc($connection->query("
         SELECT * 
         FROM users 
         WHERE user_id='$user_id'
     "));
     if (heCan($user_data['role'], 1)) {
-        if($callmaster )
-        $add_order = $connection->
-        query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`,`desription`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`) 
-        VALUES
-        ('$vg','$client', '$user_id','$description', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$date', '$callmaster', '$debt') ");
-        else
+        ChromePhp::log($vg, " : ", $client, " : ", $user_id, " : ", $description, " : ", $sum_vg, " : ", $out_percent, " : ", $sum_currency, " : ",
+            $obtain, " : ", $rollback_sum, " : ", $rollback_1, " : ", $date, " : ", $callmaster, " : ", $debt);
+        if ($callmaster) {
+            ChromePhp::log("keke");
             $add_order = $connection->
-        query("INSERT INTO `orders`
+            query("INSERT INTO `orders`
+        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`) 
+        VALUES
+        ('$vg', '$client', '$user_id', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description') ");
+            ChromePhp::log($add_order);
+        } else {
+            $add_order = $connection->
+            query("INSERT INTO `orders`
         (`vg_id`, `client_id`, `user_id`, `desription`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`) 
         VALUES
         ('$vg','$client', '$user_id', '$description','$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$date', '$debt') ");
-
+        }
         if ($add_order) {
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
@@ -82,9 +89,9 @@ if (isset($_POST['client']) &&
             }
             if ($money_to_add > 0) {
                 $connection->
-                query("UPDATE `users` 
+                query("UPDATE `branch` 
                              SET `money` = `money` + $money_to_add
-                             WHERE `user_id` = '$user_id'");
+                             WHERE `branch_id` = '$branch_id'");
                 $_SESSION['money'] += $money_to_add;
             }
 
@@ -111,8 +118,7 @@ if (isset($_POST['client']) &&
 
             try {
                 $result = file_get_contents($vg_url);
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 $response['url'] = $vg_url;
                 $response['sent'] = false;
                 echo json_encode($response);

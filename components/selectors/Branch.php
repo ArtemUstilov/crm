@@ -1,19 +1,20 @@
 <?php
-if (isset($_POST['branch_id'])) {
-    include_once("../../db.php");
-    include_once("../../funcs.php");
-    $branch_id = clean($_POST['branch_id']);
-    $branch_data = mysqli_fetch_assoc($connection->query("
+include_once("../../db.php");
+include_once("../../funcs.php");
+session_start();
+$branch_id = isset($_POST['branch_id']) ? clean($_POST['branch_id']) : $_SESSION['branch_id'];
+$branch_data = $connection->query("
             SELECT branch_name AS 'name', branch_id AS id, money
             FROM branch 
             WHERE branch_id = '$branch_id'
-            "));
+            ");
+$branch_data = !$branch_data ?: mysqli_fetch_assoc($branch_data);
 
-    if ($branch_data) {
-        echo json_encode($branch_data);
-        return false;
-    } else {
-        echo "failed";
-        return false;
-    }
+if ($branch_data) {
+    echo json_encode($branch_data);
+    return false;
+} else {
+    echo "failed";
+    return false;
 }
+

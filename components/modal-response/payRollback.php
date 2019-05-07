@@ -8,6 +8,7 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
     $client_data = mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE byname='$login'"));
     $client_id = $client_data['client_id'];
     session_start();
+    $branch_id = $_SESSION['branch_id'];
     $date = date('Y-m-d H:i:s');
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
@@ -19,10 +20,10 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
             SET `rollback_sum` = `rollback_sum` - $number 
             WHERE `client_id` = $client_id
         ");
-        $change_user_sum = $connection->query("
-            UPDATE `users` 
+        $change_branch_sum = $connection->query("
+             UPDATE `branch` 
             SET `money` = `money` - $number 
-            WHERE `user_id` = $user_id");
+            WHERE `branch_id` = $branch_id");
         $_SESSION['money'] -= $number;
         if ($change_rollback_sum && $add_ref) {
             echo "success";

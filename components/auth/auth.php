@@ -11,6 +11,13 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         INNER JOIN branch B ON B.branch_id = U.branch_id 
         WHERE login='$login'
     "));
+    $money = mysqli_fetch_assoc($connection->query("
+        SELECT money
+        FROM branch
+        WHERE branch_id IN (SELECT branch_id
+                            FROM users
+                            WHERE login = '$login')
+    "))['money'];
     if ($login != $data['login']) {
         echo "login";
         return false;
@@ -31,7 +38,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['id'] = $data['user_id'];
     $_SESSION['branch'] = $data['branch_name'];
     $_SESSION['branch_id'] = $data['branch_id'];
-    $_SESSION['money'] = $data['money'];
+    $_SESSION['money'] = $money;
     //$_SESSION['remember_me'] = $remember_me; in future
     echo "success";
 }

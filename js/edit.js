@@ -304,13 +304,25 @@ function fillClientEditForm(target) {
         },
     });
 }
-$('a[href="#Order-Modal"]').click(function(e){
+
+$('a[href="#Order-Modal"]').click(function (e) {
     e.preventDefault();
     e.stopPropagation();
-    if ($('#Order-Modal #owners-lists-container').empty())
-        $('#noOwners-Modal').modal()
-        else
-        $('#Order-Modal').modal()
+    $.ajax({
+        url: "../components/selectors/Branch.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: "req=ok",
+        success: function (res) {
+            if (res)
+                $('#Order-Modal').modal();
+            else
+                $('#noOwners-Modal').modal()
+        },
+        error: function () {
+        },
+    });
+
 })
 
 $('#Order-edit-Modal').on($.modal.CLOSE, function () {
