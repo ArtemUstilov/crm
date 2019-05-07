@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['branch']) && isset($_POST['role'])
+if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     && isset($_POST['first_name']) && isset($_POST['last_name'])) {
 
     include_once("../../db.php");
@@ -10,9 +10,10 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['branch'
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
-    $branch = clean($_POST['branch']);
+
     session_start();
     $user_id = $_SESSION['id'];
+    $branch = $_POST['branch'] ? clean($_POST['branch']) : $_SESSION['branch_id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $check_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE login='$login'"));
     if ($check_data) {

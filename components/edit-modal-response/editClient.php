@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['description']) && isset($_POST['byname'])
-    && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['phone'])) {
+    && isset($_POST['first_name']) && isset($_POST['last_name'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -13,6 +13,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     $rollback = clean($_POST['rollback']);
     $email = isset($_POST['email']) ? clean($_POST['email']) : " ";
     $edit_client_id = clean($_POST['client_id']);
+    $telegram = clean($_POST['telegram']);
     session_start();
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
@@ -27,6 +28,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
             `email` = '$email', 
             `debt` = '$debt',
             `rollback_sum` = '$rollback',
+            `telegram` = '$telegram',
             `description` = '$description'
         WHERE `client_id` = '$edit_client_id'");
         if ($res) {

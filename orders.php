@@ -13,7 +13,7 @@ switch (accessLevel()) {
 SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, " ", U.first_name) AS агент, B.branch_name AS отдел, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS "кол-во", O.real_out_percent AS "%", 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
-O.date AS дата
+O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
@@ -27,7 +27,7 @@ ORDER BY `date` DESC
 SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, ' ', U.first_name) AS агент, concat(C.last_name, ' ', C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS 'кол-во', O.real_out_percent AS '%', 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
-O.date AS дата
+O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
@@ -41,7 +41,7 @@ ORDER BY `date` DESC
 SELECT O.order_id AS id, O.order_id AS номер_заказа, concat(U.last_name, " ", U.first_name) AS агент, concat(C.last_name, " ", C.first_name) AS клиент, byname AS логин,
 V.name AS VG, O.sum_vg AS "кол-во", O.real_out_percent AS "%", 
 O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
-O.date AS дата
+O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id

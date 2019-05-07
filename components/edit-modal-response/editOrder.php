@@ -10,17 +10,17 @@ if (isset($_POST['order_id']) &&
     include_once("../../db.php");
     include_once("../../funcs.php");
     $rollback_1 = isset($_POST['rollback_1']) ? clean($_POST['rollback_1']) : 0;
-    $rollback_2 = isset($_POST['rollback_2']) ? clean($_POST['rollback_2']) : 0;
 
     $vg_id = clean($_POST['vg_id']);
     $order_id = clean($_POST['order_id']);
     $client_id = clean($_POST['client_id']);
     $sum_vg = clean($_POST['sum_vg']);
+    $description = $_POST['descr'];
     $out_percent = clean($_POST['out']);
     $debt = isset($_POST['debt']) ? clean($_POST['debt']) : 0;
     $callmaster = clean($_POST['callmaster']);
     $obtain = clean($_POST['obtain']);
-    $rollback_sum = $sum_vg / 100 * ($rollback_1 + $rollback_2);
+    $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $sum_currency = ($sum_vg * $out_percent) / 100;
     $shares = $_POST['shares'];
     session_start();
@@ -60,7 +60,7 @@ if (isset($_POST['order_id']) &&
             foreach ($shares as $key => $value) {
                 $curr_owner_id = $value['owner_id'];
                 $share_percent = $value['value'];
-                $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($share_percent / 100));
+                $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($share_percent / 100));
                 $add_share = $connection->
                 query("INSERT INTO `shares`
                 (`order_id`, `owner_id`, `sum`, `share_percent`) VALUES
@@ -131,14 +131,14 @@ if (isset($_POST['order_id']) &&
             query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
                      `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain',
-                     `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',`rollback_2` = $rollback_2,
-                     `callmaster` = '$callmaster'
+                     `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',
+                     `callmaster` = '$callmaster', `description` = '$description'
                      WHERE `order_id` = $order_id");
         } else {
             $res = $connection->
             query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
-                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain'
+                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain', `description` = '$description'
                      WHERE `order_id` = $order_id");
         }
 

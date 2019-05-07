@@ -14,16 +14,26 @@ function userAddModal($data, $more_data)
   </p>
   <p>
   <input id="loginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
-  </p>
-  <p>
-  <select id="branchField" data-validation="required">
+  </p>';
+        $i = 0;
+        foreach ($more_data as $key => $var) {
+            $i++;
+        }
+        if ($i > 1) {
+            $output .= '<p>
+                            Отдел
+                  <select id="branchField" data-validation="required">
   <option value="" disabled selected>Выберите отделение</option>';
     foreach ($more_data as $key => $var) {
         $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
     }
     $output .= '
 </select>
-</p>
+</p>';
+        }
+
+        session_start();
+    $output .= '
 <p>
 
   <input id="passField" autocomplete="new-password"  name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
@@ -33,7 +43,7 @@ function userAddModal($data, $more_data)
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
    <option value="admin">Администратор</option>
-     '.(iCan(3) ? '<option value="moder">Модератор</option>' : '').'
+     ' . (iCan(3) ? '<option value="moder">Модератор</option>' : '') . '
     </select>
   </p>
   <p>
@@ -65,26 +75,33 @@ function userAddModal($data, $more_data)
   <p>
   Деньги
   <input id="editMoneyField"    placeholder="Логин (только англ)" type="number" name="money">
-  </p>
-  <p>
-  Отдел
-  <select id="editBranchField" data-validation="required">
-  <option value="" disabled selected>Выберите отдел</option>';
+  </p>';
+        $i = 0;
         foreach ($more_data as $key => $var) {
-            $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
+            $i++;
         }
-        $output .= '
+        if ($i > 1) {
+            $output .= '<p>
+  Отдел
+                  <select id="editBranchField" data-validation="required">
+  <option value="" disabled selected>Выберите отдел</option>';
+            foreach ($more_data as $key => $var) {
+                $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
+            }
+            $output .= '
 </select>
 </p>';
+        }
+
         session_start();
-            $output .= '
+        $output .= '
   <p>
   Должность
   <select id="editRoleField" data-validation="required">
   <option value="" disabled selected>Выберите должность</option>
   <option value="agent">Агент</option>
    <option value="admin">Администратор</option>
-    '.(iCan(3) ? '<option value="moder">Модератор</option>' : '').'
+    ' . (iCan(3) ? '<option value="moder">Модератор</option>' : '') . '
     </select>
   </p>';
         $output .= '

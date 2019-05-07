@@ -16,7 +16,7 @@ function vgAddModal($data)
   <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out" step=0.01>
   </p>
    <p>
-  <input id="urlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
+  <input id="urlField" placeholder="url" type="url" name="url">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
@@ -39,7 +39,7 @@ function vgAddModal($data)
   <input id="editOutField" min=0 data-validation="required length" data-validation-length="min1" placeholder="продажа %" type="number" name="out" step=0.01>
   </p>
    <p>
-  <input id="editUrlField" data-validation="required length" data-validation-length="min4" placeholder="url" type="url" name="url">
+  <input id="editUrlField" placeholder="url" type="url" name="url">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

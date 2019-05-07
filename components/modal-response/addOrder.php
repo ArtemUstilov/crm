@@ -13,8 +13,8 @@ if (isset($_POST['client']) &&
     $rollback_1 = $_POST['rollback_1'] ? clean($_POST['rollback_1']) : 0;
     $client = clean($_POST['client']);
     $callmaster = $_POST['callmaster'];
-    $rollback_2 = $_POST['rollback_2'] ? clean($_POST['rollback_2']) : 0;
-    $rollback_sum = $sum_vg / 100 * ($rollback_1 + $rollback_2);
+    $description = $_POST['descr'];
+    $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $obtain = clean($_POST['obtain']);
     $out_percent = clean($_POST['out']);
     $shares = $_POST['shares'];
@@ -34,15 +34,15 @@ if (isset($_POST['client']) &&
         if($callmaster )
         $add_order = $connection->
         query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `rollback_2`, `date`, `callmaster`, `order_debt`) 
+        (`vg_id`, `client_id`, `user_id`,`desription`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`) 
         VALUES
-        ('$vg','$client', '$user_id', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$rollback_2','$date', '$callmaster', '$debt') ");
+        ('$vg','$client', '$user_id','$description', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$date', '$callmaster', '$debt') ");
         else
             $add_order = $connection->
         query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `rollback_2`, `date`, `order_debt`) 
+        (`vg_id`, `client_id`, `user_id`, `desription`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`) 
         VALUES
-        ('$vg','$client', '$user_id', '$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$rollback_2','$date', '$debt') ");
+        ('$vg','$client', '$user_id', '$description','$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$date', '$debt') ");
 
         if ($add_order) {
             $in_percent = mysqli_fetch_assoc($connection->query("
@@ -60,7 +60,7 @@ if (isset($_POST['client']) &&
 
             // TODO fix last_order
             foreach ($shares as $key => $var) {
-                $sum_of_owner = (($out_percent - $in_percent - $rollback_1 - $rollback_2) / 100) * ($sum_vg * ($var['value'] / 100));
+                $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($var['value'] / 100));
                 $curr_owner_id = $var['owner_id'];
                 $share_percent = $var['value'];
                 $add_share = $connection->

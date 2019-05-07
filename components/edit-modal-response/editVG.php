@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['name']) && isset($_POST['url']) && isset($_POST['in_percent']) && isset($_POST['out_percent'])) {
+if (isset($_POST['name']) && isset($_POST['in_percent']) && isset($_POST['out_percent'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
