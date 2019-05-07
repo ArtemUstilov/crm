@@ -90,7 +90,7 @@ function userAddModal($data, $more_data)
         $output .= '
 <p>
 Пароль
-  <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password" data-validation="length required alphanumeric" data-validation-length="min3" placeholder="Пароль (только англ)">
+  <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password"  data-validation-length="min3" placeholder="Пароль (только англ)">
   </p>
   <p>
     Повторите пароль

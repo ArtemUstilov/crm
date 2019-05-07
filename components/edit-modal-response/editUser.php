@@ -6,7 +6,7 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
     include_once("../../funcs.php");
     $money = clean($_POST['money']);
     $login = clean($_POST['login']);
-    $password = password_hash(clean($_POST['password']), PASSWORD_DEFAULT);
+    $password = isset($_POST['first_name']) ? password_hash(clean($_POST['password']), PASSWORD_DEFAULT) : false;
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
