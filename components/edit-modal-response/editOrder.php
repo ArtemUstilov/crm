@@ -71,8 +71,14 @@ if (isset($_POST['order_id']) &&
         if ($order_data['sum_currency'] != $sum_currency) {
             $money = $sum_currency - $order_data['sum_currency'];
             $update_user = $connection->
-            query("UPDATE users SET `money` = `money` + '$money'
-                     WHERE `client_id` = '$client_id'");
+            query("UPDATE branch SET `money` = `money` + '$money'
+                     WHERE branch_id IN(
+                         SELECT branch_id FROM users WHERE
+                         user_id IN (
+                             SELECT user_id FROM orders
+                             WHERE order_id = '$order_id'
+                         )
+                     )");
             $_SESSION['money'] += $money;
         }
 
@@ -80,11 +86,17 @@ if (isset($_POST['order_id']) &&
             $old_client = $order_data['client_id'];
             $old_debt = $order_data['order_debt'];
             if ($order_data['order_debt'] != $debt) {
-                $money = $debt - $order_data['order_debt'];
+                $money = $debt - $old_debt;
                 $update_user = $connection->
-                query("UPDATE users SET `money` = `money` + '$money'
-                     WHERE `client_id` = '$client_id'");
-                $_SESSION['money'] += $money;
+                query("UPDATE branch SET `money` = `money` - '$money'
+                     WHERE branch_id IN(
+                         SELECT branch_id FROM users WHERE
+                         user_id IN (
+                             SELECT user_id FROM orders
+                             WHERE order_id = '$order_id'
+                         )
+                     )");
+                $_SESSION['money'] -= $money;
             }
             $update_old_client = $connection->
             query("UPDATE clients SET `debt` = `debt` - '$old_debt'
@@ -100,13 +112,18 @@ if (isset($_POST['order_id']) &&
             query("UPDATE clients SET `debt` = `debt` + '$new_debt'
                      WHERE `client_id` = $client_id");
 
-            $update_debt = $connection->query("UPDATE users SET `money` = `money` - '$new_debt'
-                     WHERE `user_id` = $user_id");
+            $update_debt = $connection->query("
+            UPDATE branch SET `money` = `money` - '$new_debt'
+                     WHERE branch_id IN(
+                         SELECT branch_id FROM users WHERE
+                         user_id IN (
+                             SELECT user_id FROM orders
+                             WHERE order_id = '$order_id'
+                         )
+                     )
+            ");
 
-            $update_user = $connection->
-            query("UPDATE users SET `money` = `money` + '$new_debt'
-                     WHERE `client_id` = '$client_id'");
-            $_SESSION['money'] += $new_debt;
+            $_SESSION['money'] -= $new_debt;
         }
         if ($order_data['callmaster'] != $callmaster) {
             $old_callmaster = $order_data['callmaster'];

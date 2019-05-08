@@ -69,7 +69,7 @@ function makeTable($data, $options)
                 </div>
             </td>';
             } else {
-                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . $val . '</td>';
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val == '' || $val === null ? '-' : $val) . '</td>';
             }
             $index++;
         }
