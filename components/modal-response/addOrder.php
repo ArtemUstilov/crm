@@ -47,9 +47,9 @@ if (isset($_POST['client']) &&
         } else {
             $add_order = $connection->
             query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`, `desription`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`) 
+        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`) 
         VALUES
-        ('$vg','$client', '$user_id', '$description','$sum_vg','$out_percent','$sum_currency', '$obtain','$rollback_sum','$rollback_1','$date', '$debt') ");
+        ('$vg', '$client', '$user_id', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description') ");
         }
         if ($add_order) {
             $in_percent = mysqli_fetch_assoc($connection->query("
