@@ -62,7 +62,7 @@ function makeTable($data, $options)
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
             if ($col == 'статус') {
-                $output .= '<td class=' . $index . '-f title="' . $val . '">
+                $output .= '<td class=' . $index . '-f title="' . $val . '"><p style="display: none">'.$val.'</p>
                 <div class="button b2" id="button-10">
                 <input type="checkbox" class="checkbox" ' . ($val == 0 ? 'checked' : '') . '>
                 <div class="knobs"></div>
