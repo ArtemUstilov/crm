@@ -1,4 +1,4 @@
-checkIfActive();
+checkUserData();
 $('tr').on('click', (e) => {
     const target = $(e.target);
     const mainParent = target.parent().parent();
@@ -335,17 +335,19 @@ $('#Order-Modal').on($.modal.CLOSE, function () {
 
 })
 
-function checkIfActive() {
+function checkUserData() {
     $.ajax({
         url: "../components/auth/activityCheck.php",
         type: "POST",
         data: "req=ok",
         cache: false,
+        dataType:'JSON',
         success: function (res) {
-            if (res === "inactive") {
+            if(res['money']) $('.account-name-menu-btn-box .money-t').text(`${res['money']}грн`)
+            if (res['active'] === "inactive") {
                 window.location.href = '../index.php';
             } else {
-                setTimeout(checkIfActive, 3000);
+                setTimeout(checkUserData, 3000);
             }
         },
         error: function () {

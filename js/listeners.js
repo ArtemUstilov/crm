@@ -63,6 +63,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                console.log(res);
                 $(".spinner").fadeOut('fast');
                 switch (res) {
                     case "success":

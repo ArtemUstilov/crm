@@ -68,7 +68,7 @@ function template($body)
 </div>
 <div class="account-name-menu-btn-box">
 <i class="fas fa-coins fa-2x"></i>
-<p class="menu-n" class="money-t">' . $_SESSION['money'] . 'грн</p>
+<p class="menu-n money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div id="logout" class="account-name-menu-btn-box">
 <i class="fas fa-' . $userIcon . ' fa-2x"></i>
