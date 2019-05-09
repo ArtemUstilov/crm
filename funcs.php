@@ -7,7 +7,7 @@ function display_data($data, $options, $addition_data = NULL)
         ("
         <div class='table-menu' " . (iCan($options['range']) ? 'style = "justify-content: left;"' : '') . ">
             <h2 type=" . $options['type'] . ">" . $options['text'] . "</h2>"
-            . (iCan($options['btn']) ? "
+            . (iCan($options['btn']) && iCanMax($options['btn-max']) ? "
             <p><a 
                     id='add-btn' 
                     href=\"#" . $options['type'] . "-Modal\" 
@@ -148,7 +148,10 @@ function iCan($actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel();
 }
-
+function iCanMax($actionLvl)
+{
+    return is_null($actionLvl) || $actionLvl >= accessLevel();
+}
 function heCan($role, $actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel($role);

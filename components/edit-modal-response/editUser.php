@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
+if (isset($_POST['login']) && isset($_POST['role'])
     && isset($_POST['first_name']) && isset($_POST['last_name'])) {
 
     include_once("../../db.php");
@@ -10,9 +10,9 @@ if (isset($_POST['login']) && isset($_POST['branch']) && isset($_POST['role'])
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
-    $branch = clean($_POST['branch']);
     $edit_user_id = clean($_POST['user_id']);
     session_start();
+    $branch = $_POST['branch'] ? clean($_POST['branch']) : $_SESSION['branch_id'];
     $user_id = $_SESSION['id'];
     if ($user_id == $edit_user_id) {
         $_SESSION['name'] = $first_name . ' ' . $last_name;

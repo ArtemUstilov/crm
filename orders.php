@@ -69,6 +69,7 @@ $options['type'] = 'Order';
 $options['text'] = 'Продажи';
 $options['info'] = true;
 $options['btn'] = 1;
+$options['btn-max'] = 2;
 $options['btn-text'] = 'Добавить';
 $options['edit'] = 2;
 echo template(display_data($info, $options, $more_data));
