@@ -1,4 +1,5 @@
 <?php
+include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -62,7 +63,6 @@ if (isset($_POST['client']) &&
             LIMIT 1
             "))['order_id'];
 
-            // TODO fix last_order
             foreach ($shares as $key => $var) {
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($var['value'] / 100));
                 $curr_owner_id = $var['owner_id'];
@@ -73,23 +73,51 @@ if (isset($_POST['client']) &&
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
             }
             if ($debt > 0) {
-                $connection->
-                query("UPDATE `clients` 
-                             SET `debt` = `debt` + $debt 
-                             WHERE `client_id` = '$client'");
+                $check_payment_debt = mysqliToArray($connection->
+                query("SELECT * FROM payments
+                              WHERE `fiat_id` = '$fiat' AND `client_debt_id` = '$client' "));
+                if ($check_payment_debt)
+                    $update_payments_debt = $connection->
+                    query("UPDATE  `payments` 
+                                  SET `sum` = `sum` + '$debt'
+                                  WHERE client_debt_id = '$client' AND `fiat_id` = '$fiat'");
+                else
+                    $insert_payments_debt = $connection->
+                    query("INSERT INTO `payments` 
+                             (`fiat_id`, `sum`, `client_debt_id`)
+                             VALUES('$fiat', '$debt', '$client') ");
             }
             if ($rollback_sum > 0) {
-                $connection->
-                query("UPDATE `clients` 
-                             SET `rollback_sum` = `rollback_sum` + $rollback_sum
-                             WHERE `client_id` = '$callmaster'");
+                $check_payment_rollback = mysqliToArray($connection->
+                query("SELECT * FROM payments
+                              WHERE `fiat_id` = '$fiat' AND `client_rollback_id` = '$callmaster' "));
+
+                if ($check_payment_rollback)
+                    $connection->
+                    query("UPDATE  `payments` 
+                                  SET `sum` = `sum` + '$rollback_sum'
+                                  WHERE client_rollback_id = '$callmaster' AND `fiat_id` = '$fiat'");
+                else
+                    $connection->
+                    query("INSERT INTO `payments` 
+                             (`fiat_id`, `sum`, `client_rollback_id`)
+                             VALUES('$fiat', '$rollback_sum', '$callmaster') ");
             }
             if ($money_to_add > 0) {
-                $connection->
-                query("UPDATE `branch` 
-                             SET `money` = `money` + $money_to_add
-                             WHERE `branch_id` = '$branch_id'");
-                $_SESSION['money'] += $money_to_add;
+                $check_payment_branch = mysqliToArray($connection->
+                query("SELECT * FROM payments
+                              WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' "));
+
+                if ($check_payment_branch)
+                    $connection->
+                    query("UPDATE  `payments` 
+                                  SET `sum` = `sum` + '$money_to_add'
+                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
+                else
+                    $connection->
+                    query("INSERT INTO `payments` 
+                             (`fiat_id`, `sum`, `branch_id`)
+                             VALUES('$fiat', '$money_to_add', '$branch_id') ");
             }
 
             $vg_url = mysqli_fetch_assoc($connection->query("

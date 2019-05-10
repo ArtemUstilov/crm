@@ -32,7 +32,7 @@ function editOrder() {
     let callmaster = $('#edit-order-form #editCallmasterField').val();
     let obtain = $('#edit-order-form #editObtainingField').val();
     let client_id = $("#edit-order-form #editClientField").val();
-    let fiat = $('#edit-order-form #editFiatField');
+    let fiat = $('#edit-order-form #editFiatField').val();
     let sharesEls = $('#edit-order-form .edit-owner-percent-input');
     const allShares = [];
     sharesEls.each(function () {
