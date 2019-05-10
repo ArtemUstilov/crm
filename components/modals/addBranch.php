@@ -37,7 +37,7 @@ $output = '
   <input id="editMoneyField"    placeholder="Деньги" type="number" name="money">
   </p>
             </div>
-            <input class="modal-submit" type="submit" value="Добавить">
+            <input class="modal-submit" type="submit" value="Сохранить">
     </form>
 </div>';
 return $output;
