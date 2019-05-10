@@ -5,7 +5,7 @@ if (isset($_POST['order_id'])) {
     include_once("../../funcs.php");
     $order_id = clean($_POST['order_id']);
     $order_data = mysqli_fetch_assoc($connection->query("
-            SELECT O.order_id AS order_id, U.branch_id AS branch_id, 
+            SELECT O.order_id AS order_id, U.branch_id AS branch_id, fiat_id AS fiat,
             concat('[(',C.last_name, ' ', C.first_name,' (', C.byname,')), (', U.last_name, ' ', U.first_name,')]' ) AS `full_name`,
             C.client_id AS client_id, rollback_1, O.callmaster, U.user_id AS user_id, O.method_of_obtaining AS method, 
             O.vg_id, O.sum_vg, O.real_out_percent AS 'out', O.order_debt AS debt, O.description AS comment
@@ -48,7 +48,6 @@ if (isset($_POST['order_id'])) {
             )
         )
     "));
-    ChromePhp::log($possible_client_data);
     if($shares_data)
     $order_data['shares'] = $shares_data;
     if($other_owners_data)

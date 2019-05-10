@@ -32,6 +32,7 @@ function editOrder() {
     let callmaster = $('#edit-order-form #editCallmasterField').val();
     let obtain = $('#edit-order-form #editObtainingField').val();
     let client_id = $("#edit-order-form #editClientField").val();
+    let fiat = $('#edit-order-form #editFiatField');
     let sharesEls = $('#edit-order-form .edit-owner-percent-input');
     const allShares = [];
     sharesEls.each(function () {
@@ -56,10 +57,10 @@ function editOrder() {
             callmaster,
             obtain,
             descr,
+            fiat,
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             createAlertTable(res, "Заказ");
         },
         error: function () {

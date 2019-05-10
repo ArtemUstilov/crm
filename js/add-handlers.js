@@ -167,6 +167,7 @@ $(document).ready(function () {
         const descr = $("#add-order-form #commentField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
         const debtCl = $("#add-order-form #debtCLField").val();
+        const fiat = $("#add-order-form #fiatField").val();
         const allShares = [];
         sharesEls.each(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
@@ -188,6 +189,7 @@ $(document).ready(function () {
                 debtCl,
                 callmaster,
                 descr,
+                fiat,
             },
             cache: false,
             success: function (res) {

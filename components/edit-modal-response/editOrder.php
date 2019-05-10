@@ -6,6 +6,7 @@ if (isset($_POST['order_id']) &&
     isset($_POST['obtain']) &&
     isset($_POST['vg_id']) &&
     isset($_POST['shares']) &&
+    isset($_POST['fiat']) &&
     isset($_POST['client_id'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -20,6 +21,7 @@ if (isset($_POST['order_id']) &&
     $debt = isset($_POST['debt']) ? clean($_POST['debt']) : 0;
     $callmaster = clean($_POST['callmaster']);
     $obtain = clean($_POST['obtain']);
+    $fiat = clean($_POST['fiat']);
     $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $sum_currency = ($sum_vg * $out_percent) / 100;
     $shares = $_POST['shares'];
@@ -155,13 +157,13 @@ if (isset($_POST['order_id']) &&
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
                      `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain',
                      `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',
-                     `callmaster` = '$callmaster', `description` = '$description'
+                     `callmaster` = '$callmaster', `description` = '$description', `fiat_id` = '$fiat'
                      WHERE `order_id` = $order_id");
         } else {
             $res = $connection->
             query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
-                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain', `description` = '$description'
+                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain', `description` = '$description', `fiat_id` = '$fiat'
                      WHERE `order_id` = $order_id");
         }
 

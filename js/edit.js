@@ -100,7 +100,7 @@ function fillOrderEditForm(target) {
             $('#edit-order-form #editClientField option').each(function () {
                 if (!res['clients'].find(t => t.client_id === this.value || this.value == -1)) {
                     $(this).hide();
-                }else{
+                } else {
                     $(this).show();
                 }
             });
@@ -113,6 +113,7 @@ function fillOrderEditForm(target) {
             $("#edit-order-form #editCommentField").val(res['comment']);
             $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
             $('#edit-order-form #editObtainingField').val(res['method']);
+            $('#edit-order-form #editFiatField').val(res['fiat']);
             if (res['shares'])
                 res['shares'].forEach((el => {
                     $('#edit-owners-list-visible').append(
@@ -346,9 +347,9 @@ function checkUserData() {
         type: "POST",
         data: "req=ok",
         cache: false,
-        dataType:'JSON',
+        dataType: 'JSON',
         success: function (res) {
-            if(res['money']) $('.account-name-menu-btn-box .money-t').text(`${res['money']}грн`)
+            if (res['money']) $('.account-name-menu-btn-box .money-t').text(`${res['money']}грн`)
             if (res['active'] === "inactive") {
                 window.location.href = '../index.php';
             } else {
