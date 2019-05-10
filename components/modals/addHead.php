@@ -1,6 +1,7 @@
 <?php
 function headAddModal($data)
 {
+    //TODO deny access to all brnahces for admins
     if ($data) {
         $i = 0;
         while ($new = $data['branches']->fetch_array()) {
