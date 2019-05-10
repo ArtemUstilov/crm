@@ -117,7 +117,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Order":
             return orderAddModal($data, $more_data) . '' . clientAddModal($data);
         case "VG":
-            return vgAddModal($data);
+            return vgAddModal($more_data);
         case "Rollback":
             return rollbackModal($more_data);
         case "Debt":

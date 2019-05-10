@@ -389,20 +389,24 @@ $(document).ready(function () {
     });
 
     function addVG() {
+        let prevId = $("#add-vg-form #nameVgnField").val();
         let name = $("#add-vg-form #nameField").val();
         let in_percent = $("#add-vg-form #inField").val();
         let out_percent = $("#add-vg-form #outField").val();
         let url = $("#add-vg-form #urlField").val();
+        let key = $("#add-vg-form #keyField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addVG.php",
             type: "POST",
             data: {
-                name: name,
+                name,
+                prevId,
                 in: in_percent,
                 out: out_percent,
-                url: url,
+                url,
+                key,
             },
             cache: false,
             success: function (res) {
