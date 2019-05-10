@@ -94,11 +94,14 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            console.log(res);
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
                 if (!res['clients'].find(t => t.client_id === this.value || this.value == -1)) {
                     $(this).hide();
+                }else{
+                    $(this).show();
                 }
             });
             $('#edit-order-form #editVgField').val(res['vg_id']);

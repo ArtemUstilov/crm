@@ -37,18 +37,14 @@ if (isset($_POST['order_id'])) {
     $possible_client_data = mysqliToArray($connection->query("
        SELECT client_id 
         FROM clients
-        WHERE client_id IN (
-            SELECT client_id
-            FROM orders
-            WHERE client_id IN(
-                SELECT client_id
-                FROM clients C INNER JOIN users U ON C.user_id = U.user_id
-                WHERE branch_id IN (
+        WHERE user_id IN (
+            SELECT user_id
+            FROM users
+            WHERE branch_id IN(
                 	SELECT branch_id FROM users U
                     INNER JOIN clients C ON U.user_id = C.user_id
                     INNER JOIN orders O ON O.client_id = C.client_id
                     WHERE order_id = '$order_id'
-                )
             )
         )
     "));
