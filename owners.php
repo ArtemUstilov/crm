@@ -3,6 +3,11 @@ include_once './funcs.php';
 if (!isAuthorized()) header("Location: ./login.php");
 include_once './components/static/template.php';
 include_once './db.php';
+
+$users = $connection->query('
+SELECT *
+FROM users
+');
 if(iCan(3)){
     $branches = $connection->query('
 SELECT branch_id AS id, branch_name
@@ -14,6 +19,11 @@ FROM branch
         INNER JOIN branch B ON B.branch_id = O.branch_id
     ');
 }else{
+    $users = $connection->query('
+SELECT *
+FROM users
+WHERE branch_id = '.$_SESSION['branch_id'].'
+');
     $branches = $connection->query('
 SELECT branch_id AS id, branch_name
 FROM branch
@@ -27,10 +37,6 @@ WHERE branch_id = '.$_SESSION['branch_id'].'
     ');
 }
 
-$users = $connection->query('
-SELECT *
-FROM users
-');
 $data['branches'] = $branches;
 $data['users'] = $users;
 $options['type'] = 'Head';

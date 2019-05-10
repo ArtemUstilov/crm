@@ -35,8 +35,16 @@ function headAddModal($data)
   <p>
   <select id="branchField" data-validation="required">
   <option value="" disabled selected>Выберите предприятие</option>';
-    if($branches) foreach ($branches as $key => $var) {
-        $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
+    if($branches){
+        if(count($branches) > 1){
+            foreach ($branches as $key => $var) {
+                $output .= '<option value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
+            }
+        }else{
+            foreach ($branches as $key => $var) {
+                $output .= '<option selected value="' . $var['id'] . '">' . $var['branch_name'] . '</option>';
+            }
+        }
     }
     $output .= '
 </select>

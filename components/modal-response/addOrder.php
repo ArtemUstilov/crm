@@ -1,5 +1,4 @@
 <?php
-include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -34,15 +33,12 @@ if (isset($_POST['client']) &&
         WHERE user_id='$user_id'
     "));
     if (heCan($user_data['role'], 1)) {
-        ChromePhp::log($vg, " : ", $client, " : ", $user_id, " : ", $description, " : ", $sum_vg, " : ", $out_percent, " : ", $sum_currency, " : ",
-            $obtain, " : ", $rollback_sum, " : ", $rollback_1, " : ", $date, " : ", $callmaster, " : ", $debt);
         if ($callmaster) {
             $add_order = $connection->
             query("INSERT INTO `orders`
         (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`) 
         VALUES
         ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description') ");
-            ChromePhp::log($add_order);
         } else {
             $add_order = $connection->
             query("INSERT INTO `orders`

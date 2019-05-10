@@ -1,5 +1,4 @@
 <?php
-include_once '../../dev/ChromePhp.php';
 if (isset($_POST['sum'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");

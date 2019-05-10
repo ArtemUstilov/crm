@@ -94,13 +94,6 @@ function editUser() {
     let id = $("#edit-user-form #edit-user-title").attr('user-id');
     const $this = $("#edit-user-form .modal-submit");
     $this.prop("disabled", true);
-    console.log(password,
-        login,
-        first_name,
-        last_name,
-        branch,
-        money,
-        role)
     $.ajax({
         url: "../components/edit-modal-response/editUser.php",
         type: "POST",
