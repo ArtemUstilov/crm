@@ -55,7 +55,7 @@ if (isset($_POST['order_id']) &&
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
             FROM vg_data
-            WHERE vg_id = '$vg_id'
+            WHERE vg_id = '$vg_id' AND branch_id = '$branch_id'
             "))['in_percent'];
             foreach ($shares as $key => $value) {
                 $curr_owner_id = $value['owner_id'];

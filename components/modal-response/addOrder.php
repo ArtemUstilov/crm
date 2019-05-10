@@ -50,7 +50,7 @@ if (isset($_POST['client']) &&
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
             FROM vg_data
-            WHERE vg_id = '$vg'
+            WHERE vg_id = '$vg' AND branch_id = '$branch_id'
             "))['in_percent'];
 
             $order_id = mysqli_fetch_assoc($connection->query("
