@@ -25,8 +25,8 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     if ($user_data && heCan($user_data['role'], 1)) {
         $res = $connection->
         query("
-        INSERT INTO clients (last_name,first_name,byname,debt,rollback_sum,phone_number,email, description, telegram ) 
-        VALUES(\"$last_name\",\"$first_name\",\"$byname\",0,0,\"$phone\",\"$email\",\"$description\", '$telegram') ");
+        INSERT INTO clients (last_name,first_name,byname,debt,rollback_sum,phone_number,email, description, telegram, user_id ) 
+        VALUES(\"$last_name\",\"$first_name\",\"$byname\",0,0,\"$phone\",\"$email\",\"$description\", '$telegram', '$user_id') ");
         $lastid = mysqli_fetch_assoc($connection ->query('SELECT client_id AS id FROM clients ORDER BY client_id DESC LIMIT 1'))['id'];
         if ($res) {
             echo "success".$lastid;
