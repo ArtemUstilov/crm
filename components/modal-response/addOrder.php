@@ -37,19 +37,18 @@ if (isset($_POST['client']) &&
         ChromePhp::log($vg, " : ", $client, " : ", $user_id, " : ", $description, " : ", $sum_vg, " : ", $out_percent, " : ", $sum_currency, " : ",
             $obtain, " : ", $rollback_sum, " : ", $rollback_1, " : ", $date, " : ", $callmaster, " : ", $debt);
         if ($callmaster) {
-            ChromePhp::log("keke");
             $add_order = $connection->
             query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`) 
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`) 
         VALUES
-        ('$vg', '$client', '$user_id', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description') ");
             ChromePhp::log($add_order);
         } else {
             $add_order = $connection->
             query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `user_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`) 
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description1) 
         VALUES
-        ('$vg', '$client', '$user_id', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description') ");
         }
         if ($add_order) {
             $in_percent = mysqli_fetch_assoc($connection->query("
@@ -72,7 +71,7 @@ if (isset($_POST['client']) &&
                 $share_percent = $var['value'];
                 $add_share = $connection->
                 query("INSERT INTO `shares`
-                (`order_id`, `owner_id`, `sum`, `share_percent`) VALUES
+                (`order_id`, `user_as_owner_id`, `sum`, `share_percent`) VALUES
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
             }
             if ($debt > 0) {

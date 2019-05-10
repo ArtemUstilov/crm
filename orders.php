@@ -16,7 +16,7 @@ O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
-INNER JOIN users U ON U.user_id = O.user_id
+INNER JOIN users U ON U.user_id = C.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 INNER JOIN branch B ON U.branch_id = B.branch_id
 ORDER BY `date` DESC
@@ -30,7 +30,7 @@ O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
-INNER JOIN users U ON U.user_id = O.user_id
+INNER JOIN users U ON U.user_id = C.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 WHERE U.branch_id = '$branch_id'
 ORDER BY `date` DESC
@@ -44,7 +44,7 @@ O.sum_currency AS сумма, O.method_of_obtaining AS оплата,
 O.date AS дата, O.description AS коммент
 FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
-INNER JOIN users U ON U.user_id = O.user_id
+INNER JOIN users U ON U.user_id = C.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
 WHERE O.user_id = '.$_SESSION["id"].'
 ORDER BY `date` DESC

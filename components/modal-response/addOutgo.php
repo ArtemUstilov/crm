@@ -1,4 +1,5 @@
 <?php
+include_once '../../dev/ChromePhp.php';
 if (isset($_POST['sum'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -11,7 +12,7 @@ if (isset($_POST['sum'])) {
     $user_id = $_SESSION['id'];
     if($owner){
         $res = $connection->
-        query("INSERT INTO `outgo` (`user_id`,`sum`,`owner_id`, `date`, `description`) VALUES('$user_id','$sum','$owner', '$date', '$descr') ");
+        query("INSERT INTO `outgo` (`user_id`,`sum`,`user_as_owner_id`, `date`, `description`) VALUES('$user_id','$sum','$owner', '$date', '$descr') ");
     }else{
         $res = $connection->
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`) VALUES('$user_id','$sum', '$date', '$descr') ");

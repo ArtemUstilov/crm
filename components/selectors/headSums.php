@@ -18,17 +18,17 @@ FROM outgo
 WHERE user_id IN (SELECT user_id
                   FROM users
                   WHERE branch_id = '$branch_id') 
-AND `owner_id` IS NULL
+AND `user_as_owner_id` IS NULL
 AND `date` >= '".$start." 00:00:00' AND `date` <= '".$end." 23:59:59'
 "))['average_outgo'];
 
 $headSumsRaw = $connection->query('
 SELECT O.owner_id, TT.sum
-FROM owners O
+FROM (SELECT user_id AS owner_id, branch_id, first_name, last_name FROM users WHERE is_owner = 1) O
 LEFT JOIN (
 
     SELECT O.owner_id AS "id", (IFNULL(SUM(S.sum),0) - "' . $averageOutgo . '") AS sum
-FROM owners O
+FROM (SELECT user_id AS owner_id, branch_id, first_name, last_name FROM users WHERE is_owner = 1) O
 LEFT OUTER JOIN shares S ON O.owner_id = S.owner_id
 LEFT OUTER JOIN orders ORD ON ORD.order_id = S.order_id
 LEFT OUTER JOIN outgo T ON T.owner_id = O.owner_id
