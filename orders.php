@@ -58,9 +58,9 @@ ORDER BY `date` DESC
 $clients = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS name, C.client_id AS id FROM clients C
 ');
-$vgs = $connection -> query('
-SELECT * FROM virtualgood
-');
+$vgs = $connection -> query("
+SELECT VG.vg_id, 'name', out_percent FROM virtualgood VG INNER JOIN vg_data VD ON VD.vg_id = VG.vg_id
+");
 
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;

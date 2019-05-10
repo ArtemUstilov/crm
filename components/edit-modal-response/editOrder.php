@@ -31,12 +31,12 @@ if (isset($_POST['order_id']) &&
         query("SELECT *
                      FROM orders
                      WHERE order_id ='$order_id'"));
-
         $old_shares_data = mysqliToArray($connection->
-        query("SELECT owner_id, share_percent
+        query("SELECT user_as_owner_id AS owner_id, share_percent
                      FROM shares
                      WHERE order_id ='$order_id'"));
         $sharesChanged = true;
+
 //        if (count($shares) !== count($old_shares_data))
 //            $sharesChanged = true;
 //        else
@@ -54,7 +54,7 @@ if (isset($_POST['order_id']) &&
 
             $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
-            FROM virtualgood
+            FROM vg_data
             WHERE vg_id = '$vg_id'
             "))['in_percent'];
             foreach ($shares as $key => $value) {
@@ -63,7 +63,7 @@ if (isset($_POST['order_id']) &&
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($share_percent / 100));
                 $add_share = $connection->
                 query("INSERT INTO `shares`
-                (`order_id`, `owner_id`, `sum`, `share_percent`) VALUES
+                (`order_id`, `user_as_owner_id`, `sum`, `share_percent`) VALUES
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
             }
         }
@@ -75,8 +75,10 @@ if (isset($_POST['order_id']) &&
                      WHERE branch_id IN(
                          SELECT branch_id FROM users WHERE
                          user_id IN (
-                             SELECT user_id FROM orders
-                             WHERE order_id = '$order_id'
+                             SELECT user_id FROM clients
+                             WHERE client_id IN(
+                                     SELECT client_id FROM orders
+                                     WHERE order_id = '$order_id')
                          )
                      )");
             $_SESSION['money'] += $money;
@@ -90,10 +92,12 @@ if (isset($_POST['order_id']) &&
                 $update_user = $connection->
                 query("UPDATE branch SET `money` = `money` - '$money'
                      WHERE branch_id IN(
-                         SELECT branch_id FROM users WHERE
-                         user_id IN (
-                             SELECT user_id FROM orders
-                             WHERE order_id = '$order_id'
+                         SELECT branch_id FROM users 
+                         WHERE user_id IN (
+                             SELECT user_id FROM clients
+                             WHERE client_id IN(
+                                     SELECT client_id FROM orders
+                                     WHERE order_id = '$order_id')
                          )
                      )");
                 $_SESSION['money'] -= $money;
@@ -116,9 +120,11 @@ if (isset($_POST['order_id']) &&
             UPDATE branch SET `money` = `money` - '$new_debt'
                      WHERE branch_id IN(
                          SELECT branch_id FROM users WHERE
-                         user_id IN (
-                             SELECT user_id FROM orders
-                             WHERE order_id = '$order_id'
+                        user_id IN (
+                             SELECT user_id FROM clients
+                             WHERE client_id IN(
+                                     SELECT client_id FROM orders
+                                     WHERE order_id = '$order_id')
                          )
                      )
             ");

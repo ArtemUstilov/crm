@@ -59,6 +59,7 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
+            console.log(res);
             createAlertTable(res, "Заказ");
         },
         error: function () {
