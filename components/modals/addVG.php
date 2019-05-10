@@ -1,12 +1,23 @@
 <?php
 function vgAddModal($data)
 {
+    $vgs = $data['vgs'];
     $output = '
 <div id="VG-Modal" class="modal" action="" role="form">
 <form id="add-vg-form">
   <h2 class="modal-title">Добавить валюту</h2>
   <div class="modal-inputs">
   <p>
+  <select id="nameVgnField" data-validation="required">
+  <option value="" disabled selected>Выберите VG</option>
+    <option class="new-vg-option" value="-1">Добавить новый</option>';
+    if($vgs) foreach ($vgs as $key => $var) {
+        $output .= '<option value="' . $var['vg_id'].'">' . $var['name']. '</option>';
+    }
+    $output .= '
+</select>
+  </p>
+  <p id="nameVgn">
   <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
   <p>
@@ -17,6 +28,9 @@ function vgAddModal($data)
   </p>
    <p>
   <input id="urlField" placeholder="url" type="url" name="url">
+  </p>
+    <p>
+  <input id="keyField" placeholder="key" type="url" name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
@@ -40,6 +54,9 @@ function vgAddModal($data)
   </p>
    <p>
   <input id="editUrlField" placeholder="url" type="url" name="url">
+  </p>
+  <p>
+  <input id="editKeyField" placeholder="key" type="url" name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

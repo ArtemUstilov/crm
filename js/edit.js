@@ -236,6 +236,8 @@ function fillVGEditForm(target) {
             $('#edit-vg-form #editNameField').val(res['name']);
             $('#edit-vg-form #editOutField').val(res['out']);
             $('#edit-vg-form #editInField').val(res['in']);
+            $('#edit-vg-form #editUrlField').val(res['url']);
+            $('#edit-vg-form #editKeyField').val(res['key']);
             $(".spinner").fadeOut('fast');
             $('#VG-edit-Modal').modal();
 

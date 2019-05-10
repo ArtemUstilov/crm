@@ -198,6 +198,7 @@ function editVG() {
     let in_percent = $("#edit-vg-form #editInField").val();
     let out_percent = $("#edit-vg-form #editOutField").val();
     let url = $("#edit-vg-form #editUrlField").val();
+    let key = $("#edit-vg-form #editKeyField").val();
     let id = $("#edit-vg-form #edit-vg-title").attr('vg-id');
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
@@ -209,14 +210,15 @@ function editVG() {
             out_percent,
             in_percent,
             url,
+            key,
             vg_id : id,
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Пользователь");
+            createAlertTable(res, "VG");
         },
         error: function () {
-            createAlertTable("connectionError", "Пользователь");
+            createAlertTable("connectionError", "VG");
         },
         complete: function () {
             setTimeout(function () {

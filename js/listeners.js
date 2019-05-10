@@ -368,6 +368,15 @@ $(document).ready(function () {
         cb(start, end);
     })();
 
+    const vgcl = $('#VG-Modal #nameVgnField');
+    $('#nameVgn').hide();
+    vgcl.change(function (e) {
+        if($('#VG-Modal #nameVgnField').val() == -1){
+            $('#nameVgn').show();
+        }else{
+            $('#nameVgn').hide();
+        }
+    });
 });
 
 
