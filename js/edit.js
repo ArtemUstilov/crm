@@ -44,7 +44,7 @@ $('tr').on('click', (e) => {
             fillOrderEditForm(mainParent);
             break;
         case "info":
-            fillOrderAdditionalInfo(mainParent);
+            fillAdditionalInfo(mainParent);
             break;
         default:
             break;
@@ -52,34 +52,61 @@ $('tr').on('click', (e) => {
 
 });
 
-function fillOrderAdditionalInfo(target) {
+function fillAdditionalInfo(target) {
     $(".spinner").show();
-    let order_id = target.attr('itemid');
-    $.ajax({
-        url: "../components/selectors/OrderInfo.php",
-        type: "POST",
-        dataType: 'JSON',
-        data: {
-            order_id,
-        },
-        cache: false,
-        success: function (res) {
-            $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
-            let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
-            const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%)</p>`;
-            if (res[0]["callmaster"])
-                owners += callmaster;
-            $('#info-order-form .text').html(owners);
-        },
-        error: function () {
-            $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
-        },
-        complete: function () {
-            $(".spinner").fadeOut('fast');
-            $("#Order-info-modal").modal();
+    if($('#table-wrapper').hasClass('Client')){
+        let client_id = target.attr('itemid');
+        $.ajax({
+            url: "../components/selectors/ClientInfo.php",
+            type: "POST",
+            dataType: 'JSON',
+            data: {
+                client_id,
+            },
+            cache: false,
+            success: function (res) {
+                $('#info-client-form .modal-title').text(`Информация о клиенте`).attr('client-id', res['id']);
+                let rollbacks = '<h4>Откаты</h4>' + res['rollback'].map(line => `<br/><p>${line["rollback"]} ${line["fiat"]}</p>`).join('') + '<br/>';
+                rollbacks += '<h4>Долги</h4>' + res['debt'].map(line => `<br/><p>${line["debt"]} ${line["fiat"]}</p>`).join('');
+                $('#info-client-form .text').html(rollbacks);
+            },
+            error: function () {
+                $('#info-client-form .modal-title').text(`Нет информации про клиента`);
+            },
+            complete: function () {
+                $(".spinner").fadeOut('fast');
+                $("#Client-info-modal").modal();
 
-        }
-    });
+            }
+        });
+    }else{
+        let order_id = target.attr('itemid');
+        $.ajax({
+            url: "../components/selectors/OrderInfo.php",
+            type: "POST",
+            dataType: 'JSON',
+            data: {
+                order_id,
+            },
+            cache: false,
+            success: function (res) {
+                $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
+                let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
+                const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%)</p>`;
+                if (res[0]["callmaster"])
+                    owners += callmaster;
+                $('#info-order-form .text').html(owners);
+            },
+            error: function () {
+                $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
+            },
+            complete: function () {
+                $(".spinner").fadeOut('fast');
+                $("#Order-info-modal").modal();
+
+            }
+        });
+    }
 }
 
 function fillOrderEditForm(target) {

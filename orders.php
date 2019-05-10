@@ -46,7 +46,7 @@ FROM orders O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = C.user_id
 INNER JOIN virtualgood V ON V.vg_id = O.vg_id
-WHERE O.user_id = '.$_SESSION["id"].'
+WHERE C.user_id = '.$_SESSION["id"].'
 ORDER BY `date` DESC
 ');
        break;

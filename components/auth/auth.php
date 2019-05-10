@@ -6,7 +6,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $password = clean($_POST['password']);
     // $remember_me = clean($_POST['remember_me']);
     $user_data = mysqli_fetch_assoc($connection->query("
-        SELECT U.active, last_name, first_name, login, role, B.branch_name, U.branch_id, pass_hash, user_id, B.money
+        SELECT U.active, last_name, first_name, login, role, B.branch_name, U.branch_id, pass_hash, user_id
         FROM users U 
         INNER JOIN branch B ON B.branch_id = U.branch_id 
         WHERE login='$login'

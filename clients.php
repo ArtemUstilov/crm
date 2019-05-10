@@ -6,6 +6,7 @@ include_once './db.php';
 $options['text'] = 'Клиенты';
 $options['type'] = 'Client';
 $options['edit'] = 1;
+$options['info'] = true;
 $options['btn-text'] = 'Добавить';
 $options['btn'] = 1;
 session_start();
@@ -13,9 +14,9 @@ switch(accessLevel()){
     case 3:
         $clients = $connection->query('
                     SELECT client_id AS id, concat(last_name, " ", first_name) AS "Полное имя",
-                           byname AS Имя, IFNULL(phone_number, "-") AS телефон, debt AS долг, 
-                           rollback_sum AS откат, email AS почта, IFNULL(telegram, "-") AS телеграм
-                    FROM clients
+                           byname AS Имя, IFNULL(phone_number, "-") AS телефон,
+                           email AS почта, IFNULL(telegram, "-") AS телеграм
+                    FROM clients C
                     ');
         break;
     case 2:
