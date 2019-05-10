@@ -117,6 +117,7 @@ function orderAddModal($data, $more_data)
   </select>
 </p>
  <p>
+ Комментарий
   <textarea id="editCommentField" rows="3"  placeholder="Комментарий" name="description"></textarea>
   </p>
   <p>

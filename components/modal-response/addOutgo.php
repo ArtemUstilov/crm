@@ -16,6 +16,13 @@ if (isset($_POST['sum'])) {
         $res = $connection->
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`) VALUES('$user_id','$sum', '$date', '$descr') ");
     }
+    if($res)
+       $money_update = $connection->
+        query("UPDATE branch SET `money` = `money` - '$sum' WHERE branch_id IN(
+                                                                     SELECT branch_id 
+                                                                     FROM users
+                                                                     WHERE user_id = '$user_id'
+)");
     $_SESSION['money'] -= $sum;
     if ($res) {
         echo "success";
