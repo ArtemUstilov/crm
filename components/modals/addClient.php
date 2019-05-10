@@ -88,6 +88,13 @@ function clientAddModal($data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-
+    $output .= '<a href="#Client-info-modal" rel="modal:open" style="display: none"></a>
+<div id="Client-info-modal" class="modal" style="width: auto; text-align:center">
+<div id="info-client-form">
+  <h2 class="modal-title">Иноформация про fff</h2>
+  <div class="text">
+  </div>
+  </div>
+</div>';
     return $output;
 }

@@ -353,13 +353,14 @@ $(document).ready(function () {
     function addOutgo() {
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
+        let fiat = $("#add-outgo-form #fiatField").val();
         let descr = $("#add-outgo-form #commentField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addOutgo.php",
             type: "POST",
-            data: {owner, sum, description: descr},
+            data: {owner, sum, description: descr, fiat},
             cache: false,
             success: function (res) {
                 createAlertTable(res, "Расход");
