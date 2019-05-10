@@ -191,6 +191,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                console.log(res);
                 try {
                     res = JSON.parse(res);
                 } catch {
