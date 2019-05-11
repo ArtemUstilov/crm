@@ -16,12 +16,15 @@ if (isset($_POST['client']) &&
     $client = clean($_POST['client']);
     $callmaster = $_POST['callmaster'];
     $description = $_POST['descr'];
-    $rollback_sum = $sum_vg / 100 * ($rollback_1);
-    $obtain = clean($_POST['obtain']);
     $out_percent = clean($_POST['out']);
+
+    $sum_currency = ($sum_vg * $out_percent) / 100;
+    $rollback_sum = $sum_currency / 100 * ($rollback_1);
+    $obtain = clean($_POST['obtain']);
+
     $shares = $_POST['shares'];
     $debt = $_POST['debtCl'] ? clean($_POST['debtCl']) : 0;
-    $sum_currency = ($sum_vg * $out_percent) / 100;
+
     $money_to_add = $sum_currency - $debt;
     $date = date('Y-m-d H:i:s');
     $fiat = clean($_POST['fiat']);
