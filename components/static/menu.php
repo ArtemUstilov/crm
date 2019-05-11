@@ -20,6 +20,8 @@ function menu()
         <li><a href="../../outgo.php" class=' . ($curPage === 'outgo' ? '"active" disabled' : '') . '>Расходы</a></li>
         <li><a href="../../referals.php" class=' . ($curPage === 'referals' ? '"active" disabled' : '') . '>Рефералы</a></li>
         <li><a href="../../debts.php" class=' . ($curPage === 'debts' ? '"active" disabled' : '') . '>Должники</a></li>
+        <li><a href="../../statistics.php" class=' . ($curPage === 'statistics' ? '"active" disabled' : '') . '>Статистика</a></li>
+
         <li>    <a class="menu-logout-btn" href="./components/auth/logout.php">Выйти</a></li>
     </ul>
 </div>');
