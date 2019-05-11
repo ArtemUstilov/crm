@@ -52,17 +52,14 @@ $(document).ready(function () {
     });
 
     function addHead() {
-        let [first_name, last_name] = $("#add-head-form #nameField").val().split(' ');
-        let branch = $("#add-head-form #branchField").val();
+        let id = $("#add-head-form #nameField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/addHead.php",
             type: "POST",
             data: {
-                first_name,
-                last_name,
-                branch,
+                user_id: id,
             },
             cache: false,
             success: function (res) {

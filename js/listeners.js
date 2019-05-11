@@ -302,7 +302,7 @@ $(document).ready(function () {
                         res = JSON.parse(res);
                         if(!res || !res.length) return;
                         res.forEach(r => {
-                            const cell = $('.Head [itemid*=' + r.owner_id + '] .1-f');
+                            const cell = $('.Head [itemid*=' + r.id + '] .1-f');
                             cell.attr('title', r.sum || 0);
                             cell.text(r.sum || 0);
                         })
@@ -377,6 +377,27 @@ $(document).ready(function () {
             $('#nameVgn').hide();
         }
     });
+    $('.fa-coins').click(function(){
+        $('.spinner').show();
+        $.ajax({
+            url: "../components/selectors/branchSums.php",
+            type: "POST",
+            cache: false,
+            success: function (res) {
+                res = JSON.parse(res);
+                const modal = $("#Branch-money-info-modal");
+                modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
+                modal.html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
+                modal.modal();
+            },
+            error: function () {
+                createAlertTable("connectionError", "Деньги");
+            },
+            complete: function () {
+                $('.spinner').fadeOut('fast');
+            }
+        });
+    })
 });
 
 

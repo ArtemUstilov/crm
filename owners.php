@@ -7,6 +7,7 @@ include_once './db.php';
 $users = $connection->query('
 SELECT *
 FROM users
+WHERE is_owner = 0
 ');
 if(iCan(3)){
     $branches = $connection->query('
@@ -22,7 +23,7 @@ FROM branch
     $users = $connection->query('
 SELECT *
 FROM users
-WHERE branch_id = '.$_SESSION['branch_id'].'
+WHERE branch_id = '.$_SESSION['branch_id'].' AND is_owner = 0
 ');
     $branches = $connection->query('
 SELECT branch_id AS id, branch_name

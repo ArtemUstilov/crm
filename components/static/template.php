@@ -68,13 +68,16 @@ function template($body)
 </div>
 <div class="account-name-menu-btn-box">
 <i class="fas fa-coins fa-2x"></i>
-<p class="menu-n money-t">' . $_SESSION['money'] . 'грн</p>
 </div>
 <div id="logout" class="account-name-menu-btn-box">
 <i class="fas fa-' . $userIcon . ' fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
 <a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
+</div>
+<a href="#Branch-money-info-modal" rel="modal:open" style="display: none"></a>
+<div id="Branch-money-info-modal" class="modal">
+
 </div>
 <div class="main-wrapper">
 ' . menu() . '

@@ -23,6 +23,11 @@ html, body {
 textarea{
     width: 100%;
 }
+#Branch-money-info-modal{
+    width:auto;
+    position: absolute;
+    left: 0;
+}
 .login-page {
     height: 100%;
     display: flex;
