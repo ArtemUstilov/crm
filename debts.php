@@ -56,10 +56,10 @@ $options['btn'] = 1;
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
 SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
-byname AS login, debt
+byname AS login, P.sum AS debt
 FROM clients C
-INNER JOIN orders O ON C.client_id = O.client_id
-WHERE  debt > 0 AND O.user_id = '.$_SESSION["id"].'
+INNER JOIN payments P ON C.client_id = P.client_debt_id
+WHERE  P.sum > 0
 ');
 echo template(display_data($info, $options, $data));
 

@@ -54,7 +54,8 @@ $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
 SELECT concat(last_name, " ", first_name) AS client_name, 
 byname AS login, P.sum AS rollback_sum, fiat_id
-FROM clients C INNER JOIN payments P ON C.client_id = P.client_rollback_id
+FROM clients C 
+INNER JOIN payments P ON C.client_id = P.client_rollback_id
 WHERE  P.sum > 0
 ');
 echo template(display_data($info, $options, $data));
