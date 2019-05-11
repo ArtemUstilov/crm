@@ -14,8 +14,6 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     if ($user_data && (heCan($user_data['role'], 1))) {
-
-
         $paydebt = $connection->query("UPDATE payments SET sum = sum - '$number' WHERE client_debt_id = '$client_id' AND fiat_id = '$fiat'");
         if($paydebt){
             $add_ref = $connection->

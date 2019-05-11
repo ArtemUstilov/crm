@@ -56,7 +56,7 @@ $('tr').on('click', (e) => {
 
 function fillAdditionalInfo(target) {
     $(".spinner").show();
-    if($('#table-wrapper').hasClass('Client')){
+    if ($('#table-wrapper').hasClass('Client')) {
         let client_id = target.attr('itemid');
         $.ajax({
             url: "../components/selectors/ClientInfo.php",
@@ -81,7 +81,7 @@ function fillAdditionalInfo(target) {
 
             }
         });
-    }else{
+    } else {
         let order_id = target.attr('itemid');
         $.ajax({
             url: "../components/selectors/OrderInfo.php",
@@ -376,17 +376,16 @@ function checkUserData() {
         type: "POST",
         data: "req=ok",
         cache: false,
-        dataType: 'JSON',
+        dataType: 'html',
         success: function (res) {
-            if (res['money']) $('.account-name-menu-btn-box .money-t').text(`${res['money']}грн`)
             if (res['active'] === "inactive") {
                 window.location.href = '../index.php';
             } else {
                 setTimeout(checkUserData, 3000);
             }
         },
-        error: function () {
-
+        error: function (res) {
+            setTimeout(checkUserData, 3000);
         }
     });
 

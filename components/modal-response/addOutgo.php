@@ -7,6 +7,7 @@ if (isset($_POST['sum'])) {
     $fiat = clean($_POST['fiat']);
     $descr = clean($_POST['description']);
     session_start();
+    $branch_id = $_SESSION['branch_id'];
     date_default_timezone_set('Europe/Kiev');
     $date = date('Y-m-d H:i:s');
     $user_id = $_SESSION['id'];
@@ -18,13 +19,9 @@ if (isset($_POST['sum'])) {
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat') ");
     }
     if($res)
-       $money_update = $connection->
-        query("UPDATE branch SET `money` = `money` - '$sum' WHERE branch_id IN(
-                                                                     SELECT branch_id 
-                                                                     FROM users
-                                                                     WHERE user_id = '$user_id'
-)");
-    $_SESSION['money'] -= $sum;
+        $connection->
+        query("UPDATE payments SET `sum` = `sum` - '$sum' 
+                      WHERE branch_id = '$branch_id' AND fiat_id = '$fiat'");
     if ($res) {
         echo "success";
         return false;

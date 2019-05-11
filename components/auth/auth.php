@@ -31,7 +31,6 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['id'] = $user_data['user_id'];
     $_SESSION['branch'] = $user_data['branch_name'];
     $_SESSION['branch_id'] = $user_data['branch_id'];
-    //$_SESSION['money'] = $user_data['money'];
     //$_SESSION['remember_me'] = $remember_me; in future
     echo "success";
 }

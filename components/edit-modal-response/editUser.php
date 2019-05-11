@@ -16,7 +16,6 @@ if (isset($_POST['login']) && isset($_POST['role'])
     $user_id = $_SESSION['id'];
     if ($user_id == $edit_user_id) {
         $_SESSION['name'] = $first_name . ' ' . $last_name;
-        $_SESSION['money'] = $money;
         if ($_SESSION['branch_id'] !== $branch) {
             $_SESSION['branch'] = mysqli_fetch_assoc($connection->query("SELECT branch_name FROM branch WHERE branch_id='$branch'"))['branch_name'];
         }
