@@ -77,9 +77,10 @@ WHERE C.user_id IN(
 ORDER BY P.sum DESC
 ');
         $sumDebtsRaw = $connection->query('
-SELECT SUM(P.sum) AS sum
+SELECT SUM(P.sum) AS sum, G.fiat_id, full_name
 FROM clients F
 INNER JOIN payments P ON P.client_debt_id = F.client_id 
+INNER JOIN fiats G ON P.fiat_id = G.fiat_id  
 WHERE F.client_id IN(
     SELECT DISTINCT C.client_id
     FROM clients C
@@ -88,6 +89,7 @@ WHERE F.client_id IN(
         FROM users U
         WHERE U.branch_id = ' . $branch_id . '
 )) AND P.sum > 0
+GROUP BY G.fiat_id
 ');
         $rollbackData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, C.client_id AS id, F.name AS валюта
@@ -110,14 +112,15 @@ WHERE C.user_id IN(
     WHERE branch_id = ' . $branch_id . ') AND P.sum > 0
 ');
         $rollbackSum = $connection->query('
-SELECT SUM(P.sum) AS sum, fiat_id, full_name
+SELECT SUM(P.sum) AS sum, F.fiat_id, full_name
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
+INNER JOIN fiats F ON P.fiat_id = F.fiat_id  
 WHERE C.rollback_sum > 0 AND C.user_id IN(
         SELECT user_id
         FROM users
         WHERE branch_id = ' . $branch_id . ')
-GROUP BY fiat_id
+GROUP BY F.fiat_id
 ');
         break;
     case 3:
@@ -135,9 +138,11 @@ INNER JOIN payments P ON P.client_debt_id = C.client_id
 WHERE P.sum > 0
 ORDER BY P.sum DESC');
         $sumDebtsRaw = $connection->query('
-SELECT SUM(P.sum) AS sum
+SELECT SUM(P.sum) AS sum, F.fiat_id, full_name
 FROM clients C
-INNER JOIN payments P ON P.client_debt_id = C.client_id 
+INNER JOIN payments P ON P.client_debt_id = C.client_id
+INNER JOIN fiats F ON P.fiat_id = F.fiat_id  
+GROUP BY F.fiat_id
 ');
         $rollbackData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, client_id AS id, F.name AS валюта
@@ -154,10 +159,11 @@ INNER JOIN payments P ON P.client_rollback_id = C.client_id
 WHERE P.sum > 0
 ');
         $rollbackSum = $connection->query('
-SELECT SUM(P.sum) AS sum, fiat_id, full_name
+SELECT SUM(P.sum) AS sum, F.fiat_id, full_name
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
-GROUP BY fiat_id
+INNER JOIN fiats F ON P.fiat_id = F.fiat_id  
+GROUP BY F.fiat_id
 ');
         break;
     case 1:
@@ -175,14 +181,16 @@ INNER JOIN payments P ON P.client_debt_id = C.client_id
 WHERE C.user_id = ' . $_SESSION["id"] . ' AND P.sum > 0
 ORDER BY P.sum DESC');
         $sumDebtsRaw = $connection->query('
-SELECT SUM(P.sum) AS sum
+SELECT SUM(P.sum) AS sum, G.fiat_id, full_name
 FROM clients F
 INNER JOIN payments P ON P.client_debt_id = F.client_id 
+INNER JOIN fiats G ON P.fiat_id = G.fiat_id  
 WHERE F.client_id IN(
     SELECT DISTINCT C.client_id
     FROM clients C
     WHERE C.user_id = ' . $_SESSION["id"] . '
     )
+GROUP BY G.fiat_id
 ');
         $rollbackData = $connection->query('
 SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, C.client_id AS id, F.name AS валюта
@@ -199,11 +207,12 @@ INNER JOIN payments P ON P.client_rollback_id = C.client_id
 WHERE C.user_id = ' . $_SESSION["id"] . ' AND P.sum > 0
 ');
         $rollbackSum = $connection->query('
-SELECT SUM(P.sum) AS sum, fiat_id, full_name
+SELECT SUM(P.sum) AS sum, F.fiat_id, full_name
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
+INNER JOIN fiats F ON P.fiat_id = F.fiat_id  
 WHERE C.rollback_sum > 0 AND C.user_id = ' . $_SESSION["id"] . '
-GROUP BY fiat_id
+GROUP BY F.fiat_id
 ');
         break;
 }
@@ -219,9 +228,20 @@ $options['btn'] = 1;
 $options['modal'] = 'Debt-Modal';
 $table .= display_data($debtorsData, $options, $data);
 
-$sumDebts = $sumDebtsRaw ? mysqli_fetch_assoc($sumDebtsRaw) : null;
+$sumDebts = $sumDebtsRaw ? mysqliToArray($sumDebtsRaw) : null;
+if ($sumDebts) {
+    $empty = true;
+    foreach ($sumDebts as $key => $var) {
+        if($var['sum'] > 0) $empty = false;
+    }
+    if(!$empty){
+        $table .= '<h3 >Всего: ';
+        foreach ($sumDebts as $key => $var) {
+            $table .= $var['sum'] .' '. $var['full_name'].', ';
+        }
+    }
+}
 
-if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
 $fiats = $connection->query("SELECT * FROM fiats");
 $data['clients'] = $rollbackList;
 $data['fiats'] = $fiats;
@@ -233,13 +253,18 @@ $options['btn'] = 1;
 $options['modal'] = 'Rollback-Modal';
 
 $table .= display_data($rollbackData, $options, $data);
-
 $sumDebts = $rollbackSum ? mysqliToArray($rollbackSum) : null;
 if ($sumDebts) {
+    $empty = true;
     foreach ($sumDebts as $key => $var) {
-        $output .= '<p >' . $var['sum'] . $var['full_name'] .'</option>';
+        if($var['sum'] > 0) $empty = false;
     }
-    $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
+    if(!$empty){
+        $table .= '<h3 >Всего: ';
+        foreach ($sumDebts as $key => $var) {
+            $table .= $var['sum'] .' '. $var['full_name'].', ';
+        }
+    }
 }
 
 

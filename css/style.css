@@ -23,6 +23,9 @@ html, body {
 textarea{
     width: 100%;
 }
+h3{
+    font-size: 21px !important;
+}
 #Branch-money-info-modal{
     width:auto;
     position: absolute;
