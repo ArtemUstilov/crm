@@ -23,6 +23,11 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
         if($change_rollback_sum){
             $add_ref = $connection->
             query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date, fiat_id) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\", '$fiat') ");
+
+            $update_branch_money = $connection->
+            query("UPDATE  `payments` 
+                                  SET `sum` = `sum` - '$number'
+                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
         }
         if ($add_ref) {
             echo "success";
