@@ -222,6 +222,9 @@ h2 {
 .fa-coins, .fa-building, .fa-edit, .fa-user, .fa-user-cog, .fa-user-shield {
     margin-right: 12px;
 }
+.fa-coins{
+    cursor: pointer;
+}
 
 .fa-info-circle {
     margin-right: 5px;
