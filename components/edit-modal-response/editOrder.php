@@ -83,7 +83,6 @@ if (isset($_POST['order_id']) &&
                                      WHERE order_id = '$order_id')
                          )
                      )");
-            $_SESSION['money'] += $money;
         }
 
         if ($order_data['client_id'] != $client_id) {
@@ -102,7 +101,6 @@ if (isset($_POST['order_id']) &&
                                      WHERE order_id = '$order_id')
                          )
                      )");
-                $_SESSION['money'] -= $money;
             }
             $update_old_client = $connection->
             query("UPDATE clients SET `debt` = `debt` - '$old_debt'
@@ -130,8 +128,6 @@ if (isset($_POST['order_id']) &&
                          )
                      )
             ");
-
-            $_SESSION['money'] -= $new_debt;
         }
         if ($order_data['callmaster'] != $callmaster) {
             $old_callmaster = $order_data['callmaster'];

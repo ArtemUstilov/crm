@@ -23,7 +23,6 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
             UPDATE `branch` 
             SET `money` = `money` + $number 
             WHERE `branch_id` = $branch_id");
-        $_SESSION['money'] += $number;
         if ($change_debt && $add_ref && $change_branch_sum) {
             echo "success";
             return false;

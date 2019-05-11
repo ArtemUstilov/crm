@@ -2,9 +2,7 @@
 session_start();
 include_once '../../dev/ChromePhp.php';
 if (isset($_SESSION['id'])) {
-
     $user_id = $_SESSION['id'];
-    $old_money = $_SESSION['money'];
     $branch_id = $_SESSION['branch_id'];
     include_once("../../db.php");
     include_once("../../funcs.php");

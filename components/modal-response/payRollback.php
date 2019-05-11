@@ -24,7 +24,6 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
              UPDATE `branch` 
             SET `money` = `money` - $number 
             WHERE `branch_id` = $branch_id");
-        $_SESSION['money'] -= $number;
         if ($change_rollback_sum && $add_ref) {
             echo "success";
             return false;
