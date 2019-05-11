@@ -7,6 +7,7 @@ $options['text'] = 'Клиенты';
 $options['type'] = 'Client';
 $options['edit'] = 1;
 $options['info'] = true;
+$options['btn-max'] = 2;
 $options['btn-text'] = 'Добавить';
 $options['btn'] = 1;
 session_start();

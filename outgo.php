@@ -59,6 +59,7 @@ WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 $options['type'] = 'Outgo';
 $options['text'] = 'История расходов';
 $options['btn'] = 1;
+$options['btn-max'] = 2;
 $options['btn-text'] = 'Добавить';
 echo template(display_data($info, $options, $data));
 ?>

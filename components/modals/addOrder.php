@@ -39,7 +39,7 @@ function orderAddModal($data, $more_data)
 </p>
   <p>
   Сумма вг
-  <input id="sumVGField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
+  <input id="sumVGField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" step="0.01" name="sum-vg">
   </p>
    <p>
    Не оплаченая часть
@@ -121,11 +121,11 @@ function orderAddModal($data, $more_data)
 </p>
   <p>
   Сумма вг
-  <input id="editSumVGField" min="0" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" name="sum-vg">
+  <input id="editSumVGField" min="0" data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" step="0.01" name="sum-vg">
   </p>
    <p>
    Не оплаченая часть
-  <input id="editDebtClField" min="0" data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0>
+  <input id="editDebtClField" min="0" data-validation="required length" data-validation-length="min1" type="number" step="0.01" name="debt-sum" value = 0>
   </p>
   <p>
   Реферал

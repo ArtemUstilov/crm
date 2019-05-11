@@ -7,7 +7,7 @@ function outgoModal($data, $more_data)
   <h2 class="modal-title">Добавить расходы</h2>
   <div class="modal-inputs">
    <p>
-  <input id="sumField" min=0 data-validation="required" placeholder="Сумма" type="number" name="sum">
+  <input id="sumField" min=0 data-validation="required" placeholder="Сумма" type="number" step="0.01" name="sum">
   </p>
   <p>
   <select id="ownerField">

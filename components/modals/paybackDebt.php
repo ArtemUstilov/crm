@@ -31,7 +31,7 @@ function debtModal($data)
 </select>
 </p>
   <p>
-  <input id="paybackField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in">
+  <input id="paybackField" data-validation="required length" data-validation-length="min1" placeholder="Выплата" type="number" name="in" step="0.01">
   </p>
   <p>
 <select id="fiatField" data-validation="required">

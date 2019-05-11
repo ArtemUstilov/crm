@@ -13,7 +13,7 @@ $output = '
             </p>
              <p>
   Деньги
-  <input id="moneyField"    placeholder="Деньги" type="number" name="money">
+  <input id="moneyField"    placeholder="Деньги" type="number" name="money" step="0.01">
   </p>
             </div>
             <input class="modal-submit" type="submit" value="Добавить">
@@ -34,7 +34,7 @@ $output = '
             </p>
        <p>
   Деньги
-  <input id="editMoneyField"    placeholder="Деньги" type="number" name="money">
+  <input id="editMoneyField"    placeholder="Деньги" type="number" name="money" step="0.01">
   </p>
             </div>
             <input class="modal-submit" type="submit" value="Сохранить">
