@@ -9,23 +9,25 @@ switch (accessLevel()) {
     case 3:
         $info = $connection -> query("
 SELECT B.branch_name AS отдел, concat(U.last_name, ' ', U.first_name) AS агент, U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-O.debt_sum AS сума,
+O.debt_sum AS сумма, F.full_name AS валюта,
 O.date AS дата
 FROM debt_history O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN branch B ON B.branch_id = U.branch_id
+INNER JOIN fiats F ON F.fiat_id = O.fiat_id
 ORDER BY `date` DESC
 ");
         break;
     case 2:
         $info = $connection -> query("
 SELECT concat(U.last_name, ' ', U.first_name) AS агент, U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-O.debt_sum AS сума,
+O.debt_sum AS сумма, F.full_name AS валюта,
 O.date AS дата
 FROM debt_history O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
+INNER JOIN fiats F ON F.fiat_id = O.fiat_id
 WHERE U.branch_id = '$branch_id'
 ORDER BY `date` DESC
 ");
@@ -33,11 +35,12 @@ ORDER BY `date` DESC
     case 1:
         $info = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS клиент, 
-O.debt_sum AS сума,
+O.debt_sum AS сумма, F.full_name AS валюта,
 O.date AS дата
 FROM debt_history O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
+INNER JOIN fiats F ON F.fiat_id = O.fiat_id
 WHERE O.user_id = '.$_SESSION["id"].'
 ORDER BY `date` DESC
 ');

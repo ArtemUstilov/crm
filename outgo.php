@@ -9,7 +9,7 @@ $branch_id = $_SESSION['branch_id'];
 switch (accessLevel()) {
     case 3:
         $info = $connection->query("
-SELECT  concat(U.last_name, ' ', U.first_name) AS агент, F.full_name AS валюта, U.login AS 'логин агента', B.branch_name AS отдел, O.sum AS сума, IFNULL(concat(OW.last_name, ' ', OW.first_name),'-') AS владельцы, 
+SELECT  concat(U.last_name, ' ', U.first_name) AS агент, F.full_name AS валюта, U.login AS 'логин агента', B.branch_name AS отдел, O.sum AS сумма, IFNULL(concat(OW.last_name, ' ', OW.first_name),'-') AS владельцы, 
        IFNULL(description,'-') AS комментарий,
 O.date AS дата
 FROM outgo O
@@ -22,7 +22,7 @@ ORDER BY `date` DESC
         break;
     case 2:
         $info = $connection->query("
-SELECT  concat(U.last_name, ' ', U.first_name) AS агент, F.full_name AS валюта, U.login AS 'логин агента', O.sum AS сума, IFNULL(concat(OW.last_name, ' ', OW.first_name),'-') AS владельцы, IFNULL(description,'-') AS комментарий,
+SELECT  concat(U.last_name, ' ', U.first_name) AS агент, F.full_name AS валюта, U.login AS 'логин агента', O.sum AS сумма, IFNULL(concat(OW.last_name, ' ', OW.first_name),'-') AS владельцы, IFNULL(description,'-') AS комментарий,
 O.date AS дата
 FROM outgo O
 INNER JOIN users U ON U.user_id = O.user_id
@@ -34,7 +34,7 @@ ORDER BY `date` DESC
         break;
     case 1:
         $info = $connection->query('
-SELECT O.sum AS сума, F.full_name AS валюта, IFNULL(concat(OW.last_name, " ", OW.first_name),"-") AS владельцы, IFNULL(description,"-") AS комментарий,
+SELECT O.sum AS сумма, F.full_name AS валюта, IFNULL(concat(OW.last_name, " ", OW.first_name),"-") AS владельцы, IFNULL(description,"-") AS комментарий,
 O.date AS дата
 FROM outgo O
 INNER JOIN users U ON U.user_id = O.user_id

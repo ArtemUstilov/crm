@@ -9,7 +9,7 @@ switch (accessLevel()) {
     case 3:
         $info = $connection -> query("
 SELECT B.branch_name AS отдел, concat(U.last_name, ' ', U.first_name) AS агент,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-O.rollback_sum AS сума,
+O.rollback_sum AS сумма,
 O.date AS дата
 FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
@@ -21,7 +21,7 @@ ORDER BY `date` DESC
     case 2:
         $info = $connection -> query("
 SELECT concat(U.last_name, ' ', U.first_name) AS агент,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-O.rollback_sum AS сума,
+O.rollback_sum AS сумма,
 O.date AS дата
 FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
@@ -33,7 +33,7 @@ ORDER BY `date` DESC
     case 1:
         $info = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS клиент, 
-O.rollback_sum AS сума,
+O.rollback_sum AS сумма,
 O.date AS дата
 FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
