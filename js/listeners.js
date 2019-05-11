@@ -154,7 +154,7 @@ $(document).ready(function () {
         $('th').each(function () {
             const _this = $(this);
             _this.click(function (e) {
-                if(e.target.tagName === 'INPUT') return;
+                if (e.target.tagName === 'INPUT') return;
                 setTimeout(() => {
                     $('th').each(function () {
                         const span = $(this).children().first().children().first().children().last();
@@ -263,12 +263,12 @@ $(document).ready(function () {
         let id = $(this).parent().parent().parent().attr('itemid');
         let type = $('.table-menu>h2').attr('type');
         let url = '';
-        if(type === 'Branch'){
+        if (type === 'Branch') {
             url = 'editBranchActivity';
-        }else
+        } else
             url = 'editActivity';
         $.ajax({
-            url: "../components/edit-modal-response/"+url+".php",
+            url: "../components/edit-modal-response/" + url + ".php",
             type: "POST",
             data: {id},
             cache: false,
@@ -286,7 +286,7 @@ $(document).ready(function () {
     });
 
     (function range() {
-        if(typeof moment !== "function") return;
+        if (typeof moment !== "function") return;
         const start = moment().day("Sunday");
         const end = moment();
 
@@ -299,13 +299,13 @@ $(document).ready(function () {
                 data: {start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD')},
                 cache: false,
                 success: function (res) {
-                        res = JSON.parse(res);
-                        if(!res || !res.length) return;
-                        res.forEach(r => {
-                            const cell = $('.Head [itemid*=' + r.id + '] .1-f');
-                            cell.attr('title', r.sum || 0);
-                            cell.text(r.sum || 0);
-                        })
+                    res = JSON.parse(res);
+                    if (!res || !res.length) return;
+                    res.forEach(r => {
+                        const cell = $('.Head [itemid*=' + r.id + '] .1-f');
+                        cell.attr('title', r.sum || 0);
+                        cell.text(r.sum || 0);
+                    })
 
                 },
                 error: function () {
@@ -371,24 +371,28 @@ $(document).ready(function () {
     const vgcl = $('#VG-Modal #nameVgnField');
     $('#nameVgn').hide();
     vgcl.change(function (e) {
-        if($('#VG-Modal #nameVgnField').val() == -1){
+        if ($('#VG-Modal #nameVgnField').val() == -1) {
             $('#nameVgn').show();
-        }else{
+        } else {
             $('#nameVgn').hide();
         }
     });
-    $('.main-header .fa-coins').click(function(){
+    $('.main-header .fa-coins').click(function () {
         $('.spinner').show();
         $.ajax({
             url: "../components/selectors/branchSums.php",
             type: "POST",
             cache: false,
+            dataType: 'JSON',
             success: function (res) {
+                if(!res) return;
                 res = JSON.parse(res);
                 const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
                 modal.html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
-                modal.modal();
+                modal.modal({
+                    blockerClass: '',
+                });
             },
             error: function () {
                 createAlertTable("connectionError", "Деньги");
@@ -398,6 +402,9 @@ $(document).ready(function () {
             }
         });
     })
+    $('#Branch-money-info-modal').on($.modal.BLOCK, function (event, modal) {
+        $('.blocker.current').removeClass('blocker');
+    });
 });
 
 

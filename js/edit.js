@@ -45,6 +45,9 @@ $('tr').on('click', (e) => {
         case "Order-edit":
             fillOrderEditForm(mainParent);
             break;
+        case "Fiat-edit":
+            fillFiatEditForm(mainParent);
+            break;
         case "info":
             fillAdditionalInfo(mainParent);
             break;
@@ -176,6 +179,34 @@ function fillOrderEditForm(target) {
 }
 
 function fillOwnerEditForm(target) {
+    $(".spinner").show();
+    let owner_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/User.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            owner_id,
+        },
+        cache: false,
+        success: function (res) {
+            $('#edit-user-form #edit-user-title').text(`Изменить данные пользователя ${res['full_name']}`).attr('user-id', res['id']);
+            $('#edit-user-form #editFirstNameField').val(res['first_name']);
+            $('#edit-user-form #editLastNameField').val(res['last_name']);
+            $('#edit-user-form #editLoginField').val(res['login']);
+            $('#edit-user-form #editBranchField').val(res['branch_id']);
+            $('#edit-user-form #editRoleField').val(res['role']);
+            $('#edit-user-form #editMoneyField').val(res['money']);
+            $(".spinner").fadeOut('fast');
+            $('#Head-edit-Modal').modal();
+
+        },
+        error: function () {
+        },
+    });
+}
+
+function fillFiatEditForm(target) {
     $(".spinner").show();
     let owner_id = target.attr('itemid');
     $.ajax({
@@ -376,10 +407,10 @@ function checkUserData() {
         type: "POST",
         data: "req=ok",
         cache: false,
-        dataType: 'html',
+        dataType: 'JSON',
         success: function (res) {
             if (res['active'] === "inactive") {
-                window.location.href = '../index.php';
+                location.reload();
             } else {
                 setTimeout(checkUserData, 3000);
             }
