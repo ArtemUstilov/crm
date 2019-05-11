@@ -377,7 +377,7 @@ $(document).ready(function () {
             $('#nameVgn').hide();
         }
     });
-    $('.fa-coins').click(function(){
+    $('.main-header .fa-coins').click(function(){
         $('.spinner').show();
         $.ajax({
             url: "../components/selectors/branchSums.php",

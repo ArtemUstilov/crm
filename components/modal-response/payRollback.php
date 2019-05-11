@@ -5,6 +5,7 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
 
     $login = clean($_POST['login']);
     $number = clean($_POST['number']);
+    $fiat = clean($_POST['fiat']);
     $client_data = mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE byname='$login'"));
     $client_id = $client_data['client_id'];
     session_start();
@@ -13,19 +14,17 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     if ($user_data && heCan($user_data['role'], 1)) {
-        $add_ref = $connection->
-        query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\") ");
+
         $change_rollback_sum = $connection->query("
-            UPDATE `clients` 
-            SET `rollback_sum` = `rollback_sum` - $number 
-            WHERE `client_id` = $client_id
+            UPDATE `payments` 
+            SET `sum` = `sum` - $number 
+            WHERE `client_rollback_id` = $client_id AND fiat_id = $fiat
         ");
-        $change_branch_sum = $connection->query("
-             UPDATE `branch` 
-            SET `money` = `money` - $number 
-            WHERE `branch_id` = $branch_id");
-        $_SESSION['money'] -= $number;
-        if ($change_rollback_sum && $add_ref) {
+        if($change_rollback_sum){
+            $add_ref = $connection->
+            query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date, fiat_id) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\", '$fiat') ");
+        }
+        if ($add_ref) {
             echo "success";
             return false;
         }else{

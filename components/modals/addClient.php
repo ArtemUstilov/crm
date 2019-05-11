@@ -71,15 +71,6 @@ function clientAddModal($data)
   <input id="editEmailField"   placeholder="Email" type="email" name="email">
   </p>
   <p>
-  Откат
-  <input id="editRollbackField"   placeholder="Откат" type="number" name="rollback">
-  </p>
-  <p>
-  Долг
-  <input id="editDebtField"   placeholder="Долг" type="number" name="debt">
-  </p>
-
-  <p>
   Описание
   <textarea id="editDescriptionField" rows="3" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
   </p>

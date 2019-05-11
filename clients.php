@@ -22,8 +22,8 @@ switch(accessLevel()){
     case 2:
         $clients = $connection->query('
                     SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.debt AS долг,
-                                    C.rollback_sum AS откат, C.email AS почта, IFNULL(telegram, "-") AS телеграм
+                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон,
+                                    C.email AS почта, IFNULL(telegram, "-") AS телеграм
                     FROM clients C
                     WHERE user_id IN (
                         SELECT user_id FROM users WHERE branch_id = '.$_SESSION['branch_id'].'
@@ -33,8 +33,7 @@ switch(accessLevel()){
     case 1:
         $clients = $connection->query('
                     SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.debt AS долг,
-                                    C.rollback_sum AS откат, C.email AS почта, IFNULL(telegram, "-") AS телеграм
+                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.email AS почта, IFNULL(telegram, "-") AS телеграм
                     FROM clients C
                     WHERE user_id = '.$_SESSION['id'].'
                     ');

@@ -442,6 +442,7 @@ $(document).ready(function () {
         const optionSelected = $("option:selected", this);
         const sum = optionSelected.attr('sum');
         const input = $('#payField');
+        $('#Rollback-Modal #fiatField').val(optionSelected.attr('fiat'));
         input.val(sum);
         input.attr('max', sum);
         input.attr('min', 0);
@@ -451,14 +452,14 @@ $(document).ready(function () {
     function payRollback() {
         let login = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
+        let fiat = $("#pay-rollback-form #fiatField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/payRollback.php",
             type: "POST",
             data: {
-                login: login,
-                number: number,
+                login, fiat, number,
             },
             cache: false,
             success: function (res) {
@@ -493,8 +494,10 @@ $(document).ready(function () {
     $('#Debt-Modal #debtorField').change(function (e) {
         const optionSelected = $("option:selected", this);
         const sum = optionSelected.attr('sum');
+        const fiat = optionSelected.attr('fiat');
         const input = $('#paybackField');
         input.val(sum);
+        $('#Debt-Modal #fiatField').val(fiat);
         input.attr('max', sum);
         input.attr('min', 0);
     });
@@ -502,14 +505,16 @@ $(document).ready(function () {
     function paybackDebt() {
         let login = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();
+        let fiat = $("#payback-debt-form #fiatField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
             url: "../components/modal-response/paybackDebt.php",
             type: "POST",
             data: {
-                login: login,
-                number: number,
+                login,
+                number,
+                fiat,
             },
             cache: false,
             success: function (res) {

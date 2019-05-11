@@ -10,6 +10,7 @@ $('tr').on('click', (e) => {
             const debtorSelected = $("option:selected", debtorList);
             const debtSum = debtorSelected.attr('sum');
             const input = $('#paybackField');
+            $('#Debt-Modal #fiatField').val(debtorSelected.attr('fiat'));
             input.val(debtSum);
             input.attr('max', debtSum);
             input.attr('min', 0);
@@ -22,6 +23,7 @@ $('tr').on('click', (e) => {
             const rollbackSum = referalSelected.attr('sum');
             const input2 = $('#payField');
             input2.val(rollbackSum);
+            $('#Rollback-Modal #fiatField').val(referalSelected.attr('fiat'));
             input2.attr('max', rollbackSum);
             input2.attr('min', 0);
             break;
