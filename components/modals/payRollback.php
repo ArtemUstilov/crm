@@ -3,12 +3,12 @@ function rollbackModal($data)
 {
     if ($data) {
         $i = 0;
-        while ($new = $data['clients']->fetch_array()) {
+        if($data['clients'])while ($new = $data['clients']->fetch_array()) {
             $copy_of_data[$i] = $new;
             $i++;
         }
         $i = 0;
-        while ($new = $data['fiats']->fetch_array()) {
+        if($data['fiats'])while ($new = $data['fiats']->fetch_array()) {
             $fiats[$i] = $new;
             $i++;
         }

@@ -53,12 +53,13 @@ $options['type'] = 'Debt';
 $options['text'] = 'История погашений долгов';
 $options['btn-text'] = 'Погасить';
 $options['btn'] = 1;
-echo template(display_data($info, $options, $connection -> query('
+$data['fiats'] = $connection -> query('SELECT * FROM fiats');
+$data['clients'] = $connection -> query('
 SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
-
 byname AS login, debt
 FROM clients C
 INNER JOIN orders O ON C.client_id = O.client_id
 WHERE  debt > 0 AND O.user_id = '.$_SESSION["id"].'
-')));
+');
+echo template(display_data($info, $options, $data));
 

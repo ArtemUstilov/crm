@@ -234,8 +234,13 @@ $options['modal'] = 'Rollback-Modal';
 
 $table .= display_data($rollbackData, $options, $data);
 
-$sumDebts = $rollbackSum ? mysqli_fetch_assoc($rollbackSum) : null;
-if ($sumDebts) $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
+$sumDebts = $rollbackSum ? mysqliToArray($rollbackSum) : null;
+if ($sumDebts) {
+    foreach ($sumDebts as $key => $var) {
+        $output .= '<p >' . $var['sum'] . $var['full_name'] .'</option>';
+    }
+    $table .= '<h2>Всего: ' . ($sumDebts["sum"] ? $sumDebts["sum"] : 0) . ' грн</h2>';
+}
 
 
 echo template($table);
