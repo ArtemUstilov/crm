@@ -93,8 +93,8 @@ function fillAdditionalInfo(target) {
             cache: false,
             success: function (res) {
                 $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
-                let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]} грн (${line["share_percent"]}%)</p>`).join('');
-                const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} грн (${res[0]["rollback_1"]}%)</p>`;
+                let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]}  ${res[0]["fiat"]} (${line["share_percent"]}%)</p>`).join('');
+                const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} ${res[0]["fiat"]} (${res[0]["rollback_1"]}%)</p>`;
                 if (res[0]["callmaster"])
                     owners += callmaster;
                 $('#info-order-form .text').html(owners);

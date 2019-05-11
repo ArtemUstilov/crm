@@ -18,6 +18,11 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
         if($paydebt){
             $add_ref = $connection->
             query("INSERT INTO debt_history (user_id, client_id, debt_sum, date, fiat_id) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\", '$fiat') ");
+
+            $update_branch_money = $connection->
+            query("UPDATE  `payments` 
+                                  SET `sum` = `sum` + '$number'
+                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
         }
         if ($add_ref) {
             echo "success";
