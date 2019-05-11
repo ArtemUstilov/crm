@@ -22,8 +22,8 @@ if (isset($_POST['order_id']) &&
     $callmaster = clean($_POST['callmaster']);
     $obtain = clean($_POST['obtain']);
     $fiat = clean($_POST['fiat']);
-    $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $sum_currency = ($sum_vg * $out_percent) / 100;
+    $rollback_sum = $sum_currency / 100 * ($rollback_1);
     $shares = $_POST['shares'];
     session_start();
     $user_id = $_SESSION['id'];
