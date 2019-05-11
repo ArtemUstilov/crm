@@ -10,6 +10,8 @@ if (isset($_POST['client']) &&
 
     include_once("../../db.php");
     include_once("../../funcs.php");
+    include_once '../../dev/ChromePhp.php';
+
     $sum_vg = clean($_POST['sum_vg']);
     $vg = clean($_POST['vg']);
     $rollback_1 = $_POST['rollback_1'] ? clean($_POST['rollback_1']) : 0;
@@ -19,7 +21,7 @@ if (isset($_POST['client']) &&
     $out_percent = clean($_POST['out']);
 
     $sum_currency = ($sum_vg * $out_percent) / 100;
-    $rollback_sum = $sum_currency / 100 * ($rollback_1);
+    $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $obtain = clean($_POST['obtain']);
 
     $shares = $_POST['shares'];
@@ -70,6 +72,7 @@ if (isset($_POST['client']) &&
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($var['value'] / 100));
                 $curr_owner_id = $var['owner_id'];
                 $share_percent = $var['value'];
+                ChromePhp::log($out_percent - $in_percent - $rollback_1);
                 $add_share = $connection->
                 query("INSERT INTO `shares`
                 (`order_id`, `user_as_owner_id`, `sum`, `share_percent`) VALUES

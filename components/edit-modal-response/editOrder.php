@@ -10,6 +10,7 @@ if (isset($_POST['order_id']) &&
     isset($_POST['client_id'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
+
     $rollback_1 = isset($_POST['rollback_1']) ? clean($_POST['rollback_1']) : 0;
 
     $vg_id = clean($_POST['vg_id']);
@@ -23,10 +24,11 @@ if (isset($_POST['order_id']) &&
     $obtain = clean($_POST['obtain']);
     $fiat = clean($_POST['fiat']);
     $sum_currency = ($sum_vg * $out_percent) / 100;
-    $rollback_sum = $sum_currency / 100 * ($rollback_1);
+    $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $shares = $_POST['shares'];
     session_start();
     $user_id = $_SESSION['id'];
+    $branch_id = $_SESSION['branch_id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     if ($user_data && (heCan($user_data['role'], 2))) {
         $order_data = mysqli_fetch_assoc($connection->

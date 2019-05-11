@@ -170,6 +170,7 @@ $(document).ready(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
         });
         const shares = allShares.filter((el) => el.value > 0);
+        console.log(shares);
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
