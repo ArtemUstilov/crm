@@ -22,7 +22,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     }
     if (heCan($user_data['role'], 2)) {
         $res = $connection->
-        query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`, `money`) VALUES('$login','$password','$first_name','$last_name','$role','$branch','$money') ");
+        query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`) VALUES('$login','$password','$first_name','$last_name','$role','$branch') ");
         if ($res) {
             echo "success";
             return false;

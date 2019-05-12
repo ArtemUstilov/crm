@@ -128,6 +128,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return headAddModal($more_data);
         case "Branch":
             return branchAddModal($data);
+        case "Fiat":
+            return fiatAddModal($data);
         default:
             return null;
     }

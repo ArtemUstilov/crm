@@ -426,6 +426,50 @@ $(document).ready(function () {
     }
 
 
+    //Fiat
+    $.validate({
+        form: '#add-fiat-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addFiat();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function addFiat() {
+        let full_name = $("#add-fiat-form #fullNameFiatField").val();
+        let name = $("#add-fiat-form #nameFiatField").val();
+        let code = $("#add-fiat-form #codeField").val();
+        $this = $(".modal-submit");
+        $this.prop("disabled", true);
+        $.ajax({
+            url: "../components/modal-response/addFiat.php",
+            type: "POST",
+            data: {
+                name,
+                full_name,
+                code,
+            },
+            cache: false,
+            success: function (res) {
+                createAlertTable(res, "Fiat");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Fiat");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $this.prop("disabled", false);
+                }, 300);
+            }
+        });
+
+    }
+
+
     //Payback
 
     $.validate({

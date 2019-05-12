@@ -45,6 +45,9 @@ $('tr').on('click', (e) => {
         case "Order-edit":
             fillOrderEditForm(mainParent);
             break;
+        case "Fiat-edit":
+            fillFiatEditForm(mainParent);
+            break;
         case "info":
             fillAdditionalInfo(mainParent);
             break;
@@ -196,6 +199,35 @@ function fillOwnerEditForm(target) {
             $('#edit-user-form #editMoneyField').val(res['money']);
             $(".spinner").fadeOut('fast');
             $('#Head-edit-Modal').modal();
+
+        },
+        error: function () {
+        },
+    });
+}
+
+function fillFiatEditForm(target) {
+    $(".spinner").show();
+    let fiat = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/Fiat.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            fiat,
+        },
+        cache: false,
+        success: function (res) {
+            if(res=="failed"){
+                createAlertTable('connectionError', 'Фиат');
+                return;
+            }
+            $('#edit-fiat-form #edit-fiat-title').text(`Редактировать данные валюты ${res['full_name']}`).attr('fiat-id', res['id']);
+            $('#edit-fiat-form #editFullNameFiatField').val(res['full_name']);
+            $('#edit-fiat-form #editNameFiatField').val(res['name']);
+            $('#edit-fiat-form #editCodeField').val(res['code']);
+            $(".spinner").fadeOut('fast');
+            $('#Fiat-edit-Modal').modal();
 
         },
         error: function () {
@@ -376,10 +408,10 @@ function checkUserData() {
         type: "POST",
         data: "req=ok",
         cache: false,
-        dataType: 'html',
+        dataType: 'JSON',
         success: function (res) {
             if (res['active'] === "inactive") {
-                window.location.href = '../index.php';
+                location.reload();
             } else {
                 setTimeout(checkUserData, 3000);
             }

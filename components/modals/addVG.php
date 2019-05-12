@@ -30,7 +30,7 @@ function vgAddModal($data)
   <input id="urlField" placeholder="url" type="url" name="url">
   </p>
     <p>
-  <input id="keyField" placeholder="key" type="url" name="key">
+  <input id="keyField" placeholder="key"  name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
@@ -56,7 +56,7 @@ function vgAddModal($data)
   <input id="editUrlField" placeholder="url" type="url" name="url">
   </p>
   <p>
-  <input id="editKeyField" placeholder="key" type="url" name="key">
+  <input id="editKeyField" placeholder="key" name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

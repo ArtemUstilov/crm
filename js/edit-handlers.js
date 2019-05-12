@@ -223,7 +223,58 @@ function editVG() {
     });
 }
 
-//branch
+
+
+
+//Fiat
+$.validate({
+    form: '#edit-fiat-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editFiat();
+        return false;
+    }
+});
+
+function editFiat() {
+    let name = $("#edit-fiat-form #editNameField").val();
+    let in_percent = $("#edit-fiat-form #editInField").val();
+    let out_percent = $("#edit-fiat-form #editOutField").val();
+    let url = $("#edit-vg-form #editUrlField").val();
+    let key = $("#edit-vg-form #editKeyField").val();
+    let id = $("#edit-vg-form #edit-vg-title").attr('vg-id');
+    const $this = $("#edit-client-form .modal-submit");
+    $this.prop("disabled", true);
+    $.ajax({
+        url: "../components/edit-modal-response/editVG.php",
+        type: "POST",
+        data: {
+            name,
+            out_percent,
+            in_percent,
+            url,
+            key,
+            vg_id : id,
+        },
+        cache: false,
+        success: function (res) {
+            createAlertTable(res, "VG");
+        },
+        error: function () {
+            createAlertTable("connectionError", "VG");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $this.prop("disabled", false);
+            }, 300);
+        }
+    });
+}
+
+
+
+//Branch
 $.validate({
     form: '#edit-branch-form',
     modules: '',

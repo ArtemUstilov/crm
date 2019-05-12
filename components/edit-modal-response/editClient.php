@@ -26,8 +26,6 @@ if (isset($_POST['description']) && isset($_POST['byname'])
             `last_name` = '$last_name',
             `phone_number` = '$phone',
             `email` = '$email', 
-            `debt` = '$debt',
-            `rollback_sum` = '$rollback',
             `telegram` = '$telegram',
             `description` = '$description'
         WHERE `client_id` = '$edit_client_id'");

@@ -20,17 +20,21 @@ html, body {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #33373C;
 }
-textarea{
+
+textarea {
     width: 100%;
 }
-h3{
+
+h3 {
     font-size: 21px !important;
 }
-#Branch-money-info-modal{
-    width:auto;
+
+#Branch-money-info-modal {
+    width: auto;
     position: absolute;
     left: 0;
 }
+
 .login-page {
     height: 100%;
     display: flex;
@@ -225,7 +229,8 @@ h2 {
 .fa-coins, .fa-building, .fa-edit, .fa-user, .fa-user-cog, .fa-user-shield {
     margin-right: 12px;
 }
-.fa-coins{
+
+.fa-coins {
     cursor: pointer;
 }
 
@@ -449,7 +454,6 @@ h1 {
 }
 
 
-
 #menu ul li p {
     text-decoration: underline;
 }
@@ -476,9 +480,11 @@ a[disabled] {
     align-items: center;
     padding: 0 10px;
 }
+
 .menu-logout-btn {
     text-align: center !important;
 }
+
 .menu-n {
     font-size: 18px;
     color: white;
@@ -718,9 +724,11 @@ a[disabled] {
     .fa-building .fa-coins {
         margin: 0 !important;
     }
-    .table-wrapper{
+
+    .table-wrapper {
         max-height: 75%;
     }
+
     h2 {
         font-size: 1.3em;
     }
@@ -917,4 +925,6 @@ a[disabled] {
     border: none;
 }
 
-
+#Branch-money-info-modal {
+    z-index: 20;
+}
