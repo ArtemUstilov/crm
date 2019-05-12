@@ -385,7 +385,6 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (res) {
                 if(!res) return;
-                res = JSON.parse(res);
                 const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
                 modal.html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
