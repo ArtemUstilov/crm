@@ -53,7 +53,7 @@ $options['type'] = 'Debt';
 $options['text'] = 'История погашений долгов';
 $options['btn-text'] = 'Погасить';
 $options['btn'] = 1;
-
+$options['btn-max'] = 2;
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
 SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 

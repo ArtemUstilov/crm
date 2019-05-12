@@ -18,17 +18,17 @@ LEFT JOIN (
 	FROM users U
 	LEFT JOIN outgo O ON O.user_as_owner_id = U.user_id
 	LEFT JOIN (
-		SELECT SUM(sum)/(SELECT COUNT(DISTINCT user_id) FROM users WHERE branch_id = '.$branch_id.' AND is_owner = 1) AS outcome, fiat_id
+		SELECT SUM(sum)/(SELECT COUNT(DISTINCT user_id) FROM users WHERE branch_id = ' . $branch_id . ' AND is_owner = 1) AS outcome, fiat_id
 		FROM outgo
 		INNER JOIN users U ON U.user_id = outgo.user_id
-		WHERE user_as_owner_id IS NULL AND U.branch_id = '.$branch_id.'
+		WHERE user_as_owner_id IS NULL AND U.branch_id = ' . $branch_id . '
 		GROUP BY fiat_id
 	) T ON T.fiat_id = O.fiat_id OR O.fiat_id IS NULL
-	WHERE U.is_owner = 1 AND U.branch_id = '.$branch_id.'
+	WHERE U.is_owner = 1 AND U.branch_id = ' . $branch_id . '
 	GROUP BY U.user_id, O.fiat_id
 ) UT ON UT.user_id = U.user_id AND (UT.fiat_id = ORD.fiat_id OR ORD.fiat_id IS NULL)
 INNER JOIN fiats F ON ORD.fiat_id = F.fiat_id OR UT.fiat_id = F.fiat_id
-WHERE U.is_owner = 1 AND U.branch_id = '.$branch_id.'
+WHERE U.is_owner = 1 AND U.branch_id = ' . $branch_id . '
 GROUP BY U.user_id, ORD.fiat_id
 ');
 
@@ -222,7 +222,8 @@ $data['clients'] = $debtorsList;
 
 $options['type'] = 'Debt';
 $options['text'] = 'Должники';
-$options['coins'] = true;
+if (accessLevel() < 3)
+    $options['coins'] = true;
 $options['btn-text'] = 'Погасить';
 $options['btn'] = 1;
 $options['modal'] = 'Debt-Modal';
@@ -232,12 +233,12 @@ $sumDebts = $sumDebtsRaw ? mysqliToArray($sumDebtsRaw) : null;
 if ($sumDebts) {
     $empty = true;
     foreach ($sumDebts as $key => $var) {
-        if($var['sum'] > 0) $empty = false;
+        if ($var['sum'] > 0) $empty = false;
     }
-    if(!$empty){
+    if (!$empty) {
         $table .= '<h3 >Всего: ';
         foreach ($sumDebts as $key => $var) {
-            $table .= $var['sum'] .' '. $var['full_name'].', ';
+            $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
     }
 }
@@ -247,7 +248,8 @@ $data['clients'] = $rollbackList;
 $data['fiats'] = $fiats;
 $options['type'] = 'Rollback';
 $options['text'] = 'Ожидают откаты';
-$options['coins'] = true;
+if (accessLevel() < 3)
+    $options['coins'] = true;
 $options['btn-text'] = 'Выплатить';
 $options['btn'] = 1;
 $options['modal'] = 'Rollback-Modal';
@@ -257,12 +259,12 @@ $sumDebts = $rollbackSum ? mysqliToArray($rollbackSum) : null;
 if ($sumDebts) {
     $empty = true;
     foreach ($sumDebts as $key => $var) {
-        if($var['sum'] > 0) $empty = false;
+        if ($var['sum'] > 0) $empty = false;
     }
-    if(!$empty){
+    if (!$empty) {
         $table .= '<h3 >Всего: ';
         foreach ($sumDebts as $key => $var) {
-            $table .= $var['sum'] .' '. $var['full_name'].', ';
+            $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
     }
 }
