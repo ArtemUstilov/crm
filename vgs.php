@@ -16,7 +16,7 @@ $options['btn-text'] = 'Добавить';
 $data['vgs'] = $connection->query("
     SELECT * FROM virtualgood
 ");
-if(iCan(100)){ // currently
+if(iCan(3)){ // currently
     echo template(display_data($connection -> query('
 SELECT branch_name AS предприятие, VG.vg_id AS id, VG.name AS название, in_percent As "покупка %", out_percent AS "продажа %", api_url_regexp AS "ссылка-шаблон", access_key AS "ключ доступа"
 FROM virtualgood VG

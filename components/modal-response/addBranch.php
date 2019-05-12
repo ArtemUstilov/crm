@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['name']) && isset($_POST['money'])) {
+if (isset($_POST['name'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
     $name = clean($_POST['name']);
@@ -14,7 +14,7 @@ if (isset($_POST['name']) && isset($_POST['money'])) {
             return false;
         }
         $res = $connection->
-        query("INSERT INTO `branch` (branch_name, money) VALUES('$name', '$money')");
+        query("INSERT INTO `branch` (branch_name) VALUES('$name')");
         if ($res) {
             echo "success";
             return false;

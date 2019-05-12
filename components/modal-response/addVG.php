@@ -36,7 +36,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
             query("
                 INSERT INTO virtualgood (
                     name
-                ) VALUES(\"$name\")");
+                ) VALUES('$name')");
             $prevId = mysqliToArray($connection->query("SELECT vg_id FROM virtualgood ORDER BY vg_id DESC LIMIT 1"))[0]['vg_id'];
             $res = $connection->
             query("
@@ -47,7 +47,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                     api_url_regexp,
                     vg_id,
                     branch_id
-                ) VALUES(\"$in\",\"$out\",'$key',\"$url\", '$prevId', '$branch_id') ");
+                ) VALUES('$in','$out','$key','$url', '$prevId', '$branch_id') ");
         }
 
         if ($res) {

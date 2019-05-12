@@ -3,4 +3,4 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    'empty');
+    'empty2');

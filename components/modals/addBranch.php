@@ -11,10 +11,6 @@ $output = '
             Название
                 <input id="nameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
             </p>
-             <p>
-  Деньги
-  <input id="moneyField"    placeholder="Деньги" type="number" name="money" step="0.01">
-  </p>
             </div>
             <input class="modal-submit" type="submit" value="Добавить">
             
@@ -32,10 +28,6 @@ $output = '
             Название
                 <input id="editNameField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
             </p>
-       <p>
-  Деньги
-  <input id="editMoneyField"    placeholder="Деньги" type="number" name="money" step="0.01">
-  </p>
             </div>
             <input class="modal-submit" type="submit" value="Сохранить">
     </form>
