@@ -126,7 +126,6 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
@@ -218,11 +217,12 @@ function fillFiatEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            console.log(res);
             if(res=="failed"){
                 createAlertTable('connectionError', 'Фиат');
                 return;
             }
-            $('#edit-fiat-form #edit-fiat-title').text(`Редактировать данные валюты ${res['full_name']}`).attr('fiat-id', res['id']);
+            $('#edit-fiat-form #edit-fiat-title').text(`Редактировать данные валюты ${res['full_name']}`).attr('fiat-id', res['fiat_id']);
             $('#edit-fiat-form #editFullNameFiatField').val(res['full_name']);
             $('#edit-fiat-form #editNameFiatField').val(res['name']);
             $('#edit-fiat-form #editCodeField').val(res['code']);

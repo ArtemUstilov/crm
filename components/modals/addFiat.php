@@ -15,7 +15,7 @@ function fiatAddModal($data)
   <input id="fullNameFiatField" data-validation="required length" data-validation-length="min1" placeholder="Название" type="text" name="name">
   </p>
     <p>
-  <input id="codeField" data-validation="required" placeholder="Код"  name="key">
+  <input id="codeField" data-validation="required" placeholder="Код" type="number"  name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
@@ -37,7 +37,7 @@ function fiatAddModal($data)
   </p>
     <p>
     Код
-  <input id="editCodeField" data-validation="required" placeholder="Код"  name="key">
+  <input id="editCodeField" data-validation="required" placeholder="Код" type="number" name="key">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

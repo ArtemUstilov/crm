@@ -3,7 +3,7 @@ $connection = mysqli_connect(
     "127.0.0.1",
     "root",
     "",
-    'empty2');
+    'empty');
 //    "crm3.0");
 
 //$connection = mysqli_connect(

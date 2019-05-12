@@ -238,31 +238,27 @@ $.validate({
 });
 
 function editFiat() {
-    let name = $("#edit-fiat-form #editNameField").val();
-    let in_percent = $("#edit-fiat-form #editInField").val();
-    let out_percent = $("#edit-fiat-form #editOutField").val();
-    let url = $("#edit-vg-form #editUrlField").val();
-    let key = $("#edit-vg-form #editKeyField").val();
-    let id = $("#edit-vg-form #edit-vg-title").attr('vg-id');
-    const $this = $("#edit-client-form .modal-submit");
+    let name = $("#edit-fiat-form #editNameFiatField").val();
+    let full_name = $("#edit-fiat-form #editFullNameFiatField").val();
+    let code = $("#edit-fiat-form #editCodeField").val();
+    let fiat = $("#edit-fiat-form #edit-fiat-title").attr('fiat-id');
+    const $this = $("#edit-fiat-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editVG.php",
+        url: "../components/edit-modal-response/editFiat.php",
         type: "POST",
         data: {
             name,
-            out_percent,
-            in_percent,
-            url,
-            key,
-            vg_id : id,
+            full_name,
+            code,
+            fiat,
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "VG");
+            createAlertTable(res, "Валюта");
         },
         error: function () {
-            createAlertTable("connectionError", "VG");
+            createAlertTable("connectionError", "Fiat");
         },
         complete: function () {
             setTimeout(function () {
