@@ -49,6 +49,7 @@ ORDER BY `date` DESC
 $options['type'] = 'Rollback';
 $options['text'] = "История выплат рефералов";
 $options['btn'] = 1;
+$options['btn-max'] = 2;
 $options['btn-text'] = 'Выплатить';
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
