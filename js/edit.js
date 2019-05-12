@@ -208,25 +208,26 @@ function fillOwnerEditForm(target) {
 
 function fillFiatEditForm(target) {
     $(".spinner").show();
-    let owner_id = target.attr('itemid');
+    let fiat = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/User.php",
+        url: "../components/selectors/Fiat.php",
         type: "POST",
         dataType: 'JSON',
         data: {
-            owner_id,
+            fiat,
         },
         cache: false,
         success: function (res) {
-            $('#edit-user-form #edit-user-title').text(`Изменить данные пользователя ${res['full_name']}`).attr('user-id', res['id']);
-            $('#edit-user-form #editFirstNameField').val(res['first_name']);
-            $('#edit-user-form #editLastNameField').val(res['last_name']);
-            $('#edit-user-form #editLoginField').val(res['login']);
-            $('#edit-user-form #editBranchField').val(res['branch_id']);
-            $('#edit-user-form #editRoleField').val(res['role']);
-            $('#edit-user-form #editMoneyField').val(res['money']);
+            if(res=="failed"){
+                createAlertTable('connectionError', 'Фиат');
+                return;
+            }
+            $('#edit-fiat-form #edit-fiat-title').text(`Редактировать данные валюты ${res['full_name']}`).attr('fiat-id', res['id']);
+            $('#edit-fiat-form #editFullNameFiatField').val(res['full_name']);
+            $('#edit-fiat-form #editNameFiatField').val(res['name']);
+            $('#edit-fiat-form #editCodeField').val(res['code']);
             $(".spinner").fadeOut('fast');
-            $('#Head-edit-Modal').modal();
+            $('#Fiat-edit-Modal').modal();
 
         },
         error: function () {
