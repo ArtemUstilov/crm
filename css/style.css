@@ -511,7 +511,7 @@ a[disabled] {
     z-index: 1000;
 }
 
-#reportrange {
+.reportrange {
     background: #fff;
     cursor: pointer;
     padding: 5px 5px;
@@ -522,7 +522,7 @@ a[disabled] {
     margin-left: 20px;
 }
 
-#reportrange * {
+.reportrange * {
     color: #33373C;
 }
 

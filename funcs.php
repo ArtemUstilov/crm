@@ -2,10 +2,10 @@
 function display_data($data, $options, $addition_data = NULL)
 {
     session_start();
-    $data = mysqliToArray($data);
+    if(!$options['prepared'])$data = mysqliToArray($data);
     return
         ("
-        <div class='table-menu' " . (iCan($options['range']) ? 'style = "justify-content: left;"' : '') . ">
+        <div class='table-menu " . $options['type'] . "' " . ($options['range'] ? 'style = "justify-content: left;"' : '') . ">
             <h2 type=" . $options['type'] . ">" . $options['text'] . "</h2>"
             . (iCan($options['btn']) && iCanMax($options['btn-max']) ? "
             <p><a 
@@ -14,13 +14,15 @@ function display_data($data, $options, $addition_data = NULL)
                     rel=\"modal:open\">" . $options['btn-text'] . "
             </a></p>
             " : '') .
-            (iCan($options['range']) ? "
-            <div id='reportrange'>
+            ($options['range'] ? "
+            <div id='reportrange".$options['range']."' class='reportrange'>
     <i class='fa fa-calendar'></i>&nbsp;
     <span></span> <i class='fa fa-caret-down'></i>
 </div>
             " : '') .
-            "
+            ($options['switch-vg-stat'] ? "
+            <button class='switch-vg-stat' id='add-btn'></button>
+            " : '') . "
         </div>
         <div class='table-wrapper " . $options['type'] . "' id='table-wrapper'>
             <a 

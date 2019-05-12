@@ -186,10 +186,9 @@ $(document).ready(function () {
     }
 
     function yFixedNoJquerry() {
-        const head = document.getElementById('table-head');
         if (window.innerWidth > 524) {
-            document.getElementById('table-wrapper').addEventListener('scroll', function (e) {
-                head.style.transform = 'translateY(' + this.scrollTop + 'px)';
+            $('.table-wrapper').scroll(function (e) {
+                $(this).find('thead').css({transform: 'translateY(' + this.scrollTop + 'px)'});
             });
         }
     }
@@ -291,7 +290,7 @@ $(document).ready(function () {
         const end = moment();
 
         function cb(start, end) {
-            $('#reportrange span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
+            $('#reportrange1 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
             $('.spinner').show();
             $.ajax({
                 url: "../components/selectors/headSums.php",
@@ -317,7 +316,7 @@ $(document).ready(function () {
             });
         }
 
-        $('#reportrange').daterangepicker({
+        $('#reportrange1').daterangepicker({
             startDate: start,
             endDate: end,
             locale: {
@@ -397,7 +396,7 @@ $(document).ready(function () {
                 $('.spinner').fadeOut('fast');
             }
         });
-    })
+    });
 });
 
 

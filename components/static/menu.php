@@ -21,6 +21,7 @@ function menu()
         <li><a href="../../referals.php" class=' . ($curPage === 'referals' ? '"active" disabled' : '') . '>Рефералы</a></li>
         <li><a href="../../debts.php" class=' . ($curPage === 'debts' ? '"active" disabled' : '') . '>Должники</a></li>
         <li><a href="../../statistics.php" class=' . ($curPage === 'statistics' ? '"active" disabled' : '') . '>Статистика</a></li>
+        <li><a href="../../turnover.php" class=' . ($curPage === 'turnover' ? '"active" disabled' : '') . '>Оборот</a></li>
 
         <li>    <a class="menu-logout-btn" href="./components/auth/logout.php">Выйти</a></li>
     </ul>
