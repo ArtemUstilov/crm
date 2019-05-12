@@ -387,7 +387,7 @@ $(document).ready(function () {
                 if(!res) return;
                 const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
-                modal.html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
+                $("#Branch-money-info-modal .fiats").html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
                 modal.modal({
                     blockerClass: '',
                 });

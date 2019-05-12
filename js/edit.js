@@ -217,7 +217,6 @@ function fillFiatEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             if(res=="failed"){
                 createAlertTable('connectionError', 'Фиат');
                 return;

@@ -29,6 +29,30 @@ function template($body)
             $changeBranch = '';
             $userIcon = 'user';
     }
+    if ($_SESSION['is_owner']) {
+        $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
+        $add_money_script = '<script src="./js/replenishFiat.js"></script>';
+        $add_money_form = '
+<div id="replenish-fiat-Modal" class="modal">
+ <form id="replenish-fiat-form">
+        <h2 class="modal-title" id="edit-branch-title">Редактирова данные предприятия</h2>
+        <div class="modal-inputs">
+            <p>
+            Валюта
+                <select id="replenishFiatSelect" data-validation="required" >
+               
+                </select>
+            </p>
+            <p>
+            Сумма
+                <input type="number" id="replenishFiatSum" step="0.01" placeholder="Сумма" data-validation="required"/>
+            </p>
+            </div>
+            <input class="modal-submit" type="submit" value="Сохранить">
+    </form>
+</div>';
+    }
+
     return (
         '<html>
 <head>
@@ -75,20 +99,22 @@ function template($body)
 <a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
 </div>
-<a href="#Branch-money-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Branch-money-info-modal" class="modal">
-
+<div class="fiats"></div>
+' . $add_money_btn . '
 </div>
 <div class="main-wrapper">
 ' . menu() . '
 <div class="loader"><div class="spinner"></div></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
+' . $add_money_form . '
 ' . $changeBranch . '
 <script src="./js/add-handlers.js"></script>
 <script src="./js/edit-handlers.js"></script>
 <script src="./js/edit.js"></script>
 <script src="./js/listeners.js"></script>
 <script src="./js/statistics.js"></script>
+' . $add_money_script . '
 </body>
 </html>'
     );

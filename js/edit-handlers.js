@@ -107,7 +107,7 @@ function editUser() {
             branch,
             money,
             role,
-            user_id : id,
+            user_id: id,
         },
         cache: false,
         success: function (res) {
@@ -123,6 +123,7 @@ function editUser() {
         }
     });
 }
+
 //Client
 $.validate({
     form: '#edit-client-form',
@@ -160,7 +161,7 @@ function editClient() {
             debt,
             phone,
             telegram,
-            client_id : id,
+            client_id: id,
         },
         cache: false,
         success: function (res) {
@@ -206,7 +207,7 @@ function editVG() {
             in_percent,
             url,
             key,
-            vg_id : id,
+            vg_id: id,
         },
         cache: false,
         success: function (res) {
@@ -222,8 +223,6 @@ function editVG() {
         }
     });
 }
-
-
 
 
 //Fiat
@@ -269,7 +268,6 @@ function editFiat() {
 }
 
 
-
 //Branch
 $.validate({
     form: '#edit-branch-form',
@@ -292,7 +290,7 @@ function editBranch() {
         type: "POST",
         data: {
             name,
-            branch_id : id,
+            branch_id: id,
             money,
         },
         cache: false,
@@ -333,6 +331,11 @@ function createAlertTable(alertType, text) {
             setTimeout(function () {
                 location.reload();
             }, 1500);
+            break;
+        case "success-replenish":
+            $('.custom-alert .alert-text-box').text(`Деньги успешно зачислены`);
+            $('.custom-alert').addClass('bg-green');
+            $.modal.close();
             break;
         case "failed":
             $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
