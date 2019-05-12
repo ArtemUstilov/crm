@@ -242,6 +242,7 @@ $(document).ready(function () {
             }else{
                 $('.Stat2').show();
                 $('.Stat3').hide();
+                switcher.text('Сумма по VG');
             }
             withoutFiats = !withoutFiats;
         });
