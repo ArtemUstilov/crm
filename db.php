@@ -3,7 +3,8 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    'test11');
+    'empty');
+
 //$connection = mysqli_connect(
 //    "bvpeki022gjamywud3fk-mysql.services.clever-cloud.com",
 //    "u5bk3owgaarlg86j",
