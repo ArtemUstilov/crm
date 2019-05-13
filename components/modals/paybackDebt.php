@@ -25,7 +25,7 @@ function debtModal($data)
 <select id="debtorField" data-validation="required">
   <option value="" selected disabled>Выберите должника</option>';
     foreach ($copy_of_data as $key => $var) {
-        $output .= '<option sum="'.$var['debt'].'" fiat="'.$var['fiat_id'].'" value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+        $output .= '<option sum="'.$var['debt'].'" fiat="'.$var['fiat_id'].'" value="' . $var['id'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
     }
     $output .= '
 </select>

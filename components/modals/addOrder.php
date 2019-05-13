@@ -62,7 +62,7 @@ function orderAddModal($data, $more_data)
   </p>
   <p>
   Продажа
-  <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out">
+  <input id="outField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Продажа %" type="number" name="out" step="0.01">
   </p>
     <p>
     Способ получения

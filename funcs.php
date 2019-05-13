@@ -71,6 +71,8 @@ function makeTable($data, $options)
                 </div>
             </td>';
             } else {
+                if(is_numeric($val))
+                    $val = round($val, 2);
                 $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val == '' || $val === null ? '-' : $val) . '</td>';
             }
             $index++;

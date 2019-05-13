@@ -25,7 +25,7 @@ function rollbackModal($data)
 <select id="clientField" data-validation="required">
   <option value="" selected disabled>Выберите клиента</option>';
     foreach ($copy_of_data as $key => $var) {
-        $output .= '<option sum="'.$var['rollback_sum'].'" fiat="'.$var['fiat_id'].'" value="' . $var['login'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
+        $output .= '<option sum="'.$var['rollback_sum'].'" fiat="'.$var['fiat_id'].'" value="' . $var['id'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';
     }
     $output .= '
 </select>

@@ -303,7 +303,7 @@ $(document).ready(function () {
                     res.forEach(r => {
                         const cell = $('.Head [itemid*=' + r.id + '] .1-f');
                         cell.attr('title', r.sum || 0);
-                        cell.text(r.sum || 0);
+                        cell.text((+r.sum).toFixed(2) || 0);
                     })
 
                 },

@@ -6,7 +6,7 @@ $('tr').on('click', (e) => {
         case "#Debt-Modal":
             $('[href*="#Debt-Modal"]').first()[0].click();
             const debtorList = $('#debtorField');
-            debtorList.val(target.parent().parent().attr('defaultval'));
+            debtorList.val(target.parent().parent().attr('itemid'));
             const debtorSelected = $("option:selected", debtorList);
             const debtSum = debtorSelected.attr('sum');
             const input = $('#paybackField');
@@ -18,7 +18,7 @@ $('tr').on('click', (e) => {
         case "#Rollback-Modal":
             $('[href*="#Rollback-Modal"]').first()[0].click();
             const referalList = $('#clientField');
-            referalList.val(target.parent().parent().attr('defaultval'));
+            referalList.val(target.parent().parent().attr('itemid'));
             const referalSelected = $("option:selected", referalList);
             const rollbackSum = referalSelected.attr('sum');
             const input2 = $('#payField');

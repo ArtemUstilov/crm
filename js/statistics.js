@@ -5,6 +5,41 @@ function yFixedNoJquerry() {
         });
     }
 }
+
+function filterIcons() {
+    $('th').each(function () {
+        const _this = $(this);
+        _this.click(function (e) {
+            if (e.target.tagName === 'INPUT') return;
+            setTimeout(() => {
+                $('th').each(function () {
+                    const span = $(this).children().first().children().first().children().last();
+                    span.removeClass();
+                });
+                const span = $(this).children().first().children().first().children().last();
+                if ($(this).attr('aria-sort') === 'descending') {
+                    span.addClass('fas fa-arrow-down');
+                } else if ($(this).attr('aria-sort') === 'ascending') {
+                    span.addClass('fas fa-arrow-up');
+                }
+            }, 10);
+        })
+    });
+    $('tr').each(function () {
+        const el = $(this);
+        el.click(function (e) {
+            if (e.target.tagName === 'I') return;
+            el.toggleClass('clicked');
+
+            function unclick() {
+                el.toggleClass('clicked');
+                window.removeEventListener('click', unclick);
+            }
+
+            setTimeout(() => window.addEventListener('click', unclick), 100);
+        });
+    })
+}
 function initSorterAndFilters() {
     $(function () {
         $(".table-container").tablesorter();
@@ -112,6 +147,7 @@ $(document).ready(function () {
             initSorterAndFilters();
             range();
             yFixedNoJquerry();
+            filterIcons();
         },
         error: function () {
             createAlertTable("connectionError", "Деньги");
@@ -120,7 +156,6 @@ $(document).ready(function () {
             $('.spinner').fadeOut('fast');
         }
     });
-
 
     function range() {
         if (typeof moment !== "function") return;
@@ -297,6 +332,7 @@ $(document).ready(function () {
             $('#wrapper').html(res);
             initSorterAndFilters();
             yFixedNoJquerry();
+            filterIcons();
         },
         error: function () {
             createAlertTable("connectionError", "Деньги");

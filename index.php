@@ -55,7 +55,7 @@ switch (accessLevel()) {
     case 2:
 
         $debtorsData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, C.client_id AS id, F.name AS валюта 
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, C.client_id AS id, F.name AS валюта, concat(C.client_id, "-", F.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
@@ -66,7 +66,7 @@ WHERE C.user_id IN(
 ) AND P.sum > 0
 ORDER BY P.sum DESC');
         $debtorsList = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id, concat(C.client_id, "-", P.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 WHERE C.user_id IN(
@@ -92,7 +92,7 @@ WHERE F.client_id IN(
 GROUP BY G.fiat_id
 ');
         $rollbackData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, C.client_id AS id, F.name AS валюта
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, concat(C.client_id, "-", F.fiat_id) AS id, F.name AS валюта
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
@@ -102,7 +102,7 @@ WHERE C.user_id IN(
     WHERE branch_id = ' . $branch_id . ') AND P.sum > 0
 ');
         $rollbackList = $connection->query('
-SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, concat(C.client_id, "-", P.fiat_id) AS id,
 byname AS login, P.sum AS rollback_sum, fiat_id
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
@@ -125,14 +125,14 @@ GROUP BY F.fiat_id
         break;
     case 3:
         $debtorsData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, client_id AS id, F.name AS валюта
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, client_id AS id, F.name AS валюта, concat(C.client_id, "-", F.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
 WHERE P.sum > 0
 ORDER BY P.sum DESC');
         $debtorsList = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id,concat(C.client_id, "-", P.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 WHERE P.sum > 0
@@ -145,14 +145,14 @@ INNER JOIN fiats F ON P.fiat_id = F.fiat_id
 GROUP BY F.fiat_id
 ');
         $rollbackData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, client_id AS id, F.name AS валюта
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, concat(C.client_id, "-", F.fiat_id) AS id, F.name AS валюта
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
 WHERE P.sum > 0
 ');
         $rollbackList = $connection->query('
-SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, concat(C.client_id, "-", P.fiat_id) AS id,
 byname AS login, P.sum AS rollback_sum, fiat_id
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
@@ -168,14 +168,14 @@ GROUP BY F.fiat_id
         break;
     case 1:
         $debtorsData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, C.client_id AS id, F.name AS валюта
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS долг, C.client_id AS id, F.name AS валюта, concat(C.client_id, "-", F.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
 WHERE C.user_id = ' . $_SESSION["id"] . ' AND P.sum > 0
 ORDER BY P.sum DESC');
         $debtorsList = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS client_name, byname AS login, P.sum AS debt, fiat_id, concat(C.client_id, "-", P.fiat_id) AS id
 FROM clients C
 INNER JOIN payments P ON P.client_debt_id = C.client_id 
 WHERE C.user_id = ' . $_SESSION["id"] . ' AND P.sum > 0
@@ -193,14 +193,15 @@ WHERE F.client_id IN(
 GROUP BY G.fiat_id
 ');
         $rollbackData = $connection->query('
-SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, C.client_id AS id, F.name AS валюта
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS "Полное имя", 
+byname AS Имя, phone_number AS телефон, email AS почта, P.sum AS откат, concat(C.client_id, "-", F.fiat_id) AS id, F.name AS валюта
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
 INNER JOIN fiats F ON P.fiat_id = F.fiat_id 
 WHERE C.user_id = ' . $_SESSION["id"] . ' AND P.sum > 0
 ');
         $rollbackList = $connection->query('
-SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS client_name, concat(C.client_id, "-", P.fiat_id) AS id,
 byname AS login, P.sum AS rollback_sum, fiat_id
 FROM clients C
 INNER JOIN payments P ON P.client_rollback_id = C.client_id 
@@ -237,9 +238,13 @@ if ($sumDebts) {
     }
     if (!$empty) {
         $table .= '<h3 >Всего: ';
-        foreach ($sumDebts as $key => $var) {
+        $i = 0;
+        for( ; $i < count($sumDebts)-1; $i++){
+            $var = $sumDebts[$i];
             $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
+        $table .= $sumDebts[$i]['sum'] . ' ' . $sumDebts[$i]['full_name'];
+        $table .= '</h3>';
     }
 }
 
@@ -263,9 +268,13 @@ if ($sumDebts) {
     }
     if (!$empty) {
         $table .= '<h3 >Всего: ';
-        foreach ($sumDebts as $key => $var) {
+        $i = 0;
+        for( ; $i < count($sumDebts)-1; $i++){
+            $var = $sumDebts[$i];
             $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
+        $table .= $sumDebts[$i]['sum'] . ' ' . $sumDebts[$i]['full_name'];
+        $table .= '</h3>';
     }
 }
 
