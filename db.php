@@ -3,8 +3,9 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-<<<<<<< HEAD
     'test11');
-=======
-    'empty');
->>>>>>> 46ac91b32a32561b0f912c6e5235a958f79d0f3f
+//$connection = mysqli_connect(
+//    "bvpeki022gjamywud3fk-mysql.services.clever-cloud.com",
+//    "u5bk3owgaarlg86j",
+//    "VBDjw7RGBbwsl35Wfpb8",
+//    "bvpeki022gjamywud3fk");

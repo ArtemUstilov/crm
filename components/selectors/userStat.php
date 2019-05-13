@@ -58,16 +58,17 @@ ORDER BY sum";
     WHERE (O.date >= '" . $start . "' AND O.date <= '" . $end . "')
     GROUP BY O.fiat_id, S.user_as_owner_id
 ) MMM ON MMM.user_as_owner_id = UU.user_id AND MMM.fiat_id = FF.fiat_id";
-        $select .= ", IFNULL(MMM.sum, 0) AS `sum`";
+        $select .= ", MMM.sum AS `sum`";
 
         $querry = "
 " . $select . "
 FROM users UU
 JOIN fiats FF
 " . $join . "
-WHERE UU.is_owner = 1 AND UU.branch_id = '.$branch_id.'
+WHERE UU.is_owner = 1 ".(!iCan(3) ? " AND UU.branch_id = '.$branch_id.'" : "")."
 ";
 }
-
+include_once '../../dev/ChromePhp.php';
+ChromePhp::log($querry);
 $result = mysqliToArray($connection->query($querry));
 echo json_encode($result);
