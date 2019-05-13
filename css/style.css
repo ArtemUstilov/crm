@@ -858,6 +858,11 @@ a[disabled] {
     padding: 3px 1%;
     text-align: left;
     font-size: 15px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    height: 1.5em;
+    white-space: nowrap;
 }
 
 .error-url {

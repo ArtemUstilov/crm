@@ -5,7 +5,8 @@ function template($body)
 {
     switch (accessLevel()) {
         case 3:
-            $changeBranch = '<div id="Change-Branch-Modal" class="modal" >
+            $changeBranch = '
+<div id="Change-Branch-Modal" class="modal" >
 <h2 class="modal-title">Перейти в другой отдел</h2>
 <form id="change-branch-form">
 <div class="modal-inputs">
@@ -16,7 +17,6 @@ function template($body)
 </div>
 <input class="modal-submit" type="submit" value="Перейти">
 </form>
-
 </div>
 <script src="./js/changeBranch.js"></script>';
             $userIcon = 'user-shield';
@@ -29,7 +29,7 @@ function template($body)
             $changeBranch = '';
             $userIcon = 'user';
     }
-    if ($_SESSION['is_owner']) {
+    if ($_SESSION['is_owner'] || iCan(3)) {
         $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
         $add_money_script = '<script src="./js/replenishFiat.js"></script>';
         $add_money_form = '
