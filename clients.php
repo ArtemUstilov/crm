@@ -21,6 +21,7 @@ switch(accessLevel()){
                     ');
         break;
     case 2:
+    case 1:
         $clients = $connection->query('
                     SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
                                     C.byname AS Имя, IFNULL(phone_number, "-") AS телефон,
@@ -31,13 +32,13 @@ switch(accessLevel()){
                     )
                     ');
         break;
-    case 1:
-        $clients = $connection->query('
-                    SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.email AS почта, IFNULL(telegram, "-") AS телеграм
-          FROM clients C
-                    WHERE user_id = '.$_SESSION['id'].'
-                    ');
+//    case 1:
+//        $clients = $connection->query('
+//                    SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
+//                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.email AS почта, IFNULL(telegram, "-") AS телеграм
+//          FROM clients C
+//                    WHERE user_id = '.$_SESSION['id'].'
+//                    ');
 }
 echo template(display_data($clients, $options));
 ?>
