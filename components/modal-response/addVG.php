@@ -5,7 +5,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
     include_once("../../funcs.php");
     $name = clean($_POST['name']);
     $prevId = clean($_POST['prevId']);
-    $url = clean($_POST['url']);
+    $url = strtolower(clean($_POST['url']));
     $key = clean($_POST['key']);
     $in = clean($_POST['in']);
     $out = clean($_POST['out']);
@@ -30,7 +30,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                     api_url_regexp,
                     vg_id,
                     branch_id
-                ) VALUES(\"$in\",\"$out\",'$key',\"$url\", '$prevId', '$branch_id') ");
+                ) VALUES('$in','$out','$key','$url', '$prevId', '$branch_id') ");
         }else{
             $res = $connection->
             query("
