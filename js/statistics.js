@@ -218,6 +218,7 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
+                    console.log(res);
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat1 [itemid=' + r.id + '] .2-f');
