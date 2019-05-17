@@ -1,13 +1,11 @@
 <?php
-if (isset($_POST['number']) && isset($_POST['login'])) {
+if (isset($_POST['number']) && isset($_POST['id'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
 
-    $login = clean($_POST['login']);
+    $client_id = explode('-', $_POST['id'])[0];
     $number = clean($_POST['number']);
     $fiat = clean($_POST['fiat']);
-    $client_data = mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE byname='$login'"));
-    $client_id = $client_data['client_id'];
     session_start();
     $branch_id = $_SESSION['branch_id'];
     $date = date('Y-m-d H:i:s');
@@ -24,10 +22,8 @@ if (isset($_POST['number']) && isset($_POST['login'])) {
             $add_ref = $connection->
             query("INSERT INTO rollback_paying (user_id, client_id, rollback_sum, date, fiat_id) VALUES(\"$user_id\",\"$client_id\",\"$number\",\"$date\", '$fiat') ");
 
-            $update_branch_money = $connection->
-            query("UPDATE  `payments` 
-                                  SET `sum` = `sum` - '$number'
-                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
+           updateBranchMoney($connection, $branch_id, -$number, $fiat);
+
         }
         if ($add_ref) {
             echo "success";

@@ -19,9 +19,7 @@ if (isset($_POST['sum'])) {
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat') ");
     }
     if($res)
-        $connection->
-        query("UPDATE payments SET `sum` = `sum` - '$sum' 
-                      WHERE branch_id = '$branch_id' AND fiat_id = '$fiat'");
+        updateBranchMoney($connection, $branch_id, -$sum, $fiat);
     if ($res) {
         echo "success";
         return false;

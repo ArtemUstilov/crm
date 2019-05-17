@@ -40,6 +40,7 @@ function filterIcons() {
         });
     })
 }
+
 function initSorterAndFilters() {
     $(function () {
         $(".table-container").tablesorter();
@@ -88,8 +89,15 @@ function initSorterAndFilters() {
     });
 }
 
+$(window).load(function () {
+    if (!window.location.pathname.includes('statistics')
+        && !window.location.pathname.includes('turnover'))
+            $('.loader').fadeOut('slow');
+});
+
 $(document).ready(function () {
-    if(!window.location.pathname.includes('statistics')) return;
+    if (!window.location.pathname.includes('statistics')) return;
+    $('.loader').show();
     const toDate = (dates) => ([dates[0].format(FORMATTER) + START, dates[1].format(FORMATTER) + END]);
 
     const FORMATTER = 'YYYY-MM-DD';
@@ -107,7 +115,8 @@ $(document).ready(function () {
             .startOf('year')
             .add(-1, 'days')
             .year()]
-    );;
+    );
+
     const all = ['0000-01-01 00:00:00', '3000-01-01 00:00:00', 'все время'];
     let months = [0, 1, 2, 3, 4, 5, 6].map(off =>
         toDate(
@@ -125,11 +134,11 @@ $(document).ready(function () {
                 .startOf('month')
                 .add(-off, 'month')
                 .month()
-            ,
-            moment()
-                .startOf('month')
-                .add(-off, 'month')
-                .year() ]
+                ,
+                moment()
+                    .startOf('month')
+                    .add(-off, 'month')
+                    .year()]
         )
     );
     let weeks = [manually].concat([0, 1, 2].map(off => toDate([moment().add(-off, 'weeks').day("Sunday"), moment().add(-off, 'weeks').day('Saturday')])));
@@ -139,6 +148,7 @@ $(document).ready(function () {
         data: {years: [curYear, lastYear, all], weeks, months},
         cache: false,
         success: function (res) {
+            $('.loader').fadeOut("fast");
             try {
                 res = JSON.parse(res);
             } catch (e) {
@@ -153,7 +163,7 @@ $(document).ready(function () {
             createAlertTable("connectionError", "Деньги");
         },
         complete: function () {
-            $('.spinner').fadeOut('fast');
+            // $('.loader').fadeOut('fast');
         }
     });
 
@@ -208,9 +218,10 @@ $(document).ready(function () {
                 'Все время': [moment('1970-01-01', 'YYYY-MM-DD'), moment('2100-01-01', 'YYYY-MM-DD')]
             }
         };
+
         function cb(start, end) {
             $('#reportrange1 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
-            $('.spinner').show();
+            // $('.loader').show();
             $.ajax({
                 url: "../components/selectors/userStat.php",
                 type: "POST",
@@ -218,25 +229,25 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
-                    console.log(res);
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat1 [itemid=' + r.id + '] .2-f');
                         cell.attr('title', r.sum || 0);
-                        cell.text(r.sum || 0);
+                        cell.text(r.sum || '-');
                     })
                 },
                 error: function () {
                     createAlertTable("connectionError", "Расход");
                 },
                 complete: function () {
-                    $('.spinner').fadeOut('fast');
+                    // $('.loader').fadeOut('fast');
                 }
             });
         }
+
         function cb2(start, end) {
             $('#reportrange2 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
-            $('.spinner').show();
+            // $('.loader').show();
             $.ajax({
                 url: "../components/selectors/userStat.php",
                 type: "POST",
@@ -248,43 +259,45 @@ $(document).ready(function () {
                     res.forEach(r => {
                         const cell = $('.Stat2 [itemid="' + r.id + '"] .1-f');
                         cell.attr('title', r.sum || 0);
-                        cell.text(+r.sum);
+                        cell.text(r.sum || '-');
                     });
                 },
                 error: function () {
                     createAlertTable("connectionError", "Расход");
                 },
                 complete: function () {
-                    $('.spinner').fadeOut('fast');
+                    // $('.loader').fadeOut('fast');
                 }
             });
         }
+
         let withoutFiats = false;
         const switcher = $('.switch-vg-stat');
-        if(!withoutFiats){
+        if (!withoutFiats) {
             $('.Stat2').hide();
             $('.Stat3').show();
             switcher.text('VG по валютам');
-        }else{
+        } else {
             $('.Stat2').show();
             $('.Stat3').hide();
             switcher.text('Сумма по VG');
         }
-        switcher.click(function(){
-            if(withoutFiats){
+        switcher.click(function () {
+            if (withoutFiats) {
                 $('.Stat2').hide();
                 $('.Stat3').show();
                 switcher.text('VG по валютам');
-            }else{
+            } else {
                 $('.Stat2').show();
                 $('.Stat3').hide();
                 switcher.text('Сумма по VG');
             }
             withoutFiats = !withoutFiats;
         });
+
         function cb3(start, end) {
             $('#reportrange3 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
-            $('.spinner').show();
+            // $('.loader').show();
             $.ajax({
                 url: "../components/selectors/userStat.php",
                 type: "POST",
@@ -295,18 +308,19 @@ $(document).ready(function () {
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat3 [itemid="' + r.id + '"] .2-f');
-                        cell.attr('title', r.sum || 0);
-                        cell.text(+r.sum);
+                        cell.attr('title', r.sum || '-');
+                        cell.text(r.sum || '-');
                     });
                 },
                 error: function () {
                     createAlertTable("connectionError", "Расход");
                 },
                 complete: function () {
-                    $('.spinner').fadeOut('fast');
+                    // $('.loader').fadeOut('fast');
                 }
             });
         }
+
         $('#reportrange1').daterangepicker(OPTIONS, cb);
         $('#reportrange2').daterangepicker(OPTIONS, cb2);
         $('#reportrange3').daterangepicker(OPTIONS, cb3);
@@ -319,8 +333,8 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    if(!window.location.pathname.includes('turnover')) return;
-
+    if (!window.location.pathname.includes('turnover')) return;
+    $('.loader').show();
     $.ajax({
         url: "../components/selectors/turnover.php",
         type: "POST",
@@ -339,7 +353,7 @@ $(document).ready(function () {
             createAlertTable("connectionError", "Деньги");
         },
         complete: function () {
-            $('.spinner').fadeOut('fast');
+            $('.loader').fadeOut('fast');
         }
     });
 });

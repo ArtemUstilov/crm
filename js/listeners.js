@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    function copyToClipboard(element) {
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
+    $('#copy-btn').click(function(){copyToClipboard('#error-url')});
     let icon = $('#menu-burger > i');
     $('#menu-burger').click(function () {
         icon.toggleClass('fa-bars');
@@ -48,7 +56,7 @@ $(document).ready(function () {
     $('#login-form').submit((event) => {
         event.preventDefault();
         if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
-        $(".spinner").show();
+        $('.loader').show();
         let password = $("#passwordField").val();
         let login = $("#loginField").val();
         // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
@@ -63,7 +71,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
                 switch (res) {
                     case "success":
                         window.location.href = '../index.php';
@@ -258,7 +266,7 @@ $(document).ready(function () {
         filterIcons();
     }
     $('.checkbox').click(function () {
-        $(".spinner").show();
+        $('.loader').show();
         let id = $(this).parent().parent().parent().attr('itemid');
         let type = $('.table-menu>h2').attr('type');
         let url = '';
@@ -279,7 +287,7 @@ $(document).ready(function () {
                 createAlertTable('failed', '');
             },
             complete: function () {
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
             }
         })
     });
@@ -291,7 +299,7 @@ $(document).ready(function () {
 
         function cb(start, end) {
             $('#reportrange1 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
-            $('.spinner').show();
+            $('.loader').show();
             $.ajax({
                 url: "../components/selectors/headSums.php",
                 type: "POST",
@@ -311,7 +319,7 @@ $(document).ready(function () {
                     createAlertTable("connectionError", "Расход");
                 },
                 complete: function () {
-                    $('.spinner').fadeOut('fast');
+                    // $('.loader').fadeOut('fast');
                 }
             });
         }
@@ -377,7 +385,7 @@ $(document).ready(function () {
         }
     });
     $('.main-header .fa-coins').click(function () {
-        $('.spinner').show();
+        $('.loader').show();
         $.ajax({
             url: "../components/selectors/branchSums.php",
             type: "POST",
@@ -396,7 +404,7 @@ $(document).ready(function () {
                 createAlertTable("connectionError", "Деньги");
             },
             complete: function () {
-                $('.spinner').fadeOut('fast');
+                $('.loader').fadeOut('fast');
             }
         });
 

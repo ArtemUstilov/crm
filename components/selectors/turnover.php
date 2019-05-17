@@ -23,7 +23,12 @@ FROM rollback_paying R
 INNER JOIN fiats F ON F.fiat_id = R.fiat_id
 WHERE R.user_id IN (SELECT user_id FROM users WHERE branch_id=$branch_id)
 UNION
-SELECT 'продажа', ORD.sum_currency, ORD.date, F.full_name
+SELECT 'внос денег', I.sum, I.date, F.full_name
+FROM income_history I
+INNER JOIN fiats F ON F.fiat_id = I.fiat
+WHERE I.user_id IN (SELECT user_id FROM users WHERE branch_id=$branch_id)
+UNION
+SELECT 'продажа', ORD.sum_currency-ORD.order_debt, ORD.date, F.full_name
 FROM orders ORD
 INNER JOIN fiats F ON F.fiat_id = ORD.fiat_id
 WHERE ORD.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id=$branch_id))

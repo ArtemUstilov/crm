@@ -29,13 +29,12 @@ function template($body)
             $changeBranch = '';
             $userIcon = 'user';
     }
-    if ($_SESSION['is_owner'] || iCan(3)) {
         $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
         $add_money_script = '<script src="./js/replenishFiat.js"></script>';
         $add_money_form = '
 <div id="replenish-fiat-Modal" class="modal">
  <form id="replenish-fiat-form">
-        <h2 class="modal-title" id="edit-branch-title">Редактирова данные предприятия</h2>
+        <h2 class="modal-title" id="replenish-fiat">Добавить фиат</h2>
         <div class="modal-inputs">
             <p>
             Валюта
@@ -51,7 +50,6 @@ function template($body)
             <input class="modal-submit" type="submit" value="Сохранить">
     </form>
 </div>';
-    }
 
     return (
         '<html>
@@ -71,10 +69,6 @@ function template($body)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <script>
         $(function(){$(".table-container").tablesorter();});
-        $(window).load(function() {
-            $(".loader").fadeOut("slow");
-            
-        });
     </script>
 </head>
 <body>

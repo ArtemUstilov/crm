@@ -171,7 +171,17 @@ function generateRandomString($length = 40) {
     }
     return $randomString;
 }
-
+function updateBranchMoney($connection, $branch_id, $sum, $fiat){
+    if(count(mysqliToArray($connection->query("SELECT * FROM payments WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id'"  )))){
+        $update_branch_money = $connection->
+        query("UPDATE  `payments` 
+                                  SET `sum` = `sum` + '$sum'
+                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
+    }else{
+        $connection->query("INSERT INTO `payments` 
+                                  (fiat_id, sum, branch_id) VALUES($fiat,  $sum,$branch_id )");
+    }
+}
 
 
 

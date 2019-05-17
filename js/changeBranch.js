@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#branch-t').click(function () {
-        $(".spinner").show();
+        $('.loader').show();
         $.ajax({
             url: "../components/selectors/getBranches.php",
             type: "POST",
@@ -15,7 +15,7 @@ $(document).ready(function () {
                             $('#Change-Branch-Modal #changeBranchField').append(`<option value = ${el["id"]}>${el["name"]}</option>`)
                         });
                 }
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
                 $('#Change-Branch-Modal').modal();
             },
             error: function () {
@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
 
     function changeBranch() {
-        $(".spinner").show();
+        $('.loader').show();
         let branch_id = $('#Change-Branch-Modal #changeBranchField').val();
         $.ajax({
             url: "../components/modal-response/changeBranch.php",
@@ -50,11 +50,11 @@ $(document).ready(function () {
                 } else {
                     createAlertTable();
                 }
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
             },
             error: function () {
                 createAlertTable();
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
             },
 
         })

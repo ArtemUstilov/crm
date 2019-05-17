@@ -58,7 +58,7 @@ $('tr').on('click', (e) => {
 });
 
 function fillAdditionalInfo(target) {
-    $(".spinner").show();
+    $('.loader').show();
     if ($('#table-wrapper').hasClass('Client')) {
         let client_id = target.attr('itemid');
         $.ajax({
@@ -79,7 +79,7 @@ function fillAdditionalInfo(target) {
                 $('#info-client-form .modal-title').text(`Нет информации про клиента`);
             },
             complete: function () {
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
                 $("#Client-info-modal").modal();
 
             }
@@ -106,7 +106,7 @@ function fillAdditionalInfo(target) {
                 $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
             },
             complete: function () {
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
                 $("#Order-info-modal").modal();
 
             }
@@ -115,7 +115,7 @@ function fillAdditionalInfo(target) {
 }
 
 function fillOrderEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let order_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/Order.php",
@@ -168,7 +168,7 @@ function fillOrderEditForm(target) {
                 }));
             } else $('#open-invisible-owner-edit-list').addClass('display-none');
 
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Order-edit-Modal').modal();
 
         },
@@ -178,7 +178,7 @@ function fillOrderEditForm(target) {
 }
 
 function fillOwnerEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let owner_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/User.php",
@@ -196,7 +196,7 @@ function fillOwnerEditForm(target) {
             $('#edit-user-form #editBranchField').val(res['branch_id']);
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Head-edit-Modal').modal();
 
         },
@@ -206,7 +206,7 @@ function fillOwnerEditForm(target) {
 }
 
 function fillFiatEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let fiat = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/Fiat.php",
@@ -225,7 +225,7 @@ function fillFiatEditForm(target) {
             $('#edit-fiat-form #editFullNameFiatField').val(res['full_name']);
             $('#edit-fiat-form #editNameFiatField').val(res['name']);
             $('#edit-fiat-form #editCodeField').val(res['code']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Fiat-edit-Modal').modal();
 
         },
@@ -235,7 +235,7 @@ function fillFiatEditForm(target) {
 }
 
 function fillUserEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let user_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/User.php",
@@ -253,7 +253,7 @@ function fillUserEditForm(target) {
             $('#edit-user-form #editBranchField').val(res['branch_id']);
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#User-edit-Modal').modal();
         },
         error: function () {
@@ -262,7 +262,7 @@ function fillUserEditForm(target) {
 }
 
 function fillBranchEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let branch_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/Branch.php",
@@ -276,7 +276,7 @@ function fillBranchEditForm(target) {
             $('#edit-branch-form #edit-branch-title').text(`Изменить данные предприятия ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $('#edit-branch-form #editMoneyField').val(res['money']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Branch-edit-Modal').modal();
         },
         error: function () {
@@ -285,7 +285,7 @@ function fillBranchEditForm(target) {
 }
 
 function fillVGEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let vg_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/VG.php",
@@ -302,7 +302,7 @@ function fillVGEditForm(target) {
             $('#edit-vg-form #editInField').val(res['in']);
             $('#edit-vg-form #editUrlField').val(res['url']);
             $('#edit-vg-form #editKeyField').val(res['key']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#VG-edit-Modal').modal();
 
         },
@@ -312,7 +312,7 @@ function fillVGEditForm(target) {
 }
 
 function fillOwnerEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let owner_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/Head.php",
@@ -329,7 +329,7 @@ function fillOwnerEditForm(target) {
             $('#edit-vg-form #editOutField').val(res['out']);
             $('#edit-vg-form #editInField').val(res['in']);
             $('#edit-vg-form #editUrlField').val(res['url']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Head-edit-Modal').modal();
 
 
@@ -340,7 +340,7 @@ function fillOwnerEditForm(target) {
 }
 
 function fillClientEditForm(target) {
-    $(".spinner").show();
+    $('.loader').show();
     let client_id = target.attr('itemid');
     $.ajax({
         url: "../components/selectors/Client.php",
@@ -361,7 +361,7 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editDebtField').val(res['debt']);
             $('#edit-client-form #editRollbackField').val(res['rollback']);
             $('#edit-client-form #editDescriptionField').val(res['description']);
-            $(".spinner").fadeOut('fast');
+            $('.loader').fadeOut('fast');
             $('#Client-edit-Modal').modal();
 
 

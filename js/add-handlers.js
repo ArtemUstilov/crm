@@ -105,7 +105,7 @@ $(document).ready(function () {
         if (!client_id || !vg_id) return;
         vgcl.prop('disabled', true);
         vgcl.addClass('no-drop');
-        $(".spinner").show();
+        $('.loader').show();
 
         $.ajax({
             url: "../components/modal-response/getVGOwners.php",
@@ -122,7 +122,7 @@ $(document).ready(function () {
             error: function () {
             },
             complete: function () {
-                $(".spinner").fadeOut('slow');
+                $('.loader').fadeOut('slow');
                 vgcl.prop('disabled', false);
                 vgcl.removeClass('no-drop');
             }
@@ -168,7 +168,6 @@ $(document).ready(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
         });
         const shares = allShares.filter((el) => el.value > 0);
-        console.log(shares);
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -493,7 +492,7 @@ $(document).ready(function () {
 
 
     function payRollback() {
-        let login = $("#pay-rollback-form #clientField").val();
+        let id = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
         let fiat = $("#pay-rollback-form #fiatField").val();
         $this = $(".modal-submit");
@@ -502,7 +501,7 @@ $(document).ready(function () {
             url: "../components/modal-response/payRollback.php",
             type: "POST",
             data: {
-                login, fiat, number,
+                id, fiat, number,
             },
             cache: false,
             success: function (res) {
@@ -546,7 +545,7 @@ $(document).ready(function () {
     });
 
     function paybackDebt() {
-        let login = $("#payback-debt-form #debtorField").val();
+        let id = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();
         let fiat = $("#payback-debt-form #fiatField").val();
         $this = $(".modal-submit");
@@ -555,7 +554,7 @@ $(document).ready(function () {
             url: "../components/modal-response/paybackDebt.php",
             type: "POST",
             data: {
-                login,
+                id,
                 number,
                 fiat,
             },

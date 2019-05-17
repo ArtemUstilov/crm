@@ -253,8 +253,7 @@ $data['clients'] = $rollbackList;
 $data['fiats'] = $fiats;
 $options['type'] = 'Rollback';
 $options['text'] = 'Ожидают откаты';
-if (accessLevel() < 3)
-    $options['coins'] = true;
+$options['coins'] = true;
 $options['btn-text'] = 'Выплатить';
 $options['btn'] = 1;
 $options['modal'] = 'Rollback-Modal';

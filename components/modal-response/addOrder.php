@@ -71,7 +71,6 @@ if (isset($_POST['client']) &&
                 $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($var['value'] / 100));
                 $curr_owner_id = $var['owner_id'];
                 $share_percent = $var['value'];
-                ChromePhp::log($out_percent - $in_percent - $rollback_1);
                 $add_share = $connection->
                 query("INSERT INTO `shares`
                 (`order_id`, `user_as_owner_id`, `sum`, `share_percent`) VALUES
@@ -109,20 +108,7 @@ if (isset($_POST['client']) &&
                              VALUES('$fiat', '$rollback_sum', '$callmaster') ");
             }
             if ($money_to_add > 0) {
-                $check_payment_branch = mysqliToArray($connection->
-                query("SELECT * FROM payments
-                              WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' "));
-
-                if ($check_payment_branch)
-                    $connection->
-                    query("UPDATE  `payments` 
-                                  SET `sum` = `sum` + '$money_to_add'
-                                  WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
-                else
-                    $connection->
-                    query("INSERT INTO `payments` 
-                             (`fiat_id`, `sum`, `branch_id`)
-                             VALUES('$fiat', '$money_to_add', '$branch_id') ");
+                updateBranchMoney($connection, $branch_id, $money_to_add, $fiat);
             }
 
             $vg_data = mysqli_fetch_assoc($connection->query("
@@ -150,7 +136,6 @@ if (isset($_POST['client']) &&
                 $vg_url = str_replace("%UserName%", $client_login, $vg_data['url']);
                 $vg_url = str_replace("%Summ%", $sum_vg, $vg_url);
             }
-            ChromePhp::log($vg_url);
             set_error_handler(
                 function ($severity, $message, $file, $line) {
                     throw new ErrorException($message, $severity, $severity, $file, $line);

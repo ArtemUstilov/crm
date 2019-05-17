@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#replenish-fiat-btn').click(function () {
-        $(".spinner").show();
+        $('.loader').show();
         $.ajax({
             url: "../components/selectors/Fiat.php",
             type: "POST",
@@ -14,7 +14,7 @@ $(document).ready(function () {
                             $('#replenish-fiat-Modal #replenishFiatSelect').append(`<option value = ${el["fiat_id"]}>${el["full_name"]}</option>`)
                         });
                 }
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
                 $('#replenish-fiat-Modal').modal();
             },
             error: function () {
@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     function replenishFiat() {
-        $(".spinner").show();
+        $('.loader').show();
         const fiat = $('#replenish-fiat-Modal #replenishFiatSelect').val();
         const sum = $('#replenish-fiat-Modal #replenishFiatSum').val();
         $.ajax({
@@ -47,17 +47,16 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                console.log(res);
                 if (res == 'success-replenish') {
                     createAlertTable(res);
                 } else {
                     createAlertTable();
                 }
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
             },
             error: function () {
                 createAlertTable();
-                $(".spinner").fadeOut('fast');
+                $('.loader').fadeOut('fast');
             },
 
         })
