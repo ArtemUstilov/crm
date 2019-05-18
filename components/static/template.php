@@ -3,6 +3,7 @@ include_once './components/static/menu.php';
 
 function template($body)
 {
+
     switch (accessLevel()) {
         case 3:
             $changeBranch = '
@@ -29,12 +30,12 @@ function template($body)
             $changeBranch = '';
             $userIcon = 'user';
     }
-        $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
-        $add_money_script = '<script src="./js/replenishFiat.js"></script>';
-        $add_money_form = '
+    $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
+    $add_money_script = '<script src="./js/replenishFiat.js"></script>';
+    $add_money_form = '
 <div id="replenish-fiat-Modal" class="modal">
  <form id="replenish-fiat-form">
-        <h2 class="modal-title" id="replenish-fiat">Добавить фиат</h2>
+        <h2 class="modal-title" id="replenish-fiat">Внести фиат</h2>
         <div class="modal-inputs">
             <p>
             Валюта
@@ -45,8 +46,17 @@ function template($body)
             <p>
             Сумма
                 <input type="number" id="replenishFiatSum" step="0.01" placeholder="Сумма" data-validation="required"/>
-            </p>
-            </div>
+            </p>';
+    session_start();
+    if ($_SESSION['role'] == 'agent' && !$_SESSION['is_owner'])
+        $add_money_form .= ' <p>
+            Владелец
+                <select type="text" id="replenishOwnerSelect"  placeholder="Владелец" data-validation="required">
+                <option selected disabled>Выберите владельца</option>
+                </select>
+            </p>';
+    $add_money_form .= '
+    </div>
             <input class="modal-submit" type="submit" value="Сохранить">
     </form>
 </div>';
