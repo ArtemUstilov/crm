@@ -227,6 +227,7 @@ if (accessLevel() < 3)
     $options['coins'] = true;
 $options['btn-text'] = 'Погасить';
 $options['btn'] = 1;
+$options['btn-max'] = 2;
 $options['modal'] = 'Debt-Modal';
 $table .= display_data($debtorsData, $options, $data);
 
@@ -239,7 +240,7 @@ if ($sumDebts) {
     if (!$empty) {
         $table .= '<h3 >Всего: ';
         $i = 0;
-        for( ; $i < count($sumDebts)-1; $i++){
+        for (; $i < count($sumDebts) - 1; $i++) {
             $var = $sumDebts[$i];
             $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
@@ -253,9 +254,12 @@ $data['clients'] = $rollbackList;
 $data['fiats'] = $fiats;
 $options['type'] = 'Rollback';
 $options['text'] = 'Ожидают откаты';
-$options['coins'] = true;
-$options['btn-text'] = 'Выплатить';
+if (accessLevel() < 3){}
+    $options['coins'] = true;
 $options['btn'] = 1;
+$options['btn-max'] = 2;
+$options['btn-text'] = 'Выплатить';
+
 $options['modal'] = 'Rollback-Modal';
 
 $table .= display_data($rollbackData, $options, $data);
@@ -268,7 +272,7 @@ if ($sumDebts) {
     if (!$empty) {
         $table .= '<h3 >Всего: ';
         $i = 0;
-        for( ; $i < count($sumDebts)-1; $i++){
+        for (; $i < count($sumDebts) - 1; $i++) {
             $var = $sumDebts[$i];
             $table .= $var['sum'] . ' ' . $var['full_name'] . ', ';
         }
