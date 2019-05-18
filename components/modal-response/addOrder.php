@@ -125,7 +125,8 @@ if (isset($_POST['client']) &&
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             if (strpos($vg_data['url'],'%key%')) {
                 $IDTransact = generateRandomString();
-                $vg_url = str_replace("%username%", $client_login, $vg_data['url']);
+                $vg_url = strtolower($vg_data['url']);
+                $vg_url = str_replace("%username%", $client_login, $vg_url);
                 $vg_url = str_replace("%sum%", $sum_vg, $vg_url);
                 $vg_url = str_replace("%idtransact%", $IDTransact, $vg_url);
                 $vg_url = str_replace("%key%", $vg_data['key'], $vg_url);
