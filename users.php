@@ -8,14 +8,14 @@ $branch_id = $_SESSION['branch_id'];
 switch (accessLevel()) {
     case 3:
         $res = ($connection->query('
-SELECT user_id AS id, concat(last_name, " ", first_name) AS Имя, role AS должность, branch_name AS отделение, U.active AS статус
+SELECT user_id AS `id`, concat(last_name, " ", first_name) AS `Имя`, role AS `должность`, branch_name AS `отделение`, U.active AS `статус`
 FROM users U
 INNER JOIN branch B ON B.branch_id = U.branch_id
 '));
         break;
     case 2:
         $res = ($connection->query("
-SELECT user_id AS id, concat(last_name, ' ', first_name) AS Имя, role AS должность, branch_name AS отделение, U.active AS статус
+SELECT user_id AS `id`, concat(last_name, ' ', first_name) AS `Имя`, role AS `должность`, branch_name AS `отделение`, U.active AS `статус`
 FROM users U
 INNER JOIN branch B ON B.branch_id = U.branch_id
 WHERE B.branch_id = '$branch_id' AND U.role != 'moder'
@@ -23,7 +23,7 @@ WHERE B.branch_id = '$branch_id' AND U.role != 'moder'
         break;
     case 1:
         $res = ($connection->query("
-SELECT user_id AS id, concat(last_name, ' ', first_name) AS Имя, branch_name AS отделение, U.active AS статус
+SELECT user_id AS `id`, concat(last_name, ' ', first_name) AS `Имя`, branch_name AS `отделение`, U.active AS `статус`
 FROM users U
 INNER JOIN branch B ON B.branch_id = U.branch_id
 WHERE B.branch_id = '$branch_id' AND U.role != 'moder'

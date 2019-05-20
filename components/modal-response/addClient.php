@@ -17,7 +17,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
     $user_id = $_SESSION['id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $client = true;
-    $check_client = mysqli_fetch_assoc($connection->query("SELECT client_id AS id FROM clients WHERE byname='$byname'"));
+    $check_client = mysqli_fetch_assoc($connection->query("SELECT client_id AS `id` FROM clients WHERE byname='$byname'"));
     if ($check_client) {
         echo "exists";
         return false;
@@ -27,7 +27,7 @@ if (isset($_POST['description']) && isset($_POST['byname'])
         query("
         INSERT INTO clients (`user_id`, `last_name`, `first_name`, `byname`, `phone_number`, `email`, `description`, `telegram`) 
         VALUES('$user_id', '$last_name','$first_name','$byname','$phone','$email','$description', '$telegram') ");
-        $lastid = mysqli_fetch_assoc($connection ->query('SELECT client_id AS id FROM clients ORDER BY client_id DESC LIMIT 1'))['id'];
+        $lastid = mysqli_fetch_assoc($connection ->query('SELECT client_id AS `id` FROM clients ORDER BY client_id DESC LIMIT 1'))['id'];
         if ($res) {
             echo "success".$lastid;
             return false;

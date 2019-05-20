@@ -18,14 +18,14 @@ $data['vgs'] = $connection->query("
 ");
 if(iCan(3)){ // currently
     echo template(display_data($connection -> query('
-SELECT branch_name AS предприятие, VG.vg_id AS id, VG.name AS название, in_percent As "покупка %", out_percent AS "продажа %", api_url_regexp AS "ссылка-шаблон", access_key AS "ключ доступа"
+SELECT branch_name AS `предприятие`, VG.vg_id AS `id`, VG.name AS `название`, in_percent As "покупка %", out_percent AS "продажа %", api_url_regexp AS "ссылка-шаблон", access_key AS "ключ доступа"
 FROM virtualgood VG
 INNER JOIN vg_data D ON VG.vg_id = D.vg_id
 INNER JOIN branch B ON B.branch_id = D.branch_id
 '), $options, $data));
 }else{
     echo template(display_data($connection -> query('
-SELECT VG.vg_id AS id, VG.name AS название, in_percent As "покупка %", out_percent AS "продажа %", api_url_regexp AS "ссылка-шаблон", access_key AS "ключ доступа"
+SELECT VG.vg_id AS `id`, VG.name AS `название`, in_percent As "покупка %", out_percent AS "продажа %", api_url_regexp AS "ссылка-шаблон", access_key AS "ключ доступа"
 FROM virtualgood VG
 INNER JOIN vg_data D ON VG.vg_id = D.vg_id
 INNER JOIN branch B ON B.branch_id = D.branch_id

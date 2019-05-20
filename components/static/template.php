@@ -48,7 +48,7 @@ function template($body)
                 <input type="number" id="replenishFiatSum" step="0.01" placeholder="Сумма" data-validation="required"/>
             </p>';
     session_start();
-    if ($_SESSION['role'] == 'agent' && !$_SESSION['is_owner'])
+    if (($_SESSION['role'] == 'agent' || $_SESSION['role'] == 'admin') && !$_SESSION['is_owner'])
         $add_money_form .= ' <p>
             Владелец
                 <select type="text" id="replenishOwnerSelect"  placeholder="Владелец" data-validation="required">

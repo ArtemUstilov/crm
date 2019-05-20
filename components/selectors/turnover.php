@@ -12,7 +12,7 @@ $options['text'] = 'Оборотная ведомость';
 $options['type'] = 'Stat3';
 $options['prepared'] = true;
 
-    $querry = "SELECT 'расход' AS тип, O.sum, O.date, F.full_name AS валюта, '-' AS 'владелец'
+    $querry = "SELECT 'расход' AS `тип`, O.sum, O.date, F.full_name AS `валюта`, '-' AS 'владелец'
 FROM outgo O
 INNER JOIN fiats F ON F.fiat_id = O.fiat_id
 WHERE O.user_id IN (SELECT user_id FROM users WHERE branch_id=$branch_id)

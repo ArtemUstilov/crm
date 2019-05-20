@@ -8,8 +8,8 @@ $branch_id = $_SESSION['branch_id'];
 switch (accessLevel()) {
     case 3:
         $info = $connection -> query("
-SELECT B.branch_name AS отдел, concat(U.last_name, ' ', U.first_name) AS агент,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-concat(O.rollback_sum, ' ', F.name) AS сумма, O.date AS дата
+SELECT B.branch_name AS `отдел`, concat(U.last_name, ' ', U.first_name) AS `агент`,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS `клиент`, 
+concat(O.rollback_sum, ' ', F.name) AS `сумма`, O.date AS `дата`
 FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
@@ -21,8 +21,8 @@ ORDER BY `date` DESC
     case 2:
     case 1:
         $info = $connection -> query("
-SELECT concat(U.last_name, ' ', U.first_name) AS агент,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS клиент, 
-concat(O.rollback_sum, ' ', F.name) AS сумма, O.date AS дата
+SELECT concat(U.last_name, ' ', U.first_name) AS `агент`,  U.login AS 'логин агента', concat(C.last_name, ' ', C.first_name) AS `клиент`, 
+concat(O.rollback_sum, ' ', F.name) AS `сумма`, O.date AS `дата`
 FROM rollback_paying O
 INNER JOIN clients C ON C.client_id = O.client_id 
 INNER JOIN users U ON U.user_id = O.user_id
@@ -33,8 +33,8 @@ ORDER BY `date` DESC
 //        break;
 //    case 1:
 //        $info = $connection -> query('
-//SELECT concat(C.last_name, " ", C.first_name) AS клиент,
-//concat(O.rollback_sum, " ", F.name) AS сумма, O.date AS дата
+//SELECT concat(C.last_name, " ", C.first_name) AS `клиент`,
+//concat(O.rollback_sum, " ", F.name) AS `сумма`, O.date AS `дата`
 //FROM rollback_paying O
 //INNER JOIN clients C ON C.client_id = O.client_id
 //INNER JOIN users U ON U.user_id = O.user_id
@@ -54,8 +54,8 @@ $options['btn-max'] = 2;
 $options['btn-text'] = 'Выплатить';
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
-SELECT concat(last_name, " ", first_name) AS client_name, 
-byname AS login, P.sum AS rollback_sum, fiat_id
+SELECT concat(last_name, " ", first_name) AS `client`_name, 
+byname AS `login`, P.sum AS `rollback`_sum, fiat_id
 FROM clients C 
 INNER JOIN payments P ON C.client_id = P.client_rollback_id
 WHERE  P.sum > 0

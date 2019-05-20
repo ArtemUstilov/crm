@@ -5,7 +5,7 @@ include_once '../../db.php';
 session_start();
 $branch_id = $_SESSION['branch_id'];
 
-$select = "SELECT concat(UU.user_id, '-', FF.fiat_id) AS id, concat(UU.first_name, ' ', UU.last_name) AS владелец, FF.full_name AS валюта";
+$select = "SELECT concat(UU.user_id, '-', FF.fiat_id) AS `id`, concat(UU.first_name, ' ', UU.last_name) AS `владелец`, FF.full_name AS `валюта`";
 $join = "";
 $letters = array("A", "B", "C", "D", "E","F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q");
 $month_names = array("январь","февраль","март","апрель","май","июнь","июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь");
@@ -22,7 +22,7 @@ foreach ($weeks as $week) {
     $start = $week[0];
     $end = $week[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS sum 
+    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS `sum` 
     FROM shares S
     INNER JOIN orders O ON O.order_id = S.order_id
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')
@@ -38,7 +38,7 @@ foreach ($months as $month) {
     $start = $month[0];
     $end = $month[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS sum
+    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS `sum`
     FROM shares S
     INNER JOIN orders O ON O.order_id = S.order_id
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')
@@ -54,7 +54,7 @@ foreach ($years as $year) {
     $start = $year[0];
     $end = $year[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS sum
+    SELECT O.fiat_id, S.user_as_owner_id, SUM(S.sum) AS `sum`
     FROM shares S
     INNER JOIN orders O ON O.order_id = S.order_id
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')
@@ -78,7 +78,7 @@ $options['range'] = 1;
 
 $result = display_data($connection->query($querry), $options);
 // ---------------------TYPE 2-------------------
-$select = "SELECT V.vg_id AS id, V.name AS название";
+$select = "SELECT V.vg_id AS `id`, V.name AS `название`";
 $join = "";
 $index = 0;
 $offset = $index;
@@ -88,7 +88,7 @@ foreach ($weeks as $week) {
     $start = $week[0];
     $end = $week[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_vg) AS sum
+    SELECT O.vg_id, SUM(O.sum_vg) AS `sum`
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id
@@ -102,7 +102,7 @@ foreach ($months as $month) {
     $start = $month[0];
     $end = $month[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_vg) AS sum
+    SELECT O.vg_id, SUM(O.sum_vg) AS `sum`
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id
@@ -116,7 +116,7 @@ foreach ($years as $year) {
     $start = $year[0];
     $end = $year[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_vg) AS sum
+    SELECT O.vg_id, SUM(O.sum_vg) AS `sum`
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id
@@ -136,7 +136,7 @@ ORDER BY V.name";
 $result .= display_data($connection->query($querry), $options);
 
 // ---------------------TYPE 3-------------------
-$select = "SELECT concat(V.vg_id, '-', FF.fiat_id) AS id, V.name AS название, FF.full_name AS валюта";
+$select = "SELECT concat(V.vg_id, '-', FF.fiat_id) AS `id`, V.name AS `название`, FF.full_name AS `валюта`";
 $join = "";
 $index = 0;
 $offset = $index;
@@ -146,7 +146,7 @@ foreach ($weeks as $week) {
     $start = $week[0];
     $end = $week[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_currency) AS sum, O.fiat_id
+    SELECT O.vg_id, SUM(O.sum_currency) AS `sum`, O.fiat_id
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id, O.fiat_id
@@ -160,7 +160,7 @@ foreach ($months as $month) {
     $start = $month[0];
     $end = $month[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_currency) AS sum, O.fiat_id
+    SELECT O.vg_id, SUM(O.sum_currency) AS `sum`, O.fiat_id
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id, O.fiat_id
@@ -174,7 +174,7 @@ foreach ($years as $year) {
     $start = $year[0];
     $end = $year[1];
     $join .= "\nLEFT JOIN (
-    SELECT O.vg_id, SUM(O.sum_currency) AS sum, O.fiat_id
+    SELECT O.vg_id, SUM(O.sum_currency) AS `sum`, O.fiat_id
     FROM orders O
     WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
     GROUP BY O.vg_id, O.fiat_id

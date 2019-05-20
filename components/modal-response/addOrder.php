@@ -112,7 +112,7 @@ if (isset($_POST['client']) &&
             }
 
             $vg_data = mysqli_fetch_assoc($connection->query("
-                SELECT api_url_regexp AS url, access_key AS 'key'
+                SELECT api_url_regexp AS `url`, access_key AS 'key'
                 FROM vg_data
                 WHERE vg_id = '$vg'
             "));

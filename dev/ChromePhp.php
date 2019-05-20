@@ -9,7 +9,7 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * distributed under the License is distributed on an "AS `IS`" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
@@ -249,7 +249,7 @@ class ChromePhp
         if (!is_object($object)) {
             return $object;
         }
-        //Mark this object as processed so we don't convert it twice and it
+        //Mark this object AS `processed` so we don't convert it twice and it
         //Also avoid recursion when objects refer to each other
         $this->_processed[] = $object;
         $object_as_array = array();
@@ -258,7 +258,7 @@ class ChromePhp
         // loop through object vars
         $object_vars = get_object_vars($object);
         foreach ($object_vars as $key => $value) {
-            // same instance as parent object
+            // same instance AS `parent` object
             if ($value === $object || in_array($value, $this->_processed, true)) {
                 $value = 'recursion - parent object [' . get_class($value) . ']';
             }
@@ -267,7 +267,7 @@ class ChromePhp
         $reflection = new ReflectionClass($object);
         // loop through the properties and add those
         foreach ($reflection->getProperties() as $property) {
-            // if one of these properties was already added above then ignore it
+            // if one of these properties wAS `already` added above then ignore it
             if (array_key_exists($property->getName(), $object_vars)) {
                 continue;
             }
@@ -280,7 +280,7 @@ class ChromePhp
             } catch (ReflectionException $e) {
                 $value = 'only PHP 5.3 can access private/protected properties';
             }
-            // same instance as parent object
+            // same instance AS `parent` object
             if ($value === $object || in_array($value, $this->_processed, true)) {
                 $value = 'recursion - parent object [' . get_class($value) . ']';
             }

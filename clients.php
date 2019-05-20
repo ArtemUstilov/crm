@@ -14,18 +14,18 @@ session_start();
 switch(accessLevel()){
     case 3:
         $clients = $connection->query('
-                    SELECT client_id AS id, concat(last_name, " ", first_name) AS "Полное имя",
-                           byname AS Имя, IFNULL(phone_number, "-") AS телефон,
-                           email AS почта, IFNULL(telegram, "-") AS телеграм
+                    SELECT client_id AS `id`, concat(last_name, " ", first_name) AS "Полное имя",
+                           byname AS `Имя`, IFNULL(phone_number, "-") AS `телефон`,
+                           email AS `почта`, IFNULL(telegram, "-") AS `телеграм`
                     FROM clients C
                     ');
         break;
     case 2:
     case 1:
         $clients = $connection->query('
-                    SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон,
-                                    C.email AS почта, IFNULL(telegram, "-") AS телеграм
+                    SELECT DISTINCT C.client_id AS `id`, concat(C.last_name, " ", C.first_name) AS "Полное имя",
+                                    C.byname AS `Имя`, IFNULL(phone_number, "-") AS `телефон`,
+                                    C.email AS `почта`, IFNULL(telegram, "-") AS `телеграм`
                     FROM clients C
                     WHERE user_id IN (
                         SELECT user_id FROM users WHERE branch_id = '.$_SESSION['branch_id'].'
@@ -34,8 +34,8 @@ switch(accessLevel()){
         break;
 //    case 1:
 //        $clients = $connection->query('
-//                    SELECT DISTINCT C.client_id AS id, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-//                                    C.byname AS Имя, IFNULL(phone_number, "-") AS телефон, C.email AS почта, IFNULL(telegram, "-") AS телеграм
+//                    SELECT DISTINCT C.client_id AS `id`, concat(C.last_name, " ", C.first_name) AS "Полное имя",
+//                                    C.byname AS `Имя`, IFNULL(phone_number, "-") AS `телефон`, C.email AS `почта`, IFNULL(telegram, "-") AS `телеграм`
 //          FROM clients C
 //                    WHERE user_id = '.$_SESSION['id'].'
 //                    ');

@@ -16,7 +16,7 @@ $options['btn-text'] = 'Добавить';
 
 if(iCan(3)){ // currently
     echo template(display_data($connection -> query('
-    SELECT fiat_id AS id, code AS "код", full_name AS "название", name AS "сокращение"
+    SELECT fiat_id AS `id`, code AS "код", full_name AS "название", name AS "сокращение"
     FROM fiats
 '), $options));
 }

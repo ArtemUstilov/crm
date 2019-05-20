@@ -5,7 +5,7 @@ if (isset($_POST['vg_id'])) {
     $vg_id = clean($_POST['vg_id']);
     session_start();
     $vg_data = mysqli_fetch_assoc($connection->query("
-    SELECT VG.vg_id AS id, VG.name AS name, in_percent As `in`, out_percent AS `out`, api_url_regexp AS url, access_key AS `key`
+    SELECT VG.vg_id AS `id`, VG.name AS `name`, in_percent As `in`, out_percent AS `out`, api_url_regexp AS `url`, access_key AS `key`
     FROM virtualgood VG
     INNER JOIN vg_data D ON VG.vg_id = D.vg_id
     INNER JOIN branch B ON B.branch_id = D.branch_id
