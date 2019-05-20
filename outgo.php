@@ -16,7 +16,7 @@ FROM outgo O
 INNER JOIN users U ON U.user_id = O.user_id
 INNER JOIN branch B ON B.branch_id = U.branch_id
     INNER JOIN fiats F ON F.fiat_id = O.fiat_id
-LEFT JOIN (SELECT user_id AS `owner`_id, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
+LEFT JOIN (SELECT user_id AS `owner_id`, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
 ORDER BY `date` DESC
 ");
         break;
@@ -28,7 +28,7 @@ O.date AS `дата`
 FROM outgo O
 INNER JOIN users U ON U.user_id = O.user_id
     INNER JOIN fiats F ON F.fiat_id = O.fiat_id
-LEFT JOIN (SELECT user_id AS `owner`_id, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
+LEFT JOIN (SELECT user_id AS `owner_id`, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
 WHERE U.branch_id = '$branch_id'
 ORDER BY `date` DESC
 ");
@@ -40,7 +40,7 @@ ORDER BY `date` DESC
 //FROM outgo O
 //INNER JOIN users U ON U.user_id = O.user_id
 //INNER JOIN fiats F ON F.fiat_id = O.fiat_id
-//LEFT JOIN (SELECT user_id AS `owner`_id, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
+//LEFT JOIN (SELECT user_id AS `owner_id`, first_name, last_name FROM users WHERE is_owner = 1) OW ON OW.owner_id = O.user_as_owner_id
 //WHERE O.user_id = ' . $_SESSION["id"] . '
 //ORDER BY `date` DESC
 //');
@@ -53,7 +53,7 @@ $data['fiats'] = $connection->query("
 SELECT * FROM fiats
 ");
 $data['clients'] = $connection->query('
-SELECT user_id AS `owner`_id, concat(last_name, " ", first_name) AS `name`
+SELECT user_id AS `owner_id`, concat(last_name, " ", first_name) AS `name`
 FROM users
 WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 ');

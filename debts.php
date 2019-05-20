@@ -58,7 +58,7 @@ $options['btn-max'] = 2;
 
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
 $data['clients'] = $connection -> query('
-SELECT DISTINCT concat(last_name, " ", first_name) AS `client`_name, 
+SELECT DISTINCT concat(last_name, " ", first_name) AS `client_name`, 
 byname AS `login`, P.sum AS `debt`
 FROM clients C
 INNER JOIN payments P ON C.client_id = P.client_debt_id

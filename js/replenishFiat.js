@@ -29,7 +29,6 @@ $(document).ready(function () {
             cache: false,
             dataType: 'JSON',
             success: function (res) {
-                console.log(res);
                 if ($('#replenish-fiat-Modal #replenishOwnerSelect').empty()) {
                     if (res)
                         res.forEach((el) => {

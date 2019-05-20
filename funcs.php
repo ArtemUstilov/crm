@@ -100,6 +100,8 @@ function isAuthorized()
 
 function mysqliToArray($mysqli_result)
 {
+    if(!$mysqli_result)
+        return false;
     $i = 0;
     $data = null;
     while ($new = mysqli_fetch_assoc($mysqli_result)) $data[$i++] = $new;

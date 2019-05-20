@@ -24,18 +24,18 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
    "))['order_id'];
 
     $prev_order_owners = mysqliToArray($connection->query("
-        SELECT concat(last_name, ' ', first_name) AS `owner`_name, O.owner_id AS `id`, share_percent AS `percent` 
-        FROM (SELECT user_id AS `owner`_id, branch_id, first_name, last_name FROM users WHERE is_owner = 1) O 
+        SELECT concat(last_name, ' ', first_name) AS `owner_name`, O.owner_id AS `id`, share_percent AS `percent` 
+        FROM (SELECT user_id AS `owner_id`, branch_id, first_name, last_name FROM users WHERE is_owner = 1) O 
         INNER JOIN shares ON shares.user_as_owner_id = O.owner_id 
         WHERE order_id='" . $last_order . "' AND branch_id = '" . $branch_id . "'
     "));
 
     $hidden_owners = mysqliToArray($connection->query("
-        SELECT concat(O.last_name, ' ', O.first_name) AS `owner`_name, O.owner_id AS `id` 
-        FROM (SELECT user_id AS `owner`_id, first_name, branch_id, last_name FROM users WHERE is_owner = 1) O 
+        SELECT concat(O.last_name, ' ', O.first_name) AS `owner_name`, O.owner_id AS `id` 
+        FROM (SELECT user_id AS `owner_id`, first_name, branch_id, last_name FROM users WHERE is_owner = 1) O 
         WHERE branch_id = '$branch_id' AND O.owner_id NOT IN (
             SELECT shares.user_as_owner_id 
-            FROM  (SELECT user_id AS `owner`_id, first_name, last_name FROM users WHERE is_owner = 1) OW
+            FROM  (SELECT user_id AS `owner_id`, first_name, last_name FROM users WHERE is_owner = 1) OW
             INNER JOIN shares ON shares.user_as_owner_id = OW.owner_id 
             WHERE order_id='" . $last_order . "')"
     ));

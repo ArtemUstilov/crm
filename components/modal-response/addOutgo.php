@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['sum'])) {
+if (isset($_POST['sum'], $_POST['fiat'])) {
     include_once("../../db.php");
     include_once("../../funcs.php");
     $sum = clean($_POST['sum']);

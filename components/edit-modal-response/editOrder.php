@@ -36,7 +36,7 @@ if (isset($_POST['order_id']) &&
                      FROM orders
                      WHERE order_id ='$order_id'"));
         $old_shares_data = mysqliToArray($connection->
-        query("SELECT user_as_owner_id AS `owner`_id, share_percent
+        query("SELECT user_as_owner_id AS `owner_id`, share_percent
                      FROM shares
                      WHERE order_id ='$order_id'"));
         $sharesChanged = true;

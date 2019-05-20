@@ -23,7 +23,7 @@ function outgoModal($data, $more_data)
   </p>
   <p>
   <select id="fiatField">
-  <option value="" selected disabled>Выберите валюту</option>';
+  <option data-validation="required" value="" selected disabled>Выберите валюту</option>';
     foreach ($more_data['fiats'] as $key => $var) {
         $output .= '<option value="' . $var['fiat_id'] . '">' . $var['name'] . '</option>';
     }
