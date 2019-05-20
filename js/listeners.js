@@ -1,4 +1,25 @@
 $(document).ready(function () {
+    $('#add-order-form #obtainingField').change((e) => {
+        if ($('#add-order-form #obtainingField').children('option:selected').val() == 'add-new-method-of-obtaining') {
+            $('#add-order-form #obtainingField').parent().fadeOut(500);
+            setTimeout(() => {
+                $('#add-order-form #obtainingField').parent().remove();
+                $('#add-order-form .modal-inputs').append('<p>Способ получения<input id="obtainingField"  data-validation="required"  placeholder="Способ получения" type="text" name="obtaining-method" ></p>')
+            }, 520)
+        }
+
+    });
+    $('#edit-order-form #editObtainingField').change((e) => {
+        if ($('#edit-order-form #editObtainingField').children('option:selected').val() == 'add-new-method-of-obtaining') {
+            $('#edit-order-form #editObtainingField').parent().fadeOut(500);
+            setTimeout(() => {
+                $('#edit-order-form #editObtainingField').parent().remove();
+                $('#edit-order-form .modal-inputs').append('<p>Способ получения<input id="editObtainingField"  data-validation="required"  placeholder="Способ получения" type="text" name="obtaining-method" ></p>')
+            }, 520)
+        }
+
+    });
+
     function copyToClipboard(element) {
         var $temp = $("<input>");
         $("body").append($temp);
@@ -6,7 +27,10 @@ $(document).ready(function () {
         document.execCommand("copy");
         $temp.remove();
     }
-    $('#copy-btn').click(function(){copyToClipboard('#error-url')});
+
+    $('#copy-btn').click(function () {
+        copyToClipboard('#error-url')
+    });
     let icon = $('#menu-burger > i');
     $('#menu-burger').click(function () {
         icon.toggleClass('fa-bars');
@@ -392,7 +416,7 @@ $(document).ready(function () {
             cache: false,
             dataType: 'JSON',
             success: function (res) {
-                if(!res) return;
+                if (!res) return;
                 const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
                 $("#Branch-money-info-modal .fiats").html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))

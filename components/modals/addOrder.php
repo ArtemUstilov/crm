@@ -67,9 +67,13 @@ function orderAddModal($data, $more_data)
     <p>
     Способ получения
   <select id="obtainingField" data-validation="required">
-  <option value="" disabled >Способ получения</option>;
-  <option value="card" selected>На карту</option>;
-  <option value="cash">Наличные</option>;
+  <option value="" disabled selected>Способ получения</option>;
+  <option value="add-new-method-of-obtaining" class="new-method-option" >Добавить новый</option>';
+    if(isset($more_data['methods']))
+    foreach ($more_data['methods'] as $key => $var) {
+        $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
+    }
+    $output .='
   </select>
   </p>
    </div><div id="owners-lists-container"></div>
@@ -93,7 +97,7 @@ function orderAddModal($data, $more_data)
   <p>
   Клиент
 <select id="editClientField" data-validation="required">
-  <option value="" disabled selected>Выберите клиента</option>
+  <option value="" disabled>Выберите клиента</option>
   <option class="new-client-option" value="-1">Добавить нового</option>';
         foreach ($more_data['clients'] as $key => $var) {
             $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
@@ -145,18 +149,23 @@ function orderAddModal($data, $more_data)
   Продажа
   <input id="editOutField" min=0 data-validation="required length" data-validation-length="min1" step="0.01" placeholder="Продажа %" type="number" name="out" step=0.01>
   </p>
-    <p>
-    Способ получения
-  <select id="editObtainingField" data-validation="required">
-    <option value="" disabled >Способ получения</option>;
-  <option value="card" selected>На карту</option>;
-  <option value="cash">Наличные</option>;
-  </select>
-  </p>
   <p>
    Откат
   <input id="editRollback1Field" min="0" placeholder="Откат 1 %" type="number" name="rollback-1" step="0.01">
   </p>
+    <p>
+    Способ получения
+  <select id="editObtainingField" data-validation="required">
+    <option value="" disabled selected>Способ получения</option>;
+  <option value="add-new-method-of-obtaining" class="new-method-option">Добавить новый</option>';
+    if(isset($more_data['methods']))
+    foreach ($more_data['methods'] as $key => $var) {
+        $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
+    }
+    $output .='
+  </select>
+  </p>
+  
   </div>
   <h2>Владельцы</h2>
   <div id="edit-owners-list-visible" class="orders-modal-owners-list"></div>

@@ -1,7 +1,6 @@
 <?php
 function vgAddModal($data)
 {
-    $vgs = $data['vgs'];
     $output = '
 <div id="VG-Modal" class="modal" action="" role="form">
 <form id="add-vg-form">
@@ -11,7 +10,7 @@ function vgAddModal($data)
   <select id="nameVgnField" data-validation="required">
   <option value="" disabled selected>Выберите VG</option>
     <option class="new-vg-option" value="-1">Добавить новый</option>';
-    if($vgs) foreach ($vgs as $key => $var) {
+    if(isset($data['vgs'])) foreach ($data['vgs'] as $key => $var) {
         $output .= '<option value="' . $var['vg_id'].'">' . $var['name']. '</option>';
     }
     $output .= '
