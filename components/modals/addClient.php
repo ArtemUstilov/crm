@@ -32,7 +32,7 @@ function clientAddModal($data)
   </p>
 
   <p>
-  <textarea id="descriptionField" rows="3" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
+  <textarea id="descriptionField" rows="3"  placeholder="Описание" type="text" name="description"></textarea>
   </p>
  
   </div>

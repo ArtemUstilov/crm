@@ -13,6 +13,8 @@ function debtModal($data)
             $i++;
         }
     }
+    include_once 'dev/ChromePhp.php';
+    ChromePhp::log($copy_of_data);
     if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все долги погашены!</h2>
 </div>';
@@ -22,7 +24,7 @@ function debtModal($data)
   <h2 class="modal-title">Погасить долг</h2>
   <div class="modal-inputs">
   <p>
-<select id="debtorField" data-validation="required">
+<select id="debtorField" data-validation="required length" data-validation-length="min1">
   <option value="" selected disabled>Выберите должника</option>';
     foreach ($copy_of_data as $key => $var) {
         $output .= '<option sum="'.$var['debt'].'" fiat="'.$var['fiat_id'].'" value="' . $var['id'] . '">' . $var['client_name'] . ' (' . $var['login'] . ')</option>';

@@ -147,6 +147,7 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
+
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
@@ -431,7 +432,7 @@ function checkUserData() {
         dataType: 'JSON',
         success: function (res) {
             if (res['active'] === "inactive") {
-                // location.reload();
+                location.reload();
             } else {
                 setTimeout(checkUserData, 3000);
             }

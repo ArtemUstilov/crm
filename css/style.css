@@ -621,7 +621,7 @@ a[disabled] {
     }
 }
 
-.new-client-option, .new-vg-option {
+.new-client-option, .new-vg-option, .new-method-option {
     color: #2196F3;
     font-weight: 600;
     border-top: 1px solid black;

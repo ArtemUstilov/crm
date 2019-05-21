@@ -67,7 +67,12 @@ SELECT VG.vg_id, `name`, out_percent FROM virtualgood VG LEFT OUTER JOIN (SELECT
 $fiat = $connection -> query("
 SELECT * FROM fiats
 ");
-
+$methods_of_obtaining =
+    mysqliToArray($connection->
+    query("SELECT DISTINCT method_of_obtaining AS 'method'
+                     FROM orders"));
+if ($methods_of_obtaining)
+    $more_data['methods'] = $methods_of_obtaining;
 $more_data['clients'] = $clients;
 $more_data['vgs'] = $vgs;
 $more_data['fiat'] = $fiat;

@@ -12,6 +12,8 @@ if (isset($_POST['fiat']) && isset($_POST['sum']) && isset($_POST['owner'])) {
     ChromePhp::log($fiat .' '. $owner.' '.$sum.' '.$user_id);
     $connection->query("INSERT INTO income_history (`fiat`, `owner_id`, `sum`, `user_id`) VALUES($fiat, $owner, $sum, $user_id)");
     updateBranchMoney($connection, $branch_id, $sum, $fiat);
+    $connection->query("INSERT INTO income_history (fiat, owner_id, `sum`, user_id) VALUES($fiat, $owner, $sum, $user_id)");
+    updateBranchMoney($connection, $branch_id, $sum, $fiat);
     echo 'success-replenish';
     return false;
 }
