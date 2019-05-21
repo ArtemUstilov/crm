@@ -128,19 +128,28 @@ $(document).ready(function () {
             }
         });
     });
-    const clientInpt = $('#Order-Modal #clientField');
-    clientInpt.change(function (e) {
+
+    let currentOrderForm;
+    const clientInput = $('#Order-Modal #clientField');
+    clientInput.change(function (e) {
         let client_id = $('#Order-Modal #clientField').val();
         if (client_id == -1) {
-            const href = document.createElement('a');
-            href.style.display = 'none';
-            href.href = '#Client-Modal';
-            href.rel = 'modal:open';
-            document.body.appendChild(href);
-            href.click();
-            document.body.removeChild(href);
+            $('#Client-Modal').modal();
         }
+        currentOrderForm = $('#Order-Modal');
     });
+
+
+    const clientEditInput = $('#Order-edit-Modal #editClientField');
+    clientEditInput.change(function (e) {
+        let client_id = $('#Order-edit-Modal #editClientField').val();
+        if (client_id == -1) {
+            $('#Client-Modal').modal();
+        }
+        currentOrderForm = $('#Order-edit-Modal');
+    });
+
+
     const callmasterInpt = $('#Order-Modal #callmasterField');
     callmasterInpt.change(function (e) {
         let callmaster_id = callmasterInpt.val();
@@ -316,17 +325,16 @@ $(document).ready(function () {
                     $('#clientField').append(opt);
                     res = 'success';
                 }
-                createAlertTable(res, "Клиент");
-            },
-            error: function () {
-                createAlertTable("connectionError", "Клиент");
-            },
-            complete: function () {
                 setTimeout(function () {
                     $this.prop("disabled", false);
                 }, 300);
                 $('#Order-Modal').modal();
-            }
+                createAlertTable(res, "Клиент");
+
+            },
+            error: function () {
+                createAlertTable("connectionError", "Клиент");
+            },
         });
 
     }
@@ -590,19 +598,21 @@ $(document).ready(function () {
                 $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
-                if (requestType != 'Заказ')
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1500);
+                if(currentOrderForm && requestType == "Клиент")
+                    currentOrderForm.modal();
+                else
+                    if (requestType != 'Заказ')
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
                 break;
             case "edit-success":
                 $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
-
-                setTimeout(function () {
-                    location.reload();
-                }, 1500);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
