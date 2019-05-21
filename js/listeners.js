@@ -97,6 +97,9 @@ $(document).ready(function () {
             success: function (res) {
                 $('.loader').fadeOut('fast');
                 switch (res) {
+                    case 'sales':
+                        window.location.href = '../outgo.php';
+                        break;
                     case "success":
                         window.location.href = '../index.php';
                         break;

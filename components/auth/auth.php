@@ -33,5 +33,9 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['branch_id'] = $user_data['branch_id'];
     $_SESSION['is_owner'] = $user_data['is_owner'];
     //$_SESSION['remember_me'] = $remember_me; in future
+    if($_SESSION['role'] == 'agent'){
+        echo 'sales';
+        return false;
+    }
     echo "success";
 }
