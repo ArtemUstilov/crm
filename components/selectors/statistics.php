@@ -69,10 +69,10 @@ JOIN fiats FF
 ".$join."
 WHERE UU.is_owner = 1";
 
-
 if(!iCan(3)){
-    $querry .= " AND UU.branch_id = '.$branch_id.'";
+    $querry .= " AND UU.branch_id = '$branch_id'";
 }
+
 $options['text'] = 'Прибыль';
 $options['type'] = 'Stat1';
 $options['range'] = 1;

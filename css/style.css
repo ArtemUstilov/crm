@@ -406,7 +406,9 @@ h1 {
     -moz-transition: width 1s;
     height: calc(100vh - 50px);
 }
-
+#menu ul a{
+    padding: 8px 20px !important;
+}
 .table-container tbody .clicked {
     background-color: #888 !important;
     color: #fff;
