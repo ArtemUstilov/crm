@@ -57,12 +57,11 @@ $options['btn'] = 1;
 $options['btn-max'] = 2;
 
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
-$data['clients'] = $connection -> query('
-SELECT DISTINCT concat(last_name, " ", first_name) AS `client_name`, 
-byname AS `login`, P.sum AS `debt`
+$data['clients'] = $connection->query('
+SELECT DISTINCT concat(C.last_name, " ", C.first_name) AS `client_name`, byname AS `login`, P.sum AS `debt`, fiat_id,concat(C.client_id, "-", P.fiat_id) AS `id`
 FROM clients C
-INNER JOIN payments P ON C.client_id = P.client_debt_id
-WHERE  P.sum > 0
-');
+INNER JOIN payments P ON P.client_debt_id = C.client_id 
+WHERE P.sum > 0
+ORDER BY P.sum DESC');
 echo template(display_data($info, $options, $data));
 
