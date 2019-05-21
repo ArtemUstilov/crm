@@ -14,7 +14,6 @@ function debtModal($data)
         }
     }
     include_once 'dev/ChromePhp.php';
-    ChromePhp::log($copy_of_data);
     if (!$copy_of_data) return '<div id="Debt-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Все долги погашены!</h2>
 </div>';

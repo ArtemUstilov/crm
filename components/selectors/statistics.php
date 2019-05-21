@@ -69,8 +69,6 @@ JOIN fiats FF
 ".$join."
 WHERE UU.is_owner = 1";
 
-include_once '../../dev/ChromePhp.php';
-ChromePhp::log($branch_id);
 
 if(!iCan(3)){
     $querry .= " AND UU.branch_id = '.$branch_id.'";

@@ -67,12 +67,11 @@ function orderAddModal($data, $more_data)
   </p>
     <p>
     Способ получения
-  <select id="obtainingField" data-validation="required">
-  <option value="" disabled selected>Способ получения</option>;
+  <select id="obtainingField" data-validation="required">;
   <option value="add-new-method-of-obtaining" class="new-method-option" >Добавить новый</option>';
     if(isset($more_data['methods']))
     foreach ($more_data['methods'] as $key => $var) {
-        $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
+        $output .= '<option value="' . $var["method"] . ' "selected>' . $var["method"] . '</option>';
     }
     $output .='
   </select>

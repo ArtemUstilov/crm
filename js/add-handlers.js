@@ -201,7 +201,7 @@ $(document).ready(function () {
                     res = JSON.parse(res);
                 } catch {
                 }
-                if (res['url']) {
+                if (res['url'] !== undefined) {
                     createAlertTable('success', "Заказ");
                     $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
                     $('#Order-transaction-info-modal').modal({
