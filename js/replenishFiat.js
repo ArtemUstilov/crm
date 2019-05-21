@@ -44,25 +44,30 @@ $(document).ready(function () {
 
         });
 
-    })
+    });
     $.validate({
         form: '#replenish-fiat-form',
         modules: '',
         lang: 'ru',
         onSuccess: function () {
             replenishFiat();
-            return false;
+            // return false;
         }
     });
 
     function replenishFiat() {
+        console.log('sssss');
         $('.loader').show();
         const fiat = $('#replenish-fiat-Modal #replenishFiatSelect').val();
         const sum = $('#replenish-fiat-Modal #replenishFiatSum').val();
-        const owner = $('#replenish-fiat-Modal #replenishFiatSum').val() ? $('#replenish-fiat-Modal #replenishFiatSum').val() : 0;
+        const ownerfield = $('#replenish-fiat-Modal #replenishOwnerSelect');
+        const owner = ownerfield.val() ? ownerfield.val() : 0;
+        console.log(fiat, sum, owner);
+
         $.ajax({
             url: "../components/modal-response/replenishFiat.php",
             type: "POST",
+            method: "POST",
             data: {
                 fiat,
                 sum,
@@ -77,7 +82,7 @@ $(document).ready(function () {
                 }
                 $('.loader').fadeOut('fast');
             },
-            error: function () {
+            error: function (res) {
                 createAlertTable();
                 $('.loader').fadeOut('fast');
             },

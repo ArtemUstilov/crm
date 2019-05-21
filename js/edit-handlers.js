@@ -320,16 +320,16 @@ function createAlertTable(alertType, text) {
             $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
             $('.custom-alert').addClass('bg-green');
             $.modal.close();
-            setTimeout(function () {
-                location.reload();
-            }, 1500);
+            // setTimeout(function () {
+            //     location.reload();
+            // }, 1500);
             break;
         case "edit-success":
             $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
             $('.custom-alert').addClass('bg-green');
             $.modal.close();
             setTimeout(function () {
-                location.reload();
+                // location.reload();
             }, 1500);
             break;
         case "success-replenish":

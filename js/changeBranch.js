@@ -46,7 +46,7 @@ $(document).ready(function () {
             success: function (res) {
                 if (res == 'change-success') {
                     $.modal.close();
-                    location.reload();
+                    // location.reload();
                 } else {
                     createAlertTable();
                 }

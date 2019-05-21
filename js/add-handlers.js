@@ -216,7 +216,7 @@ $(document).ready(function () {
     }
 
     $('#Order-transaction-info-modal').on('click', '.close-modal', function () {
-        location.reload();
+        // location.reload();
     })
 
 //User
@@ -590,19 +590,19 @@ $(document).ready(function () {
                 $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
-                if (requestType != 'Заказ')
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1500);
+                // if (requestType != 'Заказ')
+                //     setTimeout(function () {
+                //         location.reload();
+                //     }, 1500);
                 break;
             case "edit-success":
                 $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
 
-                setTimeout(function () {
-                    location.reload();
-                }, 1500);
+                // setTimeout(function () {
+                //     location.reload();
+                // }, 1500);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');

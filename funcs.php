@@ -129,7 +129,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Debt":
             return debtModal($more_data);
         case "Head":
-            return headAddModal($more_data);
+            return headAddModal($more_data) .''. outgoModal($data, $more_data);
         case "Branch":
             return branchAddModal($data);
         case "Fiat":

@@ -9,10 +9,12 @@ $user_id = $_SESSION['id'];
 
 
 $headSumsRaw = $connection->query('
-SELECT concat(U.user_id,"-", F.fiat_id) AS `id`, concat(U.last_name, " ", U.first_name) AS "имя", IFNULL(SUM(S.sum), 0) AS `прибыль`, IFNULL(SUM(S.sum), 0) - IFNULL(UT.sum, 0) AS `остаток`, F.full_name AS `валюта`
+SELECT concat(U.user_id,"-", F.fiat_id) AS `id`, concat(U.last_name, " ", U.first_name) AS "имя", IFNULL(SUM(RR.sum), 0) AS `прибыль`, IFNULL(SUM(RR.sum), 0) + IFNULL(SUM(IH.sum), 0) - IFNULL(UT.sum, 0) AS `остаток`, F.full_name AS `валюта`
 FROM users U
-LEFT JOIN shares S ON S.user_as_owner_id = U.user_id
-LEFT JOIN orders ORD ON S.order_id = ORD.order_id
+JOIN fiats F
+LEFT JOIN (
+    SELECT S.sum, S.user_as_owner_id, O.fiat_id FROM shares S INNER JOIN orders O ON O.order_id = S.order_id
+    ) RR ON RR.user_as_owner_id = U.user_id AND RR.fiat_id = F.fiat_id
 LEFT JOIN (
 	SELECT U.user_id, IFNULL(SUM(O.sum), 0) + IFNULL(outcome,0) AS `sum`, IFNULL(O.fiat_id, T.fiat_id) AS `fiat_id`
 	FROM users U
@@ -26,10 +28,10 @@ LEFT JOIN (
 	) T ON T.fiat_id = O.fiat_id OR O.fiat_id IS NULL
 	WHERE U.is_owner = 1 AND U.branch_id = ' . $branch_id . '
 	GROUP BY U.user_id, O.fiat_id
-) UT ON UT.user_id = U.user_id AND (UT.fiat_id = ORD.fiat_id OR ORD.fiat_id IS NULL)
-INNER JOIN fiats F ON ORD.fiat_id = F.fiat_id OR UT.fiat_id = F.fiat_id
+) UT ON UT.user_id = U.user_id AND UT.fiat_id = F.fiat_id
+LEFT JOIN income_history IH ON IH.owner_id = U.user_id AND IH.fiat = F.fiat_id
 WHERE U.is_owner = 1 AND U.branch_id = ' . $branch_id . '
-GROUP BY U.user_id, ORD.fiat_id
+GROUP BY U.user_id, F.fiat_id
 ');
 
 
@@ -42,10 +44,20 @@ SELECT *
 FROM users
 ');
 $data['branches'] = $branches;
+$data['fiats'] = $connection->query("
+SELECT * FROM fiats
+");
+$data['clients'] = $connection->query('
+SELECT user_id AS `owner_id`, concat(last_name, " ", first_name) AS `name`
+FROM users
+WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
+');
 $data['users'] = $users;
 $options['type'] = 'Head';
 $options['text'] = 'Владельцы';
 $options['range'] = 1;
+$options['coins'] = 1;
+$options['modal'] = 'Outgo-modal';
 $table .= display_data($headSumsRaw, $options, $data);
 //$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
 //if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';

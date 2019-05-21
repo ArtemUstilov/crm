@@ -2,6 +2,8 @@ checkUserData();
 $('tr').on('click', (e) => {
     const target = $(e.target);
     const mainParent = target.parent().parent();
+    console.log("EEEEEEEEEEEE");
+
     switch (target.attr('modal')) {
         case "#Debt-Modal":
             $('[href*="#Debt-Modal"]').first()[0].click();
@@ -26,6 +28,25 @@ $('tr').on('click', (e) => {
             $('#Rollback-Modal #fiatField').val(referalSelected.attr('fiat'));
             input2.attr('max', rollbackSum);
             input2.attr('min', 0);
+            break;
+        case "#Outgo-modal":
+            $('#Outgo-Modal').modal();
+            const tr = target.parent().parent().attr('itemid');
+            const [id, fiat_id] = tr.split('-');
+            console.log($(`.Head [itemid='${tr}'] ${'.2-f'}`).val());
+            $('#Outgo-Modal #sumField').val($(`.Head [itemid='${tr}'] ${'.2-f'}`).attr('title'));
+            $('#Outgo-Modal #ownerField').val(id);
+            $('#Outgo-Modal #fiatField').val(fiat_id);
+
+            // const referalList = $('#clientField');
+            // referalList.val(target.parent().parent().attr('itemid'));
+            // const referalSelected = $("option:selected", referalList);
+            // const rollbackSum = referalSelected.attr('sum');
+            // const input2 = $('#payField');
+            // input2.val(rollbackSum);
+            // $('#Rollback-Modal #fiatField').val(referalSelected.attr('fiat'));
+            // input2.attr('max', rollbackSum);
+            // input2.attr('min', 0);
             break;
         case "Head-edit":
             fillOwnerEditForm();
@@ -410,7 +431,7 @@ function checkUserData() {
         dataType: 'JSON',
         success: function (res) {
             if (res['active'] === "inactive") {
-                location.reload();
+                // location.reload();
             } else {
                 setTimeout(checkUserData, 3000);
             }
