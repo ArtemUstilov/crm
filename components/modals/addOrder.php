@@ -49,8 +49,7 @@ function orderAddModal($data, $more_data)
   <p>
   Реферал
 <select id="callmasterField">
-  <option value="" selected>Выберите реферала(опц)</option>
-  <option class="new-client-option" value="-1">Добавить нового</option>';
+  <option value="" selected>Выберите реферала(опц)</option>';
     foreach ($more_data['clients'] as $key => $var) {
         $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
     }

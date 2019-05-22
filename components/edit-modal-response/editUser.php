@@ -4,7 +4,6 @@ if (isset($_POST['login']) && isset($_POST['role'])
 
     include_once("../../db.php");
     include_once("../../funcs.php");
-    $money = clean($_POST['money']);
     $login = clean($_POST['login']);
     $password = isset($_POST['first_name']) ? password_hash(clean($_POST['password']), PASSWORD_DEFAULT) : false;
     $role = clean($_POST['role']);
@@ -33,8 +32,7 @@ if (isset($_POST['login']) && isset($_POST['role'])
             `first_name` = '$first_name',
             `last_name` = '$last_name',
             `role` = '$role',
-            `branch_id` = '$branch', 
-            `money` = '$money'
+            `branch_id` = '$branch'
         WHERE `user_id` = '$edit_user_id'");
         if ($res) {
             echo "edit-success";

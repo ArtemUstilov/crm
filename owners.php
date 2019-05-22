@@ -23,7 +23,7 @@ FROM branch
     $users = $connection->query('
 SELECT *
 FROM users
-WHERE branch_id = '.$_SESSION['branch_id'].' AND is_owner = 0
+WHERE branch_id = '.$_SESSION['branch_id'].' AND is_owner = 0 AND role != "moder"
 ');
     $branches = $connection->query('
 SELECT branch_id AS `id`, branch_name

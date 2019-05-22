@@ -17,6 +17,13 @@ INNER JOIN branch B ON B.branch_id = U.branch_id
 INNER JOIN fiats F ON O.fiat_id = F.fiat_id
 ORDER BY `date` DESC
 ");
+        $data['clients'] = $connection -> query('
+SELECT concat(last_name, " ", first_name) AS `client_name`, 
+byname AS `login`, P.sum AS `rollback_sum`, fiat_id, client_id AS "id"
+FROM clients C 
+INNER JOIN payments P ON C.client_id = P.client_rollback_id
+WHERE  P.sum > 0
+');
         break;
     case 2:
     case 1:
@@ -30,6 +37,13 @@ INNER JOIN fiats F ON O.fiat_id = F.fiat_id
 WHERE U.branch_id = '$branch_id'
 ORDER BY `date` DESC
 ");
+    $data['clients'] = $connection -> query('
+SELECT concat(last_name, " ", first_name) AS `client_name`, 
+byname AS `login`, P.sum AS `rollback_sum`, fiat_id, client_id AS "id"
+FROM clients C 
+INNER JOIN payments P ON C.client_id = P.client_rollback_id
+WHERE  P.sum > 0 AND user_id IN(SELECT user_id FROM users WHERE branch_id="'.$branch_id.'")
+');
 //        break;
 //    case 1:
 //        $info = $connection -> query('
@@ -53,13 +67,7 @@ $options['btn'] = 1;
 $options['btn-max'] = 2;
 $options['btn-text'] = 'Выплатить';
 $data['fiats'] = $connection -> query('SELECT * FROM fiats');
-$data['clients'] = $connection -> query('
-SELECT concat(last_name, " ", first_name) AS `client_name`, 
-byname AS `login`, P.sum AS `rollback_sum`, fiat_id
-FROM clients C 
-INNER JOIN payments P ON C.client_id = P.client_rollback_id
-WHERE  P.sum > 0
-');
+
 echo template(display_data($info, $options, $data));
 ?>
 
