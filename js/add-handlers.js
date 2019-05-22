@@ -1,3 +1,5 @@
+$('#Order-transaction-info-modal').modal({
+});
 $(document).ready(function () {
 //Branch
     $.validate({
@@ -199,18 +201,20 @@ $(document).ready(function () {
             success: function (res) {
                 try {
                     res = JSON.parse(res);
+                    if (res['success'] === false) {
+                        createAlertTable('success', "Заказ");
+                        $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
+                        $('#Order-transaction-info-modal #error-url-box').append(`<div>Код ошибки: ${res['Error Code']}</div>`)
+                        $('#Order-transaction-info-modal #error-url-box').append(`<div>Ошибка: ${res['message']}</div>`)
+                        $('#Order-transaction-info-modal').modal({
+                            fadeDuration: 500,
+                            fadeDelay: 0
+                        });
+                    }
                 } catch {
+                    createAlertTable("success", "Заказ и транзакция");
                 }
-                if (res['url'] !== undefined) {
-                    createAlertTable('success', "Заказ");
-                    $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
-                    $('#Order-transaction-info-modal').modal({
-                        fadeDuration: 500,
-                        fadeDelay: 0
-                    });
-                } else {
-                    createAlertTable(res, "Заказ и транзакция");
-                }
+
             },
             error: function () {
                 createAlertTable("connectionError", "Заказ");

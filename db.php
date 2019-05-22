@@ -3,7 +3,7 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    'crm3.0');
+    'empty');
 mysqli_query($connection, "SET NAMES 'utf8'");
 mysqli_query($connection, "SET CHARACTER SET 'utf8'");
 //
