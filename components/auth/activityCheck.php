@@ -1,6 +1,5 @@
 <?php
 session_start();
-include_once '../../dev/ChromePhp.php';
 if (isset($_SESSION['id'])) {
     $user_id = $_SESSION['id'];
     $branch_id = $_SESSION['branch_id'];

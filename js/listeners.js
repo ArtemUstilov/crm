@@ -125,7 +125,6 @@ $(document).ready(function () {
 
             },
             error: function () {
-                alert("kek")
             },
             complete: function () {
                 setTimeout(function () {

@@ -9,7 +9,7 @@ if (isset($_POST['client']) &&
 
     include_once("../../db.php");
     include_once("../../funcs.php");
-    include_once '../../dev/ChromePhp.php';
+
 
     $sum_vg = clean($_POST['sum_vg']);
     $vg = clean($_POST['vg']);

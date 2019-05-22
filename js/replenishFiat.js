@@ -56,13 +56,11 @@ $(document).ready(function () {
     });
 
     function replenishFiat() {
-        console.log('sssss');
         $('.loader').show();
         const fiat = $('#replenish-fiat-Modal #replenishFiatSelect').val();
         const sum = $('#replenish-fiat-Modal #replenishFiatSum').val();
         const ownerfield = $('#replenish-fiat-Modal #replenishOwnerSelect');
         const owner = ownerfield.val() ? ownerfield.val() : 0;
-        console.log(fiat, sum, owner);
 
         $.ajax({
             url: "../components/modal-response/replenishFiat.php",

@@ -68,6 +68,5 @@ JOIN fiats FF
 WHERE UU.is_owner = 1 ".(!iCan(3) ? " AND UU.branch_id = '.$branch_id.'" : "")."
 ";
 }
-include_once '../../dev/ChromePhp.php';
 $result = mysqliToArray($connection->query($querry));
 echo json_encode($result);

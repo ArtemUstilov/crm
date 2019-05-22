@@ -2,7 +2,6 @@ checkUserData();
 $('tr').on('click', (e) => {
     const target = $(e.target);
     const mainParent = target.parent().parent();
-    console.log("EEEEEEEEEEEE");
 
     switch (target.attr('modal')) {
         case "#Debt-Modal":
@@ -33,7 +32,6 @@ $('tr').on('click', (e) => {
             $('#Outgo-Modal').modal();
             const tr = target.parent().parent().attr('itemid');
             const [id, fiat_id] = tr.split('-');
-            console.log($(`.Head [itemid='${tr}'] ${'.2-f'}`).val());
             $('#Outgo-Modal #sumField').val($(`.Head [itemid='${tr}'] ${'.2-f'}`).attr('title'));
             $('#Outgo-Modal #ownerField').val(id);
             $('#Outgo-Modal #fiatField').val(fiat_id);
