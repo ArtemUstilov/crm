@@ -11,7 +11,8 @@ function outgoModal($data, $more_data)
   </p>
   <p>
   <select id="ownerField">
-  <option value="" selected disabled>Выберите владельца (опц)</option>';
+  <option value="" selected disabled>Выберите владельца (опц)</option>
+  <option value="branch">Расход предприятия</option>';
     foreach ($more_data['clients'] as $key => $var) {
         $output .= '<option value="' . $var['owner_id'] . '">' . $var['name'] . '</option>';
     }
@@ -19,7 +20,7 @@ function outgoModal($data, $more_data)
 </select>
 </p>
  <p>
-  <textarea id="commentField" rows="3"  placeholder="Комментарий" type="text" name="description"></textarea>
+  <textarea id="commentField" rows="3"  placeholder="Комментарий" name="description"></textarea>
   </p>
   <p>
   <select id="fiatField">

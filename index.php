@@ -23,7 +23,7 @@ LEFT JOIN (
 		SELECT SUM(sum)/(SELECT COUNT(DISTINCT user_id) FROM users WHERE branch_id = ' . $branch_id . ' AND is_owner = 1) AS `outcome`, fiat_id
 		FROM outgo
 		INNER JOIN users U ON U.user_id = outgo.user_id
-		WHERE user_as_owner_id IS NULL AND U.branch_id = ' . $branch_id . '
+		WHERE user_as_owner_id IS NULL AND outgo.branch_id IS NULL AND U.branch_id = ' . $branch_id . '
 		GROUP BY fiat_id
 	) T ON T.fiat_id = O.fiat_id OR O.fiat_id IS NULL
 	WHERE U.is_owner = 1 AND U.branch_id = ' . $branch_id . '

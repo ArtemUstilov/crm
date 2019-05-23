@@ -11,9 +11,13 @@ if (isset($_POST['sum'], $_POST['fiat'])) {
     date_default_timezone_set('Europe/Kiev');
     $date = date('Y-m-d H:i:s');
     $user_id = $_SESSION['id'];
-    if($owner){
+    if($owner == "branch"){
+        $res = $connection->
+        query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`, `branch_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat', '$branch_id') ");
+    }elseif($owner) {
         $res = $connection->
         query("INSERT INTO `outgo` (`user_id`,`sum`,`user_as_owner_id`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum','$owner', '$date', '$descr', '$fiat') ");
+
     }else{
         $res = $connection->
         query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat') ");

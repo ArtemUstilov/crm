@@ -144,10 +144,16 @@ if (isset($_POST['client']) &&
             );
 
             try {
-                $result = file_get_contents($vg_url);
+                $result = json_decode(file_get_contents($vg_url));
+
+                if($result->{'success'} == false){
+                    $result->{'url'} = $vg_url;
+                    echo json_encode($result);
+                    return false;
+                }
             } catch (Exception $e) {
                 $response['url'] = $vg_url;
-                $response['sent'] = false;
+                $response['success'] = false;
                 echo json_encode($response);
                 return false;
             }

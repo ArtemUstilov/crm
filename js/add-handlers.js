@@ -1,5 +1,3 @@
-$('#Order-transaction-info-modal').modal({
-});
 $(document).ready(function () {
 //Branch
     $.validate({
@@ -199,13 +197,14 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
+                console.log(res);
                 try {
                     res = JSON.parse(res);
-                    if (res['success'] === false) {
+                    if (res['success'] == false) {
                         createAlertTable('success', "Заказ");
                         $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
-                        $('#Order-transaction-info-modal #error-url-box').append(`<div>Код ошибки: ${res['Error Code']}</div>`)
-                        $('#Order-transaction-info-modal #error-url-box').append(`<div>Ошибка: ${res['message']}</div>`)
+                        $('#Order-transaction-info-modal').append(`<div>Код ошибки: ${res['code'] || "неизвестен"}</div>`)
+                        $('#Order-transaction-info-modal').append(`<div>Ошибка: ${res['message'] || "неизвестна"}</div>`)
                         $('#Order-transaction-info-modal').modal({
                             fadeDuration: 500,
                             fadeDelay: 0
@@ -362,6 +361,7 @@ $(document).ready(function () {
         let owner = $("#add-outgo-form #ownerField").val();
         let fiat = $("#add-outgo-form #fiatField").val();
         let descr = $("#add-outgo-form #commentField").val();
+        console.log(owner);
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -370,6 +370,7 @@ $(document).ready(function () {
             data: {owner, sum, description: descr, fiat},
             cache: false,
             success: function (res) {
+                console.log(res);
                 createAlertTable(res, "Расход");
             },
             error: function () {
