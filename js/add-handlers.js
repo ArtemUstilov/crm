@@ -97,6 +97,25 @@ $(document).ready(function () {
         let vg_id = $('#Order-Modal #vgField').val();
         let client_id = $('#Order-Modal #clientField').val();
         if (!vg_id && !client_id) return;
+        console.log(client_id, vg_id);
+        $.ajax({
+            url: "../components/selectors/getLoginByVg.php",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                vg_id, client_id,
+            },
+            cache: false,
+            success: function (res) {
+                if(res.loginByVg)
+                    $('#Order-Modal #loginByVgField').val(res.loginByVg);
+            },
+            error: function () {
+            },
+            complete: function () {
+            }
+        });
+
         if (vg_id) {
             const optionSelected = $("option:selected", '#Order-Modal #vgField');
             const perc = optionSelected.attr('percent');
@@ -168,6 +187,7 @@ $(document).ready(function () {
         const sum_vg = $("#add-order-form #sumVGField").val();
         const out = $("#add-order-form #outField").val();
         const obtain = $("#add-order-form #obtainingField").val();
+        const loginByVg = $("#add-order-form #loginByVgField").val();
         const descr = $("#add-order-form #commentField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
         const debtCl = $("#add-order-form #debtCLField").val();
@@ -194,6 +214,7 @@ $(document).ready(function () {
                 callmaster,
                 descr,
                 fiat,
+                loginByVg,
             },
             cache: false,
             success: function (res) {

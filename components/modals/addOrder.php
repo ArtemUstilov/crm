@@ -42,6 +42,10 @@ function orderAddModal($data, $more_data)
   Сумма вг
   <input id="sumVGField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Кол-во виртуальной валюты" type="number" step="0.01" name="sum-vg">
   </p>
+  <p>
+  Логин клиента
+  <input id="loginByVgField" min=0 data-validation="required length" data-validation-length="min1" placeholder="Логин по вг" name="login-vg">
+  </p>
    <p>
    Не оплаченая часть
   <input id="debtClField" min=0 data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0 step="0.01">
