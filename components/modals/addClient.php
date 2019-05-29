@@ -59,7 +59,6 @@ function clientAddModal($data)
   </form>
 </div>';
     session_start();
-    if (iCan(2))
     $output .= '
 <div id="Client-edit-Modal" class="modal" action="" role="form">
 <form id="edit-client-form">
