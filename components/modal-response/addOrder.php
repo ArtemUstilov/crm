@@ -125,19 +125,22 @@ if (isset($_POST['client']) &&
             "))['byname'];
             //"http://nit.tron.net.ua/api/category/list/ttt" - test FAIL
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
-            if (strpos($vg_data['url'],'%key%')) {
+            $vg_url = strtolower($vg_data['url']);
+            if (strpos($vg_url, '%clientlogin%') && strpos($vg_url, '%sum%') && strpos($vg_url, '/api/transfer/?tr=%idtransact%&key=')) {
                 $IDTransact = generateRandomString();
-                $vg_url = strtolower($vg_data['url']);
-                $vg_url = str_replace("%username%", $login_by_vg, $vg_url);
                 $vg_url = str_replace("%sum%", $sum_vg, $vg_url);
                 $vg_url = str_replace("%idtransact%", $IDTransact, $vg_url);
                 $vg_url = str_replace("%key%", $vg_data['key'], $vg_url);
                 $vg_url = str_replace("%clientlogin%", $login_by_vg, $vg_url);
-                $md5 = md5($vg_url);
-                $vg_url = str_replace("%md5hash%", $md5, $vg_url);
+                $nMidApi = strpos($vg_data['url'], '/api/');
+
+                $vg_url_4md5 = substr($vg_data['url'], $nMidApi);
+                $md5 = md5($vg_url_4md5 . ":" . $vg_data['key']);
+
+                $vg_url = $vg_url . "&sign=" . $md5;
             } else {
-                $vg_url = str_replace("%UserName%", $login_by_vg, $vg_data['url']);
-                $vg_url = str_replace("%Summ%", $sum_vg, $vg_url);
+                $vg_url = str_replace("%clientlogin%", $login_by_vg, $vg_data['url']);
+                $vg_url = str_replace("%sum%", $sum_vg, $vg_url);
             }
             set_error_handler(
                 function ($severity, $message, $file, $line) {
@@ -148,7 +151,7 @@ if (isset($_POST['client']) &&
             try {
                 $result = json_decode(file_get_contents($vg_url));
 
-                if($result->{'success'} == false){
+                if ($result->{'success'} == false) {
                     $result->{'url'} = $vg_url;
                     echo json_encode($result);
                     return false;
