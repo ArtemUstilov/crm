@@ -15,12 +15,31 @@ function clientAddModal($data)
   <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-    Логин(идентификатор в VG)
+    ID, цифровой логин
   <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин" type="text" name="byname">
+    <button type="button" class="genid">Ген</button>
   </p>
+  <p>
+  Пароль клиента
+  <input id="passwordField" data-validation="required length" data-validation-length="min3" placeholder="Пароль" type="text" name="lastName">
+    <button type="button" class="genpass">Ген</button>
+  </p>
+  <p>
+  <span>Страничка оплаты</span>
+    <input id="pay_page" type="checkbox" name="lastName">
+   <span> Оплата в долг</span>
+  <input id="pay_in_debt"  type="checkbox" name="lastName">
+  <span>Оплата платежкой</span>
+  <input id="payment_system" type="checkbox" name="lastName">
+
+</p>
    <p>
    Номер телефона
   <input id="phoneField" placeholder="Телефон" type="text" name="phone">
+  </p>
+     <p>
+  Макс долг (деньги)
+  <input id="maxDebtField" data-validation="required length" data-validation-length="min3" placeholder="Макс долг" type="number" name="lastName">
   </p>
   <p>
    Телеграм
@@ -53,13 +72,33 @@ function clientAddModal($data)
   Фамилия
   <input id="editLastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
   </p>
+
+  
   <p>
-  Логин(идентификатор в VG)
+    ID, цифровой логин
   <input id="editBynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин" type="text" name="byname">
+  <button type="button" class="genid">Ген</button>
   </p>
+    <p>
+  Пароль клиента
+  <input id="editPasswordField" data-validation="required length" data-validation-length="min3" placeholder="Пароль" type="text" name="lastName">
+    <button type="button" class="genpass">Ген</button>
+  </p>
+    <p>
+  <span>Страничка оплаты</span>
+    <input id="pay_page" type="checkbox" name="lastName">
+   <span> Оплата в долг</span>
+  <input id="pay_in_debt"  type="checkbox" name="lastName">
+  <span>Оплата платежкой</span>
+  <input id="payment_system" type="checkbox" name="lastName">
+</p>
    <p>
    Номер телефона
   <input id="editPhoneField" placeholder="Телефон" type="text" name="phone">
+  </p>
+   <p>
+  Макс долг (деньги)
+  <input id="editMaxDebtField" data-validation="required length" data-validation-length="min3" placeholder="Макс долг" type="number" name="lastName">
   </p>
   <p>
    Телеграм

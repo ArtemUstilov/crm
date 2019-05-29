@@ -381,10 +381,13 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editDebtField').val(res['debt']);
             $('#edit-client-form #editRollbackField').val(res['rollback']);
             $('#edit-client-form #editDescriptionField').val(res['description']);
+            $('#edit-client-form #editMaxDebtField').val(res['max_debt']);
+            $('#edit-client-form #editPasswordField').val(res['password']);
+            $('#edit-client-form #pay_page').prop("checked",!!+res['pay_page']);
+            $('#edit-client-form #pay_in_debt').prop("checked",!!+res['pay_in_debt']);
+            $('#edit-client-form #payment_system').prop("checked",!!+res['payment_system']);
             $('.loader').fadeOut('fast');
             $('#Client-edit-Modal').modal();
-
-
         },
         error: function () {
         },

@@ -15,8 +15,9 @@ switch(accessLevel()){
     case 3:
         $clients = $connection->query('
                     SELECT client_id AS `id`, concat(last_name, " ", first_name) AS "Полное имя",
-                           byname AS `Имя`, IFNULL(phone_number, "-") AS `телефон`,
-                           email AS `почта`, IFNULL(telegram, "-") AS `телеграм`
+                           concat(C.login, " ")  AS `Логин`, IFNULL(phone_number, "-") AS `телефон`,
+                           email AS `почта`, IFNULL(telegram, "-") AS `телеграм`, `password` AS пароль, max_debt AS "макс. долг", `pay_page` AS "Стр. оплаты",
+                           `pay_in_debt` AS "Оплата в долг", `payment_system` AS "Платежка"
                     FROM clients C
                     ');
         break;
@@ -24,8 +25,9 @@ switch(accessLevel()){
     case 1:
         $clients = $connection->query('
                     SELECT DISTINCT C.client_id AS `id`, concat(C.last_name, " ", C.first_name) AS "Полное имя",
-                                    C.byname AS `Имя`, IFNULL(phone_number, "-") AS `телефон`,
-                                    C.email AS `почта`, IFNULL(telegram, "-") AS `телеграм`
+                                    concat(C.login, " ") AS `Логин`, IFNULL(phone_number, "-") AS `телефон`,
+                                    C.email AS `почта`, IFNULL(telegram, "-") AS `телеграм`, `password` AS пароль,  max_debt AS "макс. долг",
+                                     `pay_page` AS "Стр. оплаты", `pay_in_debt` AS "Оплата в долг", `payment_system` AS "Платежка"
                     FROM clients C
                     WHERE user_id IN (
                         SELECT user_id FROM users WHERE branch_id = '.$_SESSION['branch_id'].'

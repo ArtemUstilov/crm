@@ -147,6 +147,11 @@ function editClient() {
     let debt = $("#edit-client-form #editDebtField").val();
     let id = $("#edit-client-form #edit-client-title").attr('client-id');
     const $this = $("#edit-client-form .modal-submit");
+    let password = $("#edit-client-form #editPasswordField").val();
+    let payment_system = $("#edit-client-form #payment_system").is(':checked');
+    let pay_in_debt = $("#edit-client-form #pay_in_debt").is(':checked');
+    let pay_page = $("#edit-client-form #pay_page").is(':checked');
+    let max_debt = $("#edit-client-form #editMaxDebtField").val();
     $this.prop("disabled", true);
     $.ajax({
         url: "../components/edit-modal-response/editClient.php",
@@ -162,6 +167,10 @@ function editClient() {
             phone,
             telegram,
             client_id: id,
+            password, pay_in_debt,
+            pay_page,
+            payment_system,
+            max_debt,
         },
         cache: false,
         success: function (res) {
