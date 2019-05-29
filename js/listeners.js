@@ -156,11 +156,11 @@ $(document).ready(function () {
             $('#menu-invisible').addClass('menu--open');
 
         }
-    })
+    });
     $('.close-btn-box').click(() => {
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
-    })
+    });
 
     function handle_mousedown(e) {
         if ('DIV' !== e.target.tagName) return;

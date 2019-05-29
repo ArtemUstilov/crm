@@ -87,10 +87,10 @@ $(document).ready(function () {
     });
     $('#Order-Modal #sumVGField, #Order-Modal #outField').on('change paste keyup', function (e) {
         $('#Order-Modal #debtClField').val($('#Order-Modal #sumVGField').val() * $('#Order-Modal #outField').val() / 100);
-    })
+    });
     $('#Order-edit-Modal #editSumVGField, #Order-edit-Modal #outField').on('change paste keyup', function (e) {
         $('#Order-edit-Modal #editDebtClField').val($('#Order-edit-Modal #editSumVGField').val() * $('#Order-edit-Modal #editOutField').val() / 100);
-    })
+    });
     const vgcl = $('#Order-Modal #vgField, #Order-Modal #clientField');
     vgcl.change(function (e) {
         $('#Order-Modal #sumVGField').trigger('change');
@@ -108,6 +108,8 @@ $(document).ready(function () {
             success: function (res) {
                 if(res.loginByVg)
                     $('#Order-Modal #loginByVgField').val(res.loginByVg);
+                else
+                    $('#Order-Modal #loginByVgField').val("");
             },
             error: function () {
             },
