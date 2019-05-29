@@ -98,6 +98,12 @@ function isAuthorized()
     return isset($_SESSION['id']) && isset($_SESSION['login']) && isset($_SESSION['password']);
 }
 
+function isClientAuthorized()
+{
+    session_start();
+    return isset($_SESSION['client_id']) && isset($_SESSION['client_login']) && isset($_SESSION['client_password']);
+}
+
 function mysqliToArray($mysqli_result)
 {
     if(!$mysqli_result)
