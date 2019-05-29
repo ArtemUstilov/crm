@@ -27,7 +27,16 @@ $(document).ready(function () {
         document.execCommand("copy");
         $temp.remove();
     }
-
+    $('.genid').click(function(){
+       const inpt = $(this).parent().find("input");
+       const randomVal = Math.round(Math.random()*10.e14 + 10.e5);
+       inpt.val(randomVal);
+    });
+    $('.genpass').click(function(){
+        const inpt = $(this).parent().find("input");
+        const randomVal = [0,1,1,1,1,1].map(n=>Math.floor(Math.random()*9 + 1 - n)).join('');
+        inpt.val(randomVal);
+    });
     $('#copy-btn').click(function () {
         copyToClipboard('#error-url')
     });

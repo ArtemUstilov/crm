@@ -97,7 +97,6 @@ $(document).ready(function () {
         let vg_id = $('#Order-Modal #vgField').val();
         let client_id = $('#Order-Modal #clientField').val();
         if (!vg_id && !client_id) return;
-        console.log(client_id, vg_id);
         $.ajax({
             url: "../components/selectors/getLoginByVg.php",
             type: "GET",
@@ -218,7 +217,6 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                console.log(res);
                 try {
                     res = JSON.parse(res);
                     if (res['success'] == false) {
@@ -324,6 +322,11 @@ $(document).ready(function () {
         let byname = $("#add-client-form #bynameField").val();
         let phone = $("#add-client-form #phoneField").val();
         let email = $("#add-client-form #emailField").val();
+        let password = $("#add-client-form #passwordField").val();
+        let payment_system = $("#add-client-form #payment_system").is(':checked');
+        let pay_in_debt = $("#add-client-form #pay_in_debt").is(':checked');
+        let pay_page = $("#add-client-form #pay_page").is(':checked');
+        let max_debt = $("#add-client-form #maxDebtField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -337,7 +340,7 @@ $(document).ready(function () {
                 description: description,
                 phone: phone,
                 email: email,
-                telegram: telegram,
+                telegram: telegram, password, pay_in_debt, pay_page, payment_system, max_debt
             },
             cache: false,
             success: function (res) {
@@ -354,7 +357,6 @@ $(document).ready(function () {
                 }, 300);
                 $('#Order-Modal').modal();
                 createAlertTable(res, "Клиент");
-
             },
             error: function () {
                 createAlertTable("connectionError", "Клиент");
@@ -382,7 +384,6 @@ $(document).ready(function () {
         let owner = $("#add-outgo-form #ownerField").val();
         let fiat = $("#add-outgo-form #fiatField").val();
         let descr = $("#add-outgo-form #commentField").val();
-        console.log(owner);
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -391,7 +392,6 @@ $(document).ready(function () {
             data: {owner, sum, description: descr, fiat},
             cache: false,
             success: function (res) {
-                console.log(res);
                 createAlertTable(res, "Расход");
             },
             error: function () {

@@ -394,7 +394,19 @@ h1 {
 .table-container tbody tr td.lalign {
     text-align: left;
 }
-
+.genid, .genpass{
+    position: absolute;
+    background: transparent;
+    font-weight: bold;
+    right: 8px;
+    top: 22px;
+}
+.modal-inputs p{
+    position: relative;
+}
+.modal-inputs span{
+    display: inline;
+}
 #menu {
     position: fixed;
     z-index: 3;
@@ -587,7 +599,9 @@ a[disabled] {
     border-radius: .25rem;
     color: black;
 }
-
+[type="checkbox"]{
+    width: auto !important;
+}
 .modal-submit {
     float: right;
     font-size: 18px;
