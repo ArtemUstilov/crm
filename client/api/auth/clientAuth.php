@@ -9,4 +9,3 @@ if (isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
 $login = $_SERVER['PHP_AUTH_USER'];
 $password = $_SERVER['PHP_AUTH_PW'];
 ChromePhp::log("LOGIN: ", $login, "PASS: ", $password);
-echo var_dump($_SERVER);

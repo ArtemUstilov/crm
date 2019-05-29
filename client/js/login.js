@@ -1,26 +1,26 @@
 $(document).ready(function () {
     $('#login-form').submit((e) => {
         e.preventDefault();
-        let password = $("#passwordField").val() ? $("#passwordField").val() : 0;
-        let login = $("#loginField").val();
-        console.log(login);
+        let password = $("#clientPass").val();
+        let login = $("#clientLogin").val();
+        console.log(password, login);
         $('.spinner').show();
         $.ajax
         ({
             type: "GET",
             url: "./api/auth/clientAuth.php",
             username: login,
+            contentType: "application/json; charset=utf-8",
             password: password,
             data: '{}',
             success: function (res) {
-                console.log(res);
                 if (res.error) {
                     switch (res.error) {
                         case "pass":
-                            $("#passwordField").effect("shake");
+                            $("#clientPass").effect("shake");
                             break;
                         case "login":
-                            $("#loginField").effect("shake");
+                            $("#clientLogin").effect("shake");
                             break;
                     }
                 }
