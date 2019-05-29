@@ -13,6 +13,10 @@ echo '
             <option value selected disabled>Выберите вг</option>
         </select>
     </p>
+     <p>
+        <input id="vg-sum" type="number" placeholder="Количество">
+    </p>
+    <p>К оплате: <span id="fiat-sum">0.0</span> грн</p>
     <script src="./js/scripts.js"></script>
 </body>
 ';
