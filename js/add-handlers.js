@@ -269,6 +269,7 @@ $(document).ready(function () {
         let last_name = $("#add-user-form #lastNameField").val();
         let branch = $("#add-user-form #branchField").val();
         let role = $("#add-user-form #roleField").val();
+        let telegram = $("#add-user-form #telegram").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
@@ -281,6 +282,7 @@ $(document).ready(function () {
                 last_name: last_name,
                 branch: branch,
                 role: role,
+                telegram,
             },
             cache: false,
             success: function (res) {

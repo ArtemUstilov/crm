@@ -9,6 +9,7 @@ if (isset($_POST['login']) && isset($_POST['role'])
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
+    $telegram = clean($_POST['telegram']);
     $edit_user_id = clean($_POST['user_id']);
     session_start();
     $branch = $_POST['branch'] ? clean($_POST['branch']) : $_SESSION['branch_id'];
@@ -31,6 +32,7 @@ if (isset($_POST['login']) && isset($_POST['role'])
             . ($password ? "`pass_hash` = '$password'," : "") . "
             `first_name` = '$first_name',
             `last_name` = '$last_name',
+            `telegram` = '$telegram',
             `role` = '$role',
             `branch_id` = '$branch'
         WHERE `user_id` = '$edit_user_id'");

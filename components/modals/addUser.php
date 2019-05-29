@@ -47,7 +47,11 @@ function userAddModal($data, $more_data)
     </select>
   </p>
   <p>
-  <input id="passRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation">
+  <input id="passRepeatField" autocomplete="new-password" name="pass" type="password"  placeholder="Повторите пароль" data-validation-length="min3" data-validation="length required confirmation" >
+  </p>
+   <p>
+   Телеграм
+  <input id="telegram" name="telegram" type="text"  placeholder="Телеграм" value="@">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Добавить">
@@ -117,6 +121,10 @@ function userAddModal($data, $more_data)
         name="pass" type="password"  
         placeholder="Повторите пароль" 
         data-validation="confirmation">
+  </p>
+    <p>
+    Телеграм
+  <input id="telegram" name="telegram" type="text"  placeholder="Телеграм">
   </p>
   </div>
   <input class="modal-submit" type="submit" value="Сохранить">

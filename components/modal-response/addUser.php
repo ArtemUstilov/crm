@@ -10,6 +10,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
+    $telegram = clean($_POST['telegram']);
 
     session_start();
     $user_id = $_SESSION['id'];
@@ -22,7 +23,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     }
     if (heCan($user_data['role'], 2)) {
         $res = $connection->
-        query("INSERT INTO `users` (`login`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`) VALUES('$login','$password','$first_name','$last_name','$role','$branch') ");
+        query("INSERT INTO `users` (`login`, `telegram`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`) VALUES('$login','$telegram', '$password','$first_name','$last_name','$role','$branch') ");
         if ($res) {
             echo "success";
             return false;

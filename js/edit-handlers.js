@@ -94,6 +94,8 @@ function editUser() {
     let money = $("#edit-user-form #editMoneyField").val();
     let role = $("#edit-user-form #editRoleField").val();
     let id = $("#edit-user-form #edit-user-title").attr('user-id');
+    let telegram = $("#edit-user-form #telegram").val();
+
     const $this = $("#edit-user-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
@@ -108,6 +110,7 @@ function editUser() {
             money,
             role,
             user_id: id,
+            telegram,
         },
         cache: false,
         success: function (res) {
