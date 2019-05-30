@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_GET['login'], $_GET['password'], $_GET['vg_sum'], $_GET['debt'])) {
+if (!isset($_POST['login'], $_POST['password'], $_POST['vg_sum'], $_POST['debt'])) {
     echo array('status' => 'failed', 'error' => 'empty');
     return false;
 }
@@ -9,11 +9,11 @@ include_once '../../db.php';
 
 
 session_start();
-$login = clean($_GET['login']);
-$debt = clean($_GET['debt']);
+$login = clean($_POST['login']);
+$debt = clean($_POST['debt']);
 $sum_vg = clean($_POST['sum_vg']);
-$password = clean($_GET['password']);
-$sum_vg = clean($_GET['vg_sum']);
+$password = clean($_POST['password']);
+$sum_vg = clean($_POST['vg_sum']);
 $vg_id = $_SESSION['vg_id'];
 $fiat_id = $_SESSION['fiat_id'];
 

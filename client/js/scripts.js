@@ -52,7 +52,7 @@ $(document).ready(function () {
                 $('#pay-form').children('.alert-danger').remove();
                 $('#pass').attr('disabled', true);
                 $('#pass-btn').remove();
-                $('#pass-btn').parent().addClass('correct-info');
+                $('#pass').parent().addClass('correct-info');
             }
             parsePassData();
             $('.loader').fadeOut();
@@ -108,7 +108,7 @@ function createDeal(debt = 0) {
     const login = $('#login').val();
     const password = $('#pass').val();
     const vg_sum = $('#vg-sum').val();
-    $.get('./api/createDeal.php', {login, password, vg_sum, debt}, (res) => {
+    $.post('./api/createDeal.php', {login, password, vg_sum, debt}, (res) => {
         if(res.error){
             switch(res.error){
 
@@ -120,6 +120,8 @@ function createDeal(debt = 0) {
             $('#pay-form').append('<div class="alert alert-success">\n' +
                 '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +
                 '</div>');
+        $('#pay-in-debt-btn').remove();
+        $('#pay-system-btn').remove();
         $('.loader').fadeOut();
     }, 'html');
 }
