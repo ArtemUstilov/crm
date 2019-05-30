@@ -1,12 +1,12 @@
 <?php
-include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
     isset($_POST['obtain']) &&
     isset($_POST['vg']) &&
     isset($_POST['fiat']) &&
-    isset($_POST['shares'])) {
+    isset($_POST['shares'])&&
+    isset($_POST['loginByVg'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
@@ -25,7 +25,8 @@ if (isset($_POST['client']) &&
     $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $obtain = clean($_POST['obtain']);
 
-    $shares = $_POST['shares'];
+    $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'],true);
+
     $debt = $_POST['debtCl'] ? clean($_POST['debtCl']) : 0;
 
     $money_to_add = $sum_currency - $debt;
@@ -34,24 +35,24 @@ if (isset($_POST['client']) &&
 
 
     session_start();
-    $user_id = $_SESSION['id'];
+    $user_id = $_POST['user_id'] ? $_POST['user_id'] : $_SESSION['id'];
     $branch_id = $_SESSION['branch_id'];
     $user_data = mysqli_fetch_assoc($connection->query("
-        SELECT * 
-        FROM users 
+        SELECT *
+        FROM users
         WHERE user_id='$user_id'
     "));
     if (heCan($user_data['role'], 1)) {
         if ($callmaster) {
             $add_order = $connection->
             query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`, `fiat_id`, `loginByVg`) 
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
         ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description', '$fiat', '$login_by_vg') ");
         } else {
             $add_order = $connection->
             query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`, `fiat_id`, `loginByVg`) 
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
         ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description', '$fiat', '$login_by_vg') ");
         }
@@ -84,12 +85,12 @@ if (isset($_POST['client']) &&
                               WHERE `fiat_id` = '$fiat' AND `client_debt_id` = '$client' "));
                 if ($check_payment_debt)
                     $update_payments_debt = $connection->
-                    query("UPDATE  `payments` 
+                    query("UPDATE  `payments`
                                   SET `sum` = `sum` + '$debt'
                                   WHERE client_debt_id = '$client' AND `fiat_id` = '$fiat'");
                 else
                     $insert_payments_debt = $connection->
-                    query("INSERT INTO `payments` 
+                    query("INSERT INTO `payments`
                              (`fiat_id`, `sum`, `client_debt_id`)
                              VALUES('$fiat', '$debt', '$client') ");
             }
@@ -100,12 +101,12 @@ if (isset($_POST['client']) &&
 
                 if ($check_payment_rollback)
                     $connection->
-                    query("UPDATE  `payments` 
+                    query("UPDATE  `payments`
                                   SET `sum` = `sum` + '$rollback_sum'
                                   WHERE client_rollback_id = '$callmaster' AND `fiat_id` = '$fiat'");
                 else
                     $connection->
-                    query("INSERT INTO `payments` 
+                    query("INSERT INTO `payments`
                              (`fiat_id`, `sum`, `client_rollback_id`)
                              VALUES('$fiat', '$rollback_sum', '$callmaster') ");
             }

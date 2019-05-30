@@ -1,7 +1,14 @@
 <?php
+
+if (!isset($_GET['login'], $_GET['vgSum'])) {
+    echo array('status' => 'failed', 'error' => 'empty');
+    return false;
+}
+
 include_once '../../db.php';
-$login = $_GET['login'];
-$vgsum = $_GET['vgSum'];
+include_once './funcs.php';
+$login = clean($_GET['login']);
+$vgsum = clean($_GET['vgSum']);
 
 $client = mysqli_fetch_assoc($connection->query("
     SELECT * 
@@ -9,8 +16,8 @@ $client = mysqli_fetch_assoc($connection->query("
     WHERE login = '$login'
 "));
 
-if(!$client){
-    echo json_encode(array("error"=> "not exists"));
+if (!$client) {
+    echo json_encode(array("error" => "not exists"));
     return;
 }
 
@@ -39,6 +46,9 @@ $vg = mysqli_fetch_assoc($connection->query("
 $vg_name = $vg['name'];
 $vg_perc = $vg['outp'];
 $fiat_id = $vg['fiat_id'];
+session_start();
+$_SESSION['vg_id'] = $vg['vg_id'];
+$_SESSION['fiat_id'] = $fiat_id;
 
 $fiatName = mysqli_fetch_assoc($connection->query("SELECT * FROM fiats WHERE fiat_id = '$fiat_id'"))['name'];
 
@@ -46,8 +56,8 @@ $client_id = $client['client_id'];
 $canPayInDebt = $client['pay_in_debt'];
 $canPay = $client['payment_system'];
 $paypage = $client['pay_page'];
-if(!$paypage){
-    echo json_encode(array("error"=>"deal denied"));
+if (!$paypage) {
+    echo json_encode(array("error" => "deal denied"));
     return;
 }
 $debtLimit = $client['max_debt'] - mysqli_fetch_assoc($connection->query("
@@ -59,4 +69,4 @@ $debtLimit = $debtLimit < 0 ? 0 : $debtLimit;
 $debtLimit = $canPayInDebt ? $debtLimit : 0;
 $sum = (int)$vg_perc * (int)$vgsum;
 
-echo json_encode(array("debtLimit"=>$debtLimit, "pay_page" => $paypage,"fiatName"=>$fiatName,"paySystem"=>$canPay, "vgName"=>$vg_name, "sum"=>$sum));
+echo json_encode(array("debtLimit" => $debtLimit, "pay_page" => $paypage, "fiatName" => $fiatName, "paySystem" => $canPay, "vgName" => $vg_name, "sum" => $sum));
