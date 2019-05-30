@@ -34,7 +34,6 @@ $vg = mysqli_fetch_assoc($connection->query("
             WHERE login = 1111
         ) 
     )
-
     ) T ON T.vg_id = D.vg_id
 "));
 $vg_name = $vg['name'];
