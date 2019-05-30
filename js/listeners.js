@@ -27,14 +27,22 @@ $(document).ready(function () {
         document.execCommand("copy");
         $temp.remove();
     }
-    $('.genid').click(function(){
+    $('.genpass').click(function(){
        const inpt = $(this).parent().find("input");
-       const randomVal = Math.round(Math.random()*10.e14 + 10.e5);
+        const letters = ['a','v','r','e','N','W','Z','O','T','y'];
+        const randomVal = [0,1,1,1,1,1,1,1,1,1,1,1,1,1].map(n=>{
+            if(Math.random() > .5)
+                return Math.floor(Math.random()*9 + 1 - n);
+            else
+                return letters[Math.floor(Math.random()*9 + 1 - n)];
+        }).join('');
        inpt.val(randomVal);
     });
-    $('.genpass').click(function(){
+    $('.genid').click(function(){
         const inpt = $(this).parent().find("input");
-        const randomVal = [0,1,1,1,1,1].map(n=>Math.floor(Math.random()*9 + 1 - n)).join('');
+        const randomVal = [0,1,1,1,1,1].map(n=>{
+                return Math.floor(Math.random()*9 + 1 - n);
+        }).join('');
         inpt.val(randomVal);
     });
     $('#copy-btn').click(function () {
