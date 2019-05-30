@@ -109,20 +109,28 @@ function createDeal(debt = 0) {
     const password = $('#pass').val();
     const vg_sum = $('#vg-sum').val();
     $.post('./api/createDeal.php', {login, password, vg_sum, debt}, (res) => {
-        if(res.error){
-            switch(res.error){
+        console.log(res);
+        if (res.error) {
+            switch (res.error) {
 
             }
             $('.loader').fadeOut();
             return false;
+        } else if (res['status'] == "success") {
+            if (!$('#pay-form').find('.alert-success').length)
+                $('#pay-form').append('<div class="alert alert-success">\n' +
+                    '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +
+                    '</div>');
+            $('#pay-in-debt-btn').remove();
+            $('#pay-system-btn').remove();
+            $('.loader').fadeOut();
+            return false;
         }
-        if (!$('#pay-form').find('.alert-success').length)
-            $('#pay-form').append('<div class="alert alert-success">\n' +
-                '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +
+        if (!$('#pay-form').find('.alert-danger').length)
+            $('#pay-form').append('<div class="alert alert-danger">\n' +
+                '  <strong>Ошибка! </strong>Что-то пошло не так. Обратитесь к администрации\n' +
                 '</div>');
-        $('#pay-in-debt-btn').remove();
-        $('#pay-system-btn').remove();
         $('.loader').fadeOut();
-    }, 'html');
+    }, 'json');
 }
 

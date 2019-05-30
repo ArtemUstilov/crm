@@ -5,8 +5,7 @@ if (isset($_POST['client']) &&
     isset($_POST['obtain']) &&
     isset($_POST['vg']) &&
     isset($_POST['fiat']) &&
-    isset($_POST['shares'])&&
-    isset($_POST['loginByVg'])) {
+    isset($_POST['shares'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
