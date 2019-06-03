@@ -22,7 +22,7 @@ if (isset($_POST['client']) &&
     $out_percent = clean($_POST['out']);
 
     $sum_currency = ($sum_vg * $out_percent) / 100;
-    $rollback_sum = $sum_vg / 100 * ($rollback_1);
+    $rollback_sum = $sum_currency * $rollback_1 / 100;
     $obtain = clean($_POST['obtain']);
 
     $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'], true);
@@ -95,6 +95,7 @@ if (isset($_POST['client']) &&
                              VALUES('$fiat', '$debt', '$client') ");
             }
             if ($rollback_sum > 0) {
+
                 $check_payment_rollback = mysqliToArray($connection->
                 query("SELECT * FROM payments
                               WHERE `fiat_id` = '$fiat' AND `client_rollback_id` = '$callmaster' "));

@@ -16,10 +16,10 @@ $(document).ready(function () {
         }
         const login = $('#login').val();
         $.get('./api/getClientInfo.php', {login, vgSum}, (res) => {
-                console.log(res.error);
-                if (res.error) {
+            console.log(res.error);
+            if (res.error) {
                 let msg = "";
-                switch(res.error){
+                switch (res.error) {
                     case "deal denied":
                         msg = "Функция самостоятельной покупки отключена";
                         break;
@@ -27,12 +27,12 @@ $(document).ready(function () {
                         msg = "Неверный логин";
                         break;
                 }
-                if ($('#pay-form').find('.alert').length){
+                if ($('#pay-form').find('.alert').length) {
                     $('#pay-form').find('.alert').remove();
                 }
-                    $('#pay-form').append('<div class="alert alert-danger">\n' +
-                        '  <strong>Ошибка! </strong>'+msg+'\n' +
-                        '</div>');
+                $('#pay-form').append('<div class="alert alert-danger">\n' +
+                    '  <strong>Ошибка! </strong>' + msg + '\n' +
+                    '</div>');
                 $('#login-box .input-group').effect("shake");
                 $('.loader').fadeOut();
                 return;
@@ -83,11 +83,12 @@ $(document).ready(function () {
 //         return;
 //     $('#fiat-sum').text(+perc * +$('#vg-sum').val());
 // }
-function convertVgDataToList(data){
+function convertVgDataToList(data) {
     return data
-        .map(row=> `<option value="${row['vg_id']}" perc="${row['out_percent']}">${row['name']}</option>`)
+        .map(row => `<option value="${row['vg_id']}" perc="${row['out_percent']}">${row['name']}</option>`)
         .join('\n');
 }
+
 function parseLoginData(res) {
     $('#vg-sum').prop('disabled', true);
     $('#vg-sum').parent().addClass('correct-info');
@@ -102,9 +103,9 @@ function parseLoginData(res) {
 }
 
 function parsePassData(res) {
-    if(res.vgs){
+    if (res.vgs) {
         $('#vg-type-box').show();
-        $('#vg-type').append(convertVgDataToList(res.vgs)).change(function(){
+        $('#vg-type').append(convertVgDataToList(res.vgs)).change(function () {
             const vgt = $("option:selected", '#vg-type').text();
             $('#vg-label > span').text(vgt);
         })
@@ -139,6 +140,7 @@ function createDeal(debt = 0) {
                     '</div>');
             $('#pay-in-debt-btn').remove();
             $('#pay-system-btn').remove();
+            $('#vg-type').prop('disabled', true);
             $('.loader').fadeOut();
             return false;
         }
