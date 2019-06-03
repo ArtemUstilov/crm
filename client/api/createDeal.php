@@ -23,9 +23,9 @@ query("SELECT user_id FROM users
        WHERE user_id IN 
        (SELECT user_id FROM clients WHERE login = '$login')"))['user_id'];
 
-$vg_id = mysqli_fetch_assoc($connection->query("SELECT * FROM virtualgood WHERE vg_name = '$vg_type_name'"))['vg_id'];
+$vg_id = mysqli_fetch_assoc($connection->query("SELECT * FROM virtualgood WHERE name = '$vg_type_name'"))['vg_id'];
 
-$client_id = mysqli_fetch_array($connection->
+$client_id = mysqli_fetch_assoc($connection->
 query("SELECT client_id FROM clients WHERE login = '$login' AND password = '$password'"))['client_id'];
 if (isset($client_id, $user_id)) {
     $order_info = mysqli_fetch_array($connection->
