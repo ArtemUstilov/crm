@@ -67,6 +67,6 @@ $debtLimit = $client['max_debt'] - mysqli_fetch_assoc($connection->query("
 "))['sum'];
 $debtLimit = $debtLimit < 0 ? 0 : $debtLimit;
 $debtLimit = $canPayInDebt ? $debtLimit : 0;
-$sum = (int)$vg_perc * (int)$vgsum;
+$sum = (int)$vg_perc * (int)$vgsum / 100;
 
 echo json_encode(array("debtLimit" => $debtLimit, "pay_page" => $paypage, "fiatName" => $fiatName, "paySystem" => $canPay, "vgName" => $vg_name, "sum" => $sum));
