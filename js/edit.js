@@ -70,6 +70,9 @@ $('tr').on('click', (e) => {
         case "info":
             fillAdditionalInfo(mainParent);
             break;
+        case "delete":
+            deleteOwner(mainParent);
+            break;
         default:
             break;
     }
@@ -237,7 +240,7 @@ function fillFiatEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res=="failed"){
+            if (res == "failed") {
                 createAlertTable('connectionError', 'Фиат');
                 return;
             }
@@ -383,9 +386,9 @@ function fillClientEditForm(target) {
             $('#edit-client-form #editDescriptionField').val(res['description']);
             $('#edit-client-form #editMaxDebtField').val(res['max_debt']);
             $('#edit-client-form #editPasswordField').val(res['password']);
-            $('#edit-client-form #pay_page').prop("checked",!!+res['pay_page']);
-            $('#edit-client-form #pay_in_debt').prop("checked",!!+res['pay_in_debt']);
-            $('#edit-client-form #payment_system').prop("checked",!!+res['payment_system']);
+            $('#edit-client-form #pay_page').prop("checked", !!+res['pay_page']);
+            $('#edit-client-form #pay_in_debt').prop("checked", !!+res['pay_in_debt']);
+            $('#edit-client-form #payment_system').prop("checked", !!+res['payment_system']);
             $('.loader').fadeOut('fast');
             $('#Client-edit-Modal').modal();
         },
@@ -444,3 +447,29 @@ function checkUserData() {
     });
 
 };
+
+function deleteOwner(target) {
+    $('.loader').show();
+    const owner_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/delete/owner.php",
+        type: "POST",
+        dataType: 'html',
+        data: {
+            owner_id,
+        },
+        cache: false,
+        success: function (res) {
+            console.log(res);
+            $('.loader').fadeOut();
+            if(res.error){
+                createAlertTable("failed","");
+            }
+        },
+        error: function () {
+
+            createAlertTable("failed","");
+            $('.loader').fadeOut();
+        },
+    });
+}

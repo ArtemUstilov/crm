@@ -9,10 +9,10 @@ if (isset($_POST['vg_id'])) {
     FROM virtualgood VG
     INNER JOIN vg_data D ON VG.vg_id = D.vg_id
     INNER JOIN branch B ON B.branch_id = D.branch_id
-    WHERE B.branch_id = ".$_SESSION['branch_id']."
+    WHERE B.branch_id = " . $_SESSION['branch_id'] . "
     AND VG.vg_id = '$vg_id'
     "));
-
+   
     if ($vg_data) {
         echo json_encode($vg_data);
         return false;

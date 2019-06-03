@@ -61,6 +61,7 @@ function makeTable($data, $options)
             if ($index == 0) {
                 $actions .= $options['coins'] ? '<i class="fas fa-coins" modal="#' . $options['modal'] . '"></i>' : '';
                 $actions .= $options['info'] ? '<i class="fas fa-info-circle" modal="info"></i>' : '';
+                $actions .= $options['minus'] ? '<i class="fas fa-minus" modal="delete"></i>' : '';
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
             if ($col == 'статус') {
@@ -86,9 +87,7 @@ function makeTable($data, $options)
 function clean($value = "")
 {
     $value = trim($value);
-    $value = stripslashes($value);
     $value = strip_tags($value);
-    $value = htmlspecialchars($value);
     return $value;
 }
 
@@ -135,7 +134,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Debt":
             return debtModal($more_data);
         case "Head":
-            return headAddModal($more_data) .''. outgoModal($data, $more_data);
+            return headAddModal($more_data);
         case "Branch":
             return branchAddModal($data);
         case "Fiat":
