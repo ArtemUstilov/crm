@@ -38,7 +38,7 @@ $vg = mysqli_fetch_assoc($connection->query("
         WHERE client_id IN (
             SELECT client_id
             FROM clients
-            WHERE login = 1111
+            WHERE login = '$login'
         ) 
     )
     ) T ON T.vg_id = D.vg_id

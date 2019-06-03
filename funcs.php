@@ -73,7 +73,7 @@ function makeTable($data, $options)
             } else {
                 if(is_numeric($val))
                     $val = round($val, 2);
-                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val == '' || $val === null ? '-' : $val) . '</td>';
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val === '' || $val === null ? '-' : $val) . '</td>';
             }
             $index++;
         }
@@ -135,7 +135,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
         case "Debt":
             return debtModal($more_data);
         case "Head":
-            return headAddModal($more_data) .''. outgoModal($data, $more_data);
+            return headAddModal($more_data);
         case "Branch":
             return branchAddModal($data);
         case "Fiat":

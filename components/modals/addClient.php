@@ -12,25 +12,25 @@ function clientAddModal($data)
   </p>
   <p>
   Фамилия
-  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <input id="lastNameField" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
     ID, цифровой логин
-  <input id="bynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин" type="text" name="byname">
+  <input id="bynameField"  placeholder="Логин" type="text" name="">
     <button type="button" class="genid">Ген</button>
   </p>
   <p>
   Пароль клиента
-  <input id="passwordField" data-validation="required length" data-validation-length="min3" placeholder="Пароль" type="text" name="lastName">
+  <input id="passwordField" placeholder="Пароль" type="text" name="">
     <button type="button" class="genpass">Ген</button>
   </p>
-  <p>
+  <p style="padding-top: 15px">
   <span>Страничка оплаты</span>
     <input id="pay_page" type="checkbox" name="lastName">
    <span> Оплата в долг</span>
   <input id="pay_in_debt"  type="checkbox" name="lastName">
-  <span>Оплата платежкой</span>
-  <input id="payment_system" type="checkbox" name="lastName">
+  <span style="display:none;">Оплата платежкой</span>
+  <input style="display:none;" id="payment_system" type="checkbox" name="lastName">
 
 </p>
    <p>
@@ -39,7 +39,7 @@ function clientAddModal($data)
   </p>
      <p>
   Макс долг (деньги)
-  <input id="maxDebtField" data-validation="required length" data-validation-length="min3" placeholder="Макс долг" type="number" name="lastName">
+  <input id="maxDebtField" placeholder="Макс долг" type="number" name="lastName">
   </p>
   <p>
    Телеграм
@@ -70,27 +70,27 @@ function clientAddModal($data)
   </p>
   <p>
   Фамилия
-  <input id="editLastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <input id="editLastNameField"  placeholder="Фамилия" type="text" name="lastName">
   </p>
 
   
   <p>
     ID, цифровой логин
-  <input id="editBynameField" data-validation="required length alphanumeric" data-validation-length="min4" placeholder="Логин" type="text" name="byname">
+  <input id="editBynameField"  placeholder="Логин" type="text" name="">
   <button type="button" class="genid">Ген</button>
   </p>
     <p>
   Пароль клиента
-  <input id="editPasswordField" data-validation="required length" data-validation-length="min3" placeholder="Пароль" type="text" name="lastName">
+  <input id="editPasswordField"  placeholder="Пароль" type="text" name="">
     <button type="button" class="genpass">Ген</button>
   </p>
-    <p>
+  <p style="padding-top: 15px">
   <span>Страничка оплаты</span>
     <input id="pay_page" type="checkbox" name="lastName">
    <span> Оплата в долг</span>
   <input id="pay_in_debt"  type="checkbox" name="lastName">
-  <span>Оплата платежкой</span>
-  <input id="payment_system" type="checkbox" name="lastName">
+  <span style="display:none;">Оплата платежкой</span>
+  <input style="display:none;" id="payment_system" type="checkbox" name="lastName">
 </p>
    <p>
    Номер телефона
@@ -98,7 +98,7 @@ function clientAddModal($data)
   </p>
    <p>
   Макс долг (деньги)
-  <input id="editMaxDebtField" data-validation="required length" data-validation-length="min3" placeholder="Макс долг" type="number" name="lastName">
+  <input id="editMaxDebtField" placeholder="Макс долг" type="number" name="lastName">
   </p>
   <p>
    Телеграм

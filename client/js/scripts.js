@@ -7,7 +7,7 @@ $(document).ready(function () {
         if (vgSum == "" || vgSum == " " || vgSum < 1) {
             if (!$('#pay-form').find('.alert-warning').length)
                 $('#pay-form').append('<div class="alert alert-warning">\n' +
-                    '  <strong>Ошибка! </strong>Введена некоректная сумма\n' +
+                    '  <strong>Ошибка! </strong>Введена некорректная сумма\n' +
                     '</div>');
             $('.loader').fadeOut();
             return;
@@ -16,10 +16,22 @@ $(document).ready(function () {
         }
         const login = $('#login').val();
         $.get('./api/getClientInfo.php', {login, vgSum}, (res) => {
-            if (res.error) {
-                if (!$('#pay-form').find('.alert').length)
+                console.log(res.error);
+                if (res.error) {
+                let msg = "";
+                switch(res.error){
+                    case "deal denied":
+                        msg = "Функция самостоятельной покупки отключена";
+                        break;
+                    case "not exists":
+                        msg = "Неверный логин";
+                        break;
+                }
+                if ($('#pay-form').find('.alert').length){
+                    $('#pay-form').find('.alert').remove();
+                }
                     $('#pay-form').append('<div class="alert alert-danger">\n' +
-                        '  <strong>Ошибка! </strong>Неверный логин\n' +
+                        '  <strong>Ошибка! </strong>'+msg+'\n' +
                         '</div>');
                 $('#login-box .input-group').effect("shake");
                 $('.loader').fadeOut();
@@ -54,7 +66,7 @@ $(document).ready(function () {
                 $('#pass-btn').remove();
                 $('#pass').parent().addClass('correct-info');
             }
-            parsePassData();
+            parsePassData(res);
             $('.loader').fadeOut();
         }, 'json');
     });
@@ -71,11 +83,11 @@ $(document).ready(function () {
 //         return;
 //     $('#fiat-sum').text(+perc * +$('#vg-sum').val());
 // }
-// function convertVgDataToList(data){
-//     return data['vgs']
-//         .map(row=> `<option value="${row['vg_id']}" perc="${row['out_percent']}">${row['name']}</option>`)
-//         .join('\n');
-// }
+function convertVgDataToList(data){
+    return data
+        .map(row=> `<option value="${row['vg_id']}" perc="${row['out_percent']}">${row['name']}</option>`)
+        .join('\n');
+}
 function parseLoginData(res) {
     $('#vg-sum').prop('disabled', true);
     $('#vg-sum').parent().addClass('correct-info');
@@ -89,18 +101,25 @@ function parseLoginData(res) {
     storage = res;
 }
 
-function parsePassData() {
+function parsePassData(res) {
+    if(res.vgs){
+        $('#vg-type-box').show();
+        $('#vg-type').append(convertVgDataToList(res.vgs)).change(function(){
+            const vgt = $("option:selected", '#vg-type').text();
+            $('#vg-label > span').text(vgt);
+        })
+    }
     if (+storage.debtLimit > 0) {
         if (+storage.debtLimit - +storage.sum < 0) {
-            $('#debt-limit-label').text('Лимита оплаты долгом не достаточно');
+            $('#payment-info').append(`<p id="debt-limit-label">Лимита оплаты в долг недостаточно</p>`);
         } else {
             $('#payment-info').append(`<p id="debt-limit-label"><b>Ваш лимит оплаты в долг:</b> <span class="big-text">${storage.debtLimit}</span> <b>${storage.fiatName}</b></p>`);
             $('#pay-in-debt-btn').show();
         }
-        $('#pay-system-btn').show();
     } else {
-        $('#debt-limit-label').text('Ваш лимит оплаты в долг исчерпан');
+        $('#payment-info').append(`<p id="debt-limit-label">Ваш лимит оплаты в долг исчерпан</p>`);
     }
+    $('#pay-system-btn').show();
 }
 
 function createDeal(debt = 0) {

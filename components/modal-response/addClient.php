@@ -1,19 +1,19 @@
 <?php
-if (isset($_POST['description']) && isset($_POST['byname'])
-    && isset($_POST['first_name']) && isset($_POST['last_name'])) {
+if (isset($_POST['first_name'])) {
 
     include_once("../../db.php");
     include_once("../../funcs.php");
     $debt = 0.0;
     $rollback_sum = 0.0;
-    $byname = clean($_POST['byname']);
     $first_name = clean($_POST['first_name']);
-    $last_name = clean($_POST['last_name']);
+    $last_name = isset($_POST['last_name']) ? clean($_POST['last_name']) : null;
+    $byname = isset($_POST['byname']) ? clean($_POST['byname']) : null;
+    $pass = isset($_POST['password']) ? clean($_POST['password']) : null;
+    $max_debt = isset($_POST['max_debt']) ? (int)clean($_POST['max_debt']) : 0;
+
     $description = clean($_POST['description']);
     $telegram = clean($_POST['telegram']);
     $phone = clean($_POST['phone']);
-    $max_debt = clean($_POST['max_debt']);
-    $pass = clean($_POST['password']);
     $pay_page = $_POST['pay_page'] === "true" ? true : false;
     $payment_system = $_POST['payment_system'] === "true" ? true : false;
     $pay_in_debt = $_POST['pay_in_debt'] === "true" ? true : false;
