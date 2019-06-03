@@ -75,7 +75,7 @@ function orderAddModal($data, $more_data)
   <option value="add-new-method-of-obtaining" class="new-method-option" >Добавить новый</option>';
     if(isset($more_data['methods']))
     foreach ($more_data['methods'] as $key => $var) {
-        $output .= '<option value="' . $var["method"] . ' "selected>' . $var["method"] . '</option>';
+        $output .= '<option value="' . $var["method"] . '"selected>' . $var["method"] . '</option>';
     }
     $output .='
   </select>
@@ -189,8 +189,7 @@ function orderAddModal($data, $more_data)
 </div>';
         $output .= '<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-transaction-info-modal" class="modal">
- <h2>Ошибка транзакции!</h2>
- <h3 class="manually">Выполните вручную</h3>
+ <h2>Выполните вручную!</h2>
  <div class="error-url-box">
  <span>Ссылка: </span><a target="_blank" id="error-url"></a>
 </div>

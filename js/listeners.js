@@ -450,6 +450,7 @@ $(document).ready(function () {
             cache: false,
             dataType: 'JSON',
             success: function (res) {
+                console.log(res);
                 if (!res) return;
                 const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});

@@ -106,13 +106,35 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                if(res.loginByVg)
+                console.log(res);
+                if (res.loginByVg)
                     $('#Order-Modal #loginByVgField').val(res.loginByVg);
                 else
                     $('#Order-Modal #loginByVgField').val("");
-            },
+                console.log("fiat: ", res.fiat_id);
+                if (res.fiat_id && parseInt(res.fiat_id) > 0) {
+                    $('#Order-Modal #fiatField').val(res.fiat_id);
+                } else {
+                    $('#Order-Modal #fiatField').val($("#fiatField option:first").val());
+                }
+
+                if (res.description || parseInt(res.description) != -1)
+                    $('#Order-Modal #commentField').val(res.description);
+                else
+                    $('#Order-Modal #commentField').val("");
+                console.log(res.method_of_obtaining);
+                if (res.method_of_obtaining) {
+                    $('#Order-Modal #obtainingField').val(res.method_of_obtaining);
+                } else {
+                    $('#Order-Modal #obtainingField').val($("#obtainingField option:first").val());
+                }
+
+
+            }
+            ,
             error: function () {
-            },
+            }
+            ,
             complete: function () {
             }
         });
@@ -628,21 +650,20 @@ $(document).ready(function () {
                 $('.custom-alert .alert-text-box').text(`${requestType} успешно добавлен(о)`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
-                if(currentOrderForm && requestType == "Клиент")
+                if (currentOrderForm && requestType == "Клиент")
                     currentOrderForm.modal();
-                else
-                    if (requestType != 'Заказ')
-                        setTimeout(function () {
-                            location.reload();
-                        }, 1500);
+                else if (requestType != 'Заказ')
+                    setTimeout(function () {
+                        location.reload();
+                    }, 1500);
                 break;
             case "edit-success":
                 $('.custom-alert .alert-text-box').text(`Изменения сохранены`);
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1500);
+                setTimeout(function () {
+                    location.reload();
+                }, 1500);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');

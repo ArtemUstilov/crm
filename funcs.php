@@ -61,6 +61,7 @@ function makeTable($data, $options)
             if ($index == 0) {
                 $actions .= $options['coins'] ? '<i class="fas fa-coins" modal="#' . $options['modal'] . '"></i>' : '';
                 $actions .= $options['info'] ? '<i class="fas fa-info-circle" modal="info"></i>' : '';
+                $actions .= $options['minus'] ? '<i class="fas fa-minus" modal="delete"></i>' : '';
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
             if ($col == 'статус') {
@@ -86,9 +87,7 @@ function makeTable($data, $options)
 function clean($value = "")
 {
     $value = trim($value);
-    $value = stripslashes($value);
     $value = strip_tags($value);
-    $value = htmlspecialchars($value);
     return $value;
 }
 

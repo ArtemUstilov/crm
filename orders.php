@@ -62,7 +62,8 @@ ORDER BY `date` DESC
 $clients = $connection -> query('
 SELECT concat(C.last_name, " ", C.first_name) AS "name", C.client_id AS `id` FROM clients C WHERE user_id IN (SELECT user_id FROM users WHERE branch_id = '.$_SESSION["branch_id"].') ');
 $vgs = $connection -> query("
-SELECT VG.vg_id, `name`, out_percent FROM virtualgood VG LEFT OUTER JOIN (SELECT * FROM vg_data WHERE branch_id = '$branch_id') VD ON VD.vg_id = VG.vg_id
+SELECT VG.vg_id, `name`, out_percent FROM virtualgood VG INNER JOIN vg_data VD ON VD.vg_id = VG.vg_id
+WHERE branch_id = '$branch_id'
 ");
 $fiat = $connection -> query("
 SELECT * FROM fiats
