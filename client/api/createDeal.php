@@ -15,6 +15,7 @@ $sum_vg = clean($_POST['sum_vg']);
 $password = clean($_POST['password']);
 $sum_vg = clean($_POST['vg_sum']);
 $vg_id = $_SESSION['vg_id'];
+$vg_type_name = $_SESSION['vg_type'];
 $fiat_id = $_SESSION['fiat_id'];
 
 $user_id = mysqli_fetch_array($connection->
@@ -22,13 +23,14 @@ query("SELECT user_id FROM users
        WHERE user_id IN 
        (SELECT user_id FROM clients WHERE login = '$login')"))['user_id'];
 
+$vg_id = mysqli_fetch_assoc($connection->query("SELECT * FROM virtualgood WHERE vg_name = '$vg_type_name'"))['vg_id'];
 
 $client_id = mysqli_fetch_array($connection->
 query("SELECT client_id FROM clients WHERE login = '$login' AND password = '$password'"))['client_id'];
 if (isset($client_id, $user_id)) {
     $order_info = mysqli_fetch_array($connection->
     query("SELECT order_id, real_out_percent, IFNULL(callmaster,0) AS 'callmaster', `loginByVg` FROM orders  
-                  WHERE client_id = '$client_id' ORDER BY date DESC LIMIT 1"));
+                  WHERE client_id = '$client_id' AND vg_id = '$vg_id' ORDER BY date DESC LIMIT 1"));
     if (!$order_info) {
         echo json_encode(array("status" => "failed", "error" => "REQUEST_FAILED"));
         return false;
@@ -38,7 +40,7 @@ if (isset($client_id, $user_id)) {
     $callmaster = $order_info['callmaster'];
     $out = $order_info['real_out_percent'];
     if ($debt) {
-        $max_debt = mysqli_fetch_array($connection->
+        $max_debt = mysqli_fetch_assoc($connection->
         query("SELECT `max_debt` FROM `clients` WHERE `client_id` = '$client_id' "))['max_debt'];
         if ((int)$sum_vg * (int)$out > (int)$max_debt) {
             json_encode(array("status" => "failed", "error" => "MAX_DEBT_EXCEEDED"));

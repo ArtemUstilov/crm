@@ -91,7 +91,7 @@ function convertVgDataToList(data){
 function parseLoginData(res) {
     $('#vg-sum').prop('disabled', true);
     $('#vg-sum').parent().addClass('correct-info');
-    if (+res.paySystem) {
+    if (+res.pay_page) {
         $('#pass-box').show();
     }
 
@@ -127,12 +127,9 @@ function createDeal(debt = 0) {
     const login = $('#login').val();
     const password = $('#pass').val();
     const vg_sum = $('#vg-sum').val();
-    $.post('./api/createDeal.php', {login, password, vg_sum, debt}, (res) => {
-        console.log(res);
+    const vg_type = $('#vg-type').val();
+    $.post('./api/createDeal.php', {login, password, vg_sum, vg_type, debt}, (res) => {
         if (res.error) {
-            switch (res.error) {
-
-            }
             $('.loader').fadeOut();
             return false;
         } else if (res['status'] == "success") {
