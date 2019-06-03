@@ -14,16 +14,13 @@ $debt = clean($_POST['debt']);
 $sum_vg = clean($_POST['sum_vg']);
 $password = clean($_POST['password']);
 $sum_vg = clean($_POST['vg_sum']);
-$vg_id = $_SESSION['vg_id'];
-$vg_type_name = $_SESSION['vg_type'];
+$vg_id = $_POST['vg_type'];
 $fiat_id = $_SESSION['fiat_id'];
 
 $user_id = mysqli_fetch_array($connection->
 query("SELECT user_id FROM users 
        WHERE user_id IN 
        (SELECT user_id FROM clients WHERE login = '$login')"))['user_id'];
-
-$vg_id = mysqli_fetch_assoc($connection->query("SELECT * FROM virtualgood WHERE name = '$vg_type_name'"))['vg_id'];
 
 $client_id = mysqli_fetch_assoc($connection->
 query("SELECT client_id FROM clients WHERE login = '$login' AND password = '$password'"))['client_id'];
