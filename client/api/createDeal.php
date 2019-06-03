@@ -27,29 +27,30 @@ $client_id = mysqli_fetch_array($connection->
 query("SELECT client_id FROM clients WHERE login = '$login' AND password = '$password'"))['client_id'];
 if (isset($client_id, $user_id)) {
     $order_info = mysqli_fetch_array($connection->
-    query("SELECT order_id, real_out_percent, IFNULL(callmaster,0) AS 'callmaster' FROM orders  
+    query("SELECT order_id, real_out_percent, IFNULL(callmaster,0) AS 'callmaster', `loginByVg` FROM orders  
                   WHERE client_id = '$client_id' ORDER BY date DESC LIMIT 1"));
     if (!$order_info) {
         echo json_encode(array("status" => "failed", "error" => "REQUEST_FAILED"));
         return false;
     }
     $order_id = $order_info['order_id'];
+    $loginByVG = $order_info['loginByVg'];
     $callmaster = $order_info['callmaster'];
     $out = $order_info['real_out_percent'];
     if ($debt) {
         $max_debt = mysqli_fetch_array($connection->
         query("SELECT `max_debt` FROM `clients` WHERE `client_id` = '$client_id' "))['max_debt'];
-        if((int)$sum_vg * (int)$out > (int)$max_debt){
+        if ((int)$sum_vg * (int)$out > (int)$max_debt) {
             json_encode(array("status" => "failed", "error" => "MAX_DEBT_EXCEEDED"));
             return false;
         }
-}
+    }
     $shares = mysqliToArray($connection->
     query("SELECT user_as_owner_id AS 'owner_id', share_percent AS 'value' FROM shares
                   WHERE order_id = '$order_id'"));
     $data = array("client" => $client_id, "user_id" => $user_id, "sum_vg" => $sum_vg,
         "fiat" => $fiat_id, "vg" => $vg_id, "obtain" => "платежка", "callmaster" => $callmaster,
-        "shares" => json_encode($shares), "out" => $out);
+        "shares" => json_encode($shares), "out" => $out, "loginByVg" => $loginByVG);
     $url = "https://" . $_SERVER['SERVER_NAME'] . "/components/modal-response/addOrder.php";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
