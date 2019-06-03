@@ -106,7 +106,9 @@ function parsePassData(res) {
         $('#vg-type-box').show();
         $('#vg-type').append(convertVgDataToList(res.vgs)).change(function(){
             const vgt = $("option:selected", '#vg-type').text();
+            const perc = $("option:selected", '#vg-type').attr('perc');
             $('#vg-label > span').text(vgt);
+            $('#sum-label .big-text').html(+perc * +$('#vg-sum').val() / 100);
         })
     }
     if (+storage.debtLimit > 0) {

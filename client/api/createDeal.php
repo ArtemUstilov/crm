@@ -39,7 +39,7 @@ if (isset($client_id, $user_id)) {
     if ($debt) {
         $max_debt = mysqli_fetch_assoc($connection->
         query("SELECT `max_debt` FROM `clients` WHERE `client_id` = '$client_id' "))['max_debt'];
-        if ((int)$sum_vg * (int)$out > (int)$max_debt) {
+        if ((int)$sum_vg * (int)$out/100 > (int)$max_debt) {
             json_encode(array("status" => "failed", "error" => "MAX_DEBT_EXCEEDED"));
             return false;
         }
@@ -48,7 +48,7 @@ if (isset($client_id, $user_id)) {
     query("SELECT user_as_owner_id AS 'owner_id', share_percent AS 'value' FROM shares
                   WHERE order_id = '$order_id'"));
     $data = array("client" => $client_id, "user_id" => $user_id, "sum_vg" => $sum_vg,
-        "fiat" => $fiat_id, "vg" => $vg_id, "obtain" => "платежка", "callmaster" => $callmaster,
+        "fiat" => $fiat_id, "vg" => $vg_id, "obtain" => "платежка", "callmaster" => $callmaster, "debtCl"=>(int)$sum_vg * (int)$out/100,
         "shares" => json_encode($shares), "out" => $out, "loginByVg" => $loginByVG);
     $url = "https://" . $_SERVER['SERVER_NAME'] . "/components/modal-response/addOrder.php";
     $curl = curl_init();
