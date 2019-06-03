@@ -454,7 +454,7 @@ function deleteOwner(target) {
     $.ajax({
         url: "../components/delete/owner.php",
         type: "POST",
-        dataType: 'html',
+        dataType: 'json',
         data: {
             owner_id,
         },
@@ -464,7 +464,9 @@ function deleteOwner(target) {
             $('.loader').fadeOut();
             if(res.error){
                 createAlertTable("failed","");
+                return;
             }
+            target.remove();
         },
         error: function () {
 
