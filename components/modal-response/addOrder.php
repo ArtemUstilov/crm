@@ -5,7 +5,7 @@ if (isset($_POST['client']) &&
     isset($_POST['obtain']) &&
     isset($_POST['vg']) &&
     isset($_POST['fiat']) &&
-    isset($_POST['shares'])&&
+    isset($_POST['shares']) &&
     isset($_POST['loginByVg'])) {
 
     include_once("../../db.php");
@@ -25,7 +25,7 @@ if (isset($_POST['client']) &&
     $rollback_sum = $sum_vg / 100 * ($rollback_1);
     $obtain = clean($_POST['obtain']);
 
-    $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'],true);
+    $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'], true);
 
     $debt = $_POST['debtCl'] ? clean($_POST['debtCl']) : 0;
 
@@ -127,6 +127,11 @@ if (isset($_POST['client']) &&
             //"http://nit.tron.net.ua/api/category/list/ttt" - test FAIL
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             $vg_url = strtolower($vg_data['url']);
+            if (!isset($vg_url) || $vg_url == "" || $vg_url == " ") {
+                echo "success";
+                return false;
+            }
+
             if (strpos($vg_url, '%clientlogin%') && strpos($vg_url, '%sum%') && strpos($vg_url, '/api/transfer/?tr=%idtransact%&key=')) {
                 $IDTransact = generateRandomString();
                 $vg_url = str_replace("%sum%", $sum_vg, $vg_url);
