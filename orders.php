@@ -68,6 +68,9 @@ WHERE branch_id = '$branch_id'
 $fiat = $connection -> query("
 SELECT * FROM fiats
 ");
+$owners = $connection -> query("
+SELECT `client_id` FROM `users` WHERE is_owner = 1 AND `branch_id` = '$branch_id'
+");
 $methods_of_obtaining =
     mysqliToArray($connection->
     query("SELECT DISTINCT method_of_obtaining AS 'method'
@@ -75,6 +78,7 @@ $methods_of_obtaining =
 if ($methods_of_obtaining)
     $more_data['methods'] = $methods_of_obtaining;
 $more_data['clients'] = $clients;
+$more_data['owners'] = $owners;
 $more_data['vgs'] = $vgs;
 $more_data['fiat'] = $fiat;
 

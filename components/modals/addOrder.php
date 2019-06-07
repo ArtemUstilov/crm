@@ -2,6 +2,16 @@
 
 function orderAddModal($data, $more_data)
 {
+    if ($more_data) {
+        $i = 0;
+        if ($more_data['owners']) while ($new = $more_data['owners']->fetch_array()) {
+            $copy_of_data[$i] = $new;
+            $i++;
+        }
+    }
+    if (!$copy_of_data) return '<div id="Order-Modal" class="modal" action="" role="form">
+<h2 class="no-payroll-text">Сначало добавьте владельцев</h2>
+</div>';
     $output = '
 <div id="Order-Modal" class="modal" action="" role="form">
 <form id="add-order-form">

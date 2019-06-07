@@ -1,4 +1,5 @@
 <?php
+include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -141,7 +142,8 @@ if (isset($_POST['client']) &&
                 $vg_url = str_replace("%clientlogin%", $login_by_vg, $vg_url);
                 $nMidApi = strpos($vg_data['url'], '/api/');
 
-                $vg_url_4md5 = substr($vg_data['url'], $nMidApi);
+                $vg_url_4md5 = substr($vg_url, $nMidApi);
+                ChromePhp::log("for md5: ", $vg_url_4md5);
                 $md5 = md5($vg_url_4md5 . ":" . $vg_data['key']);
 
                 $vg_url = $vg_url . "&sign=" . $md5;
