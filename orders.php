@@ -69,7 +69,7 @@ $fiat = $connection -> query("
 SELECT * FROM fiats
 ");
 $owners = $connection -> query("
-SELECT `client_id` FROM `users` WHERE is_owner = 1 AND `branch_id` = '$branch_id'
+SELECT `user_id` FROM `users` WHERE is_owner = 1 AND `branch_id` = '$branch_id'
 ");
 $methods_of_obtaining =
     mysqliToArray($connection->
