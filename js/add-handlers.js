@@ -663,7 +663,7 @@ $(document).ready(function () {
                 $.modal.close();
                 setTimeout(function () {
                     location.reload();
-                }, 1500);
+                }, 2500);
                 break;
             case "failed":
                 $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');

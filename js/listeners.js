@@ -28,7 +28,7 @@ $(document).ready(function () {
         $temp.remove();
     }
     $('.genpass').click(function(){
-       const inpt = $(this).parent().find("input");
+        const inpt = $(this).parent().find("input");
         const letters = ['a','v','r','e','N','W','Z','O','T','y'];
         const randomVal = [0,1,1,1,1,1,1,1,1,1,1,1,1,1].map(n=>{
             if(Math.random() > .5)
@@ -36,12 +36,12 @@ $(document).ready(function () {
             else
                 return letters[Math.floor(Math.random()*9 + 1 - n)];
         }).join('');
-       inpt.val(randomVal);
+        inpt.val(randomVal);
     });
     $('.genid').click(function(){
         const inpt = $(this).parent().find("input");
         const randomVal = [0,1,1,1,1,1].map(n=>{
-                return Math.floor(Math.random()*9 + 1 - n);
+            return Math.floor(Math.random()*9 + 1 - n);
         }).join('');
         inpt.val(randomVal);
     });
@@ -115,7 +115,7 @@ $(document).ready(function () {
                 $('.loader').fadeOut('fast');
                 switch (res) {
                     case 'sales':
-                        window.location.href = '../outgo.php';
+                        window.location.href = '../orders.php';
                         break;
                     case "success":
                         window.location.href = '../index.php';
@@ -272,17 +272,17 @@ $(document).ready(function () {
                         if (!data || !data.length) return;
                         const same = (a)=>{
                             let cb = (a, b = data)=> a.toUpperCase().includes(b.toUpperCase());
-                                if(data.includes('<=')){
-                                    cb = (a) => +a <= +data.split('<=')[1];
-                                }else if(data.includes('>=')){
-                                    cb = (a) => +a >= +data.split('>=')[1];
-                                }else if(data.includes('>')){
-                                    cb = (a) => +a > +data.split('>')[1];
-                                }else if(data.includes('<')){
-                                    cb = (a) => +a < +data.split('<')[1];
-                                }else if(data.includes('=')){
-                                    cb = (a) => +a === +data.split('=')[1];
-                                }
+                            if(data.includes('<=')){
+                                cb = (a) => +a <= +data.split('<=')[1];
+                            }else if(data.includes('>=')){
+                                cb = (a) => +a >= +data.split('>=')[1];
+                            }else if(data.includes('>')){
+                                cb = (a) => +a > +data.split('>')[1];
+                            }else if(data.includes('<')){
+                                cb = (a) => +a < +data.split('<')[1];
+                            }else if(data.includes('=')){
+                                cb = (a) => +a === +data.split('=')[1];
+                            }
                             return cb(a);
                         };
                         jo = jo.filter(function checkRows() {

@@ -2,7 +2,7 @@
 function display_data($data, $options, $addition_data = NULL)
 {
     session_start();
-    if(!$options['prepared'])$data = mysqliToArray($data);
+    if (!$options['prepared']) $data = mysqliToArray($data);
     return
         ("
         <div class='table-menu " . $options['type'] . "' " . ($options['range'] ? 'style = "justify-content: left;"' : '') . ">
@@ -15,7 +15,7 @@ function display_data($data, $options, $addition_data = NULL)
             </a></p>
             " : '') .
             ($options['range'] ? "
-            <div id='reportrange".$options['range']."' class='reportrange'>
+            <div id='reportrange" . $options['range'] . "' class='reportrange'>
     <i class='fa fa-calendar'></i>&nbsp;
     <span></span> <i class='fa fa-caret-down'></i>
 </div>
@@ -65,14 +65,14 @@ function makeTable($data, $options)
                 $actions .= ($options['edit'] && iCan($options['edit'])) ? '<i class="fas fa-edit"  modal="' . $options['type'] . '-edit"></i>' : '';
             }
             if ($col == 'статус') {
-                $output .= '<td class=' . $index . '-f title="' . $val . '"><p style="display: none">'.$val.'</p>
+                $output .= '<td class=' . $index . '-f title="' . $val . '"><p style="display: none">' . $val . '</p>
                 <div class="button b2" id="button-10">
                 <input type="checkbox" class="checkbox" ' . ($val == 0 ? 'checked' : '') . '>
                 <div class="knobs"></div>
                 </div>
             </td>';
             } else {
-                if(is_numeric($val))
+                if (is_numeric($val))
                     $val = round($val, 2);
                 $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val === '' || $val === null ? '-' : $val) . '</td>';
             }
@@ -105,7 +105,7 @@ function isClientAuthorized()
 
 function mysqliToArray($mysqli_result)
 {
-    if(!$mysqli_result)
+    if (!$mysqli_result)
         return false;
     $i = 0;
     $data = null;
@@ -135,6 +135,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return debtModal($more_data);
         case "Head":
             return headAddModal($more_data);
+        case "Head-Stats":
+            return headAddModal($more_data) . outgoModal($data, $more_data);
         case "Branch":
             return branchAddModal($data);
         case "Fiat":
@@ -161,15 +163,19 @@ function iCan($actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel();
 }
+
 function iCanMax($actionLvl)
 {
     return is_null($actionLvl) || $actionLvl >= accessLevel();
 }
+
 function heCan($role, $actionLvl)
 {
     return !is_null($actionLvl) && $actionLvl <= accessLevel($role);
 }
-function generateRandomString($length = 40) {
+
+function generateRandomString($length = 40)
+{
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
@@ -178,13 +184,15 @@ function generateRandomString($length = 40) {
     }
     return $randomString;
 }
-function updateBranchMoney($connection, $branch_id, $sum, $fiat){
-    if(count(mysqliToArray($connection->query("SELECT * FROM payments WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id'"  )))){
+
+function updateBranchMoney($connection, $branch_id, $sum, $fiat)
+{
+    if (count(mysqliToArray($connection->query("SELECT * FROM payments WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id'")))) {
         $update_branch_money = $connection->
         query("UPDATE  `payments` 
                                   SET `sum` = `sum` + '$sum'
                                   WHERE `fiat_id` = '$fiat' AND `branch_id` = '$branch_id' ");
-    }else{
+    } else {
         $connection->query("INSERT INTO `payments` 
                                   (fiat_id, sum, branch_id) VALUES($fiat,  $sum,$branch_id )");
     }

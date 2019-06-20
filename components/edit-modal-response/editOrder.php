@@ -166,19 +166,22 @@ if (isset($_POST['order_id']) &&
         }
 
         if ($res) {
-            echo "edit-success";
+            if ($order_data['sum_vg'] != $sum_vg)
+                echo json_encode(array('status' => 'edit-success', 'sumChanged' => true, 'oldSum' => $order_data['sum_vg'], 'newSum' => $sum_vg));
+            else
+                echo json_encode(array('status' => "edit-success"));
             return false;
         } else {
-            echo "failed";
+            echo json_encode(array('status' => "failed"));
             return false;
         }
 
     } else {
-        echo "denied";
+        echo json_encode(array('status' => "denied"));
         return false;
 
     }
 }
-echo "empty";
+echo json_encode(array('status' => "empty"));
 return false;
 

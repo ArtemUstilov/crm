@@ -44,6 +44,7 @@ function editOrder() {
     $.ajax({
         url: "../components/edit-modal-response/editOrder.php",
         type: "POST",
+        dataType: "JSON",
         data: {
             order_id,
             client_id,
@@ -61,7 +62,15 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Заказ");
+            if (!res.sumChanged) {
+                createAlertTable(res.status, "Заказ");
+                return;
+            }
+
+            createAlertTable(res.status, "Заказ");
+            $('#Order-sum-changed-modal .old-sum').text(res.oldSum);
+            $('#Order-sum-changed-modal .new-sum').text(res.newSum);
+            $('#Order-sum-changed-modal').modal();
         },
         error: function () {
             createAlertTable("connectionError", "Заказ");
@@ -73,6 +82,10 @@ function editOrder() {
         }
     });
 }
+
+$('#Order-sum-changed-modal').on($.modal.BEFORE_CLOSE, function (event, modal) {
+    location.reload();
+});
 
 //User
 $.validate({
@@ -342,7 +355,7 @@ function createAlertTable(alertType, text) {
             $.modal.close();
             setTimeout(function () {
                 location.reload();
-            }, 1500);
+            }, 2500);
             break;
         case "success-replenish":
             $('.custom-alert .alert-text-box').text(`Деньги успешно зачислены`);

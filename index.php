@@ -53,7 +53,7 @@ FROM users
 WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 ');
 $data['users'] = $users;
-$options['type'] = 'Head';
+$options['type'] = 'Head-Stats';
 $options['text'] = 'Владельцы';
 $options['range'] = 1;
 $options['coins'] = 1;
