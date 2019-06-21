@@ -67,6 +67,9 @@ $('tr').on('click', (e) => {
         case "Fiat-edit":
             fillFiatEditForm(mainParent);
             break;
+        case "globalVG-edit":
+            fillGlobalVGlInfo(mainParent);
+            break;
         case "info":
             fillAdditionalInfo(mainParent);
             break;
@@ -361,7 +364,31 @@ function fillOwnerEditForm(target) {
         },
     });
 }
+function  fillGlobalVGlInfo(target){
+    $('.loader').show();
+    const vg_id = target.attr('itemid');
+    $.ajax({
+        url: "../components/selectors/globalVg.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            vg_id,
+        },
+        cache: false,
+        success: function (res) {
+            $('#edit-globalVG-title').attr('vg-id', vg_id)
+            $('#edit-globalVGName').val(res['name']);
+            $('#globalVG-edit-Modal').modal();
+            $('.loader').fadeOut('fast');
+        },
+        error: function () {
+            $('.loader').fadeOut('fast');
+        },
+        done: function(){
 
+        }
+    });
+}
 function fillClientEditForm(target) {
     $('.loader').show();
     let client_id = target.attr('itemid');
@@ -462,16 +489,17 @@ function deleteOwner(target) {
         success: function (res) {
             console.log(res);
             $('.loader').fadeOut();
-            if(res.error){
-                createAlertTable("failed","");
+            if (res.error) {
+                createAlertTable("failed", "");
                 return;
             }
             target.remove();
         },
         error: function () {
 
-            createAlertTable("failed","");
+            createAlertTable("failed", "");
             $('.loader').fadeOut();
         },
     });
 }
+

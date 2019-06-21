@@ -333,6 +333,42 @@ function editBranch() {
     });
 }
 
+
+//GlobalVG
+$.validate({
+    form: '#edit-globalVg-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editGlobalVG();
+        return false;
+    }
+});
+
+function editGlobalVG() {
+    $('.loader').show();
+    let name = $("#edit-globalVGName").val();
+    let vg_id = $("#edit-globalVG-title").attr('vg-id');
+    $.ajax({
+        url: "../components/edit-modal-response/editGlobalVg.php",
+        type: "POST",
+        data: {
+            vg_id,
+            name
+        },
+        cache: false,
+        success: function (res) {
+            createAlertTable(res, "VG");
+        },
+        error: function () {
+            createAlertTable("connectionError", "VG");
+        },
+        complete: function () {
+            $('.loader').fadeOut();
+        }
+    });
+}
+
 function createAlertTable(alertType, text) {
     if ($('.custom-alert').hasClass('custom-alert--active'))
         $('.custom-alert').removeClass('custom-alert--active');

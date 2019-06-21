@@ -434,13 +434,8 @@ $(document).ready(function () {
     })();
 
     const vgcl = $('#VG-Modal #nameVgnField');
-    $('#nameVgn').hide();
     vgcl.change(function (e) {
-        if ($('#VG-Modal #nameVgnField').val() == -1) {
-            $('#nameVgn').show();
-        } else {
-            $('#nameVgn').hide();
-        }
+        $('#VG-Modal #nameField').val($('#VG-Modal #nameVgnField option:selected').text());
     });
     $('.main-header .fa-coins').click(function () {
         $('.loader').show();

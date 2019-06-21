@@ -8,8 +8,7 @@ function vgAddModal($data)
   <div class="modal-inputs">
   <p>
   <select id="nameVgnField" data-validation="required">
-  <option value="" disabled selected>Выберите VG</option>
-    <option class="new-vg-option" value="-1">Добавить новый</option>';
+  <option value="" disabled selected>Выберите VG</option>';
     if(isset($data['vgs'])) foreach ($data['vgs'] as $key => $var) {
         $output .= '<option value="' . $var['vg_id'].'">' . $var['name']. '</option>';
     }

@@ -13,6 +13,7 @@ function menu()
           <li><a href="../../users.php" class=' . ($curPage === 'users' ? '"active" disabled' : '') . '>Сотрудники</a></li>
         ' : '').'
         '.(iCan(3) ? '
+         <li><a href="../../globalVG.php" class=' . ($curPage === 'globalVG' ? '"active" disabled' : '') . '>Глобальное VG</a></li>
         <li><a href="../../fiats.php" class=' . ($curPage === 'fiats' ? '"active" disabled' : '') . '>Валюты</a></li>
         <li><a href="../../branches.php" class=' . ($curPage === 'branches' ? '"active" disabled' : '') . '>Предприятия</a></li>
         ' : '').'

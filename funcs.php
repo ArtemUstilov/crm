@@ -141,6 +141,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return branchAddModal($data);
         case "Fiat":
             return fiatAddModal($data);
+        case "globalVG":
+            return globalVgAddModal();
         default:
             return null;
     }

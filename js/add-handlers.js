@@ -527,6 +527,41 @@ $(document).ready(function () {
     }
 
 
+    //GlobalVG
+    $.validate({
+        form: '#add-globalVg-form',
+        modules: '',
+        lang: 'ru',
+        onSuccess: function () {
+            addGlobalVG();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function addGlobalVG() {
+        const name = $("#globalVGName").val();
+        $('.loader').show();
+        $.ajax({
+            url: "../components/modal-response/addGlobalVG.php",
+            type: "POST",
+            data: {name},
+            cache: false,
+            success: function (res) {
+                createAlertTable(res, "VG");
+            },
+            error: function () {
+                createAlertTable("connectionError", "VG");
+            },
+            complete: function () {
+                $('.loader').fadeOut();
+            }
+        });
+
+    }
+
+
     //Payback
 
     $.validate({
