@@ -115,7 +115,7 @@ function mysqliToArray($mysqli_result)
 
 function chooseAddModal($name, $data, $more_data = NULL)
 {
-    foreach (glob("./components/modals/*.php") as $filename) {
+    foreach (glob("../components/modals/*.php") as $filename) {
         include_once $filename;
     }
     switch ($name) {
@@ -133,10 +133,10 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return rollbackModal($more_data);
         case "Debt":
             return debtModal($more_data);
-        case "Head":
-            return headAddModal($more_data);
-        case "Head-Stats":
-            return headAddModal($more_data) . outgoModal($data, $more_data);
+        case "Owner":
+            return ownerAddModal($more_data);
+        case "Owner-Stats":
+            return ownerAddModal($more_data) . outgoModal($data, $more_data);
         case "Branch":
             return branchAddModal($data);
         case "Fiat":

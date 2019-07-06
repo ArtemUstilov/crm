@@ -15,7 +15,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addBranch.php",
+            url: "../api/add/branch.php",
             type: "POST",
             data: {
                 name,
@@ -37,24 +37,24 @@ $(document).ready(function () {
     }
 
 
-    //Head
+    //Owner
 
     $.validate({
-        form: '#add-head-form',
+        form: '#add-owner-form',
         modules: '',
         lang: 'ru',
         onSuccess: function () {
-            addHead();
+            addOwner();
             return false;
         }
     });
 
-    function addHead() {
-        let id = $("#add-head-form #nameField").val();
+    function addOwner() {
+        let id = $("#add-owner-form #nameField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addHead.php",
+            url: "../api/add/owner.php",
             type: "POST",
             data: {
                 user_id: id,
@@ -98,7 +98,7 @@ $(document).ready(function () {
         let client_id = $('#Order-Modal #clientField').val();
         if (!vg_id && !client_id) return;
         $.ajax({
-            url: "../components/selectors/getLoginByVg.php",
+            url: "../api/select/getLoginByVg.php",
             type: "GET",
             dataType: 'json',
             data: {
@@ -150,7 +150,7 @@ $(document).ready(function () {
         $('.loader').show();
 
         $.ajax({
-            url: "../components/modal-response/getVGOwners.php",
+            url: "../api/add/getVGOwners.php",
             type: "POST",
             data: {
                 vg_id, client_id
@@ -223,7 +223,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addOrder.php",
+            url: "../api/add/order.php",
             type: "POST",
             data: {
                 client,
@@ -297,7 +297,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addUser.php",
+            url: "../api/add/user.php",
             type: "POST",
             data: {
                 password: password,
@@ -356,7 +356,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addClient.php",
+            url: "../api/add/client.php",
             type: "POST",
             data: {
                 byname: byname,
@@ -413,7 +413,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addOutgo.php",
+            url: "../api/add/outgo.php",
             type: "POST",
             data: {owner, sum, description: descr, fiat},
             cache: false,
@@ -456,7 +456,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addVG.php",
+            url: "../api/add/vg.php",
             type: "POST",
             data: {
                 name,
@@ -503,7 +503,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/addFiat.php",
+            url: "../api/add/fiat.php",
             type: "POST",
             data: {
                 name,
@@ -544,7 +544,7 @@ $(document).ready(function () {
         const name = $("#globalVGName").val();
         $('.loader').show();
         $.ajax({
-            url: "../components/modal-response/addGlobalVG.php",
+            url: "../api/add/global.php",
             type: "POST",
             data: {name},
             cache: false,
@@ -593,7 +593,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/payRollback.php",
+            url: "../api/add/rollback.php",
             type: "POST",
             data: {
                 id, fiat, number,
@@ -646,7 +646,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../components/modal-response/paybackDebt.php",
+            url: "../api/add/debt.php",
             type: "POST",
             data: {
                 id,

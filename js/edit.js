@@ -32,7 +32,7 @@ $('tr').on('click', (e) => {
             $('#Outgo-Modal').modal();
             const tr = target.parent().parent().attr('itemid');
             const [id, fiat_id] = tr.split('-');
-            $('#Outgo-Modal #sumField').val($(`.Head [itemid='${tr}'] ${'.2-f'}`).attr('title'));
+            $('#Outgo-Modal #sumField').val($(`.Owner [itemid='${tr}'] ${'.2-f'}`).attr('title'));
             $('#Outgo-Modal #ownerField').val(id);
             $('#Outgo-Modal #fiatField').val(fiat_id);
 
@@ -46,7 +46,7 @@ $('tr').on('click', (e) => {
             // input2.attr('max', rollbackSum);
             // input2.attr('min', 0);
             break;
-        case "Head-edit":
+        case "Owner-edit":
             fillOwnerEditForm();
             break;
         case "User-edit":
@@ -87,7 +87,7 @@ function fillAdditionalInfo(target) {
     if ($('#table-wrapper').hasClass('Client')) {
         let client_id = target.attr('itemid');
         $.ajax({
-            url: "../components/selectors/ClientInfo.php",
+            url: "../api/select/clientInfo.php",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -112,7 +112,7 @@ function fillAdditionalInfo(target) {
     } else {
         let order_id = target.attr('itemid');
         $.ajax({
-            url: "../components/selectors/OrderInfo.php",
+            url: "../api/select/orderInfo.php",
             type: "POST",
             dataType: 'JSON',
             data: {
@@ -143,7 +143,7 @@ function fillOrderEditForm(target) {
     $('.loader').show();
     let order_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/Order.php",
+        url: "../api/select/order.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -207,7 +207,7 @@ function fillOwnerEditForm(target) {
     $('.loader').show();
     let owner_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/User.php",
+        url: "../api/select/user.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -223,7 +223,7 @@ function fillOwnerEditForm(target) {
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
             $('.loader').fadeOut('fast');
-            $('#Head-edit-Modal').modal();
+            $('#Owner-edit-Modal').modal();
 
         },
         error: function () {
@@ -235,7 +235,7 @@ function fillFiatEditForm(target) {
     $('.loader').show();
     let fiat = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/Fiat.php",
+        url: "../api/select/fiat.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -264,7 +264,7 @@ function fillUserEditForm(target) {
     $('.loader').show();
     let user_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/User.php",
+        url: "../api/select/user.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -291,7 +291,7 @@ function fillBranchEditForm(target) {
     $('.loader').show();
     let branch_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/Branch.php",
+        url: "../api/select/branch.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -314,7 +314,7 @@ function fillVGEditForm(target) {
     $('.loader').show();
     let vg_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/VG.php",
+        url: "../api/select/vg.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -341,7 +341,7 @@ function fillOwnerEditForm(target) {
     $('.loader').show();
     let owner_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/Head.php",
+        url: "../api/select/owner.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -356,7 +356,7 @@ function fillOwnerEditForm(target) {
             $('#edit-vg-form #editInField').val(res['in']);
             $('#edit-vg-form #editUrlField').val(res['url']);
             $('.loader').fadeOut('fast');
-            $('#Head-edit-Modal').modal();
+            $('#Owner-edit-Modal').modal();
 
 
         },
@@ -368,7 +368,7 @@ function  fillGlobalVGlInfo(target){
     $('.loader').show();
     const vg_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/globalVg.php",
+        url: "../api/select/global.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -393,7 +393,7 @@ function fillClientEditForm(target) {
     $('.loader').show();
     let client_id = target.attr('itemid');
     $.ajax({
-        url: "../components/selectors/Client.php",
+        url: "../api/select/сlient.php",
         type: "POST",
         dataType: 'JSON',
         data: {
@@ -428,7 +428,7 @@ $('a[href="#Order-Modal"]').click(function (e) {
     e.preventDefault();
     e.stopPropagation();
     $.ajax({
-        url: "../components/selectors/Branch.php",
+        url: "../api/select/branch.php",
         type: "POST",
         dataType: 'JSON',
         data: "req=ok",
@@ -456,7 +456,7 @@ $('#Order-Modal').on($.modal.CLOSE, function () {
 
 function checkUserData() {
     $.ajax({
-        url: "../components/auth/activityCheck.php",
+        url: "../api/auth/activityCheck.php",
         type: "POST",
         data: "req=ok",
         cache: false,
@@ -479,7 +479,7 @@ function deleteOwner(target) {
     $('.loader').show();
     const owner_id = target.attr('itemid');
     $.ajax({
-        url: "../components/delete/owner.php",
+        url: "../api/delete/owner.php",
         type: "POST",
         dataType: 'json',
         data: {
