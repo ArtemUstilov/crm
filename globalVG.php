@@ -19,18 +19,16 @@ $options2['btn-text'] = 'Добавить';
 session_start();
 
 
-$data['vgs'] = $connection->query("
-    SELECT * FROM virtualgood
-");
+
 echo template(display_data($connection->query('
 SELECT VG.vg_id AS `id`, VG.vg_id AS `Уникальный id`, VG.name AS `название`
 FROM `virtualgood` VG 
-'), $options, $data) . display_data($connection->query('
+'), $options, '') . display_data($connection->query('
 SELECT VG.vg_id AS `id`, VG.name AS `название`, B.branch_name AS `предприятие`, COUNT(`vg_data_id`) AS `количество`,
 ROUND((SUM(`in_percent`) / COUNT(`in_percent`)),2) AS `средний in %`, ROUND((SUM(`out_percent`) / COUNT(`out_percent`)),2) AS `средний out %`
 FROM `virtualgood` VG 
 INNER JOIN `vg_data` VD ON VG.vg_id = VD.vg_id 
 INNER JOIN `branch` B ON VD.branch_id = B.branch_id 
 GROUP BY VG.vg_id, VG.name, B.branch_name
-'), $options2, $data));
+'), $options2, ''));
 

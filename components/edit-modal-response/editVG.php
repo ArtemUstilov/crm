@@ -18,6 +18,7 @@ if (isset($_POST['name']) && isset($_POST['in_percent']) && isset($_POST['out_pe
         query("
         UPDATE `vg_data`
         SET
+         `name`='$name',
             `out_percent`='$out',
             `in_percent`='$in',
             `api_url_regexp`='$url',
