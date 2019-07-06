@@ -9,8 +9,8 @@ function vgAddModal($data)
   <p>
   <select id="nameVgnField" data-validation="required">
   <option value="" disabled selected>Выберите VG</option>';
-    if(isset($data['vgs'])) foreach ($data['vgs'] as $key => $var) {
-        $output .= '<option value="' . $var['vg_id'].'">' . $var['name']. '</option>';
+    if (isset($data['vgs'])) foreach ($data['vgs'] as $key => $var) {
+        $output .= '<option value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
     }
     $output .= '
 </select>
@@ -36,7 +36,14 @@ function vgAddModal($data)
 </div>';
     session_start();
     if (iCan(2))
-        $output .= '
+        $output .= vgEditModal();
+
+    return $output;
+}
+
+function vgEditModal()
+{
+    return '
 <div id="VG-edit-Modal" class="modal" action="" role="form">
 <form id="edit-vg-form">
   <h2 class="modal-title" id="edit-vg-title">Редактировать валюту</h2>
@@ -60,6 +67,4 @@ function vgAddModal($data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-
-    return $output;
 }

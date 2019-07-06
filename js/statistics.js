@@ -143,7 +143,7 @@ $(document).ready(function () {
     );
     let weeks = [manually].concat([0, 1, 2].map(off => toDate([moment().add(-off, 'weeks').day("Sunday"), moment().add(-off, 'weeks').day('Saturday')])));
     $.ajax({
-        url: "../components/selectors/statistics.php",
+        url: "../api/select/statistics.php",
         type: "POST",
         data: {years: [curYear, lastYear, all], weeks, months},
         cache: false,
@@ -223,7 +223,7 @@ $(document).ready(function () {
             $('#reportrange1 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
             // $('.loader').show();
             $.ajax({
-                url: "../components/selectors/userStat.php",
+                url: "../api/select/userStat.php",
                 type: "POST",
                 data: {start: start.format(FORMATTER) + START, end: end.format(FORMATTER) + END},
                 cache: false,
@@ -249,7 +249,7 @@ $(document).ready(function () {
             $('#reportrange2 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
             // $('.loader').show();
             $.ajax({
-                url: "../components/selectors/userStat.php",
+                url: "../api/select/userStat.php",
                 type: "POST",
                 data: {start: start.format(FORMATTER) + START, end: end.format(FORMATTER) + END, type: 2},
                 cache: false,
@@ -299,7 +299,7 @@ $(document).ready(function () {
             $('#reportrange3 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
             // $('.loader').show();
             $.ajax({
-                url: "../components/selectors/userStat.php",
+                url: "../api/select/userStat.php",
                 type: "POST",
                 data: {start: start.format(FORMATTER) + START, end: end.format(FORMATTER) + END, type: 3},
                 cache: false,
@@ -336,7 +336,7 @@ $(document).ready(function () {
     if (!window.location.pathname.includes('turnover')) return;
     $('.loader').show();
     $.ajax({
-        url: "../components/selectors/turnover.php",
+        url: "../api/select/turnover.php",
         type: "POST",
         cache: false,
         success: function (res) {

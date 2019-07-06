@@ -1,5 +1,5 @@
 <?php
-function headAddModal($data)
+function ownerAddModal($data)
 {
     if ($data) {
         $i = 0;
@@ -13,13 +13,13 @@ function headAddModal($data)
             $i++;
         }
     }
-    if (!$branches) return '<div id="Head-Modal" class="modal" action="">
+    if (!$branches) return '<div id="Owner-Modal" class="modal" action="">
 <h2 class="no-payroll-text">Сначала добавьте предприятие!</h2>
 </div>';
 
     $output = '
-<div id="Head-Modal" class="modal" action="" role="form">
-<form id="add-head-form">
+<div id="Owner-Modal" class="modal" action="" role="form">
+<form id="add-owner-form">
   <h2 class="modal-title">Добавить владельца</h2>
   <div class="modal-inputs">
   <p>

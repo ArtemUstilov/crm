@@ -1,7 +1,6 @@
 <?php
 function fiatAddModal($data)
 {
-    $vgs = $data['vgs'];
     $output = '
 <div id="Fiat-Modal" class="modal" action="" role="form">
 <form id="add-fiat-form">
@@ -21,7 +20,13 @@ function fiatAddModal($data)
   <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
-        $output .= '
+    $output .= fiatEditModal();
+    return $output;
+}
+
+function fiatEditModal()
+{
+return '
 <div id="Fiat-edit-Modal" class="modal" action="" role="form">
 <form id="edit-fiat-form">
   <h2 class="modal-title" id="edit-fiat-title">Редактировать валюту</h2>
@@ -43,6 +48,4 @@ function fiatAddModal($data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-
-    return $output;
 }

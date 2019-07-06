@@ -1,14 +1,14 @@
 <?php
-include_once('funcs.php');
+include_once 'funcs.php';
 if (!isAuthorized()) header("Location: ./login.php");
-include_once './components/static/template.php';
+include_once './components/templates/template.php';
 include_once './db.php';
 $table = '';
 $branch_id = $_SESSION['branch_id'];
 $user_id = $_SESSION['id'];
 
 
-$headSumsRaw = $connection->query('
+$ownerSumsRaw = $connection->query('
 SELECT concat(U.user_id,"-", F.fiat_id) AS `id`, concat(U.last_name, " ", U.first_name) AS "имя", IFNULL(SUM(RR.sum), 0) AS `прибыль`, IFNULL(SUM(RR.sum), 0) + IFNULL(SUM(IH.sum), 0) - IFNULL(UT.sum, 0) AS `остаток`, F.full_name AS `валюта`
 FROM users U
 JOIN fiats F
@@ -53,14 +53,12 @@ FROM users
 WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 ');
 $data['users'] = $users;
-$options['type'] = 'Head-Stats';
+$options['type'] = 'Owner-Stats';
 $options['text'] = 'Владельцы';
 $options['range'] = 1;
 $options['coins'] = 1;
 $options['modal'] = 'Outgo-modal';
-$table .= display_data($headSumsRaw, $options, $data);
-//$headSums = $headSumsRaw ? mysqli_fetch_assoc($headSumsRaw) : null;
-//if($headSums) $table .= '<h2>Head1: '.($headSums["sum1"] ? $headSums["sum1"] : 0).' грн</h2><h2> Head2: '.($headSums["sum2"] ? $headSums["sum2"] : 0).' грн</h2>';
+$table .= display_data($ownerSumsRaw, $options, $data);
 $options = [];
 
 switch (accessLevel()) {

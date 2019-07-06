@@ -58,8 +58,14 @@ function clientAddModal($data)
   <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>';
-    session_start();
-    $output .= '
+    $output .= clientEditModal();
+    $output .= clientInfoModal();
+    return $output;
+}
+
+function clientEditModal()
+{
+    return '
 <div id="Client-edit-Modal" class="modal" action="" role="form">
 <form id="edit-client-form">
   <h2 class="modal-title" id="edit-client-title">Изменить данные клиента</h2>
@@ -117,7 +123,11 @@ function clientAddModal($data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-    $output .= '<a href="#Client-info-modal" rel="modal:open" style="display: none"></a>
+}
+
+function clientInfoModal()
+{
+    return '<a href="#Client-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Client-info-modal" class="modal" style="width: auto; text-align:center">
 <div id="info-client-form">
   <h2 class="modal-title">Иноформация про клиента</h2>
@@ -125,5 +135,4 @@ function clientAddModal($data)
   </div>
   </div>
 </div>';
-    return $output;
 }

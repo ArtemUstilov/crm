@@ -8,7 +8,7 @@ $user_id = $_SESSION['id'];
 $start = clean($_POST['start']);
 $end = clean($_POST['end']);
 
-$headSumsRaw = $connection->query("
+$ownerSumsRaw = $connection->query("
 SELECT concat(U.user_id, '-', F.fiat_id) AS `id`, IFNULL(SUM(S.sum), 0) AS `sum`, IFNULL(S.fiat_id, F.fiat_id) AS `fiat_id`
 FROM users U
 JOIN fiats F
@@ -22,4 +22,4 @@ WHERE U.is_owner = 1 AND U.branch_id = '.$branch_id.'
 GROUP BY U.user_id, IFNULL(S.fiat_id, F.fiat_id)
 ");
 
-echo json_encode(mysqliToArray($headSumsRaw));
+echo json_encode(mysqliToArray($ownerSumsRaw));

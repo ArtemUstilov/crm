@@ -42,7 +42,7 @@ function editOrder() {
     const $this = $("#edit-order-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editOrder.php",
+        url: "../api/edit/order.php",
         type: "POST",
         dataType: "JSON",
         data: {
@@ -112,7 +112,7 @@ function editUser() {
     const $this = $("#edit-user-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editUser.php",
+        url: "../api/edit/user.php",
         type: "POST",
         data: {
             password,
@@ -170,7 +170,7 @@ function editClient() {
     let max_debt = $("#edit-client-form #editMaxDebtField").val();
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editClient.php",
+        url: "../api/edit/client.php",
         type: "POST",
         data: {
             description,
@@ -224,7 +224,7 @@ function editVG() {
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editVG.php",
+        url: "../api/edit/vg.php",
         type: "POST",
         data: {
             name,
@@ -269,7 +269,7 @@ function editFiat() {
     const $this = $("#edit-fiat-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editFiat.php",
+        url: "../api/edit/fiat.php",
         type: "POST",
         data: {
             name,
@@ -311,7 +311,7 @@ function editBranch() {
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editBranch.php",
+        url: "../api/edit/branch.php",
         type: "POST",
         data: {
             name,
@@ -350,7 +350,7 @@ function editGlobalVG() {
     let name = $("#edit-globalVGName").val();
     let vg_id = $("#edit-globalVG-title").attr('vg-id');
     $.ajax({
-        url: "../components/edit-modal-response/editGlobalVg.php",
+        url: "../api/edit/editGlobalVg.php",
         type: "POST",
         data: {
             vg_id,

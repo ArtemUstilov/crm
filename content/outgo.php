@@ -1,8 +1,8 @@
 <?php
-include_once './funcs.php';
-if (!isAuthorized()) header("Location: ./login.php");
-include_once './components/static/template.php';
-include_once './db.php';
+include_once '../funcs.php';
+if (!isAuthorized()) header("Location: ../login.php");
+include_once '../components/templates/template.php';
+include_once '../db.php';
 session_start();
 $branch_name = $_SESSION['branch'];
 $branch_id = $_SESSION['branch_id'];

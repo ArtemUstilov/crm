@@ -83,11 +83,11 @@ function orderAddModal($data, $more_data)
   <select id="obtainingField" data-validation="required">;
     <option selected disabled >Выберите способ</option>
   <option value="add-new-method-of-obtaining" class="new-method-option" >Добавить новый</option>';
-    if(isset($more_data['methods']))
+    if (isset($more_data['methods']))
         foreach ($more_data['methods'] as $key => $var) {
             $output .= '<option value="' . $var["method"] . '"selected>' . $var["method"] . '</option>';
         }
-    $output .='
+    $output .= '
   </select>
   </p>
    </div><div id="owners-lists-container"></div>
@@ -103,7 +103,18 @@ function orderAddModal($data, $more_data)
     //edit modal
     session_start();
     if (iCan(2)) {
-        $output .= '
+        $output .= orderEditModal($more_data);
+    }
+    $output .= orderInfoModal();
+    $output .= orderTransactionInfoModal();
+    $output .= orderSumChangedModal();
+    $output .= noOrderOwnersModal();
+    return $output;
+}
+
+function orderEditModal($more_data)
+{
+    $output = '
 <div id="Order-edit-Modal" class="modal" action="" role="form">
 <form id="edit-order-form">
   <h2 class="modal-title" id="edit-order-title">Редактировать данные продажи</h2>
@@ -113,28 +124,28 @@ function orderAddModal($data, $more_data)
 <select id="editClientField" data-validation="required">
   <option value="" disabled>Выберите клиента</option>
   <option class="new-client-option" value="-1">Добавить нового</option>';
-        foreach ($more_data['clients'] as $key => $var) {
-            $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
-        }
-        $output .= '
+    foreach ($more_data['clients'] as $key => $var) {
+        $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
+    }
+    $output .= '
   </select>
 </p>
 <p>
 ВГ
 <select id="editVgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-        foreach ($more_data['vgs'] as $key => $var) {
-            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
-        }
-        $output .= '
+    foreach ($more_data['vgs'] as $key => $var) {
+        $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+    }
+    $output .= '
 </select>
 </p>
 <p>
 Валюта
 <select id="editFiatField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-        foreach ($more_data['fiat'] as $key => $var) {
-            $output .= '<option value="' . $var["fiat_id"] . '">' . $var['full_name'] . '</option>';
-        }
-        $output .= '
+    foreach ($more_data['fiat'] as $key => $var) {
+        $output .= '<option value="' . $var["fiat_id"] . '">' . $var['full_name'] . '</option>';
+    }
+    $output .= '
 </select>
 </p>
   <p>
@@ -149,10 +160,10 @@ function orderAddModal($data, $more_data)
   Реферал
 <select id="editCallmasterField">
   <option value="" selected>Выберите реферала(опц)</option>';
-        foreach ($more_data['clients'] as $key => $var) {
-            $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
-        }
-        $output .= '
+    foreach ($more_data['clients'] as $key => $var) {
+        $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
+    }
+    $output .= '
   </select>
 </p>
  <p>
@@ -172,11 +183,11 @@ function orderAddModal($data, $more_data)
   <select id="editObtainingField" data-validation="required">
     <option value="" disabled selected>Выберите способ</option>;
   <option value="add-new-method-of-obtaining" class="new-method-option">Добавить новый</option>';
-        if(isset($more_data['methods']))
-            foreach ($more_data['methods'] as $key => $var) {
-                $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
-            }
-        $output .='
+    if (isset($more_data['methods']))
+        foreach ($more_data['methods'] as $key => $var) {
+            $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
+        }
+    $output .= '
   </select>
   </p>
   
@@ -188,8 +199,12 @@ function orderAddModal($data, $more_data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-    }
-    $output .= '<a href="#Order-info-modal" rel="modal:open" style="display: none"></a>
+    return $output;
+}
+
+function orderInfoModal()
+{
+    return '<a href="#Order-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-info-modal" class="modal">
 <div id="info-order-form">
   <h2 class="modal-title">Иноформация про продажу</h2>
@@ -197,7 +212,11 @@ function orderAddModal($data, $more_data)
   </div>
   </div>
 </div>';
-    $output .= '<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
+}
+
+function orderTransactionInfoModal()
+{
+    return '<a href="#Order-transaction-info-modal" rel="modal:open" style="display: none"></a>
 <div id="Order-transaction-info-modal" class="modal">
  <h2>Выполните вручную!</h2>
  <div class="error-url-box">
@@ -205,16 +224,22 @@ function orderAddModal($data, $more_data)
 </div>
  <button id="copy-btn">Копировать</button>
 </div>';
-    $output .= '
-<div id="Order-sum-changed-modal" class="modal">
+}
+
+function orderSumChangedModal()
+{
+    return '<div id="Order-sum-changed-modal" class="modal">
  <h3>Выполните транзакцию вручную</h3>
  <div class="sum-change-box">
  <div><span>Было: </span><span class="old-sum"></span></div>
  <div><span>Текущая сумма: </span><span class="new-sum">saddas</span></div>
 </div>
 </div>';
-    $output .= '<div id="noOwners-Modal" class="modal" action="">
+}
+
+function noOrderOwnersModal()
+{
+    return '<div id="noOwners-Modal" class="modal" action="">
 <h2 class="no-owners-text">Для создания продажи требуется наличие валедльцев!</h2>
 </div>';
-    return $output;
 }

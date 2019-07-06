@@ -2,7 +2,7 @@
 
 function branchAddModal($data)
 {
-$output = '
+    $output = '
 <div id="Branch-Modal" class="modal" action="" role="form">
     <form id="add-branch-form">
         <h2 class="modal-title">Добавить предприятие</h2>
@@ -19,7 +19,14 @@ $output = '
 ';
     session_start();
     if (iCan(2))
-        $output .= '
+        $output .= branchEditModal();
+    return $output;
+}
+
+
+function branchEditModal()
+{
+    return '
 <div id="Branch-edit-Modal" class="modal" action="" role="form">
     <form id="edit-branch-form">
         <h2 class="modal-title" id="edit-branch-title">Редактирова данные предприятия</h2>
@@ -32,5 +39,4 @@ $output = '
             <input class="modal-submit" type="submit" value="Сохранить">
     </form>
 </div>';
-return $output;
 }

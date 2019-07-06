@@ -50,7 +50,7 @@ if (isset($client_id, $user_id)) {
     $data = array("client" => $client_id, "user_id" => $user_id, "sum_vg" => $sum_vg,
         "fiat" => $fiat_id, "vg" => $vg_id, "obtain" => "платежка", "callmaster" => $callmaster, "debtCl"=>(int)$sum_vg * (int)$out/100,
         "shares" => json_encode($shares), "out" => $out, "loginByVg" => $loginByVG);
-    $url = "https://" . $_SERVER['SERVER_NAME'] . "/components/modal-response/addOrder.php";
+    $url = "https://" . $_SERVER['SERVER_NAME'] . "/api/add/order.php";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_POST, true);

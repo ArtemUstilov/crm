@@ -1,8 +1,8 @@
 <?php
-include_once './funcs.php';
-if (!isAuthorized()) header("Location: ./login.php");
-include_once './components/static/template.php';
-include_once './db.php';
+include_once '../funcs.php';
+if (!isAuthorized()) header("Location: ../login.php");
+include_once '../components/templates/template.php';
+include_once '../db.php';
 
 $users = $connection->query('
 SELECT *
@@ -41,7 +41,7 @@ WHERE branch_id = '.$_SESSION['branch_id'].'
 $data['branches'] = $branches;
 $data['users'] = $users;
 $options['minus'] = true;
-$options['type'] = 'Head';
+$options['type'] = 'Owner';
 $options['text'] = 'Владельцы';
 $options['btn-text'] = 'Добавить';
 $options['btn'] = 2;

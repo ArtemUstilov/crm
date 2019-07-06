@@ -1,6 +1,4 @@
 <?php
-include_once './components/static/menu.php';
-
 function template($body)
 {
 
@@ -19,7 +17,7 @@ function template($body)
 <input class="modal-submit" type="submit" value="Перейти">
 </form>
 </div>
-<script src="./js/changeBranch.js"></script>';
+<script src="../js/changeBranch.js"></script>';
             $userIcon = 'user-shield';
             break;
         case 2:
@@ -31,7 +29,7 @@ function template($body)
             $userIcon = 'user';
     }
     $add_money_btn = '<div  id="replenish-fiat-btn">Внести деньги</div>';
-    $add_money_script = '<script src="./js/replenishFiat.js"></script>';
+    $add_money_script = '<script src="../js/replenishFiat.js"></script>';
     $add_money_form = '
 <div id="replenish-fiat-Modal" class="modal">
  <form id="replenish-fiat-form">
@@ -61,7 +59,7 @@ function template($body)
     </form>
 </div>';
 
-    return (
+    $output =
         '<html>
 <head>
     <title>gCRM</title>
@@ -100,26 +98,28 @@ function template($body)
 <div id="logout" class="account-name-menu-btn-box">
 <i class="fas fa-' . $userIcon . ' fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
-<a  href="./components/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+<a  href="./api/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
 </div>
 <div id="Branch-money-info-modal" class="modal">
 <div class="fiats"></div>
 ' . $add_money_btn . '
 </div>
-<div class="main-wrapper">
-' . menu() . '
-<div class="loader"><div class="spinner"></div></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
+<div class="main-wrapper">';
+    ob_start();
+    include 'menu.php';
+    $output .= ob_get_clean();
+    $output .= '<div class="loader"><div class="spinner"></div></div><div id="wrapper">' . ($body ? $body : '<h1>NO INFO ABOUT CURRENT PAGE</h1>') . '</div>
 </div>
 ' . $add_money_form . '
 ' . $changeBranch . '
-<script src="./js/add-handlers.js"></script>
-<script src="./js/edit-handlers.js"></script>
-<script src="./js/edit.js"></script>
-<script src="./js/listeners.js"></script>
-<script src="./js/statistics.js"></script>
+<script src="../js/add-handlers.js"></script>
+<script src="../js/edit-handlers.js"></script>
+<script src="../js/edit.js"></script>
+<script src="../js/listeners.js"></script>
+<script src="../js/statistics.js"></script>
 ' . $add_money_script . '
 </body>
-</html>'
-    );
+</html>';
+    return $output;
 }

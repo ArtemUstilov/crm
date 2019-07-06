@@ -59,7 +59,13 @@ function userAddModal($data, $more_data)
 </div>';
     session_start();
     if (iCan(2)) {
-        $output .= '
+        $output .= userEditModal($more_data);
+    }
+    return $output;
+}
+function userEditModal($more_data)
+{
+    $output = '
 <div id="User-edit-Modal" class="modal" action="" role="form">
 <form id="edit-user-form">
   <h2 class="modal-title" id="edit-user-title">Изменить данные пользователя</h2>
@@ -80,25 +86,25 @@ function userAddModal($data, $more_data)
   Деньги
   <input id="editMoneyField"    step="0.01" placeholder="Деньги" type="number" name="money">
   </p>';
-        $i = 0;
-        foreach ($more_data as $key => $var) {
-            $i++;
-        }
-        if ($i > 1) {
-            $output .= '<p>
+    $i = 0;
+    foreach ($more_data as $key => $var) {
+        $i++;
+    }
+    if ($i > 1) {
+        $output .= '<p>
   Отдел
                   <select id="editBranchField" data-validation="required">
   <option value="" disabled selected>Выберите отдел</option>';
-            foreach ($more_data as $key => $var) {
-                $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
-            }
-            $output .= '
+        foreach ($more_data as $key => $var) {
+            $output .= '<option value="' . $var["branch_id"] . '">' . $var["branch_name"] . '</option>';
+        }
+        $output .= '
 </select>
 </p>';
-        }
+    }
 
-        session_start();
-        $output .= '
+    session_start();
+    $output .= '
   <p>
   Должность
   <select id="editRoleField" data-validation="required">
@@ -108,7 +114,7 @@ function userAddModal($data, $more_data)
     ' . (iCan(3) ? '<option value="moder">Модератор</option>' : '') . '
     </select>
   </p>';
-        $output .= '
+    $output .= '
 <p>
 Пароль
   <input id="editPassField" autocomplete="new-password" name="pass_confirmation" type="password"  data-validation-length="min3" placeholder="Пароль (только англ)">
@@ -130,6 +136,5 @@ function userAddModal($data, $more_data)
   <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
-    }
     return $output;
 }

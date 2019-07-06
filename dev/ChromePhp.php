@@ -296,7 +296,7 @@ class ChromePhp
      */
     protected function _getPropertyKey(ReflectionProperty $property)
     {
-        $static = $property->isStatic() ? ' static' : '';
+        $static = $property->isStatic() ? ' components' : '';
         if ($property->isPublic()) {
             return 'public' . $static . ' ' . $property->getName();
         }
