@@ -600,7 +600,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Откат");
+                createAlertTable(res.status || res.error, "Откат");
             },
             error: function () {
                 createAlertTable("connectionError", "Откат");
@@ -656,7 +656,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Погашение");
+                createAlertTable(res.status || res.error, "Погашение");
             },
             error: function () {
                 createAlertTable("connectionError", "Погашение");

@@ -68,7 +68,7 @@ $(document).ready(function () {
         const owner = ownerfield.val() ? ownerfield.val() : 0;
 
         $.ajax({
-            url: "../api/add/fiat.php",
+            url: "../api/operate/fiat.php",
             type: "POST",
             method: "POST",
             data: {
@@ -78,10 +78,10 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                if (res == 'success-replenish') {
+                if (res.status === 'success-replenish') {
                     createAlertTable(res);
                 } else {
-                    createAlertTable();
+                    createAlertTable(res.error);
                 }
                 $('.loader').fadeOut('fast');
             },

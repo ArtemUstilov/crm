@@ -14,18 +14,18 @@ if (isset($_POST['branch_id'])) {
         if ($res) {
             $_SESSION['branch'] = $branch_name;
             $_SESSION['branch_id'] = $branch_id;
-            echo "change-success";
+            echo json_encode(array("status" => "change-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     } else {
-        echo "denied";
+        error("denied");
         return false;
 
     }
 }
-echo "empty";
+error("empty");
 return false;
