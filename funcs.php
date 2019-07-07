@@ -220,6 +220,24 @@ function error($errorType)
     return false;
 }
 
+function display_tree_table(){
+    $output = '<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
+ <div id="types-wrapper">
+ <h2>Типы расходов</h2>
+ <table>
+ <thead>
+ <th>Название</th>
+ <th>Статус</th>
+</thead>
+</table>
+        <ul id="types-list">
+
+            </ul>
+        </div>
+        </div>';
+    return $output;
+}
+
 function getOutGoTypes($connection)
 {
     $HALLS = "../../../../../halls/";
@@ -293,8 +311,6 @@ function children_list($node, $types)
     array_push($next, $node);
     return $next;
 }
-
-
 
 
 

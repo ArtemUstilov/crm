@@ -33,6 +33,8 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
                class=' <?php ($curPage === 'referals' ? '"active" disabled' : '') ?>'>Рефералы</a></li>
         <li><a href="../../content/debts.php" class=' <?php echo ($curPage === ' debts' ? '"active" disabled' : '') ?>'>Должники</a>
         </li>
+        <li><a href="../../content/types.php"
+               class=' <?php echo ($curPage === 'types' ? '"active" disabled' : '') ?>'>Типы расходов</a></li>
         <li><a href="../../content/statistics.php"
                class=' <?php echo ($curPage === 'statistics' ? '"active" disabled' : '') ?>'>Статистика</a></li>
         <li><a href="../../content/turnover.php"
