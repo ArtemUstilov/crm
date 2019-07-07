@@ -20,9 +20,14 @@ $(document).ready(function () {
             data: {
                 name,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Предприятие");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Предприятие");
             },
             error: function () {
                 createAlertTable("connectionError", "Предприятие");
@@ -60,9 +65,14 @@ $(document).ready(function () {
             data: {
                 user_id: id,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Владелец");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Владелец");
             },
             error: function () {
                 createAlertTable("connectionError", "Владелец");
@@ -117,7 +127,6 @@ $(document).ready(function () {
                     $('#Order-Modal #loginByVgField').val(res.loginByVg);
                 else
                     $('#Order-Modal #loginByVgField').val("");
-                console.log("fiat: ", res.fiat_id);
                 if (res.fiat_id && parseInt(res.fiat_id) > 0) {
                     $('#Order-Modal #fiatField').val(res.fiat_id);
                 } else {
@@ -157,11 +166,16 @@ $(document).ready(function () {
             data: {
                 vg_id, client_id
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
                 const container = $('#owners-lists-container');
                 container.empty();
-                container.append(res);
+                container.append(res.data || "");
             },
             error: function () {
             },
@@ -241,10 +255,14 @@ $(document).ready(function () {
                 fiat,
                 loginByVg,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
                 try {
-                    res = JSON.parse(res);
+                    if(res.error){
+                        createAlertTable(res.error);
+                        return;
+                    }
                     if (res['success'] == false) {
                         createAlertTable('success', "Заказ");
                         $('#Order-transaction-info-modal #error-url').text(res['url']).attr('href', res['url']);
@@ -311,9 +329,14 @@ $(document).ready(function () {
                 role: role,
                 telegram,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Пользователь");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Пользователь");
             },
             error: function () {
                 createAlertTable("connectionError", "Пользователь");
@@ -372,9 +395,14 @@ $(document).ready(function () {
                 email: email,
                 telegram: telegram, password, pay_in_debt, pay_page, payment_system, max_debt
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                if (res.includes('success')) {
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                if (res.status.includes("success")) {
                     const opt = document.createElement('option');
                     opt.value = res.substr(7);
                     opt.innerText = first_name + ' ' + last_name;
@@ -426,9 +454,14 @@ $(document).ready(function () {
             url: "../api/add/outgo.php",
             type: "POST",
             data: {owner, sum, description: descr, fiat},
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Расход");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Расход");
             },
             error: function () {
                 createAlertTable("connectionError", "Расход");
@@ -478,9 +511,14 @@ $(document).ready(function () {
                 url,
                 key,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "VG");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "VG");
             },
             error: function () {
                 createAlertTable("connectionError", "VG");
@@ -523,9 +561,14 @@ $(document).ready(function () {
                 full_name,
                 code,
             },
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Fiat");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Fiat");
             },
             error: function () {
                 createAlertTable("connectionError", "Fiat");
@@ -562,9 +605,14 @@ $(document).ready(function () {
             url: "../api/add/global.php",
             type: "POST",
             data: {name},
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                createAlertTable(res, "VG");
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "VG");
             },
             error: function () {
                 createAlertTable("connectionError", "VG");

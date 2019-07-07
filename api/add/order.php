@@ -1,5 +1,4 @@
 <?php
-include_once '../../dev/ChromePhp.php';
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -130,7 +129,7 @@ if (isset($_POST['client']) &&
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             $vg_url = strtolower($vg_data['url']);
             if (!isset($vg_url) || $vg_url == "" || $vg_url == " ") {
-                echo "success";
+                json_encode(array("status"=>"success"));
                 return false;
             }
 
@@ -143,7 +142,6 @@ if (isset($_POST['client']) &&
                 $nMidApi = strpos($vg_data['url'], '/api/');
 
                 $vg_url_4md5 = substr($vg_url, $nMidApi);
-                ChromePhp::log("for md5: ", $vg_url_4md5);
                 $md5 = md5($vg_url_4md5 . ":" . $vg_data['key']);
 
                 $vg_url = $vg_url . "&sign=" . $md5;
@@ -162,27 +160,29 @@ if (isset($_POST['client']) &&
 
                 if ($result->{'success'} == false) {
                     $result->{'url'} = $vg_url;
+                    $result->{'status'} = "success";
                     echo json_encode($result);
                     return false;
                 }
             } catch (Exception $e) {
                 $response['url'] = $vg_url;
                 $response['success'] = false;
+                $response['status'] = "success";
                 echo json_encode($response);
                 return false;
             }
 
             restore_error_handler();
-            echo "success";
+            json_encode(array("status"=>"success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }
