@@ -7,7 +7,7 @@ if (isset($_POST['name'])) {
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $exists = mysqliToArray($connection->query("SELECT * FROM virtualgood WHERE `name` = '$name'"));
     if ($exists) {
-        echo "exists";
+        error("exists");
         return false;
     }
     if (heCan($user_data['role'], 3)) {
@@ -15,15 +15,15 @@ if (isset($_POST['name'])) {
         query("
                 INSERT INTO virtualgood (`name`) VALUES('$name') ");
         if ($res) {
-            echo "success";
+            json_encode(array("status"=>"success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }

@@ -15,7 +15,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $exists = mysqliToArray($connection->query("SELECT * FROM vg_data WHERE `name` = '$name' AND `brnach_id` = $branch_id"));
     if ($exists) {
-        echo "exists";
+        error("exists");
         return false;
     }
     if (heCan($user_data['role'], 2)) {
@@ -31,15 +31,15 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                     `branch_id`
                 ) VALUES('$name', '$in','$out','$key','$url', '$prevId', '$branch_id') ");
         if ($res) {
-            echo "success";
+            json_encode(array("status"=>"success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }

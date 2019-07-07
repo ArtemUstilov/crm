@@ -18,22 +18,22 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $check_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE login='$login'"));
     if ($check_data) {
-        echo "exists";
+        error("exists");
         return false;
     }
     if (heCan($user_data['role'], 2)) {
         $res = $connection->
         query("INSERT INTO `users` (`login`, `telegram`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`) VALUES('$login','$telegram', '$password','$first_name','$last_name','$role','$branch') ");
         if ($res) {
-            echo "success";
+            json_encode(array("status"=>"success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }

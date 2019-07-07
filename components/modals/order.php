@@ -31,9 +31,12 @@ function orderAddModal($data, $more_data)
 <p>
 ВГ
 <select id="vgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-    foreach ($more_data['vgs'] as $key => $var) {
-        $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+    if($more_data['vgs']){
+        foreach ($more_data['vgs'] as $key => $var) {
+            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+        }
     }
+
 
     $output .= '
 </select>
@@ -64,8 +67,10 @@ function orderAddModal($data, $more_data)
   Реферал
 <select id="callmasterField">
   <option value="" selected>Выберите реферала(опц)</option>';
-    foreach ($more_data['clients'] as $key => $var) {
-        $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
+    if($more_data['clients']){
+        foreach ($more_data['clients'] as $key => $var) {
+            $output .= '<option value="' . $var["id"] . '">' . $var["name"] . '</option>';
+        }
     }
     $output .= '
   </select>
@@ -133,17 +138,22 @@ function orderEditModal($more_data)
 <p>
 ВГ
 <select id="editVgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-    foreach ($more_data['vgs'] as $key => $var) {
-        $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+    if($more_data['vgs']){
+        foreach ($more_data['vgs'] as $key => $var) {
+            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+        }
     }
+
     $output .= '
 </select>
 </p>
 <p>
 Валюта
 <select id="editFiatField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
-    foreach ($more_data['fiat'] as $key => $var) {
-        $output .= '<option value="' . $var["fiat_id"] . '">' . $var['full_name'] . '</option>';
+    if($more_data['fiat']){
+        foreach ($more_data['fiat'] as $key => $var) {
+            $output .= '<option value="' . $var["fiat_id"] . '">' . $var['full_name'] . '</option>';
+        }
     }
     $output .= '
 </select>

@@ -60,14 +60,13 @@ if (isset($client_id, $user_id)) {
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
     $out = curl_exec($curl);
     curl_close($curl);
-    if ($out == 'empty' || $out == 'failed') {
-
-        echo json_encode(array("status" => "failed", "error" => "NU_SUCH_CLIENT"));
+    $out_json = json_decode($out);
+    if ($out_json['error']) {
+        error($out_json['error']);
         return false;
     }
     echo json_encode(array("status" => "success"));
     return false;
-
 }
-echo json_encode(array("status" => "failed", "error" => "NU_SUCH_CLIENT"));
+error("empty");
 return false;
