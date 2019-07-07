@@ -1,13 +1,10 @@
 $('#login-form').submit((event) => {
-    console.log("SSSSSSSS");
     event.preventDefault();
     if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
-    $('.loader').show();
+    $(".loader").show();
+    $(".login-form-submit").prop("disabled", true);
     let password = $("#passwordField").val();
     let login = $("#loginField").val();
-    // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
-    $this = $(".login-form-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/auth/auth.php",
         type: "POST",
@@ -51,8 +48,9 @@ $('#login-form').submit((event) => {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".login-form-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 
