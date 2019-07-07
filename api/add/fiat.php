@@ -12,20 +12,15 @@ if (isset($_POST['name']) && isset($_POST['full_name']) && isset($_POST['code'])
         $res = $connection->
         query("INSERT INTO `fiats` (`name`, code, full_name) VALUES('$name', '$code', '$full_name')");
         if ($res) {
-            json_encode(array("status"=>"success"));
+            json_encode(array("status" => "success"));
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
 
     } else {
-        error("denied");
-        return false;
+        return error("denied");
 
     }
-    error("failed");
-    return false;
 }
-error("empty");
-return false;
+return error("empty");

@@ -10,8 +10,7 @@ if (isset($_POST['name'])) {
     if ($user_data && iCan(3)) {
         $check = mysqli_fetch_assoc($connection->query("SELECT * FROM branch WHERE branch_name='$name'"));
         if ($check) {
-            error("exists");
-            return false;
+            return error("exists");
         }
         $res = $connection->
         query("INSERT INTO `branch` (branch_name) VALUES('$name')");
@@ -19,8 +18,7 @@ if (isset($_POST['name'])) {
             json_encode(array("status"=>"success"));
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
 
     } else {
@@ -28,8 +26,5 @@ if (isset($_POST['name'])) {
         return false;
 
     }
-    error("failed");
-    return false;
 }
-error("empty");
-return false;
+return error("empty");

@@ -18,8 +18,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $check_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE login='$login'"));
     if ($check_data) {
-        error("exists");
-        return false;
+        return error("exists");
     }
     if (heCan($user_data['role'], 2)) {
         $res = $connection->
@@ -32,8 +31,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
             return false;
         }
     }
-    error("denied");
-    return false;
+    return error("denied");
 } else {
-    error("empty");
+    return  error("empty");
 }

@@ -24,8 +24,7 @@ if (isset($_POST['first_name'])) {
     $client = true;
     $check_client = mysqli_fetch_assoc($connection->query("SELECT client_id AS `id` FROM clients WHERE byname='$byname'"));
     if ($check_client) {
-        error("exists");
-        return false;
+        return error("exists");
     }
     if ($user_data && heCan($user_data['role'], 1)) {
         $res = $connection->
@@ -37,14 +36,12 @@ if (isset($_POST['first_name'])) {
             json_encode(array("status"=>"success")).$lastid;
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
 
     } else {
-        error("empty");
-        return false;
+        return error("empty");
     }
 }else{
-    error("empty");
+    return error("empty");
 }

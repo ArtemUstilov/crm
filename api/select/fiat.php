@@ -15,8 +15,7 @@ if ($fiat_data) {
     echo json_encode($fiat_data);
     return false;
 } else {
-    error("failed");
-    return false;
+    return error("failed");
 }
 
 

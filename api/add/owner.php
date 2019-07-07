@@ -14,15 +14,12 @@ if (isset($_POST['user_id'])) {
             json_encode(array("status"=>"success"));
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
 
     } else {
-        error("denied");
-        return false;
+        return error("denied");
 
     }
 }
-error("empty");
-return false;
+return error("empty");

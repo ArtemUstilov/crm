@@ -29,14 +29,11 @@ if (isset($_POST['number']) && isset($_POST['id'])) {
             echo json_encode(array("status" => "success"));
             return false;
         }else{
-            error("failed");
-            return false;
+            return error("failed");
         }
     } else {
-        error("denied");
-        return false;
+        return error("denied");
     }
 } else {
-    error("failed");
-    return false;
+    return error("failed");
 }
