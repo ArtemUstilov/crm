@@ -231,7 +231,7 @@ $(document).ready(function () {
         const loginByVg = $("#add-order-form #loginByVgField").val();
         const descr = $("#add-order-form #commentField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
-        const debtCl = $("#add-order-form #debtCLField").val();
+        const debtCl = $("#add-order-form #debtCLField").val() || 0;
         const fiat = $("#add-order-form #fiatField").val();
         const allShares = [];
         sharesEls.each(function () {

@@ -125,6 +125,7 @@ function fillAdditionalInfo(target) {
             cache: false,
             success: function (res) {
                 if(res.error){
+                    console.log(res);
                     createAlertTable(res.error, "Данные продажи");
                     return;
                 }
@@ -134,14 +135,13 @@ function fillAdditionalInfo(target) {
                 if (res[0]["callmaster"])
                     owners += callmaster;
                 $('#info-order-form .text').html(owners);
+                $("#Order-info-modal").modal();
             },
             error: function () {
                 $('#info-order-form .modal-title').text(`Нет информации про продажу № ${order_id}`);
             },
             complete: function () {
                 $('.loader').fadeOut('fast');
-                $("#Order-info-modal").modal();
-
             }
         });
     }
@@ -176,7 +176,7 @@ function fillOrderEditForm(target) {
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
             if (res['callmaster'])
                 $('#edit-order-form #editCallmasterField').val(res['callmaster']);
-            $('#edit-order-form #editDebtClField').val(res['debt']);
+            $('#edit-order-form #editDebtClField').val(res['debt'] || 0);
             $('#edit-order-form #editOutField').val(res['out']);
             $("#edit-order-form #editCommentField").val(res['comment']);
             $('#edit-order-form #editRollback1Field').val(res['rollback_1']);
