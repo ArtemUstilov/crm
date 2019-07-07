@@ -7,7 +7,6 @@ if (isset($_POST['login']) && isset($_POST['role'])
     $login = clean($_POST['login']);
     if($_POST['password'])
         $password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
-    echo $_POST['password'];
 
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);

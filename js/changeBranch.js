@@ -39,7 +39,7 @@ $(document).ready(function () {
         $('.loader').show();
         let branch_id = $('#Change-Branch-Modal #changeBranchField').val();
         $.ajax({
-            url: "../api/add/branch.php",
+            url: "../api/operate/branch.php",
             type: "POST",
             data: {branch_id},
             cache: false,

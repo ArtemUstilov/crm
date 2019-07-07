@@ -43,6 +43,7 @@
 </div>
 <div class="loader"><div class="spinner"></div></div>
 <script src="js/listeners.js"></script>
+<script src="js/auth.js"></script>
 <div id="user-inactive-modal" class="modal">
     <h2>Пользователь деактивирован</h2>
     <h3>Обратитесь к администратору</h3>

@@ -115,7 +115,7 @@ function mysqliToArray($mysqli_result)
 
 function chooseAddModal($name, $data, $more_data = NULL)
 {
-    foreach (glob("../components/modals/*.php") as $filename) {
+    foreach (glob($_SERVER['DOCUMENT_ROOT']."/components/modals/*.php") as $filename) {
         include_once $filename;
     }
     switch ($name) {

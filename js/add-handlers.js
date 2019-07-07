@@ -593,7 +593,7 @@ $(document).ready(function () {
         $this = $(".modal-submit");
         $this.prop("disabled", true);
         $.ajax({
-            url: "../api/add/rollback.php",
+            url: "../api/operate/rollback.php",
             type: "POST",
             data: {
                 id, fiat, number,
@@ -645,8 +645,9 @@ $(document).ready(function () {
         let fiat = $("#payback-debt-form #fiatField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
+        console.log("AAAAAAAA");
         $.ajax({
-            url: "../api/add/debt.php",
+            url: "../api/operate/debt.php",
             type: "POST",
             data: {
                 id,

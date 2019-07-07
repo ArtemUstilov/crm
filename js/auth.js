@@ -1,4 +1,5 @@
 $('#login-form').submit((event) => {
+    console.log("SSSSSSSS");
     event.preventDefault();
     if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
     $('.loader').show();
