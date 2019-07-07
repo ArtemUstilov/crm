@@ -12,15 +12,15 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
         WHERE login='$login'
     "));
     if ($login != $user_data['login']) {
-        echo "login";
+        error("login");
         return false;
     }
     if (!password_verify($password, $user_data['pass_hash'])) {
-        echo "pass";
+        error("pass");
         return false;
     }
     if (!$user_data['active']) {
-        echo "inactive";
+        error("inactive");
         return false;
     }
     session_start();
@@ -34,8 +34,8 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
     $_SESSION['is_owner'] = $user_data['is_owner'];
     //$_SESSION['remember_me'] = $remember_me; in future
     if($_SESSION['role'] == 'agent'){
-        echo 'sales';
+        echo json_encode(array("status"=>'sales'));
         return false;
     }
-    echo "success";
+    echo json_encode(array("status"=>'success'));
 }

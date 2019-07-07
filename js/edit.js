@@ -526,7 +526,6 @@ function deleteOwner(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('.loader').fadeOut();
             if (res.error) {
                 createAlertTable("failed", "");

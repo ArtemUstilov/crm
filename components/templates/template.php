@@ -98,7 +98,7 @@ function template($body)
 <div id="logout" class="account-name-menu-btn-box">
 <i class="fas fa-' . $userIcon . ' fa-2x"></i>
 <p class="menu-n">' . $_SESSION['name'] . '</p>
-<a  href="./api/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
+<a  href="../api/auth/logout.php"><i class="fas fa-sign-out-alt fa-2x"></i></a>
 </div>
 </div>
 <div id="Branch-money-info-modal" class="modal">

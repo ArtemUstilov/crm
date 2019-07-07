@@ -15,10 +15,11 @@ $('#login-form').submit((event) => {
             password: password,
             login: login
         },
+        dataType: "JSON",
         cache: false,
         success: function (res) {
             $('.loader').fadeOut('fast');
-            switch (res) {
+            switch (res.error || res.status) {
                 case 'sales':
                     window.location.href = '../content/orders.php';
                     break;
