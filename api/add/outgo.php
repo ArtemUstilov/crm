@@ -28,9 +28,8 @@ if (isset($_POST['sum'], $_POST['fiat'])) {
         json_encode(array("status"=>"success"));
         return false;
     } else {
-        error("failed");
-        return false;
+        return error("failed");
     }
 } else {
-    error("empty");
+    return error("empty");
 }

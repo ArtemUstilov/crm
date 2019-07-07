@@ -14,7 +14,6 @@ if ($branch_data) {
     echo json_encode($branch_data);
     return false;
 } else {
-    error("failed");
-    return false;
+    return error("failed");
 }
 

@@ -18,12 +18,10 @@ if (isset($_POST['name'])) {
             json_encode(array("status"=>"success"));
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
     }
-    error("denied");
-    return false;
+    return error("denied");
 } else {
-    error("empty");
+    return error("empty");
 }

@@ -91,7 +91,8 @@ function makeTable($data, $options)
     return $output;
 }
 
-function formatData($val){
+function formatData($val)
+{
     if (is_numeric($val))
         $val = round($val, 2);
     return $val === '' || $val === null ? '-' : $val;
@@ -128,7 +129,7 @@ function mysqliToArray($mysqli_result)
 
 function chooseAddModal($name, $data, $more_data = NULL)
 {
-    foreach (glob($_SERVER['DOCUMENT_ROOT']."/components/modals/*.php") as $filename) {
+    foreach (glob($_SERVER['DOCUMENT_ROOT'] . "/components/modals/*.php") as $filename) {
         include_once $filename;
     }
     switch ($name) {
@@ -213,8 +214,10 @@ function updateBranchMoney($connection, $branch_id, $sum, $fiat)
     }
 }
 
-function error($errorType){
-    echo json_encode(array("error"=>$errorType));
+function error($errorType)
+{
+    echo json_encode(array("success" => false, "error" => $errorType));
+    return false;
 }
 
 

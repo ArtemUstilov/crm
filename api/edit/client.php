@@ -21,8 +21,7 @@ if (isset($_POST['first_name'])) {
     session_start();
     $user_id = $_SESSION['id'];
     if(mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE ((login = '$byname' AND login IS NOT NULL) || `password` = '$pass') AND client_id != '$edit_client_id'"))){
-        error("exists");
-        return;
+        return error("exists");
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     if ($user_data && (heCan($user_data['role'], 2))) {
@@ -47,12 +46,10 @@ if (isset($_POST['first_name'])) {
             echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            error("failed");
-            return false;
+            return error("failed");
         }
 
     } else {
-        error("empty");
-        return false;
+        return error("empty");
     }
 }
