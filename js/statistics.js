@@ -70,8 +70,23 @@ function initSorterAndFilters() {
                 maxcols.forEach(k => {
                     const data = _this.find(`#${k}-i`)[0] && _this.find(`#${k}-i`)[0].value;
                     if (!data || !data.length) return;
+                    const same = (a)=>{
+                        let cb = (a, b = data)=> a.toUpperCase().includes(b.toUpperCase());
+                        if(data.includes('<=')){
+                            cb = (a) => +a <= +data.split('<=')[1];
+                        }else if(data.includes('>=')){
+                            cb = (a) => +a >= +data.split('>=')[1];
+                        }else if(data.includes('>')){
+                            cb = (a) => +a > +data.split('>')[1];
+                        }else if(data.includes('<')){
+                            cb = (a) => +a < +data.split('<')[1];
+                        }else if(data.includes('=')){
+                            cb = (a) => +a === +data.split('=')[1];
+                        }
+                        return cb(a);
+                    };
                     jo = jo.filter(function checkRows() {
-                        return $(this).children(`.${k}-f`).first()[0].innerText.toUpperCase().includes(data.toUpperCase()) || $(this).prop('id') === 'spec';
+                        return same($(this).children(`.${k}-f`).first()[0].innerText) || $(this).prop('id') === 'spec';
                     });
                 });
                 jo.show();

@@ -38,6 +38,7 @@ $options['text'] = 'Сотрудники';
 $options['edit'] = 2;
 $options['btn-text'] = 'Добавить';
 $options['btn'] = 2;
+$options['printbtn'] = true;
 if(iCan(3)){
     $branches = $connection->query('
 SELECT * FROM branch

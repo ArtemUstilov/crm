@@ -95,14 +95,13 @@ function editUser() {
     let role = $("#edit-user-form #editRoleField").val();
     let id = $("#edit-user-form #edit-user-title").attr('user-id');
     let telegram = $("#edit-user-form #telegram").val();
-
     const $this = $("#edit-user-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
         url: "../components/edit-modal-response/editUser.php",
         type: "POST",
         data: {
-            password,
+            password : password.length ? password : null,
             login,
             first_name,
             last_name,

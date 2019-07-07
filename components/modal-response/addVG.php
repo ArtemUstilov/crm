@@ -35,11 +35,12 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
             $res = $connection->
             query("
                 INSERT INTO virtualgood (
-                    name
+                    `name`
                 ) VALUES('$name')");
             $prevId = mysqliToArray($connection->query("SELECT vg_id FROM virtualgood ORDER BY vg_id DESC LIMIT 1"))[0]['vg_id'];
-            $res = $connection->
-            query("
+            if($key && $url){
+                $res = $connection->
+                query("
                 INSERT INTO vg_data (
                     in_percent,
                     out_percent,
@@ -48,6 +49,36 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                     vg_id,
                     branch_id
                 ) VALUES('$in','$out','$key','$url', '$prevId', '$branch_id') ");
+            }elseif($key){
+                $res = $connection->
+                query("
+                INSERT INTO vg_data (
+                    in_percent,
+                    out_percent,
+                    access_key,
+                    vg_id,
+                    branch_id
+                ) VALUES('$in','$out','$key', '$prevId', '$branch_id') ");
+            }elseif($url){
+                $res = $connection->
+                query("
+                INSERT INTO vg_data (
+                    in_percent,
+                    out_percent,
+                    api_url_regexp,
+                    vg_id,
+                    branch_id
+                ) VALUES('$in','$out','$url', '$prevId', '$branch_id') ");
+            }else{
+                $res = $connection->
+                query("
+                INSERT INTO vg_data (
+                    in_percent,
+                    out_percent,
+                    vg_id,
+                    branch_id
+                ) VALUES('$in','$out', '$prevId', '$branch_id') ");
+            }
         }
 
         if ($res) {

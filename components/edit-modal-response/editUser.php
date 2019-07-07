@@ -5,7 +5,10 @@ if (isset($_POST['login']) && isset($_POST['role'])
     include_once("../../db.php");
     include_once("../../funcs.php");
     $login = clean($_POST['login']);
-    $password = isset($_POST['first_name']) ? password_hash(clean($_POST['password']), PASSWORD_DEFAULT) : false;
+    if($_POST['password'])
+        $password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
+    echo $_POST['password'];
+
     $role = clean($_POST['role']);
     $first_name = clean($_POST['first_name']);
     $last_name = clean($_POST['last_name']);
@@ -25,17 +28,20 @@ if (isset($_POST['login']) && isset($_POST['role'])
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     if (iCan(2)) {
-        $res = $connection->
-        query("
+            $res = $connection->
+            query("
         UPDATE `users` 
         SET `login`='$login',"
-            . ($password ? "`pass_hash` = '$password'," : "") . "
+                . ($password ? "`pass_hash` = '$password'," : "") . "
             `first_name` = '$first_name',
             `last_name` = '$last_name',
             `telegram` = '$telegram',
             `role` = '$role',
             `branch_id` = '$branch'
         WHERE `user_id` = '$edit_user_id'");
+
+
+
         if ($res) {
             echo "edit-success";
             return false;
