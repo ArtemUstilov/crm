@@ -20,6 +20,6 @@ if ($client_data) {
     echo json_encode($client_data);
     return false;
 } else {
-    echo "failed";
+    error("failed");
     return false;
 }

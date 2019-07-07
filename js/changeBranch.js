@@ -44,11 +44,11 @@ $(document).ready(function () {
             data: {branch_id},
             cache: false,
             success: function (res) {
-                if (res == 'change-success') {
+                if (res.status === 'change-success') {
                     $.modal.close();
                     location.reload();
                 } else {
-                    createAlertTable();
+                    createAlertTable(res.error);
                 }
                 $('.loader').fadeOut('fast');
             },

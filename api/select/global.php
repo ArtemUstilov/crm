@@ -12,7 +12,7 @@ if (isset($_POST['vg_id'])) {
         echo json_encode($vg_data);
         return false;
     } else {
-        echo "failed";
+        error("failed");
         return false;
     }
 }

@@ -95,6 +95,10 @@ function fillAdditionalInfo(target) {
             },
             cache: false,
             success: function (res) {
+                if(res.error){
+                    createAlertTable(res.error, "Данные клиента");
+                    return;
+                }
                 $('#info-client-form .modal-title').text(`Информация о клиенте`).attr('client-id', res['id']);
                 let rollbacks = '<h4>Откаты</h4>' + res['rollback'].map(line => `<br/><p>${line["rollback"]} ${line["fiat"]}</p>`).join('') + '<br/>';
                 rollbacks += '<h4>Долги</h4>' + res['debt'].map(line => `<br/><p>${line["debt"]} ${line["fiat"]}</p>`).join('');
@@ -120,6 +124,10 @@ function fillAdditionalInfo(target) {
             },
             cache: false,
             success: function (res) {
+                if(res.error){
+                    createAlertTable(res.error, "Данные продажи");
+                    return;
+                }
                 $('#info-order-form .modal-title').text(`Информация о продаже №${order_id}`).attr('order-id', res['id']);
                 let owners = '<h4>Владельцы</h4>' + res.map(line => `<br/><p>${line["name"]} - ${line["sum"]}  ${res[0]["fiat"]} (${line["share_percent"]}%)</p>`).join('');
                 const callmaster = `<br/><h4>Реферал:</h4><br/><p>${res[0]["callmaster"]} - ${res[0]["rollback_sum"]} ${res[0]["fiat"]} (${res[0]["rollback_1"]}%)</p>`;
@@ -151,7 +159,10 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-
+            if(res.error){
+                createAlertTable(res.error, "Данные продажи");
+                return;
+            }
             $('#edit-order-form #edit-order-title').text(`Редактировать продажу №${res['order_id']}`).attr('order-id', res['order_id']);
             $('#edit-order-form #editClientField').val(res['client_id']);
             $('#edit-order-form #editClientField option').each(function () {
@@ -215,6 +226,10 @@ function fillOwnerEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные менеджера");
+                return;
+            }
             $('#edit-user-form #edit-user-title').text(`Изменить данные пользователя ${res['full_name']}`).attr('user-id', res['id']);
             $('#edit-user-form #editFirstNameField').val(res['first_name']);
             $('#edit-user-form #editLastNameField').val(res['last_name']);
@@ -243,7 +258,7 @@ function fillFiatEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if (res == "failed") {
+            if(res.error){
                 createAlertTable('connectionError', 'Фиат');
                 return;
             }
@@ -272,6 +287,10 @@ function fillUserEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные менеджера");
+                return;
+            }
             $('#edit-user-form #edit-user-title').text(`Изменить данные пользователя ${res['full_name']}`).attr('user-id', res['id']);
             $('#edit-user-form #editFirstNameField').val(res['first_name']);
             $('#edit-user-form #editLastNameField').val(res['last_name']);
@@ -299,6 +318,10 @@ function fillBranchEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные предприятия");
+                return;
+            }
             $('#edit-branch-form #edit-branch-title').text(`Изменить данные предприятия ${res['name']}`).attr('branch-id', res['id']);
             $('#edit-branch-form #editNameField').val(res['name']);
             $('#edit-branch-form #editMoneyField').val(res['money']);
@@ -322,6 +345,10 @@ function fillVGEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные ВГ");
+                return;
+            }
             $('#edit-vg-form #edit-vg-title').text(`Изменить данные валюты ${res['name']}`).attr('vg-id', res['id']);
             $('#edit-vg-form #editNameField').val(res['name']);
             $('#edit-vg-form #editOutField').val(res['out']);
@@ -349,6 +376,10 @@ function fillOwnerEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные владельца");
+                return;
+            }
             $('#edit-vg-form #edit-vg-title').text(`Изменить валюту ${res['name']}`);
             $('#edit-vg-form #editNameField').attr('owner-id', res['id']);
             $('#edit-vg-form #editNameField').val(res['name']);
@@ -376,6 +407,10 @@ function  fillGlobalVGlInfo(target){
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные глобала");
+                return;
+            }
             $('#edit-globalVG-title').attr('vg-id', vg_id)
             $('#edit-globalVGName').val(res['name']);
             $('#globalVG-edit-Modal').modal();
@@ -401,6 +436,10 @@ function fillClientEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, "Данные клиента");
+                return;
+            }
             $('#edit-client-form #edit-client-title').text(`Изменить данные клиента ${res['full_name']}`).attr('client-id', res['id']);
             $('#edit-client-form #editFirstNameField').val(res['first_name']);
             $('#edit-client-form #editLastNameField').val(res['last_name']);
@@ -487,7 +526,6 @@ function deleteOwner(target) {
         },
         cache: false,
         success: function (res) {
-            console.log(res);
             $('.loader').fadeOut();
             if (res.error) {
                 createAlertTable("failed", "");

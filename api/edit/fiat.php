@@ -14,18 +14,18 @@ if (isset($_POST['name']) && isset($_POST['fiat'])&& isset($_POST['full_name']) 
         query("UPDATE fiats SET `name`='$name', full_name='$full_name', code='$code'
                      WHERE fiat_id='$fiat_id'");
         if ($res) {
-            echo "edit-success";
+            echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     } else {
-        echo "denied";
+        error("denied");
         return false;
 
     }
 }
-echo "empty";
+error("empty");
 return false;

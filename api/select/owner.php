@@ -13,7 +13,7 @@ if (isset($_POST['owner_id'])) {
         echo json_encode($owner_data);
         return false;
     } else {
-        echo "failed";
+        error("failed");
         return false;
     }
 }

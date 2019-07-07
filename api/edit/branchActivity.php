@@ -13,18 +13,18 @@ if (isset($_POST['id'])) {
         query("SELECT `active` FROM branch WHERE branch_id='$id'"))[0]['active'];
         $connection->query("UPDATE users SET `active`= '$isActive'  WHERE branch_id='$id' AND `role` != 'moder'");
         if ($res) {
-            echo "edit-success";
+            echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     } else {
-        echo "denied";
+        error("denied");
         return false;
 
     }
 }
-echo "empty";
+error("empty");
 return false;

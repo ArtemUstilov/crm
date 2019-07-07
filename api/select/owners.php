@@ -11,7 +11,7 @@ if ($owners) {
     echo json_encode($owners);
     return false;
 } else {
-    echo "failed";
+    error("failed");
     return false;
 }
 

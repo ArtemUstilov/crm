@@ -11,5 +11,5 @@ if ($user_data) {
     echo json_encode(array("status" => "success"));
     return false;
 }
-echo json_encode(array("status" => "failed", "error" => "CAN_NOT_UPDATE"));
+error("CAN_NOT_UPDATE");
 return false;

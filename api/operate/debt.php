@@ -22,17 +22,17 @@ if (isset($_POST['number']) && isset($_POST['id'])) {
             updateBranchMoney($connection, $branch_id, $number, $fiat);
         }
         if ($add_ref) {
-            echo "success";
+            echo json_encode(array("status" => "success"));
             return false;
         }else{
-            echo "failed";
+            error("failed");
             return false;
         }
     } else {
-        echo "denied";
+        error("denied");
         return false;
     }
 } else {
-    echo "empty";
+    error("empty");
     return false;
 }

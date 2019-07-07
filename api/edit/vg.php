@@ -29,15 +29,15 @@ if (isset($_POST['name']) && isset($_POST['in_percent']) && isset($_POST['out_pe
               `branch_id`='$branch_id'
         ");
         if ($res) {
-            echo "edit-success";
+            echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }

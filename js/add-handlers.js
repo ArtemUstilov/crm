@@ -106,7 +106,10 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                console.log(res);
+                if(res.error){
+                    createAlertTable(res.error, "Данные ВГ");
+                    return;
+                }
                 if (res.loginByVg)
                     $('#Order-Modal #loginByVgField').val(res.loginByVg);
                 else
@@ -122,14 +125,11 @@ $(document).ready(function () {
                     $('#Order-Modal #commentField').val(res.description);
                 else
                     $('#Order-Modal #commentField').val("");
-                console.log(res.method_of_obtaining);
                 if (res.method_of_obtaining) {
                     $('#Order-Modal #obtainingField').val(res.method_of_obtaining);
                 } else {
                     $('#Order-Modal #obtainingField').val($("#obtainingField option:first").val());
                 }
-
-
             }
             ,
             error: function () {
@@ -600,7 +600,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Откат");
+                createAlertTable(res.status || res.error, "Откат");
             },
             error: function () {
                 createAlertTable("connectionError", "Откат");
@@ -656,7 +656,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                createAlertTable(res, "Погашение");
+                createAlertTable(res.status || res.error, "Погашение");
             },
             error: function () {
                 createAlertTable("connectionError", "Погашение");

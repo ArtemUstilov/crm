@@ -62,6 +62,10 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
             if (!res.sumChanged) {
                 createAlertTable(res.status, "Заказ");
                 return;
@@ -113,6 +117,7 @@ function editUser() {
     $.ajax({
         url: "../api/edit/user.php",
         type: "POST",
+        dataType: "JSON",
         data: {
             password : password.length ? password : null,
             login,
@@ -126,7 +131,11 @@ function editUser() {
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Пользователь");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "Пользователь");
         },
         error: function () {
             createAlertTable("connectionError", "Пользователь");
@@ -171,6 +180,7 @@ function editClient() {
     $.ajax({
         url: "../api/edit/client.php",
         type: "POST",
+        dataType: "JSON",
         data: {
             description,
             email,
@@ -189,7 +199,11 @@ function editClient() {
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Пользователь");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "Пользователь");
         },
         error: function () {
             createAlertTable("connectionError", "Пользователь");
@@ -233,9 +247,14 @@ function editVG() {
             key,
             vg_id: id,
         },
+        dataType: "JSON",
         cache: false,
         success: function (res) {
-            createAlertTable(res, "VG");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "VG");
         },
         error: function () {
             createAlertTable("connectionError", "VG");
@@ -276,9 +295,14 @@ function editFiat() {
             code,
             fiat,
         },
+        dataType: "JSON",
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Валюта");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "Валюта");
         },
         error: function () {
             createAlertTable("connectionError", "Fiat");
@@ -317,9 +341,14 @@ function editBranch() {
             branch_id: id,
             money,
         },
+        dataType: "JSON",
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Пользователь");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "Пользователь");
         },
         error: function () {
             createAlertTable("connectionError", "Пользователь");
@@ -355,9 +384,14 @@ function editGlobalVG() {
             vg_id,
             name
         },
+        dataType: "JSON",
         cache: false,
         success: function (res) {
-            createAlertTable(res, "VG");
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "VG");
         },
         error: function () {
             createAlertTable("connectionError", "VG");

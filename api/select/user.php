@@ -14,7 +14,7 @@ if (isset($_POST['user_id'])) {
         echo json_encode($user_data);
         return false;
     } else {
-        echo "failed";
+        error("failed");
         return false;
     }
 }
