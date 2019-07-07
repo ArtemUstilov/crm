@@ -59,6 +59,11 @@ SELECT user_id AS `owner_id`, concat(last_name, " ", first_name) AS `name`
 FROM users
 WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 ');
+$data['types'] = $connection->query("
+    SELECT outgo_type_id AS `id`, outgo_name AS `name`
+    FROM outgo_types
+    WHERE branch_id = '$branch_id'
+");
 $options['type'] = 'Outgo';
 $options['text'] = 'История расходов';
 $options['btn'] = 1;

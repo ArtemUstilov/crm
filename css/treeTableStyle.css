@@ -143,7 +143,8 @@ a {
 }
 
 .jquery-accordion-menu ul ul.submenu {
-    padding-left: 30px
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .invisible {
@@ -278,6 +279,16 @@ a {
     align-items: center;
     flex-grow: 1;
     height: 50px;
+    border-bottom: 2px solid #5491F5;
+}
+.name-wrapper{
+    width: 300px;
+}
+#global-add-type{
+    position: absolute;
+    left: 20px;
+    color: #fff;
+    top: 67px;
 }
 #types-wrapper .fa-plus{
     padding-right: 10px;
@@ -289,6 +300,7 @@ a {
     z-index: 2;
     color: #fff;
     font-size: 16px;
+    position: relative;
 }
 #types-wrapper thead th{
     text-align: center;
