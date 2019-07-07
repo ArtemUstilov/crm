@@ -1,33 +1,41 @@
 <?php
 function display_data($data, $options, $addition_data = NULL)
 {
+    //OPTIONS:::
+    //RANGE - show datepicker
+    //BTN-BTN-MAX show add button if allowed
+    //SWITCH_VG_STAT - switch types of statistics
+    //TYPE - type of tables
     session_start();
     if (!$options['prepared']) $data = mysqliToArray($data);
     return
         ("
         <div class='table-menu " . $options['type'] . "' " . ($options['range'] ? 'style = "justify-content: left;"' : '') . ">
             <h2 type=" . $options['type'] . ">" . $options['text'] . "</h2>"
-            . (iCan($options['btn']) && iCanMax($options['btn-max']) ? "
-            <p><a 
+
+            . (iCan($options['btn']) && iCanMax($options['btn-max']) ?
+                "<p><a 
                     id='add-btn' 
                     href=\"#" . $options['type'] . "-Modal\" 
                     rel=\"modal:open\">" . $options['btn-text'] . "
-            </a></p>
-            " : '') .
+                    </a>
+                </p>" : '') .
+
             ($options['range'] ? "
             <div id='reportrange" . $options['range'] . "' class='reportrange'>
-    <i class='fa fa-calendar'></i>&nbsp;
-    <span></span> <i class='fa fa-caret-down'></i>
-</div>
-            " : '') .
-            ($options['switch-vg-stat'] ? "
-            <button class='switch-vg-stat' id='add-btn'></button>
-            " : '') . "
+                <i class='fa fa-calendar'></i>&nbsp;
+                <span></span> 
+                <i class='fa fa-caret-down'></i>
+            </div>" : '') .
+
+            ($options['switch-vg-stat'] ?
+                "<button class='switch-vg-stat' id='add-btn'>
+                 </button>" : '') . "
         </div>
         <div class='table-wrapper " . $options['type'] . "' id='table-wrapper'>
             <a 
                     class='display-none' 
-                    href=\"#" . $options['type'] . "-edit-Modal\" 
+                    href='#" . $options['type'] . "-edit-Modal' 
                     rel=\"modal:open\">
             </a>
             " . makeTable($data, $options) . "
@@ -42,6 +50,7 @@ function makeTable($data, $options)
         return '<h2>Пусто</h2>';
     }
     $output = "<table class='table-container table table-fixed'>";
+
     foreach ($data as $key => $var) {
         $index = 0;
         if ($key === 0) {
@@ -72,9 +81,7 @@ function makeTable($data, $options)
                 </div>
             </td>';
             } else {
-                if (is_numeric($val))
-                    $val = round($val, 2);
-                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . ($val === '' || $val === null ? '-' : $val) . '</td>';
+                $output .= '<td class=' . $index . '-f title="' . $val . '">' . $actions . formatData($val) . '</td>';
             }
             $index++;
         }
@@ -82,6 +89,12 @@ function makeTable($data, $options)
     }
     $output .= '</tbody></table>';
     return $output;
+}
+
+function formatData($val){
+    if (is_numeric($val))
+        $val = round($val, 2);
+    return $val === '' || $val === null ? '-' : $val;
 }
 
 function clean($value = "")
