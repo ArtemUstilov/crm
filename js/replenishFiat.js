@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#replenish-fiat-btn').click(function () {
         $('.loader').show();
         $.ajax({
-            url: "../components/selectors/Fiat.php",
+            url: "../api/select/fiat.php",
             type: "POST",
             data: "req=ok",
             cache: false,
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
         });
         $.ajax({
-            url: "../components/selectors/Owners.php",
+            url: "../api/select/owners.php",
             type: "POST",
             data: "req=ok",
             cache: false,
@@ -63,7 +63,7 @@ $(document).ready(function () {
         const owner = ownerfield.val() ? ownerfield.val() : 0;
 
         $.ajax({
-            url: "../components/modal-response/replenishFiat.php",
+            url: "../api/add/fiat.php",
             type: "POST",
             method: "POST",
             data: {

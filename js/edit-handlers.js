@@ -42,8 +42,9 @@ function editOrder() {
     const $this = $("#edit-order-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editOrder.php",
+        url: "../api/edit/order.php",
         type: "POST",
+        dataType: "JSON",
         data: {
             order_id,
             client_id,
@@ -61,7 +62,15 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
-            createAlertTable(res, "Заказ");
+            if (!res.sumChanged) {
+                createAlertTable(res.status, "Заказ");
+                return;
+            }
+
+            createAlertTable(res.status, "Заказ");
+            $('#Order-sum-changed-modal .old-sum').text(res.oldSum);
+            $('#Order-sum-changed-modal .new-sum').text(res.newSum);
+            $('#Order-sum-changed-modal').modal();
         },
         error: function () {
             createAlertTable("connectionError", "Заказ");
@@ -73,6 +82,10 @@ function editOrder() {
         }
     });
 }
+
+$('#Order-sum-changed-modal').on($.modal.BEFORE_CLOSE, function (event, modal) {
+    location.reload();
+});
 
 //User
 $.validate({
@@ -98,7 +111,7 @@ function editUser() {
     const $this = $("#edit-user-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editUser.php",
+        url: "../api/edit/user.php",
         type: "POST",
         data: {
             password : password.length ? password : null,
@@ -156,7 +169,7 @@ function editClient() {
     let max_debt = $("#edit-client-form #editMaxDebtField").val();
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editClient.php",
+        url: "../api/edit/client.php",
         type: "POST",
         data: {
             description,
@@ -210,7 +223,7 @@ function editVG() {
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editVG.php",
+        url: "../api/edit/vg.php",
         type: "POST",
         data: {
             name,
@@ -255,7 +268,7 @@ function editFiat() {
     const $this = $("#edit-fiat-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editFiat.php",
+        url: "../api/edit/fiat.php",
         type: "POST",
         data: {
             name,
@@ -297,7 +310,7 @@ function editBranch() {
     const $this = $("#edit-client-form .modal-submit");
     $this.prop("disabled", true);
     $.ajax({
-        url: "../components/edit-modal-response/editBranch.php",
+        url: "../api/edit/branch.php",
         type: "POST",
         data: {
             name,
@@ -315,6 +328,42 @@ function editBranch() {
             setTimeout(function () {
                 $this.prop("disabled", false);
             }, 300);
+        }
+    });
+}
+
+
+//GlobalVG
+$.validate({
+    form: '#edit-globalVg-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editGlobalVG();
+        return false;
+    }
+});
+
+function editGlobalVG() {
+    $('.loader').show();
+    let name = $("#edit-globalVGName").val();
+    let vg_id = $("#edit-globalVG-title").attr('vg-id');
+    $.ajax({
+        url: "../api/edit/editGlobalVg.php",
+        type: "POST",
+        data: {
+            vg_id,
+            name
+        },
+        cache: false,
+        success: function (res) {
+            createAlertTable(res, "VG");
+        },
+        error: function () {
+            createAlertTable("connectionError", "VG");
+        },
+        complete: function () {
+            $('.loader').fadeOut();
         }
     });
 }
@@ -341,7 +390,7 @@ function createAlertTable(alertType, text) {
             $.modal.close();
             setTimeout(function () {
                 location.reload();
-            }, 1500);
+            }, 2500);
             break;
         case "success-replenish":
             $('.custom-alert .alert-text-box').text(`Деньги успешно зачислены`);

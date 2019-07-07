@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#branch-t').click(function () {
         $('.loader').show();
         $.ajax({
-            url: "../components/selectors/getBranches.php",
+            url: "../api/select/getBranches.php",
             type: "POST",
             data: "req=ok",
             cache: false,
@@ -39,7 +39,7 @@ $(document).ready(function () {
         $('.loader').show();
         let branch_id = $('#Change-Branch-Modal #changeBranchField').val();
         $.ajax({
-            url: "../components/modal-response/changeBranch.php",
+            url: "../api/add/branch.php",
             type: "POST",
             data: {branch_id},
             cache: false,

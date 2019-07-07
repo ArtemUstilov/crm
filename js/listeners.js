@@ -28,7 +28,7 @@ $(document).ready(function () {
         $temp.remove();
     }
     $('.genpass').click(function(){
-       const inpt = $(this).parent().find("input");
+        const inpt = $(this).parent().find("input");
         const letters = ['a','v','r','e','N','W','Z','O','T','y'];
         const randomVal = [0,1,1,1,1,1,1,1,1,1,1,1,1,1].map(n=>{
             if(Math.random() > .5)
@@ -36,12 +36,12 @@ $(document).ready(function () {
             else
                 return letters[Math.floor(Math.random()*9 + 1 - n)];
         }).join('');
-       inpt.val(randomVal);
+        inpt.val(randomVal);
     });
     $('.genid').click(function(){
         const inpt = $(this).parent().find("input");
         const randomVal = [0,1,1,1,1,1].map(n=>{
-                return Math.floor(Math.random()*9 + 1 - n);
+            return Math.floor(Math.random()*9 + 1 - n);
         }).join('');
         inpt.val(randomVal);
     });
@@ -94,63 +94,7 @@ $(document).ready(function () {
             $(this).attr('value', $(this).val());
         })
     });
-    $('#login-form').submit((event) => {
-        event.preventDefault();
-        if ($("#passwordField").val().length == 0 || $("#loginField").val().length == 0) return;
-        $('.loader').show();
-        let password = $("#passwordField").val();
-        let login = $("#loginField").val();
-        // let rememberMe = $("#remember-me-check").prop("checked") ? "on" : "off";
-        $this = $(".login-form-submit");
-        $this.prop("disabled", true);
-        $.ajax({
-            url: "../components/auth/auth.php",
-            type: "POST",
-            data: {
-                password: password,
-                login: login
-            },
-            cache: false,
-            success: function (res) {
-                $('.loader').fadeOut('fast');
-                switch (res) {
-                    case 'sales':
-                        window.location.href = '../outgo.php';
-                        break;
-                    case "success":
-                        window.location.href = '../index.php';
-                        break;
-                    case "login":
-                        $('.login-form #loginField').addClass('shaking');
-                        setTimeout(function () {
-                            $('.login-form #loginField').removeClass('shaking');
-                            setTimeout
-                        }, 1000);
-                        break;
-                    case "pass":
-                        $('.login-form #passwordField').addClass('shaking');
-                        setTimeout(function () {
-                            $('.login-form #passwordField').removeClass('shaking');
-                            setTimeout
-                        }, 1000);
-                        break;
-                    case "inactive":
-                        $('#user-inactive-modal').modal();
-                        break;
 
-                }
-
-            },
-            error: function () {
-            },
-            complete: function () {
-                setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
-            }
-        });
-
-    });
 
     $('#menu-burger').click(() => {
 
@@ -272,17 +216,17 @@ $(document).ready(function () {
                         if (!data || !data.length) return;
                         const same = (a)=>{
                             let cb = (a, b = data)=> a.toUpperCase().includes(b.toUpperCase());
-                                if(data.includes('<=')){
-                                    cb = (a) => +a <= +data.split('<=')[1];
-                                }else if(data.includes('>=')){
-                                    cb = (a) => +a >= +data.split('>=')[1];
-                                }else if(data.includes('>')){
-                                    cb = (a) => +a > +data.split('>')[1];
-                                }else if(data.includes('<')){
-                                    cb = (a) => +a < +data.split('<')[1];
-                                }else if(data.includes('=')){
-                                    cb = (a) => +a === +data.split('=')[1];
-                                }
+                            if(data.includes('<=')){
+                                cb = (a) => +a <= +data.split('<=')[1];
+                            }else if(data.includes('>=')){
+                                cb = (a) => +a >= +data.split('>=')[1];
+                            }else if(data.includes('>')){
+                                cb = (a) => +a > +data.split('>')[1];
+                            }else if(data.includes('<')){
+                                cb = (a) => +a < +data.split('<')[1];
+                            }else if(data.includes('=')){
+                                cb = (a) => +a === +data.split('=')[1];
+                            }
                             return cb(a);
                         };
                         jo = jo.filter(function checkRows() {
@@ -333,7 +277,7 @@ $(document).ready(function () {
         } else
             url = 'editActivity';
         $.ajax({
-            url: "../components/edit-modal-response/" + url + ".php",
+            url: "../api/edit/" + url + ".php",
             type: "POST",
             data: {id},
             cache: false,
@@ -359,7 +303,7 @@ $(document).ready(function () {
             $('#reportrange1 span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
             $('.loader').show();
             $.ajax({
-                url: "../components/selectors/headSums.php",
+                url: "../api/select/ownerSums.php",
                 type: "POST",
                 data: {start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD')},
                 cache: false,
@@ -367,7 +311,7 @@ $(document).ready(function () {
                     res = JSON.parse(res);
                     if (!res || !res.length) return;
                     res.forEach(r => {
-                        const cell = $('.Head [itemid*=' + r.id + '] .1-f');
+                        const cell = $('.Owner [itemid*=' + r.id + '] .1-f');
                         cell.attr('title', r.sum || 0);
                         cell.text((+r.sum).toFixed(2) || 0);
                     })
@@ -434,18 +378,13 @@ $(document).ready(function () {
     })();
 
     const vgcl = $('#VG-Modal #nameVgnField');
-    $('#nameVgn').hide();
     vgcl.change(function (e) {
-        if ($('#VG-Modal #nameVgnField').val() == -1) {
-            $('#nameVgn').show();
-        } else {
-            $('#nameVgn').hide();
-        }
+        $('#VG-Modal #nameField').val($('#VG-Modal #nameVgnField option:selected').text());
     });
     $('.main-header .fa-coins').click(function () {
         $('.loader').show();
         $.ajax({
-            url: "../components/selectors/branchSums.php",
+            url: "../api/select/branchSums.php",
             type: "POST",
             cache: false,
             dataType: 'JSON',
