@@ -311,7 +311,7 @@ $(document).ready(function () {
                     res = JSON.parse(res);
                     if (!res || !res.length) return;
                     res.forEach(r => {
-                        const cell = $('.Owner [itemid*=' + r.id + '] .1-f');
+                        const cell = $('.Owner-Stats [itemid*=' + r.id + '] .1-f');
                         cell.attr('title', r.sum || 0);
                         cell.text((+r.sum).toFixed(2) || 0);
                     })
@@ -321,7 +321,7 @@ $(document).ready(function () {
                     createAlertTable("connectionError", "Расход");
                 },
                 complete: function () {
-                    // $('.loader').fadeOut('fast');
+                    $('.loader').fadeOut('fast');
                 }
             });
         }

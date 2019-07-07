@@ -18,7 +18,7 @@ SWITCH($type){
         $join .= "\nLEFT JOIN (
     SELECT O.vg_id, SUM(O.sum_vg) AS `sum`
     FROM orders O
-    WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
+    WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id=$branch_id))" : "")."
     GROUP BY O.vg_id
 ) MMM ON MMM.vg_id = V.vg_id";
         $select .= ", IFNULL(MMM.sum, 0) AS `sum`";
@@ -35,7 +35,7 @@ ORDER BY sum";
         $join .= "\nLEFT JOIN (
     SELECT O.vg_id, SUM(O.sum_currency) AS `sum`, O.fiat_id
     FROM orders O
-    WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id='$branch_id'))" : "")."
+    WHERE (O.date >= '".$start."' AND O.date <= '".$end."')".(!iCan(3) ? " AND O.client_id IN (SELECT client_id FROM clients WHERE user_id IN(SELECT user_id FROM users WHERE branch_id=$branch_id))" : "")."
     GROUP BY O.vg_id, O.fiat_id
 ) MMM ON MMM.vg_id = V.vg_id AND MMM.fiat_id = F.fiat_id";
         $select .= ", IFNULL(MMM.sum, 0) AS `sum`";
@@ -65,7 +65,7 @@ ORDER BY sum";
 FROM users UU
 JOIN fiats FF
 " . $join . "
-WHERE UU.is_owner = 1 ".(!iCan(3) ? " AND UU.branch_id = '.$branch_id.'" : "")."
+WHERE UU.is_owner = 1 ".(!iCan(3) ? " AND UU.branch_id = $branch_id" : "")."
 ";
 }
 $result = mysqliToArray($connection->query($querry));
