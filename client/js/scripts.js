@@ -124,7 +124,23 @@ function parsePassData(res) {
     }
     $('#pay-system-btn').show();
 }
-
+function translateErrorsForClientPart(errorType){
+    switch (errorType) {
+        case "NO_SUCH_CLIENT":
+            return "Клиента не существует";
+        case "empty":
+            return "Данные не заполнены";
+        case "failed":
+            return "Ошибка сервера";
+        case "denied":
+            return "Доступ запрещен";
+        default:
+            return "Неизвестная ошибка";
+    }
+}
+function customAlert(errorType){
+    alert(translateErrorsForClientPart(errorType));
+}
 function createDeal(debt = 0) {
     $('.loader').show();
     const login = $('#login').val();
@@ -134,8 +150,9 @@ function createDeal(debt = 0) {
     $.post('./api/createDeal.php', {login, password, vg_sum, vg_type, debt}, (res) => {
         if (res.error) {
             $('.loader').fadeOut();
+            customAlert(res.error);
             return false;
-        } else if (res['status'] == "success") {
+        } else if (res['status'] === "success") {
             if (!$('#pay-form').find('.alert-success').length)
                 $('#pay-form').append('<div class="alert alert-success">\n' +
                     '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +

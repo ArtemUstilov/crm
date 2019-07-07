@@ -130,7 +130,7 @@ if (isset($_POST['client']) &&
             //'http://nit.tron.net.ua/api/category/list' - test SUCCESS
             $vg_url = strtolower($vg_data['url']);
             if (!isset($vg_url) || $vg_url == "" || $vg_url == " ") {
-                echo "success";
+                json_encode(array("status"=>"success"));
                 return false;
             }
 
@@ -162,27 +162,29 @@ if (isset($_POST['client']) &&
 
                 if ($result->{'success'} == false) {
                     $result->{'url'} = $vg_url;
+                    $result->{'status'} = "success";
                     echo json_encode($result);
                     return false;
                 }
             } catch (Exception $e) {
                 $response['url'] = $vg_url;
                 $response['success'] = false;
+                $response['status'] = "success";
                 echo json_encode($response);
                 return false;
             }
 
             restore_error_handler();
-            echo "success";
+            json_encode(array("status"=>"success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }

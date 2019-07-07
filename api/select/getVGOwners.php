@@ -91,7 +91,6 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
         ';
     }
     $res .= '</div>';
-    echo $res;
-
+    echo json_encode(array("status"=>"succes", "data" => $res));
 }
 

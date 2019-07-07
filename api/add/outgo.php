@@ -25,12 +25,12 @@ if (isset($_POST['sum'], $_POST['fiat'])) {
     if($res)
         updateBranchMoney($connection, $branch_id, -$sum, $fiat);
     if ($res) {
-        echo "success";
+        json_encode(array("status"=>"success"));
         return false;
     } else {
-        echo "failed";
+        error("failed");
         return false;
     }
 } else {
-    echo "empty";
+    error("empty");
 }

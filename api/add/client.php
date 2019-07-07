@@ -24,7 +24,7 @@ if (isset($_POST['first_name'])) {
     $client = true;
     $check_client = mysqli_fetch_assoc($connection->query("SELECT client_id AS `id` FROM clients WHERE byname='$byname'"));
     if ($check_client) {
-        echo "exists";
+        error("exists");
         return false;
     }
     if ($user_data && heCan($user_data['role'], 1)) {
@@ -34,17 +34,17 @@ if (isset($_POST['first_name'])) {
         VALUES('$user_id', '$last_name','$first_name','$byname','$phone','$email','$description', '$telegram', '$byname', '$pass', '$pay_in_debt', '$payment_system', '$pay_page', '$max_debt') ");
         $lastid = mysqli_fetch_assoc($connection ->query('SELECT client_id AS `id` FROM clients ORDER BY client_id DESC LIMIT 1'))['id'];
         if ($res) {
-            echo "success".$lastid;
+            json_encode(array("status"=>"success")).$lastid;
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     } else {
-        echo "empty";
+        error("empty");
         return false;
     }
 }else{
-    echo "empty";
+    error("empty");
 }
