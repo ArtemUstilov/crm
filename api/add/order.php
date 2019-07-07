@@ -1,4 +1,6 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . "/funcs.php";
+
 if (isset($_POST['client']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
@@ -9,8 +11,6 @@ if (isset($_POST['client']) &&
     isset($_POST['loginByVg'])) {
 
     include_once("../../db.php");
-    include_once("../../funcs.php");
-
 
     $sum_vg = clean($_POST['sum_vg']);
     $login_by_vg = clean($_POST['loginByVg']);
@@ -179,10 +179,10 @@ if (isset($_POST['client']) &&
             error("failed");
             return false;
         }
-
     }
     error("denied");
     return false;
 } else {
     error("empty");
+    return false;
 }

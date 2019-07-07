@@ -18,9 +18,8 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
         error("exists");
         return false;
     }
-    if (heCan($user_data['role'], 2)) {
-            $res = $connection->
-            query("
+    if (heCan($user_data['role'], 2)){
+        $query = "
                 INSERT INTO vg_data (
                 `name`,
                     `in_percent`,
@@ -29,7 +28,11 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                    `api_url_regexp`,
                     `vg_id`,
                     `branch_id`
-                ) VALUES('$name', '$in','$out','$key','$url', '$prevId', '$branch_id') ");
+                ) VALUES('$name', '$in','$out','$key','$url', '$prevId', '$branch_id') ";
+    include '../../dev/ChromePhp.php';
+    ChromePhp::log($query);
+            $res = $connection->
+            query($query);
         if ($res) {
             json_encode(array("status"=>"success"));
             return false;

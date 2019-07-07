@@ -23,7 +23,7 @@ $.validate({
 function editOrder() {
     let order_id = $('#edit-order-form #edit-order-title').attr('order-id');
     let sum_vg = $("#edit-order-form #editSumVGField").val();
-    let debt = $("#edit-order-form #editDebtClField").val();
+    let debt = $("#edit-order-form #editDebtClField").val() || 0;
     let referral = $("#edit-order-form #editLastNameField").val();
     let rollback_1 = $("#edit-order-form #editRollback1Field").val();
     let out = $("#edit-order-form #editOutField").val();

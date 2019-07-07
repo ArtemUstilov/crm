@@ -61,7 +61,7 @@ function orderAddModal($data, $more_data)
   </p>
    <p>
    Не оплаченая часть
-  <input id="debtClField" min=0 data-validation="required length" data-validation-length="min1" type="number" name="debt-sum" value = 0 step="0.01">
+  <input id="debtClField" min=0 type="number" name="debt-sum" value = 0 step="0.01">
   </p>
   <p>
   Реферал
@@ -164,7 +164,7 @@ function orderEditModal($more_data)
   </p>
    <p>
    Не оплаченая часть
-  <input id="editDebtClField" min="0" data-validation="required length" data-validation-length="min1" type="number" step="0.01" name="debt-sum" value = 0>
+  <input id="editDebtClField" min="0" type="number" step="0.01" name="debt-sum" value = 0>
   </p>
   <p>
   Реферал
