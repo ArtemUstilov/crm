@@ -1,12 +1,13 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'] . "/funcs.php";
+include_once("../../db.php");
 
 if (!isset($_POST['client'], $_POST['sum_vg'], $_POST['out'], $_POST['obtain'],
     $_POST['vg'], $_POST['fiat'], $_POST['shares'], $_POST['loginByVg'])) {
     return error("empty");
 }
 
-include_once $_SERVER['DOCUMENT_ROOT'] . "/funcs.php";
-include_once("../../db.php");
+
 
 
 $sum_vg = clean($_POST['sum_vg']);
