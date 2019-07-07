@@ -16,7 +16,6 @@ $(document).ready(function () {
         }
         const login = $('#login').val();
         $.get('./api/getClientInfo.php', {login, vgSum}, (res) => {
-            console.log(res.error);
             if (res.error) {
                 let msg = "";
                 switch (res.error) {

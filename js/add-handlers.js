@@ -124,7 +124,6 @@ $(document).ready(function () {
                     $('#Order-Modal #loginByVgField').val(res.loginByVg);
                 else
                     $('#Order-Modal #loginByVgField').val("");
-                console.log("fiat: ", res.fiat_id);
                 if (res.fiat_id && parseInt(res.fiat_id) > 0) {
                     $('#Order-Modal #fiatField').val(res.fiat_id);
                 } else {
@@ -694,7 +693,6 @@ $(document).ready(function () {
         let fiat = $("#payback-debt-form #fiatField").val();
         $this = $(".modal-submit");
         $this.prop("disabled", true);
-        console.log("AAAAAAAA");
         $.ajax({
             url: "../api/operate/debt.php",
             type: "POST",
