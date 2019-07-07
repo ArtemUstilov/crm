@@ -238,6 +238,79 @@ function display_tree_table(){
     return $output;
 }
 
+function getOutGoTypes($connection)
+{
+    $HALLS = "../../../../../halls/";
+    $res = mysqliToArray($connection->query("SELECT outgo_type_id, outgo_name, group_concat(DISTINCT son_id) AS sons
+                FROM `outgo_types` OT
+                LEFT OUTER JOIN `outgo_types_relatives` OTR ON OT.outgo_type_id = OTR.parent_id
+                GROUP BY outgo_type_id, outgo_name"));
+    return $res;
+}
+
+function getTypeByTypes($types, $type_id)
+{
+    foreach ($types as $key => $var) {
+        if ($var['outgo_type_id'] == $type_id) {
+            $cur = $var;
+        }
+    }
+    return $cur;
+}
+
+function tree($node, $types)
+{
+    if (is_null($node) || !is_array($node) || is_null($node['sons']) || $node['sons'] == '' || $node['sons'] == '{NULL}' ||
+        $node['sons'] == NULL || $node['sons'] == 'NULL') {
+        return array("node" => $node);
+    }
+    $sons = explode(',', $node['sons']);
+    $layer = array();
+    for ($i = 0; $i < count($sons); $i++) {
+        $ggg = null;
+
+        foreach ($types as $key => $var) {
+            if ($var['outgo_type_id'] == $sons[$i]) {
+                $ggg = $var;
+            }
+        }
+        array_push($layer, $ggg);
+    }
+    $next = array();
+    foreach ($layer as $key => $var) {
+        array_push($next, tree($var, $types));
+    }
+    return array("node" => $node, "children" => $next);
+}
+
+function children_list($node, $types)
+{
+    if (is_null($node) || !is_array($node) || is_null($node['sons']) || $node['sons'] == '' || $node['sons'] == '{NULL}' ||
+        $node['sons'] == NULL || $node['sons'] == 'NULL') {
+        return array($node);
+    }
+    $sons = explode(',', $node['sons']);
+    $layer = array();
+    for ($i = 0; $i < count($sons); $i++) {
+        $ggg = null;
+
+        foreach ($types as $key => $var) {
+            if ($var['outgo_type_id'] == $sons[$i]) {
+                $ggg = $var;
+            }
+        }
+        array_push($layer, $ggg);
+    }
+    $next = array();
+    foreach ($layer as $key => $var) {
+        $newArr = children_list($var, $types);
+        foreach ($newArr as $item) {
+            array_push($next, $item);
+        }
+    }
+    array_push($next, $node);
+    return $next;
+}
 
 
 
