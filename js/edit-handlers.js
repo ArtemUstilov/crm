@@ -21,6 +21,8 @@ $.validate({
 });
 
 function editOrder() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let order_id = $('#edit-order-form #edit-order-title').attr('order-id');
     let sum_vg = $("#edit-order-form #editSumVGField").val();
     let debt = $("#edit-order-form #editDebtClField").val() || 0;
@@ -39,8 +41,6 @@ function editOrder() {
         allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
     });
     const shares = allShares.filter((el) => el.value > 0);
-    const $this = $("#edit-order-form .modal-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/order.php",
         type: "POST",
@@ -81,8 +81,9 @@ function editOrder() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -103,6 +104,8 @@ $.validate({
 });
 
 function editUser() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let password = $("#edit-user-form #editPassField").val();
     let login = $("#edit-user-form #editLoginField").val();
     let first_name = $("#edit-user-form #editFirstNameField").val();
@@ -112,8 +115,6 @@ function editUser() {
     let role = $("#edit-user-form #editRoleField").val();
     let id = $("#edit-user-form #edit-user-title").attr('user-id');
     let telegram = $("#edit-user-form #telegram").val();
-    const $this = $("#edit-user-form .modal-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/user.php",
         type: "POST",
@@ -142,8 +143,9 @@ function editUser() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -160,6 +162,8 @@ $.validate({
 });
 
 function editClient() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let phone = $("#edit-client-form #editPhoneField").val();
     let byname = $("#edit-client-form #editBynameField").val();
     let telegram = $("#edit-client-form #editTgField").val();
@@ -176,7 +180,6 @@ function editClient() {
     let pay_in_debt = $("#edit-client-form #pay_in_debt").is(':checked');
     let pay_page = $("#edit-client-form #pay_page").is(':checked');
     let max_debt = $("#edit-client-form #editMaxDebtField").val();
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/client.php",
         type: "POST",
@@ -210,8 +213,9 @@ function editClient() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -228,14 +232,14 @@ $.validate({
 });
 
 function editVG() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let name = $("#edit-vg-form #editNameField").val();
     let in_percent = $("#edit-vg-form #editInField").val();
     let out_percent = $("#edit-vg-form #editOutField").val();
     let url = $("#edit-vg-form #editUrlField").val();
     let key = $("#edit-vg-form #editKeyField").val();
     let id = $("#edit-vg-form #edit-vg-title").attr('vg-id');
-    const $this = $("#edit-client-form .modal-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/vg.php",
         type: "POST",
@@ -261,8 +265,9 @@ function editVG() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -280,12 +285,12 @@ $.validate({
 });
 
 function editFiat() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let name = $("#edit-fiat-form #editNameFiatField").val();
     let full_name = $("#edit-fiat-form #editFullNameFiatField").val();
     let code = $("#edit-fiat-form #editCodeField").val();
     let fiat = $("#edit-fiat-form #edit-fiat-title").attr('fiat-id');
-    const $this = $("#edit-fiat-form .modal-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/fiat.php",
         type: "POST",
@@ -309,8 +314,9 @@ function editFiat() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -328,11 +334,11 @@ $.validate({
 });
 
 function editBranch() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let name = $("#edit-branch-form #editNameField").val();
     let money = $("#edit-branch-form #editMoneyField").val();
     let id = $("#edit-branch-form #edit-branch-title").attr('branch-id');
-    const $this = $("#edit-client-form .modal-submit");
-    $this.prop("disabled", true);
     $.ajax({
         url: "../api/edit/branch.php",
         type: "POST",
@@ -355,8 +361,9 @@ function editBranch() {
         },
         complete: function () {
             setTimeout(function () {
-                $this.prop("disabled", false);
-            }, 300);
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
@@ -374,7 +381,8 @@ $.validate({
 });
 
 function editGlobalVG() {
-    $('.loader').show();
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
     let name = $("#edit-globalVGName").val();
     let vg_id = $("#edit-globalVG-title").attr('vg-id');
     $.ajax({
@@ -397,7 +405,10 @@ function editGlobalVG() {
             createAlertTable("connectionError", "VG");
         },
         complete: function () {
-            $('.loader').fadeOut();
+            setTimeout(function () {
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
         }
     });
 }
