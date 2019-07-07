@@ -11,9 +11,9 @@ $(document).ready(function () {
     });
 
     function addBranch() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let name = $("#add-branch-form #nameField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/branch.php",
             type: "POST",
@@ -34,8 +34,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -55,9 +56,9 @@ $(document).ready(function () {
     });
 
     function addOwner() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let id = $("#add-owner-form #nameField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/owner.php",
             type: "POST",
@@ -78,8 +79,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -103,6 +105,7 @@ $(document).ready(function () {
     });
     const vgcl = $('#Order-Modal #vgField, #Order-Modal #clientField');
     vgcl.change(function (e) {
+        $('.loader').show();
         $('#Order-Modal #sumVGField').trigger('change');
         let vg_id = $('#Order-Modal #vgField').val();
         let client_id = $('#Order-Modal #clientField').val();
@@ -116,7 +119,7 @@ $(document).ready(function () {
             },
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error, "Данные ВГ");
                     return;
                 }
@@ -139,12 +142,11 @@ $(document).ready(function () {
                 } else {
                     $('#Order-Modal #obtainingField').val($("#obtainingField option:first").val());
                 }
-            }
-            ,
+            },
             error: function () {
-            }
-            ,
+            },
             complete: function () {
+                $(".loader").fadeOut("fast");
             }
         });
 
@@ -217,6 +219,8 @@ $(document).ready(function () {
     });
 
     function addOrder() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         const client = $("#add-order-form #clientField").val();
         const rollback_1 = $("#add-order-form #rollback1Field").val();
         const callmaster = $("#add-order-form #callmasterField").val();
@@ -234,8 +238,6 @@ $(document).ready(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
         });
         const shares = allShares.filter((el) => el.value > 0);
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/order.php",
             type: "POST",
@@ -281,8 +283,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -305,6 +308,8 @@ $(document).ready(function () {
     });
 
     function addUser() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let password = $("#add-user-form #passField").val();
         let login = $("#add-user-form #loginField").val();
         let first_name = $("#add-user-form #firstNameField").val();
@@ -312,8 +317,6 @@ $(document).ready(function () {
         let branch = $("#add-user-form #branchField").val();
         let role = $("#add-user-form #roleField").val();
         let telegram = $("#add-user-form #telegram").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/user.php",
             type: "POST",
@@ -340,8 +343,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -363,21 +367,21 @@ $(document).ready(function () {
     });
 
     function addClient() {
-        let first_name = $("#add-client-form #firstNameField").val();
-        let last_name = $("#add-client-form #lastNameField").val();
-        let telegram = $("#add-client-form #tgField").val();
-        let description = $("#add-client-form #descriptionField").val();
-        let callmaster = $("#add-client-form #callmasterField").val();
-        let byname = $("#add-client-form #bynameField").val();
-        let phone = $("#add-client-form #phoneField").val();
-        let email = $("#add-client-form #emailField").val();
-        let password = $("#add-client-form #passwordField").val();
-        let payment_system = $("#add-client-form #payment_system").is(':checked');
-        let pay_in_debt = $("#add-client-form #pay_in_debt").is(':checked');
-        let pay_page = $("#add-client-form #pay_page").is(':checked');
-        let max_debt = $("#add-client-form #maxDebtField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
+        const first_name = $("#add-client-form #firstNameField").val();
+        const last_name = $("#add-client-form #lastNameField").val();
+        const telegram = $("#add-client-form #tgField").val();
+        const description = $("#add-client-form #descriptionField").val();
+        const callmaster = $("#add-client-form #callmasterField").val();
+        const byname = $("#add-client-form #bynameField").val();
+        const phone = $("#add-client-form #phoneField").val();
+        const email = $("#add-client-form #emailField").val();
+        const password = $("#add-client-form #passwordField").val();
+        const payment_system = $("#add-client-form #payment_system").is(':checked');
+        const pay_in_debt = $("#add-client-form #pay_in_debt").is(':checked');
+        const pay_page = $("#add-client-form #pay_page").is(':checked');
+        const max_debt = $("#add-client-form #maxDebtField").val();
         $.ajax({
             url: "../api/add/client.php",
             type: "POST",
@@ -415,6 +419,12 @@ $(document).ready(function () {
             error: function () {
                 createAlertTable("connectionError", "Клиент");
             },
+            complete: function () {
+                setTimeout(function () {
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
+            }
         });
 
     }
@@ -434,12 +444,12 @@ $(document).ready(function () {
     });
 
     function addOutgo() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
         let fiat = $("#add-outgo-form #fiatField").val();
         let descr = $("#add-outgo-form #commentField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/outgo.php",
             type: "POST",
@@ -458,8 +468,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -480,14 +491,15 @@ $(document).ready(function () {
     });
 
     function addVG() {
+        $('.loader').show();
+        $(".modal-submit").prop("disabled", true);
         let prevId = $("#add-vg-form #nameVgnField").val();
         let name = $("#add-vg-form #nameField").val();
         let in_percent = $("#add-vg-form #inField").val();
         let out_percent = $("#add-vg-form #outField").val();
         let url = $("#add-vg-form #urlField").val();
         let key = $("#add-vg-form #keyField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
+
         $.ajax({
             url: "../api/add/vg.php",
             type: "POST",
@@ -513,8 +525,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -535,11 +548,11 @@ $(document).ready(function () {
     });
 
     function addFiat() {
+        $('.loader').show();
+        $(".modal-submit").prop("disabled", true);
         let full_name = $("#add-fiat-form #fullNameFiatField").val();
         let name = $("#add-fiat-form #nameFiatField").val();
         let code = $("#add-fiat-form #codeField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/add/fiat.php",
             type: "POST",
@@ -562,8 +575,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -585,7 +599,8 @@ $(document).ready(function () {
 
     function addGlobalVG() {
         const name = $("#globalVGName").val();
-        $('.loader').show();
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         $.ajax({
             url: "../api/add/global.php",
             type: "POST",
@@ -603,7 +618,10 @@ $(document).ready(function () {
                 createAlertTable("connectionError", "VG");
             },
             complete: function () {
-                $('.loader').fadeOut();
+                setTimeout(function () {
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -635,11 +653,11 @@ $(document).ready(function () {
 
 
     function payRollback() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let id = $("#pay-rollback-form #clientField").val();
         let number = $("#pay-rollback-form #payField").val();
         let fiat = $("#pay-rollback-form #fiatField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/operate/rollback.php",
             type: "POST",
@@ -655,8 +673,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
@@ -688,11 +707,11 @@ $(document).ready(function () {
     });
 
     function paybackDebt() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
         let id = $("#payback-debt-form #debtorField").val();
         let number = $("#payback-debt-form #paybackField").val();
         let fiat = $("#payback-debt-form #fiatField").val();
-        $this = $(".modal-submit");
-        $this.prop("disabled", true);
         $.ajax({
             url: "../api/operate/debt.php",
             type: "POST",
@@ -710,8 +729,9 @@ $(document).ready(function () {
             },
             complete: function () {
                 setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
             }
         });
 
