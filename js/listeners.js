@@ -273,17 +273,18 @@ $(document).ready(function () {
         let type = $('.table-menu>h2').attr('type');
         let url = '';
         if (type === 'Branch') {
-            url = 'editBranchActivity';
+            url = 'branchActivity';
         } else
-            url = 'editActivity';
+            url = 'activity';
         $.ajax({
             url: "../api/edit/" + url + ".php",
             type: "POST",
             data: {id},
+            dataType: "JSON",
             cache: false,
             success: function (res) {
-                if (res === "failed" || res === "empty")
-                    createAlertTable('failed', '');
+                if(res.error)
+                    createAlertTable(res.error, '');
             },
             error: function () {
                 createAlertTable('failed', '');

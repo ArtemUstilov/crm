@@ -21,7 +21,7 @@ if (isset($_POST['first_name'])) {
     session_start();
     $user_id = $_SESSION['id'];
     if(mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE ((login = '$byname' AND login IS NOT NULL) || `password` = '$pass') AND client_id != '$edit_client_id'"))){
-        echo "exists";
+        error("exists");
         return;
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
@@ -44,15 +44,15 @@ if (isset($_POST['first_name'])) {
             `max_debt` = '$max_debt'
         WHERE `client_id` = '$edit_client_id'");
         if ($res) {
-            echo "edit-success";
+            echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
 
     } else {
-        echo "empty";
+        error("empty");
         return false;
     }
 }

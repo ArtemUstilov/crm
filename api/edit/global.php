@@ -18,15 +18,15 @@ if (isset($_POST['name'])) {
             `vg_id`='$vg_id' 
         ");
         if ($res) {
-            echo "edit-success";
+            echo json_encode(array("status"=>"edit-success"));
             return false;
         } else {
-            echo "failed";
+            error("failed");
             return false;
         }
     }
-    echo "denied";
+    error("denied");
     return false;
 } else {
-    echo "empty";
+    error("empty");
 }
