@@ -9,7 +9,10 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (res) {
                 if ($('#replenish-fiat-Modal #replenishFiatSelect').empty()) {
-                    if (res)
+                    if(res.error){
+                        createAlertTable(res.error, "Данные фиата");
+                        return;
+                    }
                         res.forEach((el) => {
                             $('#replenish-fiat-Modal #replenishFiatSelect').append(`<option value = ${el["fiat_id"]}>${el["full_name"]}</option>`)
                         });
@@ -30,8 +33,10 @@ $(document).ready(function () {
             dataType: 'JSON',
             success: function (res) {
                 if ($('#replenish-fiat-Modal #replenishOwnerSelect').empty()) {
-                    if (res)
-                        res.forEach((el) => {
+                    if(res.error){
+                        createAlertTable(res.error, "Данные фиата");
+                        return;
+                    }                        res.forEach((el) => {
                             $('#replenish-fiat-Modal #replenishOwnerSelect').append(`<option value = ${el["id"]}>${el["full_name"]}</option>`)
                         });
                 }

@@ -244,6 +244,10 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
+                    if(res.error){
+                        createAlertTable(res.error, "Статистика");
+                        return;
+                    }
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat1 [itemid=' + r.id + '] .2-f');
@@ -270,6 +274,10 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
+                    if(res.error){
+                        createAlertTable(res.error, "Статистика");
+                        return;
+                    }
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat2 [itemid="' + r.id + '"] .1-f');
@@ -320,6 +328,10 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
+                    if(res.error){
+                        createAlertTable(res.error, "Статистика");
+                        return;
+                    }
                     if (!res || !res.length) return;
                     res.forEach(r => {
                         const cell = $('.Stat3 [itemid="' + r.id + '"] .2-f');
@@ -358,6 +370,10 @@ $(document).ready(function () {
             try {
                 res = JSON.parse(res);
             } catch (e) {
+            }
+            if(res.error){
+                createAlertTable(res.error, "Статистика");
+                return;
             }
             $('#wrapper').html(res);
             initSorterAndFilters();

@@ -15,7 +15,7 @@ if (isset($_POST['client_id'])) {
         echo json_encode($client_data);
         return false;
     } else {
-        echo "failed";
+        error("failed");
         return false;
     }
 }

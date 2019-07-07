@@ -309,7 +309,10 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
-                    if (!res || !res.length) return;
+                    if(res.error){
+                        createAlertTable(res.error, "Данные владельцев");
+                        return;
+                    }
                     res.forEach(r => {
                         const cell = $('.Owner-Stats [itemid*=' + r.id + '] .1-f');
                         cell.attr('title', r.sum || 0);
@@ -389,9 +392,10 @@ $(document).ready(function () {
             cache: false,
             dataType: 'JSON',
             success: function (res) {
-                console.log(res);
-                if (!res) return;
-                const modal = $("#Branch-money-info-modal");
+                if(res.error){
+                    createAlertTable(res.error, "Данные предприятия");
+                    return;
+                }                const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
                 $("#Branch-money-info-modal .fiats").html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
                 modal.modal({
