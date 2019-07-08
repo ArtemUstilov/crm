@@ -8,6 +8,6 @@ $types = getOutGoTypes($connection);
 
 if ($types) {
     $cur = getTypeByTypes($types, $type_id);
-    echo json_encode(array("types" => tree($cur, $types)));
+    echo json_encode(array("status"=>"success","types" => tree($cur, $types)));
     return false;
 }

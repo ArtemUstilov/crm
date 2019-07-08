@@ -1,17 +1,49 @@
 $(document).ready(() => {
-    if (!window.location.pathname.includes('types')){
+    if (!window.location.pathname.includes('types')) {
         return;
     }
     $('#wrapper').css({overflowX: "visible"});
-    initTable();
-    fetchTypes();
-    $('.change_isactive').change(function (res) {
-        if ($(this).attr('checked'))
-            deactivate(this, res);
-        else
-            activate(this, res);
-    });
+    initTreeTable().then(initTable);
 });
+
+function initTreeTable(){
+    return new Promise((resolve)=>{
+        fetchTypes()
+            .then(() => {
+                    initModalListeners();
+                    $('.change_isactive').change(function (res) {
+                        $(this).prop('checked', !+$(this).prop('checked'));
+                        activate(this, res);
+                    });
+                    resolve();
+                }
+            );
+    });
+}
+
+function initModalListeners() {
+    [{icon: "plus", suff: "add"}, {icon: "edit", suff: "edit"}].forEach(({icon, suff}) => {
+        $(`#types-list .fa-${icon}`).click(function () {
+            const id = $(this).parent().parent().parent().attr('itemid');
+            const name = $(this).parent().find('span').text();
+            const nameInput = $(`#outgo-type-${suff}-Modal #name-${suff}`);
+
+            $(`#outgo-type-${suff}-category`).text(name);
+            if(suff === "edit"){
+                nameInput.val(name);
+            }
+            nameInput.attr('itemid', id);
+            $(`#outgo-type-${suff}-Modal`).modal();
+        });
+    });
+    $('#global-add-type').click(function(){
+        const id = 1;
+        const name = "общие";
+        $(`#outgo-type-add-category`).text(name);
+        $(`#outgo-type-add-Modal #name-add`).attr('itemid', id);
+        $(`#outgo-type-add-Modal`).modal();
+    });
+}
 
 
 function levelToHtml(types, acc = 0) {
@@ -19,9 +51,9 @@ function levelToHtml(types, acc = 0) {
     if (!types || !types.length) return html;
     acc && (html += `<ul class="submenu" id="${acc}">`);
     html += types.map(type => {
+        if(!type.node) return;
         if (Object.keys(type.node).length < 2) return;
         let s = appendType(type.node, type.children && type.children.length);
-
         s += levelToHtml(type.children, acc + 1);
         s += '</li>\n';
         return s;
@@ -30,10 +62,10 @@ function levelToHtml(types, acc = 0) {
     return html;
 }
 
-function appendType({name, id, status}, hasChildren) {
+function appendType({outgo_name: name, outgo_type_id: id, active}, hasChildren) {
     let s = `<li itemid="${id}">
             <div class="row-wrapper">
-            <div>
+            <div class="name-wrapper">
             <i class="fas fa-edit"></i>
             <i class="fas fa-plus"></i>
              <span>${name}</span>
@@ -42,48 +74,44 @@ function appendType({name, id, status}, hasChildren) {
 <i class="fas fa-arrow-down"></i>` : ""}
              <span>
                 <div class="button b2" id="button-10">
-                <input type="checkbox" class="checkbox change_isactive" ${status === 1 ? "" : "checked"}>
+                <input type="checkbox" class="checkbox change_isactive" ${+active === 1 ? "" : "checked"}>
                 <div class="knobs"></div>
                 </div>
                 </span>
               </div>
-
             `;
     return s;
 }
 
-function fetchTypes() {
-    const mockData = [
-        {node:{id:1, name: "first", status: 1}, children: [
-            {node:{id:2, name: "sec", status: 1}, children:
-                    [{node:{id:3, name: "third", status: 0}},{node:{id:4, name: "fourth", status: 0}}]
-            }]
+const fetchTypes = () => new Promise((resolve, reject) => {
+    $(".loader").show();
+    $.ajax({
+        url: "../api/select/outgoTypes.php",
+        type: "POST",
+        data: {},
+        dataType: "JSON",
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error);
+                reject();
+                return;
+            }
+            if (res.status === "success") {
+                $('#types-list').html(levelToHtml(res.types.children));
+                resolve();
+            }
+            reject();
         },
-    ];
-    $('#types-list').html(levelToHtml(mockData));
-    // $(".loader").show();
-    // $.ajax({
-    //     url: "../api/select/outgoTypes.php",
-    //     type: "POST",
-    //     data: {},
-    //     dataType: "JSON",
-    //     cache: false,
-    //     success: function (res) {
-    //         if (res.error) {
-    //             createAlertTable(res.error);
-    //             return;
-    //         }
-    //
-    //     },
-    //     error: function () {
-    //         createAlertTable("connectionError", "Типы расходов");
-    //     },
-    //     complete: function (res) {
-    //         $(".loader").fadeOut("slow");
-    //     }
-    // });
-}
-
+        error: function () {
+            createAlertTable("connectionError", "Типы расходов");
+            reject();
+        },
+        complete: function (res) {
+            $(".loader").fadeOut("slow");
+        }
+    })
+});
 
 function initTable() {
     (function () {
@@ -119,9 +147,7 @@ function initTable() {
                         if (['I', 'SPAN', 'INPUT'].includes(e.target.tagName)) return;
                         e.stopPropagation();
                         e.preventDefault();
-                        console.log($(this).children());
                         if ($(this).children(".submenu").length > 0) {
-                            console.log("SSSS");
                             if ($(this).children(".submenu").css("display") === "none") {
                                 $(this).children(".submenu").delay(defaults.showDelay).slideDown(defaults.speed);
                                 return false
@@ -177,7 +203,6 @@ function initTable() {
 
     $(document).ready(function () {
         jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
-
     });
     $(function () {
         $("#hall-list li").click(function () {
@@ -188,49 +213,30 @@ function initTable() {
 }
 
 function activate(_this) {
-    const row = $(_this).parent().parent();
-    const a = $(_this).parent();
-    const hall_name = row.attr('itemid');
+    const row = $(_this).parent().parent().parent().parent();
+    const id = row.attr('itemid');
     $.ajax
     ({
         type: "POST",
-        url: "../backend/api/update/hall_active.php",
+        url: "../api/edit/outgoTypeActive.php",
         dataType: 'JSON',
-        data: {
-            hall_name, is_active: 1,
-        },
-        success: function (res) {
-            if (res.status === 'success'){
-
-            } else
-                $(_this).effect('shake');
-        },
-        error: function (e) {
-            $(_this).effect('shake');
-        }
-    });
-}
-
-function deactivate(_this) {
-    const row = $(_this).parent().parent();
-    const a = $(_this).parent();
-    const hall_name = row.attr('itemid');
-    $.ajax
-    ({
-        type: "POST",
-        url: "../backend/api/update/typeActive.php",
-        dataType: 'JSON',
-        data: {
-            hall_name, is_active: 0,
-        },
+        data: {id},
         success: function (res) {
             if (res.status === 'success') {
-
-            } else
-                $(_this).effect('shake');
+                res.nodes.replace(/'/g, '').split(',').forEach(r => {
+                    const li = $('[itemid="' + r + '"]');
+                    li.find('.change_isactive').prop('checked', !+res.status_to_do)
+                });
+            } else{
+                if(res.error === "denied"){
+                    $(_this).parent().effect('shake');
+                }else{
+                    alert(res.error);
+                }
+            }
         },
         error: function (e) {
-            $(_this).effect('shake');
+            alert(e.responseText);
         }
     });
 }

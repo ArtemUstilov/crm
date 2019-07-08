@@ -73,6 +73,7 @@ function template($body)
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
@@ -114,11 +115,11 @@ function template($body)
 </div>
 ' . $add_money_form . '
 ' . $changeBranch . '
+<script src="../js/treeTable.js"></script>
 <script src="../js/add-handlers.js"></script>
 <script src="../js/edit-handlers.js"></script>
 <script src="../js/edit.js"></script>
 <script src="../js/listeners.js"></script>
-<script src="../js/treeTable.js"></script>
 <script src="../js/statistics.js"></script>
 ' . $add_money_script . '
 </body>

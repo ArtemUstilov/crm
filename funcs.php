@@ -221,29 +221,35 @@ function error($errorType)
 }
 
 function display_tree_table(){
-    $output = '<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
- <div id="types-wrapper">
- <h2>Типы расходов</h2>
- <table>
- <thead>
- <th>Название</th>
- <th>Статус</th>
-</thead>
-</table>
-        <ul id="types-list">
+    include_once $_SERVER['DOCUMENT_ROOT'] . "/components/modals/outgo_type.php";
 
-            </ul>
-        </div>
-        </div>';
-    return $output;
+    $output = '
+<div id="jquery-accordion-menu" class="jquery-accordion-menu white">
+    <div id="types-wrapper">
+        <h2>Типы расходов</h2>
+        <table>
+            <thead>
+                <i class="fas fa-plus fa-2x" id="global-add-type"></i>
+                <th>Название</th>
+                <th>Статус</th>
+            </thead>
+        </table>
+        <ul id="types-list"></ul>
+    </div>
+</div>';
+    return $output.outgoTypeModal();
 }
 
 function getOutGoTypes($connection)
 {
-    $HALLS = "../../../../../halls/";
-    $res = mysqliToArray($connection->query("SELECT outgo_type_id, outgo_name, group_concat(DISTINCT son_id) AS sons
+    //  OR outgo_type_id = 1  |this we need coz we should take root type every time
+    session_start();
+    $branch_id = $_SESSION['branch_id'];
+
+    $res = mysqliToArray($connection->query("SELECT outgo_type_id, outgo_name, group_concat(DISTINCT son_id) AS sons, `active`
                 FROM `outgo_types` OT
-                LEFT OUTER JOIN `outgo_types_relatives` OTR ON OT.outgo_type_id = OTR.parent_id
+                LEFT OUTER JOIN `outgo_types_relative` OTR ON OT.outgo_type_id = OTR.parent_id
+                WHERE branch_id =$branch_id OR outgo_type_id = 1
                 GROUP BY outgo_type_id, outgo_name"));
     return $res;
 }

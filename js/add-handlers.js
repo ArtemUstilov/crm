@@ -351,7 +351,52 @@ $(document).ready(function () {
 
     }
 
+    // Outgo Type
+    $.validate({
+        form: '#add-outgo-type-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addOutgoType();
+            return false;
+        }
+    });
 
+    function addOutgoType() {
+        $(".loader").show();
+        $(".modal-submit").prop("disabled", true);
+        const nameInput = $("#add-outgo-type-form #name-add");
+        const name = nameInput.val();
+        const id = nameInput.attr('itemid');
+
+        $.ajax({
+            url: "../api/add/outgoType.php",
+            type: "POST",
+            data: {
+               name,
+                parentId: id
+            },
+            dataType: "JSON",
+            cache: false,
+            success: function (res) {
+                if(res.error){
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Тип расходов");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Тип расходов");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
+            }
+        });
+
+    }
 //Client
 
     $.validate({
@@ -738,7 +783,7 @@ $(document).ready(function () {
     }
 
 
-    function createAlertTable(alertType, requestType) {
+    function createAlertTable(alertType, requestType, reload = true) {
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
@@ -757,7 +802,7 @@ $(document).ready(function () {
                     currentOrderForm.modal();
                 else if (requestType != 'Заказ')
                     setTimeout(function () {
-                        location.reload();
+                        reload && location.reload();
                     }, 1500);
                 break;
             case "edit-success":
@@ -765,7 +810,7 @@ $(document).ready(function () {
                 $('.custom-alert').addClass('bg-green');
                 $.modal.close();
                 setTimeout(function () {
-                    location.reload();
+                    reload && location.reload();
                 }, 2500);
                 break;
             case "failed":

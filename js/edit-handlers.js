@@ -150,6 +150,53 @@ function editUser() {
     });
 }
 
+// Outgo Type
+$.validate({
+    form: '#edit-outgo-type-form',
+    modules: 'security',
+    lang: 'ru',
+    onSuccess: function () {
+        editOutgoType();
+        return false;
+    }
+});
+
+function editOutgoType() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
+    const nameInput = $("#edit-outgo-type-form #name-edit");
+    const name = nameInput.val();
+    const id = nameInput.attr('itemid');
+    $.ajax({
+        url: "../api/edit/outgoType.php",
+        type: "POST",
+        data: {
+            name,
+            id
+        },
+        dataType: "JSON",
+        cache: false,
+        success: function (res) {
+            if(res.error){
+                createAlertTable(res.error);
+                return;
+            }
+            createAlertTable(res.status, "Тип расходов");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Тип расходов");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
+        }
+    });
+
+}
+
+
 //Client
 $.validate({
     form: '#edit-client-form',
@@ -422,7 +469,7 @@ function createAlertTable(alertType, text) {
             $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);
             break;
         case "success":
-            $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
+            $('.custom-alert .alert-text-box').text(`${text} успешно изменен`);
             $('.custom-alert').addClass('bg-green');
             $.modal.close();
             setTimeout(function () {
