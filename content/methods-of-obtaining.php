@@ -5,13 +5,11 @@ include_once '../components/templates/template.php';
 include_once '../db.php';
 
 
-$options['type'] = 'methodsOfObtaining';
+$options['type'] = 'MethodsOfObtaining';
 $options['text'] = 'Методы оплаты';
 $options['edit'] = 3;
 $options['btn'] = 3;
 $options['btn-text'] = 'Добавить';
-
-
 
 
 echo template(display_data($connection->query('

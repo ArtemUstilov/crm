@@ -73,6 +73,9 @@ $('tr').on('click', (e) => {
         case "info":
             fillAdditionalInfo(mainParent);
             break;
+        case "MethodsOfObtaining-edit":
+            fillMethodOfObtainingInfo(mainParent);
+            break;
         case "delete":
             deleteOwner(mainParent);
             break;
@@ -95,7 +98,7 @@ function fillAdditionalInfo(target) {
             },
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error, "Данные клиента");
                     return;
                 }
@@ -124,7 +127,7 @@ function fillAdditionalInfo(target) {
             },
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     console.log(res);
                     createAlertTable(res.error, "Данные продажи");
                     return;
@@ -159,7 +162,7 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные продажи");
                 return;
             }
@@ -226,7 +229,7 @@ function fillOwnerEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные менеджера");
                 return;
             }
@@ -258,7 +261,7 @@ function fillFiatEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable('connectionError', 'Фиат');
                 return;
             }
@@ -287,7 +290,7 @@ function fillUserEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные менеджера");
                 return;
             }
@@ -318,7 +321,7 @@ function fillBranchEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные предприятия");
                 return;
             }
@@ -345,7 +348,7 @@ function fillVGEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные ВГ");
                 return;
             }
@@ -376,7 +379,7 @@ function fillOwnerEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные владельца");
                 return;
             }
@@ -395,7 +398,8 @@ function fillOwnerEditForm(target) {
         },
     });
 }
-function  fillGlobalVGlInfo(target){
+
+function fillGlobalVGlInfo(target) {
     $('.loader').show();
     const vg_id = target.attr('itemid');
     $.ajax({
@@ -407,7 +411,7 @@ function  fillGlobalVGlInfo(target){
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные глобала");
                 return;
             }
@@ -419,11 +423,12 @@ function  fillGlobalVGlInfo(target){
         error: function () {
             $('.loader').fadeOut('fast');
         },
-        done: function(){
+        done: function () {
 
         }
     });
 }
+
 function fillClientEditForm(target) {
     $('.loader').show();
     let client_id = target.attr('itemid');
@@ -436,7 +441,7 @@ function fillClientEditForm(target) {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, "Данные клиента");
                 return;
             }
@@ -460,6 +465,34 @@ function fillClientEditForm(target) {
         },
         error: function () {
         },
+    });
+}
+
+function fillMethodOfObtainingInfo(target) {
+    $('.loader').show();
+    let method_id = target.attr('itemid');
+    $.ajax({
+        url: "../api/select/methodOfObtaining.php",
+        type: "POST",
+        dataType: 'json',
+        data: {
+            method_id,
+        },
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error, "Метод оплаты");
+                return;
+            }
+
+            $('#method-of-obtaining-edit-form #method-edit-name').val(res['method_name']);
+            $('#MethodsOfObtaining-edit-Modal').modal();
+        },
+        error: function () {
+        },
+        complete: function () {
+            $('.loader').fadeOut('fast');
+        }
     });
 }
 

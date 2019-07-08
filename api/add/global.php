@@ -4,6 +4,7 @@ if (isset($_POST['name'])) {
     include_once("../../funcs.php");
     $name = clean($_POST['name']);
     session_start();
+    $user_id = $_SESSION['user_id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $exists = mysqliToArray($connection->query("SELECT * FROM virtualgood WHERE `name` = '$name'"));
     if ($exists) {
@@ -15,7 +16,7 @@ if (isset($_POST['name'])) {
         query("
                 INSERT INTO virtualgood (`name`) VALUES('$name') ");
         if ($res) {
-            json_encode(array("status"=>"success"));
+            json_encode(array("status" => "success"));
             return false;
         } else {
             return error("failed");

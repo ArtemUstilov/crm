@@ -157,7 +157,7 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return fiatAddModal($data);
         case "globalVG":
             return globalVgAddModal();
-        case "methodsOfObtaining":
+        case "MethodsOfObtaining":
             return methodOfObtainingModal();
         default:
             return null;
