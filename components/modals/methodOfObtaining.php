@@ -11,7 +11,7 @@ function methodOfObtainingModal()
   <input id="method-name" data-validation="required"  placeholder="Название" type="text" name="name" >
   </p>
   </div>
-  <input class="modal-submit" type="submit" value="Выплатить">
+  <input class="modal-submit" type="submit" value="Добавить">
   </form>
 </div>' . methodOfObtainingEditModal();
 }
@@ -28,7 +28,7 @@ function methodOfObtainingEditModal()
   <input id="method-edit-name" data-validation="required"  placeholder="Название" type="text" name="name" >
   </p>
   </div>
-  <input class="modal-submit" type="submit" value="Выплатить">
+  <input class="modal-submit" type="submit" value="Сохранить">
   </form>
 </div>';
 }

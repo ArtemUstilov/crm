@@ -150,6 +150,53 @@ function editUser() {
     });
 }
 
+
+
+
+//Method of obtaining
+$.validate({
+    form: '#method-of-obtaining-edit-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editMethodOfObtaining();
+        return false;
+    }
+});
+
+function editMethodOfObtaining() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
+    let method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
+    $.ajax({
+        url: "../api/edit/methodOfObtaining.php",
+        type: "POST",
+        dataType: "JSON",
+        data: {method_name},
+        cache: false,
+        success: function (res) {
+            if(res.error){
+                createAlertTable(res.error, '');
+                return;
+            }
+            createAlertTable(res.status, "Пользователь");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Пользователь");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
+        }
+    });
+}
+
+
+
+
+
 //Client
 $.validate({
     form: '#edit-client-form',

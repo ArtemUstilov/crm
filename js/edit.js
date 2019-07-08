@@ -484,7 +484,6 @@ function fillMethodOfObtainingInfo(target) {
                 createAlertTable(res.error, "Метод оплаты");
                 return;
             }
-
             $('#method-of-obtaining-edit-form #method-edit-name').val(res['method_name']);
             $('#MethodsOfObtaining-edit-Modal').modal();
         },
