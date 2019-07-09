@@ -36,6 +36,9 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
         </li>
         <li><a href="../../content/types.php"
                class=<?php echo($curPage === 'types' ? '"active" disabled' : '') ?>>Типы расходов</a></li>
+        <li><a href="../../content/projects.php"
+               class=<?php echo($curPage === 'projects' ? '"active" disabled' : '') ?>>Проекты</a>
+        </li>
         <li><a href="../../content/statistics.php"
                class=<?php echo($curPage === 'statistics' ? '"active" disabled' : '') ?>>Статистика</a></li>
         <li><a href="../../content/turnover.php"
