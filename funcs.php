@@ -166,6 +166,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return globalVgAddModal();
         case "MethodsOfObtaining":
             return methodOfObtainingModal();
+        case "Project":
+            return projectAddModal();
         default:
             return null;
     }
