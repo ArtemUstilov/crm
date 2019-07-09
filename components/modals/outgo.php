@@ -19,6 +19,17 @@ function outgoModal($data, $more_data)
     $output .= '
 </select>
 </p>
+<p>
+  <select id="typeField">
+  <option value="" selected disabled>Выберите тип расхода</option>';
+    if($more_data['types']){
+        foreach ($more_data['types'] as $key => $var) {
+            $output .= '<option value="' . $var['id'] . '">' . $var['name'] . '</option>';
+        }
+    }
+    $output .= '
+</select>
+</p>
  <p>
   <textarea id="commentField" rows="3"  placeholder="Комментарий" name="description"></textarea>
   </p>

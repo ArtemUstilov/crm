@@ -9,7 +9,7 @@ if (isset($_POST['method_name'])) {
     $branch_id = $_SESSION['branch_id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
 
-    $exists = mysqli_fetch_assoc($connection->query("SELECT * FROM methods_of_obtaining WHERE method_name='$method_name'"));
+    $exists = mysqli_fetch_assoc($connection->query("SELECT * FROM methods_of_obtaining WHERE method_name='$method_name' AND branch_id='$branch_id'"));
     if ($exists) {
         error("exists");
         return false;

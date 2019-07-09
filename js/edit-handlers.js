@@ -150,6 +150,15 @@ function editUser() {
     });
 }
 
+// Outgo Type
+$.validate({
+    form: '#edit-outgo-type-form',
+    modules: 'security',
+    lang: 'ru',
+    onSuccess: function () {
+        editOutgoType();
+    }
+});
 
 //Method of obtaining
 $.validate({
@@ -162,11 +171,40 @@ $.validate({
     }
 });
 
+
+function editOutgoType() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
+    const nameInput = $("#edit-outgo-type-form #name-edit");
+    const name = nameInput.val();
+    const id = nameInput.attr('itemid');
+    $.ajax({
+        url: "../api/edit/outgoType.php",
+        type: "POST",
+        data: {
+            name,
+            id
+        },
+        dataType: "JSON",
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error);
+                return;
+            }
+            createAlertTable(res.status, "Тип расходов");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Тип расходов");
+        }
+    });
+}
+
 function editMethodOfObtaining() {
     $(".loader").show();
     $(".modal-submit").prop("disabled", true);
     const method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
-    const method_id =  $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
+    const method_id = $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
     $.ajax({
         url: "../api/edit/methodOfObtaining.php",
         type: "POST",
@@ -468,7 +506,7 @@ function createAlertTable(alertType, text) {
             $('.custom-alert .alert-text-box').text(`${text} с таким логином уже существует`);
             break;
         case "success":
-            $('.custom-alert .alert-text-box').text(`${text} успешно добавлен`);
+            $('.custom-alert .alert-text-box').text(`${text} успешно изменен`);
             $('.custom-alert').addClass('bg-green');
             $.modal.close();
             setTimeout(function () {

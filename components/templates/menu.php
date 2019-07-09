@@ -5,8 +5,8 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
 <div id="menu" page="<?php echo $curPage ?>">
     <ul>
         <li>
-            <a href="../.." class=' <?php echo (!$curPage ? '"active" disabled' : '') ?> '>Главная</a></li>
-        <li><a href="../../content/clients.php" class='<?php echo ($curPage === 'clients' ? '"active" disabled' : '') ?>'>Клиенты</a>
+            <a href="../.." class=<?php echo(!$curPage ? '"active" disabled' : '') ?>>Главная</a></li>
+        <li><a href="../../content/clients.php" class=<?php echo($curPage === 'clients' ? '"active" disabled' : '') ?>>Клиенты</a>
         </li>
         <?php if (iCan(2))
             echo '
@@ -16,28 +16,32 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
                 '>Сотрудники</a></li>';
         else echo '' ?>
         <?php if (iCan(3))
-        echo '<li><a href="../../content/global.php" class=' . ($curPage === 'global' ? '"active" disabled' : '') .'>Глобальное
+            echo '<li><a href="../../content/branches.php"
+              class=' . ($curPage === 'branches' ? '"active" disabled' : '') . '>Предприятия</a></li>
+        <li><a href="../../content/global.php" class=' . ($curPage === 'global' ? '"active" disabled' : '') . '>Глобальное
                 VG</a></li>
-        <li><a href="../../content/fiats.php" class=' . ($curPage === 'fiats' ? '"active" disabled' : '') .'>Валюты</a>
-        </li>
-        <li><a href="../../content/branches.php"
-               class='. ($curPage === ' branches' ? '"active" disabled' : '') .'>Предприятия</a></li>';
+        <li><a href="../../content/fiats.php" class=' . ($curPage === 'fiats' ? '"active" disabled' : '') . '>Валюты</a>
+        </li>';
         else echo '' ?>
-        <li><a href="../../content/vgs.php" class=' <?php echo ($curPage === 'vgs' ? '"active" disabled' : '') ?> '>VG</a>
+        <li><a href="../../content/vgs.php" class=<?php echo($curPage === 'vgs' ? '"active" disabled' : '') ?>>VG</a>
         </li>
-        <li><a href="../../content/orders.php" class=' <?php echo ($curPage === 'orders' ? '"active" disabled' : '') ?>'>Продажи</a>
+        <li><a href="../../content/orders.php" class=<?php echo($curPage === 'orders' ? '"active" disabled' : '') ?>>Продажи</a>
         </li>
-        <li><a href="../../content/outgo.php" class=' <?php echo ($curPage === 'outgo' ? '"active" disabled' : '') ?>'>Расходы</a>
+        <li><a href="../../content/outgo.php" class=<?php echo($curPage === 'outgo' ? '"active" disabled' : '') ?>>Расходы</a>
         </li>
         <li><a href="../../content/referals.php"
-               class=' <?php ($curPage === 'referals' ? '"active" disabled' : '') ?>'>Рефералы</a></li>
-        <li><a href="../../content/debts.php" class=' <?php echo ($curPage === ' debts' ? '"active" disabled' : '') ?>'>Должники</a>
+               class=<?php ($curPage === 'referals' ? '"active" disabled' : '') ?>>Рефералы</a></li>
+
+        <li><a href="../../content/debts.php" class=<?php echo($curPage === 'debts' ? '"active" disabled' : '') ?> >Должники</a>
         </li>
+        <li><a href="../../content/types.php"
+               class=<?php echo($curPage === 'types' ? '"active" disabled' : '') ?>>Типы расходов</a></li>
         <li><a href="../../content/statistics.php"
-               class=' <?php echo ($curPage === 'statistics' ? '"active" disabled' : '') ?>'>Статистика</a></li>
+               class=<?php echo($curPage === 'statistics' ? '"active" disabled' : '') ?>>Статистика</a></li>
         <li><a href="../../content/turnover.php"
-               class=' <?php echo ($curPage === 'turnover' ? '"active" disabled' : '') ?>'>Оборот</a></li>
-        <li><a href="../../content/methods-of-obtaining.php" class=' <?php echo ($curPage === 'methodsOfObtaining' ? '"active" disabled' : '') ?>'>Методы оплаты</a>
+               class=<?php echo($curPage === 'turnover' ? '"active" disabled' : '') ?>>Оборот</a></li>
+        <li><a href="../../content/methods-of-obtaining.php"
+               class=<?php echo($curPage === 'methods-of-obtaining' ? '"active" disabled' : '') ?>>Методы оплаты</a>
         </li>
 
         <li><a class="menu-logout-btn" href="../../api/auth/logout.php">Выйти</a></li>
