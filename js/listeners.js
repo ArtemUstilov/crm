@@ -289,7 +289,6 @@ $(document).ready(function () {
                 url = 'activity';
                 break;
         }
-        console.log(data);
 
         $.ajax({
             url: "../api/operate/" + url + ".php",

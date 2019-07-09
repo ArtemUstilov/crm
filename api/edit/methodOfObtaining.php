@@ -1,24 +1,23 @@
 <?php
-if (isset($_POST['name'])) {
-
+include_once("../../funcs.php");
+if (isset($_POST['method_name'], $_POST['method_id'])) {
     include_once("../../db.php");
-    include_once("../../funcs.php");
-    $name = clean($_POST['name']);
-    $vg_id = clean($_POST['vg_id']);
+    $method_name = clean($_POST['method_name']);
+    $method_id = clean($_POST['method_id']);
     session_start();
     $user_id = $_SESSION['user_id'];
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if (heCan($user_data['role'],3)) {
+    if (heCan($user_data['role'], 1)) {
         $res = $connection->
         query("
-        UPDATE `virtualgood`
+        UPDATE `methods_of_obtaining`
         SET
-            `name` = '$name'
+            `method_name` = '$method_name'
         WHERE 
-            `vg_id`='$vg_id' 
+            `method_id`='$method_id' 
         ");
         if ($res) {
-            echo json_encode(array("status"=>"edit-success"));
+            echo json_encode(array("status" => "edit-success"));
             return false;
         } else {
             error("failed");

@@ -4,7 +4,7 @@ if (isset($_POST['method_id'])) {
     include_once("../../funcs.php");
     $method_id = clean($_POST['method_id']);
     $method_data = mysqli_fetch_assoc($connection->query("
-    SELECT `method_name` 
+    SELECT `method_name`, `method_id`
     FROM methods_of_obtaining 
     WHERE  method_id = '$method_id'
     "));

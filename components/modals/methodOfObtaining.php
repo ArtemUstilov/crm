@@ -21,7 +21,6 @@ function methodOfObtainingEditModal()
     return '
 <div id="MethodsOfObtaining-edit-Modal" class="modal" action="" role="form">
 <form id="method-of-obtaining-edit-form">
-
   <h2 class="modal-title">Редактировать метод оплаты</h2>
   <div class="modal-inputs">
   <p>

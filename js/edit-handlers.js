@@ -62,7 +62,7 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -120,7 +120,7 @@ function editUser() {
         type: "POST",
         dataType: "JSON",
         data: {
-            password : password.length ? password : null,
+            password: password.length ? password : null,
             login,
             first_name,
             last_name,
@@ -132,7 +132,7 @@ function editUser() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -149,8 +149,6 @@ function editUser() {
         }
     });
 }
-
-
 
 
 //Method of obtaining
@@ -167,22 +165,26 @@ $.validate({
 function editMethodOfObtaining() {
     $(".loader").show();
     $(".modal-submit").prop("disabled", true);
-    let method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
+    const method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
+    const method_id =  $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
     $.ajax({
         url: "../api/edit/methodOfObtaining.php",
         type: "POST",
-        dataType: "JSON",
-        data: {method_name},
+        dataType: "json",
+        data: {
+            method_name,
+            method_id,
+        },
         cache: false,
         success: function (res) {
-            if(res.error){
-                createAlertTable(res.error, '');
+            if (res.error) {
+                createAlertTable(res.error, 'Метод оплаты');
                 return;
             }
-            createAlertTable(res.status, "Пользователь");
+            createAlertTable(res.status, "Метод оплаты");
         },
         error: function () {
-            createAlertTable("connectionError", "Пользователь");
+            createAlertTable("connectionError", "Метод оплаты");
         },
         complete: function () {
             setTimeout(function () {
@@ -192,9 +194,6 @@ function editMethodOfObtaining() {
         }
     });
 }
-
-
-
 
 
 //Client
@@ -249,7 +248,7 @@ function editClient() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -301,7 +300,7 @@ function editVG() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -350,7 +349,7 @@ function editFiat() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -397,7 +396,7 @@ function editBranch() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -442,7 +441,7 @@ function editGlobalVG() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
