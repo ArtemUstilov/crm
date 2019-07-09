@@ -157,6 +157,8 @@ $.validate({
     lang: 'ru',
     onSuccess: function () {
         editOutgoType();
+    }
+});
 
 //Method of obtaining
 $.validate({
@@ -186,7 +188,7 @@ function editOutgoType() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error);
                 return;
             }
@@ -194,11 +196,15 @@ function editOutgoType() {
         },
         error: function () {
             createAlertTable("connectionError", "Тип расходов");
+        }
+    });
+}
+
 function editMethodOfObtaining() {
     $(".loader").show();
     $(".modal-submit").prop("disabled", true);
     const method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
-    const method_id =  $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
+    const method_id = $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
     $.ajax({
         url: "../api/edit/methodOfObtaining.php",
         type: "POST",
