@@ -62,7 +62,7 @@ function editOrder() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -120,7 +120,7 @@ function editUser() {
         type: "POST",
         dataType: "JSON",
         data: {
-            password : password.length ? password : null,
+            password: password.length ? password : null,
             login,
             first_name,
             last_name,
@@ -132,7 +132,7 @@ function editUser() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -157,9 +157,18 @@ $.validate({
     lang: 'ru',
     onSuccess: function () {
         editOutgoType();
+
+//Method of obtaining
+$.validate({
+    form: '#method-of-obtaining-edit-form',
+    modules: '',
+    lang: 'ru',
+    onSuccess: function () {
+        editMethodOfObtaining();
         return false;
     }
 });
+
 
 function editOutgoType() {
     $(".loader").show();
@@ -185,6 +194,29 @@ function editOutgoType() {
         },
         error: function () {
             createAlertTable("connectionError", "Тип расходов");
+function editMethodOfObtaining() {
+    $(".loader").show();
+    $(".modal-submit").prop("disabled", true);
+    const method_name = $("#method-of-obtaining-edit-form #method-edit-name").val();
+    const method_id =  $('#method-of-obtaining-edit-form .modal-title').attr('method-id')
+    $.ajax({
+        url: "../api/edit/methodOfObtaining.php",
+        type: "POST",
+        dataType: "json",
+        data: {
+            method_name,
+            method_id,
+        },
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error, 'Метод оплаты');
+                return;
+            }
+            createAlertTable(res.status, "Метод оплаты");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Метод оплаты");
         },
         complete: function () {
             setTimeout(function () {
@@ -193,7 +225,6 @@ function editOutgoType() {
             }, 100);
         }
     });
-
 }
 
 
@@ -249,7 +280,7 @@ function editClient() {
         },
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -301,7 +332,7 @@ function editVG() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -350,7 +381,7 @@ function editFiat() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -397,7 +428,7 @@ function editBranch() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }
@@ -442,7 +473,7 @@ function editGlobalVG() {
         dataType: "JSON",
         cache: false,
         success: function (res) {
-            if(res.error){
+            if (res.error) {
                 createAlertTable(res.error, '');
                 return;
             }

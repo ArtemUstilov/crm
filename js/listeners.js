@@ -27,21 +27,22 @@ $(document).ready(function () {
         document.execCommand("copy");
         $temp.remove();
     }
-    $('.genpass').click(function(){
+
+    $('.genpass').click(function () {
         const inpt = $(this).parent().find("input");
-        const letters = ['a','v','r','e','N','W','Z','O','T','y'];
-        const randomVal = [0,1,1,1,1,1,1,1,1,1,1,1,1,1].map(n=>{
-            if(Math.random() > .5)
-                return Math.floor(Math.random()*9 + 1 - n);
+        const letters = ['a', 'v', 'r', 'e', 'N', 'W', 'Z', 'O', 'T', 'y'];
+        const randomVal = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1].map(n => {
+            if (Math.random() > .5)
+                return Math.floor(Math.random() * 9 + 1 - n);
             else
-                return letters[Math.floor(Math.random()*9 + 1 - n)];
+                return letters[Math.floor(Math.random() * 9 + 1 - n)];
         }).join('');
         inpt.val(randomVal);
     });
-    $('.genid').click(function(){
+    $('.genid').click(function () {
         const inpt = $(this).parent().find("input");
-        const randomVal = [0,1,1,1,1,1].map(n=>{
-            return Math.floor(Math.random()*9 + 1 - n);
+        const randomVal = [0, 1, 1, 1, 1, 1].map(n => {
+            return Math.floor(Math.random() * 9 + 1 - n);
         }).join('');
         inpt.val(randomVal);
     });
@@ -214,17 +215,17 @@ $(document).ready(function () {
                     maxcols.forEach(k => {
                         const data = _this.find(`#${k}-i`)[0] && _this.find(`#${k}-i`)[0].value;
                         if (!data || !data.length) return;
-                        const same = (a)=>{
-                            let cb = (a, b = data)=> a.toUpperCase().includes(b.toUpperCase());
-                            if(data.includes('<=')){
+                        const same = (a) => {
+                            let cb = (a, b = data) => a.toUpperCase().includes(b.toUpperCase());
+                            if (data.includes('<=')) {
                                 cb = (a) => +a <= +data.split('<=')[1];
-                            }else if(data.includes('>=')){
+                            } else if (data.includes('>=')) {
                                 cb = (a) => +a >= +data.split('>=')[1];
-                            }else if(data.includes('>')){
+                            } else if (data.includes('>')) {
                                 cb = (a) => +a > +data.split('>')[1];
-                            }else if(data.includes('<')){
+                            } else if (data.includes('<')) {
                                 cb = (a) => +a < +data.split('<')[1];
-                            }else if(data.includes('=')){
+                            } else if (data.includes('=')) {
                                 cb = (a) => +a === +data.split('=')[1];
                             }
                             return cb(a);
@@ -268,23 +269,36 @@ $(document).ready(function () {
         filterIcons();
     }
     $('.checkbox').click(function () {
+        $(this).toggleClass('checked');
         $('.loader').show();
-        let id = $(this).parent().parent().parent().attr('itemid');
+        let parent = $(this).parent().parent().parent();
+        let id = parent.attr('itemid');
         let type = $('.table-menu>h2').attr('type');
         let url = '';
-        if (type === 'Branch') {
-            url = 'branchActivity';
-        } else
-            url = 'activity';
+        let data = {id}
+        switch (type) {
+            case "Branch":
+                url = 'branchActivity';
+                break;
+            case "MethodsOfObtaining":
+                url = "methodOfObtaining";
+                data['active'] = parent.find('.checkbox.status').prop('checked') ? 0 : 1;
+                data['participates_in_balance'] = parent.find('.checkbox.participates').prop('checked') ? 0 : 1;
+                break;
+            default:
+                url = 'activity';
+                break;
+        }
+
         $.ajax({
-            url: "../api/edit/" + url + ".php",
+            url: "../api/operate/" + url + ".php",
             type: "POST",
-            data: {id},
+            data: data,
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error)
-                    createAlertTable(res.error, '');
+                // if (res.error)
+                //     createAlertTable(res.error, '');
             },
             error: function () {
                 createAlertTable('failed', '');
@@ -310,7 +324,7 @@ $(document).ready(function () {
                 cache: false,
                 success: function (res) {
                     res = JSON.parse(res);
-                    if(res.error){
+                    if (res.error) {
                         createAlertTable(res.error, "Данные владельцев");
                         return;
                     }
@@ -393,10 +407,11 @@ $(document).ready(function () {
             cache: false,
             dataType: 'JSON',
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error, "Данные предприятия");
                     return;
-                }                const modal = $("#Branch-money-info-modal");
+                }
+                const modal = $("#Branch-money-info-modal");
                 modal.css({left: $('.fa-coins').offset().left - 50, top: 50});
                 $("#Branch-money-info-modal .fiats").html(res.map(line => `<p>${line.sum} ${line.full_name}</p>`))
                 modal.modal({

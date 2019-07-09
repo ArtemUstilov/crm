@@ -23,7 +23,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -68,7 +68,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -169,7 +169,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -259,7 +259,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 try {
-                    if(res.error){
+                    if (res.error) {
                         createAlertTable(res.error);
                         return;
                     }
@@ -332,7 +332,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -443,7 +443,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -502,7 +502,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -559,7 +559,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -609,7 +609,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -653,7 +653,7 @@ $(document).ready(function () {
             dataType: "JSON",
             cache: false,
             success: function (res) {
-                if(res.error){
+                if (res.error) {
                     createAlertTable(res.error);
                     return;
                 }
@@ -672,9 +672,52 @@ $(document).ready(function () {
 
     }
 
+    //Fiat
+    $.validate({
+        form: '#add-method-of-obtaining-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addMethodOfObtaining();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function addMethodOfObtaining() {
+        $('.loader').show();
+        $(".modal-submit").prop("disabled", true);
+        let method_name = $("#add-method-of-obtaining-form #method-name").val();
+        $.ajax({
+            url: "../api/add/methodOfObtaining.php",
+            type: "POST",
+            data: {
+                method_name
+            },
+            dataType: "json",
+            cache: false,
+            success: function (res) {
+                if (res.error) {
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Метод оплаты");
+            },
+            error: function () {
+                createAlertTable("connectionError", "MethodOfObtaining");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
+            }
+        });
+
+    }
 
     //Payback
-
     $.validate({
         form: '#pay-rollback-form',
         modules: '',
@@ -728,7 +771,6 @@ $(document).ready(function () {
 
 
 //Debt
-
     $.validate({
         form: '#payback-debt-form',
         modules: '',

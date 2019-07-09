@@ -43,28 +43,33 @@ $(document).ready(function () {
             type: "POST",
             data: {branch_id},
             cache: false,
+            dataType: "JSON",
             success: function (res) {
+                console.log(res);
                 if (res.status === 'change-success') {
                     $.modal.close();
                     location.reload();
                 } else {
                     createAlertTable(res.error);
                 }
-                $('.loader').fadeOut('fast');
             },
             error: function () {
                 createAlertTable();
-                $('.loader').fadeOut('fast');
+
             },
+            complete: function () {
+                $('.loader').fadeOut('fast');
+            }
 
         })
         ;
     };
+
     function createAlertTable() {
         if ($('.custom-alert').hasClass('custom-alert--active'))
             $('.custom-alert').removeClass('custom-alert--active');
         if ($('.custom-alert').hasClass('bg-green')) $('.custom-alert').removeClass('bg-green');
-                $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
+        $('.custom-alert .alert-text-box').text('Что-то пошло не так. Попробуйте еще раз');
 
 
         setTimeout(function () {

@@ -39,6 +39,8 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
                class=' <?php echo ($curPage === 'statistics' ? '"active" disabled' : '') ?>'>Статистика</a></li>
         <li><a href="../../content/turnover.php"
                class=' <?php echo ($curPage === 'turnover' ? '"active" disabled' : '') ?>'>Оборот</a></li>
+        <li><a href="../../content/methods-of-obtaining.php" class=' <?php echo ($curPage === 'methodsOfObtaining' ? '"active" disabled' : '') ?>'>Методы оплаты</a>
+        </li>
 
         <li><a class="menu-logout-btn" href="../../api/auth/logout.php">Выйти</a></li>
     </ul>
