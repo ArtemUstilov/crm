@@ -11,21 +11,27 @@ $parentId = clean($_POST['parentId']);
 session_start();
 $branch_id = $_SESSION['branch_id'];
 
-$result = $connection->query("
-    INSERT INTO outgo_types
-    (outgo_name, branch_id)
-    VALUES('$name', '$branch_id');
-");
-if (!$result) {
-    error("failed");
-    return false;
+$siblings = mysqli_fetch_assoc($connection->query("
+    SELECT outgo_type_id FROM outgo_types
+    WHERE outgo_type_id IN (
+        SELECT son_id FROM outgo_types_relative
+        WHERE parent_id = '$parentId'
+    )
+    ORDER BY outgo_type_id DESC
+"));
+
+if($siblings){
+    $nextId = intval($siblings['outgo_type_id']) + 1;
+}else{
+    $nextId = $parentId."00";
 }
 
-$currentId = mysqli_fetch_assoc($connection->query("
-    SELECT * FROM outgo_types
-    ORDER BY outgo_type_id DESC
-"))['outgo_type_id'];
-if (!$currentId && $currentId !== 0) {
+$result = $connection->query("
+    INSERT INTO outgo_types
+    (outgo_type_id, outgo_name, branch_id)
+    VALUES('$nextId','$name', '$branch_id');
+");
+if (!$result) {
     error("failed");
     return false;
 }
@@ -33,7 +39,7 @@ if (!$currentId && $currentId !== 0) {
 $result = $connection->query("
     INSERT INTO outgo_types_relative
     (parent_id, son_id)
-    VALUES('$parentId', '$currentId');
+    VALUES('$parentId', '$nextId');
 ");
 if (!$result) {
     error("failed");

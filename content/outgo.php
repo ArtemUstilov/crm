@@ -62,7 +62,8 @@ WHERE is_owner = 1 AND branch_id = ' . $branch_id . '
 $data['types'] = $connection->query("
     SELECT outgo_type_id AS `id`, outgo_name AS `name`
     FROM outgo_types
-    WHERE branch_id = '$branch_id'
+    WHERE branch_id = '$branch_id' AND outgo_type_id != '1'
+    ORDER BY outgo_type_id ASC
 ");
 $options['type'] = 'Outgo';
 $options['text'] = 'История расходов';
