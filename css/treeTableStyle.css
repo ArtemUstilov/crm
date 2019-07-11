@@ -168,7 +168,12 @@ a {
     cursor: pointer;
     transition: all 0.5s;
 }
-
+#types-wrapper-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
 .jquery-accordion-menu ul li .jquery-accordion-menu-label, .jquery-accordion-menu ul ul.submenu li .jquery-accordion-menu-label {
     min-width: 20px;
     padding: 1px 2px 1px 1px;

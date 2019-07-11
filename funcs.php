@@ -239,7 +239,14 @@ function display_tree_table()
     $output = '
 <div id="jquery-accordion-menu" class="jquery-accordion-menu white">
     <div id="types-wrapper">
+    <div id="types-wrapper-header">
         <h2>Типы расходов</h2>
+         <div id="reportrange-types" class="reportrange">
+                <i class="fa fa-calendar"></i>&nbsp;
+                <span></span> 
+                <i class="fa fa-caret-down"></i>
+            </div>
+            </div>
         <table>
             <thead>
                 <i class="fas fa-plus fa-2x" id="global-add-type"></i>

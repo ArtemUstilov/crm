@@ -69,6 +69,7 @@ function appendType({outgo_name: name, outgo_type_id: id, active}, hasChildren) 
             <i class="fas fa-edit"></i>
             <i class="fas fa-plus"></i>
              <span>${name}</span>
+              <span class="forsum"></span>
              </div>
              ${hasChildren ? `
 <i class="fas fa-arrow-down"></i>` : ""}

@@ -5,6 +5,7 @@ if (isset($_POST['sum'], $_POST['fiat'])) {
     $sum = clean($_POST['sum']);
     $owner = clean($_POST['owner']);
     $fiat = clean($_POST['fiat']);
+    $project = clean($_POST['project']);
     $type = clean($_POST['type']);
     $descr = clean($_POST['description']);
     session_start();
@@ -12,41 +13,35 @@ if (isset($_POST['sum'], $_POST['fiat'])) {
     date_default_timezone_set('Europe/Kiev');
     $date = date('Y-m-d H:i:s');
     $user_id = $_SESSION['id'];
-    if($type){
-        if($owner == "branch"){
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`, `branch_id`, `outgo_type_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat', '$branch_id', '$type') ");
-        }elseif($owner) {
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`,`user_as_owner_id`, `date`, `description`, `fiat_id`, `outgo_type_id`) VALUES('$user_id','$sum','$owner', '$date', '$descr', '$fiat', '$type') ");
 
-        }else{
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`, `outgo_type_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat', '$type') ");
-        }
-    }else{
-        if($owner == "branch"){
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`, `branch_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat', '$branch_id') ");
-        }elseif($owner) {
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`,`user_as_owner_id`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum','$owner', '$date', '$descr', '$fiat') ");
+    $VALUES = "'$user_id','$sum', '$date', '$descr', '$fiat'";
+    $PARAMS = "`user_id`,`sum`, `date`, `description`, `fiat_id`";
 
-        }else{
-            $res = $connection->
-            query("INSERT INTO `outgo` (`user_id`,`sum`, `date`, `description`, `fiat_id`) VALUES('$user_id','$sum', '$date', '$descr', '$fiat') ");
-        }
+    if ($type) {
+        $VALUES .= ", '$type'";
+        $PARAMS .= ", `outgo_type_id`";
     }
-
-    if($res)
-        updateBranchMoney($connection, $branch_id, -$sum, $fiat);
-    if ($res) {
-        echo json_encode(array("status"=>"success"));
-        return false;
-    } else {
-        error("failed");
-        return false;
+    if ($owner == "branch") {
+        $VALUES .= ", '$branch_id'";
+        $PARAMS .= ", `branch_id`";
+    } elseif ($owner) {
+        $VALUES .= ", '$owner'";
+        $PARAMS .= ", `user_as_owner_id`";
     }
+    if($project){
+        $VALUES .= ", '$project'";
+        $PARAMS .= ", `project_id`";
+    }
+    $res = $connection->query("INSERT INTO outgo ($PARAMS) VALUES($VALUES);");
+if ($res)
+    updateBranchMoney($connection, $branch_id, -$sum, $fiat);
+if ($res) {
+    echo json_encode(array("status" => "success"));
+    return false;
+} else {
+    error("failed");
+    return false;
+}
 } else {
     return error("empty");
 }

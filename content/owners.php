@@ -15,7 +15,7 @@ SELECT branch_id AS `id`, branch_name
 FROM branch
 ');
     $table = $connection -> query('
-        SELECT owner_id AS `id`. concat(O.last_name, " ", O.first_name) AS  Имя, branch_name AS `предприятие`
+        SELECT owner_id AS `id`, concat(O.last_name, " ", O.first_name) AS  Имя, branch_name AS `предприятие`
         FROM (SELECT user_id AS `owner_id`, first_name, last_name, branch_id FROM users WHERE is_owner = 1) O
         INNER JOIN branch B ON B.branch_id = O.branch_id
     ');

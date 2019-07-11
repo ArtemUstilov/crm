@@ -111,7 +111,8 @@ $(window).load(function () {
 });
 
 $(document).ready(function () {
-    if (!window.location.pathname.includes('statistics')) return;
+    if (!window.location.pathname.includes('statistics') &&
+    !window.location.pathname.includes('types')) return;
     $('.loader').show();
     const toDate = (dates) => ([dates[0].format(FORMATTER) + START, dates[1].format(FORMATTER) + END]);
 
@@ -157,30 +158,7 @@ $(document).ready(function () {
         )
     );
     let weeks = [manually].concat([0, 1, 2].map(off => toDate([moment().add(-off, 'weeks').day("Sunday"), moment().add(-off, 'weeks').day('Saturday')])));
-    $.ajax({
-        url: "../api/select/statistics.php",
-        type: "POST",
-        data: {years: [curYear, lastYear, all], weeks, months},
-        cache: false,
-        success: function (res) {
-            $('.loader').fadeOut("fast");
-            try {
-                res = JSON.parse(res);
-            } catch (e) {
-            }
-            $('#wrapper').html(res);
-            initSorterAndFilters();
-            range();
-            yFixedNoJquerry();
-            filterIcons();
-        },
-        error: function () {
-            createAlertTable("connectionError", "Деньги");
-        },
-        complete: function () {
-            // $('.loader').fadeOut('fast');
-        }
-    });
+
 
     function range() {
         if (typeof moment !== "function") return;
@@ -348,13 +326,122 @@ $(document).ready(function () {
             });
         }
 
-        $('#reportrange1').daterangepicker(OPTIONS, cb);
-        $('#reportrange2').daterangepicker(OPTIONS, cb2);
-        $('#reportrange3').daterangepicker(OPTIONS, cb3);
+        function cb4(start, end) {
+            $('#reportrange-types span').html(start.format('D/M/YYYY') + ' - ' + end.format('D/M/YYYY'));
+            $('.loader').show();
+            setTimeout(()=> {
+                $.ajax({
+                    url: "../api/select/types-stat.php",
+                    type: "POST",
+                    data: {start: start.format(FORMATTER) + START, end: end.format(FORMATTER) + END},
+                    cache: false,
+                    success: function (res) {
+                        res = JSON.parse(res);
+                        if(res.error){
+                            createAlertTable(res.error, "Типы расходов");
+                            return;
+                        }
+                        if (!res || !res.length) return;
 
-        cb(start, end);
-        cb2(start, end);
-        cb3(start, end);
+                        res.forEach(({outgo_type_id, sum}, i)=>{
+                            res[i].sum = +sum;
+                            $('[itemid="' +outgo_type_id + '"] .name-wrapper .forsum').text("")
+                        });
+                        res.forEach(({outgo_type_id, fiat_name, sum})=>{
+                            if(!+sum) return;
+                            res
+                                .filter(({outgo_type_id: outgo_type_id2, fiat_name: fiat_name2}) =>{
+                                    const regexp = new RegExp(`^${outgo_type_id2}.*`);
+                                    return outgo_type_id2.length < outgo_type_id.length &&
+                                        regexp.test(outgo_type_id)
+                                })
+                                .reduce((acc, elem, i)=>{
+                                    if(acc.find(e=>e.outgo_type_id === elem.outgo_type_id)){
+                                        return acc;
+                                    }
+                                    acc.push(elem);
+                                    return  acc;
+                                }, [])
+
+
+                                .forEach(({outgo_type_id: outgo_type_id2, fiat_name: fiat_name2, sum: sum2})=>{
+                                    const idx = res.findIndex(({outgo_type_id: outgo_type_id3, fiat_name: fiat_name3})=>
+                                        outgo_type_id3 === outgo_type_id2 &&
+                                        fiat_name3 === fiat_name);
+                                    if(idx >= 0){
+                                        res[idx] = {
+                                            ...res[idx],
+                                            fiat_name,
+                                            sum: +res[idx].sum + +sum
+                                        }
+                                    }else{
+                                        res.push({
+                                            outgo_type_id: outgo_type_id2,
+                                            fiat_name,
+                                            sum
+                                        });
+                                    }
+                                });
+                        });
+                        res.forEach(({outgo_type_id, fiat_name, sum}) => {
+                            if(!fiat_name || !+sum) return;
+                            const cell = $('[itemid="' +outgo_type_id + '"] > .row-wrapper .name-wrapper .forsum');
+                            cell.append(`<span>--${sum}${fiat_name}</span>`)
+                        });
+                    },
+                    error: function () {
+                        createAlertTable("connectionError", "Типы расходов");
+                    },
+                    complete: function () {
+                        $('.loader').fadeOut('fast');
+                    }
+                });
+            }, 1000);
+        }
+
+
+
+        if(window.location.pathname.includes('statistic')){
+
+            cb(start, end);
+            cb2(start, end);
+            cb3(start, end);
+            $('#reportrange1').daterangepicker(OPTIONS, cb);
+            $('#reportrange2').daterangepicker(OPTIONS, cb2);
+            $('#reportrange3').daterangepicker(OPTIONS, cb3);
+        }else{
+            cb4(start, end);
+            $('#reportrange-types').daterangepicker(OPTIONS, cb4);
+        }
+    }
+    if(window.location.pathname.includes('statistic')){
+        $.ajax({
+            url: "../api/select/statistics.php",
+            type: "POST",
+            data: {years: [curYear, lastYear, all], weeks, months},
+            cache: false,
+            success: function (res) {
+                $('.loader').fadeOut("fast");
+                try {
+                    res = JSON.parse(res);
+                } catch (e) {
+                }
+                $('#wrapper').html(res);
+                initSorterAndFilters();
+                range();
+                yFixedNoJquerry();
+                filterIcons();
+            },
+            error: function () {
+                createAlertTable("connectionError", "Деньги");
+            },
+            complete: function () {
+                // $('.loader').fadeOut('fast');
+            }
+        });
+    }else{
+        range();
+
     }
 
 });

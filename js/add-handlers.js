@@ -493,14 +493,14 @@ $(document).ready(function () {
         $(".modal-submit").prop("disabled", true);
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
+        let project = $("#add-outgo-form #projectField").val();
         let fiat = $("#add-outgo-form #fiatField").val();
         let type = $("#add-outgo-form #typeField").val();
         let descr = $("#add-outgo-form #commentField").val();
-        console.log(type);
         $.ajax({
             url: "../api/add/outgo.php",
             type: "POST",
-            data: {owner, sum, description: descr, fiat, type},
+            data: {owner, sum, description: descr, fiat, type, project},
             dataType: "JSON",
             cache: false,
             success: function (res) {
