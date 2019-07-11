@@ -3,13 +3,13 @@ if (!(isset($_POST['order_id']) &&
     isset($_POST['client_id']) &&
     isset($_POST['sum_vg']) &&
     isset($_POST['out']) &&
-    isset($_POST['obtain']) &&
+    isset($_POST['method_id']) &&
     isset($_POST['vg_id']) &&
     isset($_POST['shares']) &&
     isset($_POST['fiat']) &&
     isset($_POST['client_id']))) {
-        error("empty");
-        return false;
+    error("empty");
+    return false;
 }
 include_once("../../db.php");
 include_once("../../funcs.php");
@@ -24,7 +24,7 @@ $description = $_POST['descr'];
 $out_percent = clean($_POST['out']);
 $debt = isset($_POST['debt']) ? clean($_POST['debt']) : 0;
 $callmaster = clean($_POST['callmaster']);
-$obtain = clean($_POST['obtain']);
+$method_id = clean($_POST['method_id']);
 $fiat = clean($_POST['fiat']);
 $sum_currency = ($sum_vg * $out_percent) / 100;
 $rollback_sum = $sum_currency * $rollback_1 / 100;
@@ -32,6 +32,7 @@ $shares = $_POST['shares'];
 session_start();
 $user_id = $_SESSION['id'];
 $branch_id = $_SESSION['branch_id'];
+
 $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
 if ($user_data && (heCan($user_data['role'], 2))) {
     $order_data = mysqli_fetch_assoc($connection->
@@ -44,16 +45,6 @@ if ($user_data && (heCan($user_data['role'], 2))) {
                      WHERE order_id ='$order_id'"));
     $sharesChanged = true;
 
-//        if (count($shares) !== count($old_shares_data))
-//            $sharesChanged = true;
-//        else
-//            foreach ($shares as $key => $value) {
-//                if ($value['value'] !== $old_shares_data[$key]['share_percent'] ||
-//                    $value['owner_id'] !== $old_shares_data[$key]['owner_id']) {
-//                    $sharesChanged = true;
-//                    break;
-//                }
-//            }
     if ($sharesChanged) {
         $connection->
         query("DELETE FROM shares
@@ -74,11 +65,16 @@ if ($user_data && (heCan($user_data['role'], 2))) {
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
         }
     }
-
-    if ($order_data['sum_currency'] != $sum_currency) {
-        $money = $sum_currency - $order_data['sum_currency'];
-        $update_user = $connection->
-        query("UPDATE branch SET `money` = `money` + '$money'
+    //TODO add logic of changing method
+    if ($method_id == $order_data['method_id']) {
+        $participates_in_balance = mysqli_fetch_assoc($connection->
+        query("SELECT participates_in_balance
+                     FROM methods_of_ontain
+                     WHERE method_id ='$method_id'"));
+        if ($order_data['sum_currency'] != $sum_currency) {
+            $money = $sum_currency - $order_data['sum_currency'];
+            $update_user = $connection->
+            query("UPDATE branch SET `money` = `money` + '$money'
                      WHERE branch_id IN(
                          SELECT branch_id FROM users WHERE
                          user_id IN (
@@ -88,6 +84,9 @@ if ($user_data && (heCan($user_data['role'], 2))) {
                                      WHERE order_id = '$order_id')
                          )
                      )");
+        }
+    } else {
+
     }
 
     if ($order_data['client_id'] != $client_id) {
@@ -156,7 +155,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
         $res = $connection->
         query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
-                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain',
+                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_id` = '$method_id',
                      `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',
                      `callmaster` = '$callmaster', `description` = '$description', `fiat_id` = '$fiat'
                      WHERE `order_id` = $order_id");
@@ -164,7 +163,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
         $res = $connection->
         query("UPDATE orders SET `vg_id` = '$vg_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
-                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_of_obtaining` = '$obtain', `description` = '$description', `fiat_id` = '$fiat'
+                     `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_id` = '$method_id', `description` = '$description', `fiat_id` = '$fiat'
                      WHERE `order_id` = $order_id");
     }
 

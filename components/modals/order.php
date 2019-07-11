@@ -86,11 +86,10 @@ function orderAddModal($data, $more_data)
     <p>
     Способ получения
   <select id="obtainingField" data-validation="required">;
-    <option selected disabled >Выберите способ</option>
-  <option value="add-new-method-of-obtaining" class="new-method-option" >Добавить новый</option>';
+    <option selected disabled >Выберите способ</option>';
     if (isset($more_data['methods']))
         foreach ($more_data['methods'] as $key => $var) {
-            $output .= '<option value="' . $var["method"] . '"selected>' . $var["method"] . '</option>';
+            $output .= '<option value="' . $var["method_id"] . '">' . $var["method_name"] . '</option>';
         }
     $output .= '
   </select>
@@ -195,7 +194,7 @@ function orderEditModal($more_data)
   <option value="add-new-method-of-obtaining" class="new-method-option">Добавить новый</option>';
     if (isset($more_data['methods']))
         foreach ($more_data['methods'] as $key => $var) {
-            $output .= '<option value="' . $var["method"] . '">' . $var["method"] . '</option>';
+            $output .= '<option value="' . $var["method_id"] . '">' . $var["method_name"] . '</option>';
         }
     $output .= '
   </select>
