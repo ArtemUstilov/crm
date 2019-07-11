@@ -12,7 +12,7 @@ if (isset($_POST['name']) && isset($_POST['full_name']) && isset($_POST['code'])
         $res = $connection->
         query("INSERT INTO `fiats` (`name`, code, full_name) VALUES('$name', '$code', '$full_name')");
         if ($res) {
-            json_encode(array("status" => "success"));
+            echo json_encode(array("status" => "success"));
             return false;
         } else {
             return error("failed");

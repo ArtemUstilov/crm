@@ -40,7 +40,7 @@ if (isset($client_id, $user_id)) {
         $max_debt = mysqli_fetch_assoc($connection->
         query("SELECT `max_debt` FROM `clients` WHERE `client_id` = '$client_id' "))['max_debt'];
         if ((int)$sum_vg * (int)$out/100 > (int)$max_debt) {
-            json_encode(array("status" => "failed", "error" => "MAX_DEBT_EXCEEDED"));
+            echo json_encode(array("status" => "failed", "error" => "MAX_DEBT_EXCEEDED"));
             return false;
         }
     }

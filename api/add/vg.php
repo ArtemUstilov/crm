@@ -33,7 +33,7 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
             $res = $connection->
             query($query);
         if ($res) {
-            json_encode(array("status"=>"success"));
+            echo json_encode(array("status"=>"success"));
             return false;
         } else {
             return error("failed");

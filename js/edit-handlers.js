@@ -452,6 +452,53 @@ function editBranch() {
     });
 }
 
+//Project
+$.validate({
+    form: '#edit-project-form',
+    modules: 'security',
+    lang: 'ru',
+    onSuccess: function () {
+        editProject();
+        return false;
+    },
+    onError: function () {
+    }
+});
+
+
+function editProject() {
+    $('.loader').show();
+    $(".modal-submit").prop("disabled", true);
+    let name = $("#edit-project-form #editNameProjectField").val();
+    let id = $("#edit-project-form #edit-project-title").attr('project-id');
+    $.ajax({
+        url: "../api/edit/project.php",
+        type: "POST",
+        data: {
+            name,
+            project_id: id,
+        },
+        dataType: "JSON",
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error);
+                return;
+            }
+            createAlertTable(res.status, "Проект");
+        },
+        error: function () {
+            createAlertTable("connectionError", "Проект");
+        },
+        complete: function () {
+            setTimeout(function () {
+                $(".modal-submit").prop("disabled", false);
+                $(".loader").fadeOut("slow");
+            }, 100);
+        }
+    });
+
+}
 
 //GlobalVG
 $.validate({

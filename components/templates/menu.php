@@ -43,7 +43,9 @@ $curPage = substr($_SERVER['REQUEST_URI'], 9, -4);
         <li><a href="../../content/methods-of-obtaining.php"
                class=<?php echo($curPage === 'methods-of-obtaining' ? '"active" disabled' : '') ?>>Методы оплаты</a>
         </li>
-
+        <li><a href="../../content/projects.php"
+               class=<?php echo($curPage === 'projects' ? '"active" disabled' : '') ?>>Проекты</a>
+        </li>
         <li><a class="menu-logout-btn" href="../../api/auth/logout.php">Выйти</a></li>
     </ul>
 </div>

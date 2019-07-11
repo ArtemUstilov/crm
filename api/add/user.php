@@ -24,7 +24,7 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['role'])
         $res = $connection->
         query("INSERT INTO `users` (`login`, `telegram`,`pass_hash`,`first_name`,`last_name`,`role`,`branch_id`) VALUES('$login','$telegram', '$password','$first_name','$last_name','$role','$branch') ");
         if ($res) {
-            json_encode(array("status"=>"success"));
+            echo json_encode(array("status"=>"success"));
             return false;
         } else {
             error("failed");

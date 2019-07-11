@@ -55,6 +55,9 @@ $('tr').on('click', (e) => {
         case "Branch-edit":
             fillBranchEditForm(mainParent);
             break;
+            case "Project-edit":
+                fillProjectEditForm(mainParent);
+            break;
         case "Client-edit":
             fillClientEditForm(mainParent);
             break;
@@ -335,7 +338,31 @@ function fillBranchEditForm(target) {
         },
     });
 }
-
+function fillProjectEditForm(target) {
+    $('.loader').show();
+    let project_id = target.attr('itemid');
+    $.ajax({
+        url: "../api/select/project.php",
+        type: "POST",
+        dataType: 'JSON',
+        data: {
+            project_id,
+        },
+        cache: false,
+        success: function (res) {
+            if (res.error) {
+                createAlertTable(res.error, "Данные проекта");
+                return;
+            }
+            $('#edit-project-form #edit-project-title').text(`Изменить данные проекта ${res['project_name']}`).attr('project-id', res['project_id']);
+            $('#edit-project-form #editNameProjectField').val(res['project_name']);
+            $('.loader').fadeOut('fast');
+            $('#Project-edit-Modal').modal();
+        },
+        error: function () {
+        },
+    });
+}
 function fillVGEditForm(target) {
     $('.loader').show();
     let vg_id = target.attr('itemid');

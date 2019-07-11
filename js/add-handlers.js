@@ -494,11 +494,13 @@ $(document).ready(function () {
         let sum = $("#add-outgo-form #sumField").val();
         let owner = $("#add-outgo-form #ownerField").val();
         let fiat = $("#add-outgo-form #fiatField").val();
+        let type = $("#add-outgo-form #typeField").val();
         let descr = $("#add-outgo-form #commentField").val();
+        console.log(type);
         $.ajax({
             url: "../api/add/outgo.php",
             type: "POST",
-            data: {owner, sum, description: descr, fiat},
+            data: {owner, sum, description: descr, fiat, type},
             dataType: "JSON",
             cache: false,
             success: function (res) {
@@ -628,6 +630,50 @@ $(document).ready(function () {
 
     }
 
+    //Project
+    $.validate({
+        form: '#add-project-form',
+        modules: 'security',
+        lang: 'ru',
+        onSuccess: function () {
+            addProject();
+            return false;
+        },
+        onError: function () {
+        }
+    });
+
+    function addProject() {
+        $('.loader').show();
+        $(".modal-submit").prop("disabled", true);
+        let name = $("#add-project-form #addNameProjectField").val();
+        $.ajax({
+            url: "../api/add/project.php",
+            type: "POST",
+            data: {
+                name
+            },
+            dataType: "JSON",
+            cache: false,
+            success: function (res) {
+                if (res.error) {
+                    createAlertTable(res.error);
+                    return;
+                }
+                createAlertTable(res.status, "Проект");
+            },
+            error: function () {
+                createAlertTable("connectionError", "Проект");
+            },
+            complete: function () {
+                setTimeout(function () {
+                    $(".modal-submit").prop("disabled", false);
+                    $(".loader").fadeOut("slow");
+                }, 100);
+            }
+        });
+
+    }
 
     //GlobalVG
     $.validate({

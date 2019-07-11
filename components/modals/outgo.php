@@ -21,12 +21,23 @@ function outgoModal($data, $more_data)
 </p>
 <p>
   <select id="typeField">
-  <option value="" selected disabled>Выберите тип расхода</option>';
+  <option value="" selected disabled>Выберите тип расхода(опц)</option>';
     if($more_data['types']){
         foreach ($more_data['types'] as $key => $var) {
             $spaces = strlen($var['id']) - 1;
             $spacesstr = str_repeat('&nbsp;', $spaces);
             $output .= '<option value="' . $var['id'] . '">' . $spacesstr . $var['name'] . '</option>';
+        }
+    }
+    $output .= '
+</select>
+</p>
+<p>
+  <select id="projectField">
+  <option value="" selected disabled>Выберите проект(опц)</option>';
+    if($more_data['projects']){
+        foreach ($more_data['projects'] as $key => $var) {
+            $output .= '<option value="' . $var['project_id'] . '">' . $var['project_name'] . '</option>';
         }
     }
     $output .= '

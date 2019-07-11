@@ -121,7 +121,7 @@ if ($add_order) {
     }
 
     restore_error_handler();
-    json_encode(array("status" => "success"));
+    echo json_encode(array("status" => "success"));
     return false;
 } else {
     return error("failed");

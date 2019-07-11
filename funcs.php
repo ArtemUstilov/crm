@@ -146,6 +146,8 @@ function chooseAddModal($name, $data, $more_data = NULL)
             return clientAddModal($data);
         case "Outgo":
             return outgoModal($data, $more_data);
+        case "Project":
+            return projectAddModal();
         case "Order":
             return orderAddModal($data, $more_data) . '' . clientAddModal($data);
         case "VG":

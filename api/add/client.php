@@ -33,7 +33,7 @@ if (isset($_POST['first_name'])) {
         VALUES('$user_id', '$last_name','$first_name','$byname','$phone','$email','$description', '$telegram', '$byname', '$pass', '$pay_in_debt', '$payment_system', '$pay_page', '$max_debt') ");
         $lastid = mysqli_fetch_assoc($connection ->query('SELECT client_id AS `id` FROM clients ORDER BY client_id DESC LIMIT 1'))['id'];
         if ($res) {
-            json_encode(array("status"=>"success")).$lastid;
+            echo json_encode(array("status"=>"success")).$lastid;
             return false;
         } else {
             return error("failed");

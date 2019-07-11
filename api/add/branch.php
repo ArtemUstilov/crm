@@ -15,7 +15,7 @@ if (isset($_POST['name'])) {
         $res = $connection->
         query("INSERT INTO `branch` (branch_name) VALUES('$name')");
         if ($res) {
-            json_encode(array("status"=>"success"));
+            echo json_encode(array("status"=>"success"));
             return false;
         } else {
             return error("failed");

@@ -277,6 +277,9 @@ $(document).ready(function () {
         let url = '';
         let data = {id}
         switch (type) {
+            case "Project":
+                url = 'projectActivity';
+                break;
             case "Branch":
                 url = 'branchActivity';
                 break;
