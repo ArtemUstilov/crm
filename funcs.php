@@ -228,7 +228,6 @@ function updateBranchMoney($connection, $branch_id, $sum, $fiat)
 function error($errorType)
 {
     echo json_encode(array("success" => false, "error" => $errorType));
-    echo json_encode(array("success" => false, "error" => $errorType));
     return false;
 }
 
