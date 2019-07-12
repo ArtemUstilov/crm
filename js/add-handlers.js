@@ -166,7 +166,6 @@ $(document).ready(function () {
             data: {
                 vg_id, client_id
             },
-            dataType: "JSON",
             cache: false,
             success: function (res) {
                 if (res.error) {
@@ -175,7 +174,7 @@ $(document).ready(function () {
                 }
                 const container = $('#owners-lists-container');
                 container.empty();
-                container.append(res.data || "");
+                container.append(res || "");
             },
             error: function () {
             },

@@ -65,28 +65,32 @@ if ($user_data && (heCan($user_data['role'], 2))) {
                 ('$order_id','$curr_owner_id','$sum_of_owner','$share_percent') ");
         }
     }
+    $participates_in_balance = mysqli_fetch_assoc($connection->
+    query("SELECT participates_in_balance
+                     FROM methods_of_obtaining
+                     WHERE method_id ='$method_id'"))['participates_in_balance'];
+
+    $prevMethodId = $order_data['method_id'];
+    $prev_method_participated = mysqli_fetch_assoc($connection->
+    query("SELECT participates_in_balance
+                     FROM methods_of_obtaining
+                     WHERE method_id ='$prevMethodId'"))['participates_in_balance'];
+
     //TODO add logic of changing method
-    if ($method_id == $order_data['method_id']) {
-        $participates_in_balance = mysqli_fetch_assoc($connection->
-        query("SELECT participates_in_balance
-                     FROM methods_of_ontain
-                     WHERE method_id ='$method_id'"));
+    if ((int)$prev_method_participated === (int)$participates_in_balance) {
         if ($order_data['sum_currency'] != $sum_currency) {
             $money = $sum_currency - $order_data['sum_currency'];
-            $update_user = $connection->
-            query("UPDATE branch SET `money` = `money` + '$money'
-                     WHERE branch_id IN(
-                         SELECT branch_id FROM users WHERE
-                         user_id IN (
-                             SELECT user_id FROM clients
-                             WHERE client_id IN(
-                                     SELECT client_id FROM orders
-                                     WHERE order_id = '$order_id')
-                         )
-                     )");
+            if((int)$participates_in_balance){
+                updateBranchMoney($connection, $branch_id, $money, $fiat);
+            }
+
         }
     } else {
-
+        if((int)$prev_method_participated === 1){
+            updateBranchMoney($connection, $branch_id, - $order_data['sum_currency'], $fiat);
+        }else{
+            updateBranchMoney($connection, $branch_id, $order_data['sum_currency'], $fiat);
+        }
     }
 
     if ($order_data['client_id'] != $client_id) {
@@ -94,17 +98,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
         $old_debt = $order_data['order_debt'];
         if ($order_data['order_debt'] != $debt) {
             $money = $debt - $old_debt;
-            $update_user = $connection->
-            query("UPDATE branch SET `money` = `money` - '$money'
-                     WHERE branch_id IN(
-                         SELECT branch_id FROM users 
-                         WHERE user_id IN (
-                             SELECT user_id FROM clients
-                             WHERE client_id IN(
-                                     SELECT client_id FROM orders
-                                     WHERE order_id = '$order_id')
-                         )
-                     )");
+            updateBranchMoney($connection, $branch_id, -$money, $fiat);
         }
         $update_old_client = $connection->
         query("UPDATE clients SET `debt` = `debt` - '$old_debt'
@@ -120,18 +114,8 @@ if ($user_data && (heCan($user_data['role'], 2))) {
         query("UPDATE clients SET `debt` = `debt` + '$new_debt'
                      WHERE `client_id` = $client_id");
 
-        $update_debt = $connection->query("
-            UPDATE branch SET `money` = `money` - '$new_debt'
-                     WHERE branch_id IN(
-                         SELECT branch_id FROM users WHERE
-                        user_id IN (
-                             SELECT user_id FROM clients
-                             WHERE client_id IN(
-                                     SELECT client_id FROM orders
-                                     WHERE order_id = '$order_id')
-                         )
-                     )
-            ");
+        updateBranchMoney($connection, $branch_id, -$new_debt, $fiat);
+
     }
     if ($order_data['callmaster'] != $callmaster) {
         $old_callmaster = $order_data['callmaster'];

@@ -61,7 +61,7 @@ SELECT `user_id` FROM `users` WHERE is_owner = 1 AND `branch_id` = '$branch_id'
 $methods_of_obtaining =
     mysqliToArray($connection->
     query("SELECT  * FROM methods_of_obtaining
-WHERE `branch_id` = '$branch_id' AND active = 1"));
+WHERE `branch_id` = '$branch_id' AND is_active = 1"));
 $more_data['clients'] = $clients;
 $more_data['owners'] = $owners;
 $more_data['vgs'] = $vgs;

@@ -42,19 +42,23 @@ $user_data = mysqli_fetch_assoc($connection->query("
 if (!heCan($user_data['role'], 1)) {
     return error("denied");
 }
+
+$query = "";
 if ($callmaster) {
-    $add_order = $connection->
-    query("INSERT INTO `orders`
+    $query="INSERT INTO `orders`
         (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_id`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
-        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description', '$fiat', '$login_by_vg') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description', '$fiat', '$login_by_vg') ";
 } else {
-    $add_order = $connection->
-    query("INSERT INTO `orders`
+    $query="INSERT INTO `orders`
         (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_id`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
-        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description', '$fiat', '$login_by_vg') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description', '$fiat', '$login_by_vg') ";
 }
+include "../../dev/ChromePhp.php";
+ChromePhp::log($query);
+$add_order = $connection->
+query($query);
 if ($add_order) {
     $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent

@@ -599,9 +599,7 @@ a[disabled] {
     border-radius: .25rem;
     color: black;
 }
-[type="checkbox"]{
-    width: auto !important;
-}
+
 .modal-submit {
     float: right;
     font-size: 18px;
