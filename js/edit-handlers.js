@@ -32,7 +32,7 @@ function editOrder() {
     let descr = $("#edit-order-form #editCommentField").val();
     let vg_id = $("#edit-order-form #editVgField").val();
     let callmaster = $('#edit-order-form #editCallmasterField').val();
-    let obtain = $('#edit-order-form #editObtainingField').val();
+    let method_id = $('#edit-order-form #editObtainingField').val();
     let client_id = $("#edit-order-form #editClientField").val();
     let fiat = $('#edit-order-form #editFiatField').val();
     let sharesEls = $('#edit-order-form .edit-owner-percent-input');
@@ -56,7 +56,7 @@ function editOrder() {
             vg_id,
             shares,
             callmaster,
-            obtain,
+            method_id,
             descr,
             fiat,
         },

@@ -10,7 +10,7 @@ if (isset($_POST['id'], $_POST['active'], $_POST['participates_in_balance'])) {
     $user_data = $connection->query("SELECT * FROM users WHERE user_id='$user_id'");
     if ($user_data && (heCan(mysqliToArray($user_data)['role'], 1))) {
         $res = $connection->
-        query("UPDATE methods_of_obtaining SET participates_in_balance= '$participates_in_balance', active = '$active' WHERE method_id = $method_id ");
+        query("UPDATE methods_of_obtaining SET participates_in_balance= '$participates_in_balance', is_active = '$active' WHERE method_id = $method_id ");
         if ($res) {
             echo json_encode(array("status" => "change-success"));
             return false;

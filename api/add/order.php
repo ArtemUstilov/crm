@@ -2,12 +2,10 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . "/funcs.php";
 include_once("../../db.php");
 
-if (!isset($_POST['client'], $_POST['sum_vg'], $_POST['out'], $_POST['obtain'],
+if (!isset($_POST['client'], $_POST['sum_vg'], $_POST['out'], $_POST['method_id'],
     $_POST['vg'], $_POST['fiat'], $_POST['shares'], $_POST['loginByVg'])) {
     return error("empty");
 }
-
-
 
 
 $sum_vg = clean($_POST['sum_vg']);
@@ -18,10 +16,10 @@ $client = clean($_POST['client']);
 $callmaster = $_POST['callmaster'];
 $description = $_POST['descr'];
 $out_percent = clean($_POST['out']);
+$method_id = $_POST['method_id'];
 
 $sum_currency = ($sum_vg * $out_percent) / 100;
 $rollback_sum = $sum_currency * $rollback_1 / 100;
-$obtain = clean($_POST['obtain']);
 
 $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'], true);
 
@@ -44,19 +42,23 @@ $user_data = mysqli_fetch_assoc($connection->query("
 if (!heCan($user_data['role'], 1)) {
     return error("denied");
 }
+
+$query = "";
 if ($callmaster) {
-    $add_order = $connection->
-    query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
+    $query="INSERT INTO `orders`
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_id`, `rollback_sum`, `rollback_1`, `date`, `callmaster`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
-        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description', '$fiat', '$login_by_vg') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$callmaster', '$debt', '$description', '$fiat', '$login_by_vg') ";
 } else {
-    $add_order = $connection->
-    query("INSERT INTO `orders`
-        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_of_obtaining`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
+    $query="INSERT INTO `orders`
+        (`vg_id`, `client_id`, `sum_vg`, `real_out_percent`, `sum_currency`, `method_id`, `rollback_sum`, `rollback_1`, `date`, `order_debt`, `description`, `fiat_id`, `loginByVg`)
         VALUES
-        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$obtain', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description', '$fiat', '$login_by_vg') ");
+        ('$vg', '$client', '$sum_vg', '$out_percent', '$sum_currency','$method_id', '$rollback_sum', '$rollback_1', '$date', '$debt', '$description', '$fiat', '$login_by_vg') ";
 }
+include "../../dev/ChromePhp.php";
+ChromePhp::log($query);
+$add_order = $connection->
+query($query);
 if ($add_order) {
     $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
@@ -75,9 +77,15 @@ if ($add_order) {
         return error("SHARES_NOT_ADDED");
     }
 
+    $participating_in_balance = mysqli_fetch_assoc($connection->query("
+            SELECT participates_in_balance
+            FROM methods_of_obtaining
+            WHERE `method_id` = '$method_id'
+            "))['participates_in_balance'];
+
     if ($debt > 0) addDebt($connection, $client, $fiat, $debt);
     if ($rollback_sum > 0) addRollback($connection, $fiat, $callmaster, $rollback_sum);
-    if ($money_to_add > 0) updateBranchMoney($connection, $branch_id, $money_to_add, $fiat);
+    if ($money_to_add > 0 && $participating_in_balance) updateBranchMoney($connection, $branch_id, $money_to_add, $fiat);
 
     $vg_data = mysqli_fetch_assoc($connection->query("
                 SELECT `api_url_regexp` AS `url`, access_key AS `key`
@@ -126,7 +134,6 @@ if ($add_order) {
 } else {
     return error("failed");
 }
-
 
 
 //FUNCTIONS

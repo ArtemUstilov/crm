@@ -166,7 +166,6 @@ $(document).ready(function () {
             data: {
                 vg_id, client_id
             },
-            dataType: "JSON",
             cache: false,
             success: function (res) {
                 if (res.error) {
@@ -175,7 +174,7 @@ $(document).ready(function () {
                 }
                 const container = $('#owners-lists-container');
                 container.empty();
-                container.append(res.data || "");
+                container.append(res || "");
             },
             error: function () {
             },
@@ -227,12 +226,12 @@ $(document).ready(function () {
         const vg = $("#add-order-form #vgField").val();
         const sum_vg = $("#add-order-form #sumVGField").val();
         const out = $("#add-order-form #outField").val();
-        const obtain = $("#add-order-form #obtainingField").val();
         const loginByVg = $("#add-order-form #loginByVgField").val();
         const descr = $("#add-order-form #commentField").val();
         const sharesEls = $("#add-order-form .owner-percent-input");
         const debtCl = $("#add-order-form #debtCLField").val() || 0;
         const fiat = $("#add-order-form #fiatField").val();
+        const method_id = $("#add-order-form #obtainingField").val();
         const allShares = [];
         sharesEls.each(function () {
             allShares.push({value: $(this).val(), owner_id: $(this).attr('owner-id')});
@@ -246,7 +245,7 @@ $(document).ready(function () {
                 rollback_1,
                 sum_vg,
                 out,
-                obtain,
+                method_id,
                 vg,
                 shares,
                 debtCl,
