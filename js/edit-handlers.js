@@ -63,7 +63,7 @@ function editOrder() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'Заказ');
                 return;
             }
             if (!res.sumChanged) {
@@ -133,7 +133,7 @@ function editUser() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'Пользователь');
                 return;
             }
             createAlertTable(res.status, "Пользователь");
@@ -189,7 +189,7 @@ function editOutgoType() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error);
+                createAlertTable(res.error, "Тип расходов");
                 return;
             }
             createAlertTable(res.status, "Тип расходов");
@@ -287,7 +287,7 @@ function editClient() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'Пользователь');
                 return;
             }
             createAlertTable(res.status, "Пользователь");
@@ -339,7 +339,7 @@ function editVG() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'VG');
                 return;
             }
             createAlertTable(res.status, "VG");
@@ -388,7 +388,7 @@ function editFiat() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'Валюта');
                 return;
             }
             createAlertTable(res.status, "Валюта");
@@ -435,7 +435,7 @@ function editBranch() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'Пользователь');
                 return;
             }
             createAlertTable(res.status, "Пользователь");
@@ -482,7 +482,7 @@ function editProject() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error);
+                createAlertTable(res.error, "Проект");
                 return;
             }
             createAlertTable(res.status, "Проект");
@@ -527,7 +527,7 @@ function editGlobalVG() {
         cache: false,
         success: function (res) {
             if (res.error) {
-                createAlertTable(res.error, '');
+                createAlertTable(res.error, 'VG');
                 return;
             }
             createAlertTable(res.status, "VG");

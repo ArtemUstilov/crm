@@ -24,7 +24,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Предприятие');
                     return;
                 }
                 createAlertTable(res.status, "Предприятие");
@@ -69,7 +69,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Владелец');
                     return;
                 }
                 createAlertTable(res.status, "Владелец");
@@ -169,7 +169,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Владелец');
                     return;
                 }
                 const container = $('#owners-lists-container');
@@ -259,7 +259,7 @@ $(document).ready(function () {
             success: function (res) {
                 try {
                     if (res.error) {
-                        createAlertTable(res.error);
+                        createAlertTable(res.error, "Заказ и транзакция")
                         return;
                     }
                     if (res['success'] == false) {
@@ -332,7 +332,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, "Пользователь");
                     return;
                 }
                 createAlertTable(res.status, "Пользователь");
@@ -379,7 +379,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if(res.error){
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, "Тип расходов");
                     return;
                 }
                 createAlertTable(res.status, "Тип расходов");
@@ -443,7 +443,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Клиент');
                     return;
                 }
                 if (res.status.includes("success")) {
@@ -504,7 +504,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Расход');
                     return;
                 }
                 createAlertTable(res.status, "Расход");
@@ -561,7 +561,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'VG');
                     return;
                 }
                 createAlertTable(res.status, "VG");
@@ -611,7 +611,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Fiat');
                     return;
                 }
                 createAlertTable(res.status, "Fiat");
@@ -656,7 +656,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Проект');
                     return;
                 }
                 createAlertTable(res.status, "Проект");
@@ -699,7 +699,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'VG');
                     return;
                 }
                 createAlertTable(res.status, "VG");
@@ -744,7 +744,7 @@ $(document).ready(function () {
             cache: false,
             success: function (res) {
                 if (res.error) {
-                    createAlertTable(res.error);
+                    createAlertTable(res.error, 'Методы оплаты');
                     return;
                 }
                 createAlertTable(res.status, "Метод оплаты");

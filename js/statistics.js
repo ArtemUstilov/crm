@@ -336,6 +336,11 @@ $(document).ready(function () {
                     data: {start: start.format(FORMATTER) + START, end: end.format(FORMATTER) + END},
                     cache: false,
                     success: function (res) {
+                        if(!res){
+                            $('.name-wrapper .forsum').text("");
+                            $('.loader').fadeOut('fast');
+                            return;
+                        }
                         res = JSON.parse(res);
                         if(res.error){
                             createAlertTable(res.error, "Типы расходов");
@@ -391,6 +396,7 @@ $(document).ready(function () {
                     },
                     error: function () {
                         createAlertTable("connectionError", "Типы расходов");
+                        $('.loader').fadeOut('fast');
                     },
                     complete: function () {
                         $('.loader').fadeOut('fast');
