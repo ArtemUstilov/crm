@@ -145,15 +145,19 @@ function initTable() {
             openSubmenu: function () {
                 $(this.element).find("div").children("ul").find("li").bind("click touchstart",
                     function (e) {
-                        if (['I', 'SPAN', 'INPUT'].includes(e.target.tagName)) return;
+                        if (['I', 'SPAN', 'INPUT'].includes(e.target.tagName)
+                            && !e.target.classList.contains('fa-arrow-down')
+                            && !e.target.classList.contains('fa-arrow-up')) return;
                         e.stopPropagation();
                         e.preventDefault();
                         if ($(this).children(".submenu").length > 0) {
                             if ($(this).children(".submenu").css("display") === "none") {
                                 $(this).children(".submenu").delay(defaults.showDelay).slideDown(defaults.speed);
+                                $(this).children('.row-wrapper').find('i').addClass('fa-arrow-up').removeClass('fa-arrow-down');
                                 return false
                             } else {
-                                $(this).children(".submenu").delay(defaults.hideDelay).slideUp(defaults.speed)
+                                $(this).children(".submenu").delay(defaults.hideDelay).slideUp(defaults.speed);
+                                $(this).children('.row-wrapper').find('i').addClass('fa-arrow-down').removeClass('fa-arrow-up');
                             }
                             if ($(this).children(".submenu").siblings("a").hasClass("submenu-indicator-minus")) {
                                 $(this).children(".submenu").siblings("a").removeClass("submenu-indicator-minus")

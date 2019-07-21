@@ -446,19 +446,18 @@ $(document).ready(function () {
                     createAlertTable(res.error, 'Клиент');
                     return;
                 }
-                if (res.status.includes("success")) {
+                if (res.id){
                     const opt = document.createElement('option');
-                    opt.value = res.substr(7);
+                    opt.value = res.id;
                     opt.innerText = first_name + ' ' + last_name;
                     opt.selected = true;
                     $('#clientField').append(opt);
-                    res = 'success';
                 }
                 setTimeout(function () {
                     $this.prop("disabled", false);
                 }, 300);
                 $('#Order-Modal').modal();
-                createAlertTable(res, "Клиент");
+                createAlertTable(res.status, "Клиент");
             },
             error: function () {
                 createAlertTable("connectionError", "Клиент");
