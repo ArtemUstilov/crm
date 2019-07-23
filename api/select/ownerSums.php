@@ -13,7 +13,7 @@ LEFT JOIN (
     SELECT O.fiat_id, S.user_as_owner_id, S.sum 
     FROM shares S
     INNER JOIN orders O ON O.order_id = S.order_id
-    WHERE (O.date >= '".$start." 00:00:00' AND O.date <= '".$end." 23:59:59')
+    WHERE (O.date >= '" . $start . " 00:00:00' AND O.date <= '" . $end . " 23:59:59')
 ) S ON S.user_as_owner_id = U.user_id AND S.fiat_id = F.fiat_id
 WHERE U.is_owner = 1 AND U.branch_id = $branch_id
 GROUP BY U.user_id, IFNULL(S.fiat_id, F.fiat_id)
@@ -21,4 +21,4 @@ GROUP BY U.user_id, IFNULL(S.fiat_id, F.fiat_id)
 
 $ownerSumsRaw = $connection->query($query);
 
-echo json_encode(mysqliToArray($ownerSumsRaw));
+echo $ownerSumsRaw ? json_encode(mysqliToArray($ownerSumsRaw)) : false;

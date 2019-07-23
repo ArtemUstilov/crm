@@ -28,8 +28,6 @@ if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
                     `vg_id`,
                     `branch_id`
                 ) VALUES('$name', '$in','$out','$key','$url', '$prevId', '$branch_id') ";
-    include '../../dev/ChromePhp.php';
-    ChromePhp::log($query);
             $res = $connection->
             query($query);
         if ($res) {

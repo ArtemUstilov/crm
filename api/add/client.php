@@ -14,9 +14,9 @@ if (isset($_POST['first_name'])) {
     $description = clean($_POST['description']);
     $telegram = clean($_POST['telegram']);
     $phone = clean($_POST['phone']);
-    $pay_page = $_POST['pay_page'] === "true" ? true : false;
-    $payment_system = $_POST['payment_system'] === "true" ? true : false;
-    $pay_in_debt = $_POST['pay_in_debt'] === "true" ? true : false;
+    $pay_page = $_POST['pay_page'] === "true" ? 1 : 0;
+    $payment_system = $_POST['payment_system'] === "true" ? 1 : 0;
+    $pay_in_debt = $_POST['pay_in_debt'] === "true" ? 1 : 0;
     $email = isset($_POST['email']) ? clean($_POST['email']) : " ";
     session_start();
     $user_id = $_SESSION['id'];
