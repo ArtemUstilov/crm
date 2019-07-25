@@ -166,6 +166,7 @@ $(document).ready(function () {
             data: {
                 vg_id, client_id
             },
+            dataType: 'JSON',
             cache: false,
             success: function (res) {
                 if (res.error) {
