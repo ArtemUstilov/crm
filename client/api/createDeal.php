@@ -61,10 +61,6 @@ if (isset($client_id, $user_id)) {
     $out = curl_exec($curl);
     curl_close($curl);
     $out_json = json_decode($out);
-    if ($out_json['error']) {
-        error($out_json['error']);
-        return false;
-    }
     echo json_encode(array("status" => "success"));
     return false;
 }

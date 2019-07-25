@@ -273,7 +273,7 @@ function getOutGoTypes($connection)
             break;
         case 1:
         case 2:
-        $res = mysqliToArray($connection->query("SELECT outgo_type_id, outgo_name, group_concat(DISTINCT son_id) AS sons, `active`
+            $res = mysqliToArray($connection->query("SELECT outgo_type_id, outgo_name, group_concat(DISTINCT son_id) AS sons, `active`
                 FROM `outgo_types` OT
                 LEFT OUTER JOIN `outgo_types_relative` OTR ON OT.outgo_type_id = OTR.parent_id
                 WHERE branch_id =$branch_id OR outgo_type_id = '1'
