@@ -174,7 +174,7 @@ $(document).ready(function () {
                 }
                 const container = $('#owners-lists-container');
                 container.empty();
-                container.append(res || "");
+                container.append(res.data || "");
             },
             error: function () {
             },
