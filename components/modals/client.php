@@ -6,7 +6,7 @@ function clientAddModal($data)
 <form id="add-client-form">
   <h2 class="modal-title">Добавить клиента</h2>
   <div class="modal-inputs">
-  <p>
+  <p style="grid-column-start: 1;grid-column-end: 3;">
   Имя
   <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
   </p>
@@ -70,7 +70,7 @@ function clientEditModal()
 <form id="edit-client-form">
   <h2 class="modal-title" id="edit-client-title">Изменить данные клиента</h2>
   <div class="modal-inputs">
-  <p>
+  <p style="grid-column-start: 1;grid-column-end: 3;">
   Имя
   <input id="editFirstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
   </p>
@@ -116,7 +116,7 @@ function clientEditModal()
   </p>
   <p>
   Описание
-  <textarea id="editDescriptionField" rows="3" data-validation="required"  placeholder="Описание" type="text" name="description"></textarea>
+  <textarea id="editDescriptionField" rows="3"   placeholder="Описание" type="text" name="description"></textarea>
   </p>
  
   </div>

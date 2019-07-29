@@ -23,7 +23,7 @@ if (isset($_POST['first_name'])) {
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
     $client = true;
     $check_client = mysqli_fetch_assoc($connection->query("SELECT client_id AS `id` FROM clients WHERE byname='$byname'"));
-    if ($check_client) {
+    if ($check_client && $byname) {
         return error("exists");
     }
     if ($user_data && heCan($user_data['role'], 1)) {

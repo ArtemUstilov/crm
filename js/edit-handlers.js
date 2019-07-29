@@ -517,7 +517,7 @@ function editGlobalVG() {
     let name = $("#edit-globalVGName").val();
     let vg_id = $("#edit-globalVG-title").attr('vg-id');
     $.ajax({
-        url: "../api/edit/editGlobalVg.php",
+        url: "../api/edit/global.php",
         type: "POST",
         data: {
             vg_id,

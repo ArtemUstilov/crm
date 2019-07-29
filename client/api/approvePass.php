@@ -13,7 +13,7 @@ $exists = mysqli_fetch_assoc($connection->query(" SELECT * FROM clients WHERE lo
 $client_id = $exists['client_id'];
 $nvgs = array();
 $vgs = mysqliToArray($connection->query("
-    SELECT V.vg_id, V.name
+    SELECT DISTINCT V.vg_id, V.name
     FROM vg_data D
     INNER JOIN virtualgood V ON V.vg_id = D.vg_id
     WHERE D.vg_id IN (

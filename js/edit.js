@@ -301,6 +301,7 @@ function fillUserEditForm(target) {
             $('#edit-user-form #editFirstNameField').val(res['first_name']);
             $('#edit-user-form #editLastNameField').val(res['last_name']);
             $('#edit-user-form #editLoginField').val(res['login']);
+            $('#edit-user-form #telegram').val(res['telegram']);
             $('#edit-user-form #editBranchField').val(res['branch_id']);
             $('#edit-user-form #editRoleField').val(res['role']);
             $('#edit-user-form #editMoneyField').val(res['money']);
@@ -460,7 +461,7 @@ function fillClientEditForm(target) {
     $('.loader').show();
     let client_id = target.attr('itemid');
     $.ajax({
-        url: "../api/select/сlient.php",
+        url: "../api/select/client.php",
         type: "POST",
         dataType: 'JSON',
         data: {

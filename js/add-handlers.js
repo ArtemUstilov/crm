@@ -166,7 +166,7 @@ $(document).ready(function () {
             data: {
                 vg_id, client_id
             },
-            dataType: 'JSON',
+			dataType: 'JSON',
             cache: false,
             success: function (res) {
                 if (res.error) {
@@ -175,6 +175,7 @@ $(document).ready(function () {
                 }
                 const container = $('#owners-lists-container');
                 container.empty();
+				console.log(res);
                 container.append(res.data || "");
             },
             error: function () {
@@ -241,20 +242,7 @@ $(document).ready(function () {
         $.ajax({
             url: "../api/add/order.php",
             type: "POST",
-            data: {
-                client,
-                rollback_1,
-                sum_vg,
-                out,
-                method_id,
-                vg,
-                shares,
-                debtCl,
-                callmaster,
-                descr,
-                fiat,
-                loginByVg,
-            },
+            data: {"client":"51","shares": [],"user_id":"2","sum_vg":"100","fiat":"2","vg":"2","method_id":1,"callmaster":"0","debtCl":12,"out":"12.00","loginByVg":"123"},
             dataType: "JSON",
             cache: false,
             success: function (res) {
@@ -454,9 +442,7 @@ $(document).ready(function () {
                     opt.selected = true;
                     $('#clientField').append(opt);
                 }
-                setTimeout(function () {
-                    $this.prop("disabled", false);
-                }, 300);
+               
                 $('#Order-Modal').modal();
                 createAlertTable(res.status, "Клиент");
             },

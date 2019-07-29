@@ -269,7 +269,6 @@ $(document).ready(function () {
         filterIcons();
     }
     $('.checkbox').click(function () {
-        $(this).toggleClass('checked');
         $('.loader').show();
         let parent = $(this).parent().parent().parent();
         let id = parent.attr('itemid');
@@ -279,6 +278,9 @@ $(document).ready(function () {
         switch (type) {
             case "Project":
                 url = 'projectActivity';
+                break;
+            case "globalVG":
+                url = 'globalActivity';
                 break;
             case "Branch":
                 url = 'branchActivity';
@@ -292,7 +294,7 @@ $(document).ready(function () {
                 url = 'activity';
                 break;
         }
-
+        $(this).toggleClass('checked');
         $.ajax({
             url: "../api/operate/" + url + ".php",
             type: "POST",
@@ -302,6 +304,7 @@ $(document).ready(function () {
             success: function (res) {
                 // if (res.error)
                 //     createAlertTable(res.error, '');
+                location.reload();
             },
             error: function () {
                 createAlertTable('failed', '');
@@ -326,6 +329,8 @@ $(document).ready(function () {
                 data: {start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD')},
                 cache: false,
                 success: function (res) {
+					if(!res || res == null) return;
+					
                     res = JSON.parse(res);
                     if (res.error) {
                         createAlertTable(res.error, "Данные владельцев");

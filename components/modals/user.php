@@ -7,13 +7,13 @@ function userAddModal($data, $more_data)
   <h2 class="modal-title">Добавить пользователя</h2>
   <div class="modal-inputs">
   <p>
-  <input id="firstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  <input id="firstNameField" placeholder="Имя" type="text" name="name">
   </p>
   <p>
-  <input id="lastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <input id="lastNameField" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
-  <input id="loginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
+  <input id="loginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min3" placeholder="Логин (только англ)" type="text" name="login">
   </p>';
         $i = 0;
         foreach ($more_data as $key => $var) {
@@ -72,15 +72,15 @@ function userEditModal($more_data)
   <div class="modal-inputs">
   <p>
   Имя
-  <input id="editFirstNameField" data-validation="required length" data-validation-length="min3" placeholder="Имя" type="text" name="name">
+  <input id="editFirstNameField"  placeholder="Имя" type="text" name="name">
   </p>
   <p>
   Фамилия
-  <input id="editLastNameField" data-validation="required length" data-validation-length="min3" placeholder="Фамилия" type="text" name="lastName">
+  <input id="editLastNameField" placeholder="Фамилия" type="text" name="lastName">
   </p>
   <p>
   Логин
-  <input id="editLoginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min5" placeholder="Логин (только англ)" type="text" name="login">
+  <input id="editLoginField" autocomplete="username" data-validation="required length alphanumeric" data-validation-length="min3" placeholder="Логин (только англ)" type="text" name="login">
   </p>
   <p>
   Деньги

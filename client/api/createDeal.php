@@ -7,7 +7,8 @@ if (!isset($_POST['login'], $_POST['password'], $_POST['vg_sum'], $_POST['debt']
 include_once './funcs.php';
 include_once '../../db.php';
 
-
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 session_start();
 $login = clean($_POST['login']);
 $debt = clean($_POST['debt']);
@@ -48,9 +49,9 @@ if (isset($client_id, $user_id)) {
     query("SELECT user_as_owner_id AS 'owner_id', share_percent AS 'value' FROM shares
                   WHERE order_id = '$order_id'"));
     $data = array("client" => $client_id, "user_id" => $user_id, "sum_vg" => $sum_vg,
-        "fiat" => $fiat_id, "vg" => $vg_id, "obtain" => "платежка", "callmaster" => $callmaster, "debtCl"=>(int)$sum_vg * (int)$out/100,
+        "fiat" => $fiat_id, "vg" => $vg_id, "method_id" => 1, "callmaster" => $callmaster, "debtCl"=>(int)$sum_vg * (int)$out/100,
         "shares" => json_encode($shares), "out" => $out, "loginByVg" => $loginByVG);
-    $url = "https://" . $_SERVER['SERVER_NAME'] . "/api/add/order.php";
+    $url = "https://www.gcrm.a-group.club/api/add/order.php";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_POST, true);
@@ -61,6 +62,8 @@ if (isset($client_id, $user_id)) {
     $out = curl_exec($curl);
     curl_close($curl);
     $out_json = json_decode($out);
+
+
     echo json_encode(array("status" => "success"));
     return false;
 }

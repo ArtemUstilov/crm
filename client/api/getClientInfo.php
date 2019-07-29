@@ -22,7 +22,7 @@ if (!$client) {
 }
 
 $vg = mysqli_fetch_assoc($connection->query("
-    SELECT *
+    SELECT DISTINCT *
     FROM vg_data D
     INNER JOIN virtualgood V ON V.vg_id = D.vg_id
     INNER JOIN(

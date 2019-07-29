@@ -20,7 +20,7 @@ if (isset($_POST['first_name'])) {
     $pay_in_debt = $_POST['pay_in_debt'] === "true" ? true : false;
     session_start();
     $user_id = $_SESSION['id'];
-    if(mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE ((login = '$byname' AND login IS NOT NULL) || `password` = '$pass') AND client_id != '$edit_client_id'"))){
+    if($byname && mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE ((login = '$byname' AND login IS NOT NULL) || `password` = '$pass') AND client_id != '$edit_client_id'"))){
         return error("exists");
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));

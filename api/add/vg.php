@@ -1,6 +1,5 @@
 <?php
 if (isset($_POST['name']) && isset($_POST['in']) && isset($_POST['out'])) {
-
     include_once("../../db.php");
     include_once("../../funcs.php");
     $name = clean($_POST['name']);

@@ -3,14 +3,12 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    'crm5.0');
+    'crm100500');
+
+//$connection = mysqli_connect("localhost", "gcrm1", "9834cm9834ME", "dev_gcrm");
+
+
 mysqli_query($connection, "SET NAMES 'utf8'");
 mysqli_query($connection, "SET CHARACTER SET 'utf8'");
 
-//$connection = mysqli_connect(
-//    "localhost",
-//    "testcrm",
-//    "4Z8c8W6q",
-//    "user392890_testcrm");
-//mysqli_query($connection, "SET NAMES 'utf8'");
-//mysqli_query($connection, "SET CHARACTER SET 'utf8'");
+

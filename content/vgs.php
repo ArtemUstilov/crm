@@ -14,7 +14,7 @@ session_start();
 $options['btn-text'] = 'Добавить';
 
 $data['vgs'] = $connection->query("
-    SELECT * FROM virtualgood
+    SELECT * FROM virtualgood WHERE active=1
 ");
     echo template(display_data($connection -> query('
 SELECT vg_data_id AS `id`, name AS `название`, in_percent As "покупка %", out_percent AS "продажа %", 
