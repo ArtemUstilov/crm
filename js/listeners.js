@@ -274,7 +274,7 @@ $(document).ready(function () {
         let id = parent.attr('itemid');
         let type = $('.table-menu>h2').attr('type');
         let url = '';
-        let data = {id}
+        let data = {id};
         switch (type) {
             case "Project":
                 url = 'projectActivity';
