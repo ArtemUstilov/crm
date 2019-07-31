@@ -1,45 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13921fc2-9792-4599-bd0a-419795730916" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/api/operate/globalActivity.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/add/client.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/add/client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/add/order.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/add/order.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/add/vg.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/add/vg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/edit/client.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/edit/client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/select/ownerSums.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/select/ownerSums.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/select/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/select/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/select/сlient.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/select/client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bash.exe.stackdump" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/approvePass.php" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/approvePass.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/createDeal.php" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/createDeal.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/api/getClientInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/getClientInfo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-brands.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-brands.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-brands.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-brands.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-regular.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-regular.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-regular.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-regular.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-solid.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-solid.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fa-solid.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fa-solid.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fontawesome-all.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fontawesome-all.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fontawesome-all.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fontawesome-all.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fontawesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fontawesome.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/fontawesome/css/fontawesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/fontawesome/css/fontawesome.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/payment.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/payment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modals/client.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/modals/client.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modals/outgo.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/modals/outgo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modals/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/modals/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/clients.php" beforeDir="false" afterPath="$PROJECT_DIR$/content/clients.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/global.php" beforeDir="false" afterPath="$PROJECT_DIR$/content/global.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/content/orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/content/vgs.php" beforeDir="false" afterPath="$PROJECT_DIR$/content/vgs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/db.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/ChromePhp.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/funcs.php" beforeDir="false" afterPath="$PROJECT_DIR$/funcs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/add-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/listeners.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/listeners.js" afterDir="false" />
+    <list default="true" id="64f571ad-fd88-4f93-b34b-07778113fb7b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/api/select/getVGOwners.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/select/getVGOwners.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -64,91 +27,91 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/listeners.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="5644">
+              <caret line="332" column="20" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/modals/order.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="549">
+              <caret line="85" column="7" lean-forward="true" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/add-handlers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/operate/globalActivity.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="22" lean-forward="true" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/content/vgs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/edit-handlers.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="590">
-              <caret line="593" lean-forward="true" selection-start-line="593" selection-end-line="593" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/replenishFiat.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="97" column="3" lean-forward="true" selection-start-line="97" selection-start-column="3" selection-end-line="97" selection-end-column="3" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/edit.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-495">
-              <caret line="541" column="10" lean-forward="true" selection-start-line="541" selection-start-column="10" selection-end-line="541" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/content/global.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/statistics.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="486" lean-forward="true" selection-start-line="486" selection-end-line="486" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/auth.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="29" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+            <state relative-caret-position="281">
+              <caret line="163" column="43" selection-start-line="163" selection-start-column="32" selection-end-line="163" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/listeners.js">
+        <entry file="file://$PROJECT_DIR$/api/select/getVGOwners.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="519">
-              <caret line="299" column="72" selection-start-line="299" selection-start-column="72" selection-end-line="299" selection-end-column="72" />
+            <state relative-caret-position="986">
+              <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/add/client.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="799">
+              <caret line="47" selection-start-line="47" selection-end-line="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/modals/outgo.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/db.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/index.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/select/outgoTypes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/add/vg.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="89" selection-start-line="28" selection-start-column="89" selection-end-line="28" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -165,8 +128,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>?&gt;</find>
-      <find>SERVER</find>
       <find>debtClField</find>
       <find>fa-info</find>
       <find>orderInfo</find>
@@ -186,7 +147,6 @@
       <find>json_encode(array(&quot;s</find>
       <find>checkbox</find>
       <find>//Outgo</find>
-      <find>owners-lists-container</find>
       <find>createAlertTable</find>
       <find>createAlertTable(res.error</find>
       <find>Client</find>
@@ -195,6 +155,9 @@
       <find>fillUser</find>
       <find>editGlobalV</find>
       <find>activity</find>
+      <find>id=&quot;owners-lists-container&quot;</find>
+      <find>owners-lists-container</find>
+      <find>getVGOwners</find>
     </findStrings>
     <replaceStrings>
       <replace>('.loader')</replace>
@@ -229,7 +192,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api/select/outgoTypes.php" />
         <option value="$PROJECT_DIR$/api/edit/outgoType.php" />
         <option value="$PROJECT_DIR$/components/modals/outgo_type.php" />
         <option value="$PROJECT_DIR$/api/edit/outgoTypeActive.php" />
@@ -265,7 +227,6 @@
         <option value="$PROJECT_DIR$/api/add/owner.php" />
         <option value="$PROJECT_DIR$/funcs.php" />
         <option value="$PROJECT_DIR$/client/api/createDeal.php" />
-        <option value="$PROJECT_DIR$/js/add-handlers.js" />
         <option value="$PROJECT_DIR$/content/orders.php" />
         <option value="$PROJECT_DIR$/components/modals/user.php" />
         <option value="$PROJECT_DIR$/db.php" />
@@ -280,6 +241,8 @@
         <option value="$PROJECT_DIR$/content/vgs.php" />
         <option value="$PROJECT_DIR$/content/global.php" />
         <option value="$PROJECT_DIR$/js/listeners.js" />
+        <option value="$PROJECT_DIR$/js/add-handlers.js" />
+        <option value="$PROJECT_DIR$/api/select/getVGOwners.php" />
       </list>
     </option>
   </component>
@@ -289,101 +252,69 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="136" />
-    <option name="y" value="183" />
-    <option name="width" value="1440" />
-    <option name="height" value="765" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="add" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="delete" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="edit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="operate" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="select" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="modals" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
-              <item name="content" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="crmCopy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="crmCopy" type="462c0819:PsiDirectoryNode" />
+              <item name="crm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="crm" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -497,13 +428,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="470707000" />
+    <option name="totallyTimeSpent" value="471375000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32197943" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -525,6 +456,27 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29690832" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4978678" visible="true" weight="0.032502707" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5021322" side_tool="true" weight="0.32936078" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -579,28 +531,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="fix table" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/content/fiats.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/owners.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="21" column="6" lean-forward="true" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/content/debts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-565" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/treeTableStyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="178" column="22" selection-start-line="178" selection-start-column="22" selection-end-line="178" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/select/userStat.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -666,17 +596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/modals/order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="184" column="6" selection-start-line="184" selection-start-column="6" selection-end-line="184" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -705,8 +624,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/select/outgoTypes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        <state relative-caret-position="153">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -759,13 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/select/clientInfo.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -805,8 +717,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/api/add/client.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="542">
-          <caret line="38" column="35" lean-forward="true" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
+        <state relative-caret-position="799">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
         </state>
       </provider>
     </entry>
@@ -879,17 +791,63 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/add-handlers.js">
+    <entry file="file://$PROJECT_DIR$/js/listeners.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="19" lean-forward="true" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+        <state relative-caret-position="5644">
+          <caret line="332" column="20" selection-start-line="332" selection-start-column="20" selection-end-line="332" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/listeners.js">
+    <entry file="file://$PROJECT_DIR$/components/modals/outgo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="519">
-          <caret line="299" column="72" selection-start-line="299" selection-start-column="72" selection-end-line="299" selection-end-column="72" />
+        <state relative-caret-position="532">
+          <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/modals/order.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="85" column="7" lean-forward="true" selection-start-line="85" selection-start-column="7" selection-end-line="85" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/select/ownerSums.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" selection-start-line="23" selection-end-line="23" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/payment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="89" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/add-handlers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="163" column="43" selection-start-line="163" selection-start-column="32" selection-end-line="163" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/select/getVGOwners.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="58" column="69" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
         </state>
       </provider>
     </entry>
