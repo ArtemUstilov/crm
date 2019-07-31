@@ -56,7 +56,7 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
         ';
         }
         $res .= '</div>';
-        echo $res;
+        echo json_encode(array("status"=>"success", "data" => $res));
         return false;
     }
     $res = '';
@@ -91,6 +91,6 @@ if (isset($_POST['vg_id']) && isset($_POST['client_id'])) {
         ';
     }
     $res .= '</div>';
-    echo json_encode(array("status"=>"succes", "data" => $res));
+    echo json_encode(array("status"=>"success", "data" => $res));
 }
 

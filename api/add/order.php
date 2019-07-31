@@ -56,7 +56,6 @@ if ($callmaster) {
 		}
 
 
-
 $add_order = $connection->
 query($query);
 if ($add_order) {
@@ -165,6 +164,9 @@ function parse_vg_url($vg_url_in, $sum_vg, $key, $login_by_vg)
 
 function addShares($connection, $order_id, $shares, $out_percent, $in_percent, $rollback_1, $sum_vg)
 {
+    if(!$shares){
+        return;
+    }
     foreach ($shares as $key => $var) {
         $sum_of_owner = (($out_percent - $in_percent - $rollback_1) / 100) * ($sum_vg * ($var['value'] / 100));
         $curr_owner_id = $var['owner_id'];

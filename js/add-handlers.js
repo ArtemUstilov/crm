@@ -18,27 +18,27 @@ $(document).ready(function () {
             url: "../api/add/branch.php",
             type: "POST",
             data: {
-                name,
-            },
-            dataType: "JSON",
-            cache: false,
-            success: function (res) {
-                if (res.error) {
-                    createAlertTable(res.error, 'Предприятие');
-                    return;
+                    name,
+                },
+                dataType: "JSON",
+                cache: false,
+                success: function (res) {
+                    if (res.error) {
+                        createAlertTable(res.error, 'Предприятие');
+                        return;
+                    }
+                    createAlertTable(res.status, "Предприятие");
+                },
+                error: function () {
+                    createAlertTable("connectionError", "Предприятие");
+                },
+                complete: function () {
+                    setTimeout(function () {
+                        $(".modal-submit").prop("disabled", false);
+                        $(".loader").fadeOut("slow");
+                    }, 100);
                 }
-                createAlertTable(res.status, "Предприятие");
-            },
-            error: function () {
-                createAlertTable("connectionError", "Предприятие");
-            },
-            complete: function () {
-                setTimeout(function () {
-                    $(".modal-submit").prop("disabled", false);
-                    $(".loader").fadeOut("slow");
-                }, 100);
-            }
-        });
+            });
 
     }
 
@@ -175,10 +175,12 @@ $(document).ready(function () {
                 }
                 const container = $('#owners-lists-container');
                 container.empty();
-				console.log(res);
+                console.log(res);
                 container.append(res.data || "");
             },
             error: function () {
+                console.log(res);
+
             },
             complete: function () {
                 $('.loader').fadeOut('slow');
@@ -242,7 +244,20 @@ $(document).ready(function () {
         $.ajax({
             url: "../api/add/order.php",
             type: "POST",
-            data: {"client":"51","shares": [],"user_id":"2","sum_vg":"100","fiat":"2","vg":"2","method_id":1,"callmaster":"0","debtCl":12,"out":"12.00","loginByVg":"123"},
+            data: {
+                client,
+                rollback_1,
+                sum_vg,
+                out,
+                method_id,
+                vg,
+                shares,
+                debtCl,
+                callmaster,
+                descr,
+                fiat,
+                loginByVg,
+            },
             dataType: "JSON",
             cache: false,
             success: function (res) {
@@ -361,7 +376,7 @@ $(document).ready(function () {
             url: "../api/add/outgoType.php",
             type: "POST",
             data: {
-               name,
+                name,
                 parentId: id
             },
             dataType: "JSON",
@@ -442,7 +457,7 @@ $(document).ready(function () {
                     opt.selected = true;
                     $('#clientField').append(opt);
                 }
-               
+
                 $('#Order-Modal').modal();
                 createAlertTable(res.status, "Клиент");
             },
