@@ -848,6 +848,7 @@ $(document).ready(function () {
         $.ajax({
             url: "../api/operate/debt.php",
             type: "POST",
+            dataType: "json",
             data: {
                 id,
                 number,
