@@ -275,9 +275,10 @@ $(document).ready(function () {
                             fadeDuration: 500,
                             fadeDelay: 0
                         });
+                    }else{
+                        createAlertTable("success", "Заказ и транзакция");
+                        setTimeout(() => location.reload(), 300)
                     }
-                    createAlertTable("success", "Заказ и транзакция");
-                    setTimeout(() => location.reload(), 300);
                 } catch {
                     createAlertTable("success", "Заказ и транзакция");
                     setTimeout(() => location.reload(), 300);
