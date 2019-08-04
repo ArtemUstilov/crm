@@ -276,8 +276,11 @@ $(document).ready(function () {
                             fadeDelay: 0
                         });
                     }
+                    createAlertTable("success", "Заказ и транзакция");
+                    setTimeout(() => location.reload(), 300);
                 } catch {
                     createAlertTable("success", "Заказ и транзакция");
+                    setTimeout(() => location.reload(), 300);
                 }
 
             },
