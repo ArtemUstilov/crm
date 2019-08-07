@@ -137,8 +137,8 @@ $(document).ready(function () {
                     $('#Order-Modal #commentField').val(res.description);
                 else
                     $('#Order-Modal #commentField').val("");
-                if (res.method_of_obtaining) {
-                    $('#Order-Modal #obtainingField').val(res.method_of_obtaining);
+                if (res.method_id) {
+                    $('#Order-Modal #obtainingField').val(res.method_id);
                 } else {
                     $('#Order-Modal #obtainingField').val($("#obtainingField option:first").val());
                 }

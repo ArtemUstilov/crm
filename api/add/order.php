@@ -19,7 +19,7 @@ $out_percent = clean($_POST['out']);
 $method_id = $_POST['method_id'];
 
 $sum_currency = ($sum_vg * $out_percent) / 100;
-$rollback_sum = $sum_currency * $rollback_1 / 100;
+$rollback_sum = $sum_vg * $rollback_1 / 100;
 
 $shares = is_array($_POST['shares']) ? $_POST['shares'] : json_decode($_POST['shares'], true);
 
