@@ -27,7 +27,7 @@ $callmaster = clean($_POST['callmaster']);
 $method_id = clean($_POST['method_id']);
 $fiat = clean($_POST['fiat']);
 $sum_currency = ($sum_vg * $out_percent) / 100;
-$rollback_sum = $sum_currency * $rollback_1 / 100;
+$rollback_sum = $sum_vg * $rollback_1 / 100;
 $shares = $_POST['shares'];
 session_start();
 $user_id = $_SESSION['id'];

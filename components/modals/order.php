@@ -33,7 +33,7 @@ function orderAddModal($data, $more_data)
 <select id="vgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
     if($more_data['vgs']){
         foreach ($more_data['vgs'] as $key => $var) {
-            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_data_id'] . '">' . $var['name'] . '</option>';
         }
     }
 
@@ -139,7 +139,7 @@ function orderEditModal($more_data)
 <select id="editVgField" data-validation="required"><option value="" disabled selected>Выберите валюту</option>';
     if($more_data['vgs']){
         foreach ($more_data['vgs'] as $key => $var) {
-            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_id'] . '">' . $var['name'] . '</option>';
+            $output .= '<option percent="' . $var["out_percent"] . '" value="' . $var['vg_data_id'] . '">' . $var['name'] . '</option>';
         }
     }
 

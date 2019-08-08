@@ -3,7 +3,7 @@ $connection = mysqli_connect(
     "localhost",
     "root",
     "",
-    'crm100500');
+    'crm5.1');
 
 //$connection = mysqli_connect("localhost", "gcrm1", "9834cm9834ME", "dev_gcrm");
 
