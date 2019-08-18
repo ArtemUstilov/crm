@@ -179,7 +179,7 @@ function fillOrderEditForm(target) {
                     $(this).show();
                 }
             });
-            $('#edit-order-form #editVgField').val(res['vg_id']);
+            $('#edit-order-form #editVgField').val(res['vg_data_id']);
             $('#edit-order-form #editSumVGField').val(res['sum_vg']);
             if (res['callmaster'])
                 $('#edit-order-form #editCallmasterField').val(res['callmaster']);

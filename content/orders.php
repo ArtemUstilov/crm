@@ -9,7 +9,7 @@ $branch_name = $_SESSION['branch'];
 $branch_id = $_SESSION['branch_id'];
 switch (accessLevel()) {
     case 3:
-        $info = $connection -> query('
+        $info = $connection->query('
 SELECT O.order_id AS `id`, O.order_id AS `номер заказа`, concat(U.last_name, " ", U.first_name) AS `агент`, B.branch_name AS `отдел`, concat(C.last_name, " ", C.first_name) AS `клиент`, byname AS `логин`,
 VD.name AS `VG`, O.sum_vg AS "кол-во", O.real_out_percent AS "%", 
 concat(O.sum_currency, " ", F.name) AS `сумма`, order_debt AS "долг", MOO.method_name AS `оплата`,
@@ -24,10 +24,19 @@ INNER JOIN methods_of_obtaining MOO ON O.method_id = MOO.method_id
 INNER JOIN vg_data VD ON VD.vg_data_id = O.vg_data_id
 ORDER BY `date` DESC
 ');
+        $clients = $connection->query('
+SELECT concat(C.last_name, " ", C.first_name) AS "name", C.client_id AS `id` FROM clients C  ORDER BY C.last_name, C.first_name');
+        $vgs = $connection->query("
+SELECT vg_data_id, VD.name, out_percent, vg_id FROM vg_data VD
+");
+        $methods_of_obtaining =
+            mysqliToArray($connection->
+            query("SELECT  * FROM methods_of_obtaining
+WHERE is_active = 1"));
         break;
     case 2:
     case 1:
-        $info = $connection -> query("
+        $info = $connection->query("
 SELECT O.order_id AS `id`, O.order_id AS `номер заказа`, concat(U.last_name, ' ', U.first_name) AS `агент`, concat(C.last_name, ' ', C.first_name) AS `клиент`, byname AS `логин`,
 VD.name AS `VG`, O.sum_vg AS 'кол-во', O.real_out_percent AS '%', 
 concat(O.sum_currency, \" \", F.name) AS `сумма`, order_debt AS 'долг', MOO.method_name AS `оплата`,
@@ -42,28 +51,31 @@ INNER JOIN vg_data VD ON VD.vg_data_id = O.vg_data_id
 WHERE U.branch_id = '$branch_id'
 ORDER BY `date` DESC
 ");
+        $clients = $connection->query('
+SELECT concat(C.last_name, " ", C.first_name) AS "name", C.client_id AS `id` FROM clients C 
+WHERE user_id IN (SELECT user_id FROM users WHERE branch_id = ' . $_SESSION["branch_id"] . ') ORDER BY C.last_name, C.first_name');
+        $vgs = $connection->query("
+SELECT vg_data_id, VD.name, out_percent, vg_id FROM vg_data VD
+WHERE branch_id = '$branch_id'
+");
+        $methods_of_obtaining =
+            mysqliToArray($connection->
+            query("SELECT  * FROM methods_of_obtaining
+WHERE `branch_id` = '$branch_id' AND is_active = 1"));
         break;
     default:
         exit();
         break;
 }
 
-$clients = $connection -> query('
-SELECT concat(C.last_name, " ", C.first_name) AS "name", C.client_id AS `id` FROM clients C WHERE user_id IN (SELECT user_id FROM users WHERE branch_id = '.$_SESSION["branch_id"].') ORDER BY C.last_name, C.first_name');
-$vgs = $connection -> query("
-SELECT vg_data_id, VD.name, out_percent, vg_id FROM vg_data VD
-WHERE branch_id = '$branch_id'
-");
-$fiat = $connection -> query("
+
+$fiat = $connection->query("
 SELECT * FROM fiats
 ");
-$owners = $connection -> query("
+$owners = $connection->query("
 SELECT `user_id` FROM `users` WHERE is_owner = 1 AND `branch_id` = '$branch_id'
 ");
-$methods_of_obtaining =
-    mysqliToArray($connection->
-    query("SELECT  * FROM methods_of_obtaining
-WHERE `branch_id` = '$branch_id' AND is_active = 1"));
+
 $more_data['clients'] = $clients;
 $more_data['owners'] = $owners;
 $more_data['vgs'] = $vgs;

@@ -16,7 +16,7 @@ include_once("../../funcs.php");
 
 $rollback_1 = isset($_POST['rollback_1']) ? clean($_POST['rollback_1']) : 0;
 
-$vg_id = clean($_POST['vg_id']);
+$vg_data_id = clean($_POST['vg_id']);
 $order_id = clean($_POST['order_id']);
 $client_id = clean($_POST['client_id']);
 $sum_vg = clean($_POST['sum_vg']);
@@ -53,7 +53,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
         $in_percent = mysqli_fetch_assoc($connection->query("
             SELECT in_percent
             FROM vg_data
-            WHERE vg_id = '$vg_id' AND branch_id = '$branch_id'
+            WHERE vg_data_id = '$vg_data_id'
             "))['in_percent'];
         foreach ($shares as $key => $value) {
             $curr_owner_id = $value['owner_id'];
@@ -137,7 +137,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
     }
     if ($callmaster) {
         $res = $connection->
-        query("UPDATE orders SET `vg_id` = '$vg_id',
+        query("UPDATE orders SET `vg_data_id` = '$vg_data_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
                      `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_id` = '$method_id',
                      `rollback_sum` = '$rollback_sum',`rollback_1` = '$rollback_1',
@@ -145,7 +145,7 @@ if ($user_data && (heCan($user_data['role'], 2))) {
                      WHERE `order_id` = $order_id");
     } else {
         $res = $connection->
-        query("UPDATE orders SET `vg_id` = '$vg_id',
+        query("UPDATE orders SET `vg_data_id` = '$vg_data_id',
                      `client_id` = '$client_id',`sum_vg` = '$sum_vg',`real_out_percent` = '$out_percent',
                      `sum_currency` = '$sum_currency',`order_debt` = '$debt',`method_id` = '$method_id', `description` = '$description', `fiat_id` = '$fiat'
                      WHERE `order_id` = $order_id");

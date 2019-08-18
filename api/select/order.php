@@ -8,7 +8,7 @@ if (isset($_POST['order_id'])) {
             SELECT O.order_id AS `order_id`, U.branch_id AS `branch_id`, fiat_id AS `fiat`,
             concat('[(',C.last_name, ' ', C.first_name,' (', C.byname,')), (', U.last_name, ' ', U.first_name,')]' ) AS `full_name`,
             C.client_id AS `client_id`, rollback_1, O.callmaster, U.user_id AS `user_id`, MOO.method_id AS `method`, 
-            O.vg_id, O.sum_vg, O.real_out_percent AS 'out', O.order_debt AS `debt`, O.description AS `comment`
+            O.vg_data_id, O.sum_vg, O.real_out_percent AS 'out', O.order_debt AS `debt`, O.description AS `comment`
             FROM orders O 
             INNER JOIN clients C ON C.client_id = O.client_id
             INNER JOIN users U ON U.user_id = C.user_id
