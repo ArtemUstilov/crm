@@ -803,6 +803,7 @@ $(document).ready(function () {
                 id, fiat, number,
             },
             cache: false,
+            dataType:"json",
             success: function (res) {
                 createAlertTable(res.status || res.error, "Откат");
             },

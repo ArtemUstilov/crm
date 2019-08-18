@@ -165,6 +165,7 @@ function fillOrderEditForm(target) {
         },
         cache: false,
         success: function (res) {
+            console.log(res);
             if (res.error) {
                 createAlertTable(res.error, "Данные продажи");
                 return;
