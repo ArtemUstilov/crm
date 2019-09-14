@@ -118,7 +118,7 @@ $(document).ready(function () {
                 vg_id, client_id,
             },
             cache: false,
-            success: function (res) {
+            success: function (res) {;
                 if (res.error) {
                     createAlertTable(res.error, "Данные ВГ");
                     return;
