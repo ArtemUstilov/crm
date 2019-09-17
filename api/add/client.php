@@ -40,7 +40,7 @@ if (isset($_POST['first_name'])) {
         }
 
     } else {
-        return error("empty");
+        return error("denied");
     }
 }else{
     return error("empty");

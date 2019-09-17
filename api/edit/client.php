@@ -15,16 +15,16 @@ if (isset($_POST['first_name'])) {
     $email = isset($_POST['email']) ? clean($_POST['email']) : " ";
     $edit_client_id = clean($_POST['client_id']);
     $telegram = clean($_POST['telegram']);
-    $pay_page = $_POST['pay_page'] === "true" ? true : false;
-    $payment_system = $_POST['payment_system'] === "true" ? true : false;
-    $pay_in_debt = $_POST['pay_in_debt'] === "true" ? true : false;
+    $pay_page = $_POST['pay_page'] === "true" ? 1 : 0;
+    $payment_system = $_POST['payment_system'] === "true" ? 1 : 0;
+    $pay_in_debt = $_POST['pay_in_debt'] === "true" ? 1 : 0;
     session_start();
     $user_id = $_SESSION['id'];
     if($byname && mysqli_fetch_assoc($connection->query("SELECT * FROM clients WHERE ((login = '$byname' AND login IS NOT NULL) || `password` = '$pass') AND client_id != '$edit_client_id'"))){
         return error("exists");
     }
     $user_data = mysqli_fetch_assoc($connection->query("SELECT * FROM users WHERE user_id='$user_id'"));
-    if ($user_data && (heCan($user_data['role'], 2))) {
+    if ($user_data && (heCan($user_data['role'], 1))) {
         $res = $connection->
         query("
         UPDATE `clients` 
@@ -50,6 +50,6 @@ if (isset($_POST['first_name'])) {
         }
 
     } else {
-        return error("empty");
+        return error("denied");
     }
 }
