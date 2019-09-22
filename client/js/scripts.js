@@ -146,27 +146,41 @@ function createDeal(debt = 0) {
     const password = $('#pass').val();
     const vg_sum = $('#vg-sum').val();
     const vg_type = $('#vg-type').val();
-    $.post('./api/createDeal.php', {login, password, vg_sum, vg_type, debt}, (res) => {
+    $.post('./api/pay.php', {login, password, vg_sum, vg_type, debt}, (res) => {
         if (res.error) {
             $('.loader').fadeOut();
             customAlert(res.error);
             return false;
-        } else if (res['status'] === "success") {
-            if (!$('#pay-form').find('.alert-success').length)
-                $('#pay-form').append('<div class="alert alert-success">\n' +
-                    '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +
-                    '</div>');
-            $('#pay-in-debt-btn').remove();
-            $('#pay-system-btn').remove();
-            $('#vg-type').prop('disabled', true);
-            $('.loader').fadeOut();
-            return false;
         }
-        if (!$('#pay-form').find('.alert-danger').length)
-            $('#pay-form').append('<div class="alert alert-danger">\n' +
-                '  <strong>Ошибка! </strong>Что-то пошло не так. Обратитесь к администрации\n' +
-                '</div>');
+        $('#pay-form').append(
+            `
+			<form style="display: none;" name="payment" method="post" action="https://sci.interkassa.com/" accept-charset="UTF-8">
+			${Object.keys(res).map(key => (`
+			  <input type="hidden" name="${key}" value="${res[key]}"/>
+
+			`))}
+  <input type="submit" value="Pay">
+</form>
+		 `
+        );
         $('.loader').fadeOut();
+
+        document.payment.submit();
+        /*		else if (res['status'] === "success") {
+                    if (!$('#pay-form').find('.alert-success').length)
+                        $('#pay-form').append('<div class="alert alert-success">\n' +
+                            '  <strong>Поздравляем! </strong>Транзакция прошла успешно\n' +
+                            '</div>');
+                    $('#pay-in-debt-btn').remove();
+                    $('#pay-system-btn').remove();
+                    $('#vg-type').prop('disabled', true);
+                    $('.loader').fadeOut();
+                    return false;
+                }
+                if (!$('#pay-form').find('.alert-danger').length)
+                    $('#pay-form').append('<div class="alert alert-danger">\n' +
+                        '  <strong>Ошибка! </strong>Что-то пошло не так. Обратитесь к администрации\n' +
+                        '</div>');;*/
     }, 'json');
 }
 

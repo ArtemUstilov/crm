@@ -13,12 +13,13 @@ $(document).ready(function () {
     function addBranch() {
         $(".loader").show();
         $(".modal-submit").prop("disabled", true);
-        let name = $("#add-branch-form #nameField").val();
+        const name = $("#add-branch-form #nameField").val();
+        const ik_id = $("#add-branch-form #ikId").val();
         $.ajax({
             url: "../api/add/branch.php",
             type: "POST",
             data: {
-                    name,
+                    name, ik_id
                 },
                 dataType: "JSON",
                 cache: false,
