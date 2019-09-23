@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64f571ad-fd88-4f93-b34b-07778113fb7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/api/pay.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/add/branch.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/add/branch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/edit/branch.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/edit/branch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/select/branch.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/select/branch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/client/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/js/scripts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/payment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modals/branch.php" beforeDir="false" afterPath="$PROJECT_DIR$/components/modals/branch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/add-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/add-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit-handlers.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit-handlers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/api/pay.php" beforeDir="false" afterPath="$PROJECT_DIR$/client/api/pay.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +26,17 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/api/pay.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="753">
+              <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -112,7 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/api/add/fiat.php" />
         <option value="$PROJECT_DIR$/api/add/global.php" />
         <option value="$PROJECT_DIR$/components/templates/menu.php" />
         <option value="$PROJECT_DIR$/api/add/project.php" />
@@ -163,6 +162,7 @@
         <option value="$PROJECT_DIR$/js/edit-handlers.js" />
         <option value="$PROJECT_DIR$/api/select/branch.php" />
         <option value="$PROJECT_DIR$/js/edit.js" />
+        <option value="$PROJECT_DIR$/client/api/pay.php" />
       </list>
     </option>
   </component>
@@ -185,6 +185,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -223,7 +224,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -320,7 +320,8 @@
       <workItem from="1568480133650" duration="710000" />
       <workItem from="1568735436889" duration="2458000" />
       <workItem from="1569080577880" duration="547000" />
-      <workItem from="1569146898730" duration="2788000" />
+      <workItem from="1569146898730" duration="3421000" />
+      <workItem from="1569235580088" duration="740000" />
     </task>
     <task id="LOCAL-00001" summary="ebanaya basa added">
       <created>1556032282787</created>
@@ -354,12 +355,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="491006000" />
+    <option name="totallyTimeSpent" value="492379000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1444563" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14605543" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -675,13 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="89" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/edit/fiat.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -744,13 +739,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/api/pay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="43" column="27" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/edit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -788,6 +776,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/index.php">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/api/pay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="60" column="4" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="4" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

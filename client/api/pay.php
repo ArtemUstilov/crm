@@ -21,6 +21,11 @@ query("SELECT user_id FROM users
        WHERE user_id IN 
        (SELECT user_id FROM clients WHERE login = '$login')"))['user_id'];
 
+$ik_id = mysqli_fetch_array($connection->
+query("SELECT ik_id FROM branch 
+       WHERE branch_id IN 
+       (SELECT branch_id FROM clients WHERE login = '$login')"))['ik_id'];
+
 $client_id = mysqli_fetch_assoc($connection->
 query("SELECT client_id FROM clients WHERE login = '$login' AND password = '$password'"))['client_id'];
 if (isset($client_id, $user_id)) {
@@ -39,8 +44,9 @@ if (isset($client_id, $user_id)) {
 
 
 
+
     echo json_encode(array(
-        'ik_co_id'=>'5d2c387f1ae1bdf68a8b4567',
+        'ik_co_id'=>$ik_id,
         'ik_pm_no'=>'213412',
         'ik_am'=> $sumFiat,
         'ik_cur'=>'uah',
@@ -52,5 +58,6 @@ if (isset($client_id, $user_id)) {
         'ik_x_vg_id '=> $vg_id ,
         'ik_x_fiat_id'=> $fiat_id,
     ));
+    
     return false;
 }
